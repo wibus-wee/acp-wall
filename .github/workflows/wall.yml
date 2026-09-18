@@ -119,6 +119,11 @@ jobs:
           [ -n "$install" ] && timeout 600 sh -c "$install" || true
 
       - name: Probe
+        env:
+          # transparent SNI proxy: model-API domains get TLS-terminated into
+          # the mock (works without any harness config), everything else
+          # relays untouched. Interceptions are disclosed in report.transport.
+          ACP_MITM: "1"
         run: |
           mkdir -p probe/reports
           # generous ceiling: cold npx/binary downloads happen inside the run

@@ -111,6 +111,9 @@ if (existsSync(reportsDir)) {
       repo: reg.repo ?? null,
       dishonesty: r.dishonesty ?? [],
       violations: r.violations ?? [],
+      // disclosure: model endpoints the probe TLS-impersonated (transport
+      // layer), vs documented-config wiring — honesty about the measurement
+      mitm: r.transport?.mitm?.impersonated?.length ? r.transport.mitm.impersonated : null,
       star: r.tier === "verified" && r.score === 100 ? 1 : 0,
       _file: f,
     });

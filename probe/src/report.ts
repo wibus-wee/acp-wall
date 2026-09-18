@@ -63,6 +63,17 @@ export interface Report {
   dishonesty: Array<{ claim: string; detail: string }>;
   violations: ViolationRec[];
   transcript: TranscriptEntry[];
+  /** Disclosed when the probe impersonated model endpoints at the transport
+   * layer (transparent SNI proxy) rather than via documented config. */
+  transport?: {
+    mitm?: {
+      port: number;
+      impersonated: string[];
+      impersonations: number;
+      relayed: number;
+      drops: number;
+    };
+  };
 }
 
 export function buildReport(opts: {
@@ -72,6 +83,7 @@ export function buildReport(opts: {
   dishonesty: Array<{ claim: string; detail: string }>;
   violations: ViolationRec[];
   transcript: TranscriptEntry[];
+  transport?: Report["transport"];
 }): Report {
   const notes: Record<string, string> = {};
   let exercised = 0;
@@ -115,5 +127,6 @@ export function buildReport(opts: {
     dishonesty: opts.dishonesty,
     violations: opts.violations,
     transcript: opts.transcript,
+    transport: opts.transport,
   };
 }

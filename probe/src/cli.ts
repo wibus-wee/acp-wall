@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-import { writeFileSync, mkdirSync, readFileSync, mkdtempSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync, mkdtempSync, chmodSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { tmpdir } from "node:os";
+import { tmpdir, platform } from "node:os";
+import { spawn, execFileSync, type ChildProcess } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { RpcPeer } from "./rpc.js";
 import { makeClientStubs, type ClientCalls } from "./stubs.js";
 import {
@@ -13,8 +15,9 @@ import {
   recordEnvelopeViolation,
   type ProbeContext,
 } from "./probes.js";
-import { buildReport } from "./report.js";
+import { buildReport, type Report } from "./report.js";
 import { startMockLlm } from "./mock-llm.js";
+import { ensureCa } from "./mitm.js";
 
 const args = process.argv.slice(2);
 function arg(flag: string): string | undefined {
@@ -40,8 +43,11 @@ if (entry) {
   if (entry.run && !arg("--cmd")) args.push("--cmd", entry.run);
   if (entry.name && !arg("--name")) args.push("--name", entry.name);
 }
+// --mitm: transparent SNI proxy — model-API domains get TLS-terminated into
+// the mock, everything else relays untouched. Needs no harness cooperation.
+const useMitm = has("--mitm") || process.env.ACP_MITM === "1";
 const needsMock =
-  has("--llm") ||
+  has("--llm") || useMitm ||
   (entry !== undefined && JSON.stringify({ env: entry.env, sessionFiles: entry.sessionFiles }).includes("${MOCK_LLM_URL}"));
 
 const cmd = arg("--cmd") ?? "";
@@ -59,6 +65,8 @@ options:
   --out FILE       report path (default: reports/<name>.json)
   --env K=V        extra env for the agent (repeatable)
   --llm            start mock LLM; sets OPENAI_BASE_URL + ANTHROPIC_BASE_URL
+  --mitm           (linux) transparent SNI proxy: model domains → mock, rest relayed
+  --mitm-domains   extra impersonated hosts, comma-separated
   --transcript     also write the full transcript to <out>.transcript.jsonl
 `);
   process.exit(cmd ? 0 : 1);
@@ -79,6 +87,98 @@ process.on("unhandledRejection", (e) => {
   console.error(`  [unhandled rejection swallowed: ${String(e).slice(0, 120)}]`);
 });
 
+interface MitmHandle {
+  port: number;
+  caCrt: string;
+  logPath: string;
+  child: ChildProcess;
+  rules: Array<{ bin: string; args: string[] }>;
+  closed: boolean;
+}
+
+const sudo = (bin: string, a: string[]) => {
+  try {
+    execFileSync("sudo", ["-n", bin, ...a], { stdio: ["ignore", "ignore", "pipe"] });
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+/** Linux-only: spawn the SNI proxy as `nobody` (so iptables owner-match can
+ * exempt its upstream connections) and REDIRECT all outbound :443 into it. */
+async function setupMitm(mockPort: number): Promise<MitmHandle | null> {
+  if (platform() !== "linux") {
+    console.log("  [mitm] linux-only — skipped on this platform");
+    return null;
+  }
+  const dir = mkdtempSync(join(tmpdir(), "acp-mitm-"));
+  chmodSync(dir, 0o777);
+  mkdirSync(join(dir, "certs"));
+  chmodSync(join(dir, "certs"), 0o777);
+  try {
+    ensureCa(dir);
+  } catch {
+    console.log("  [mitm] openssl unavailable — skipped");
+    return null;
+  }
+  chmodSync(join(dir, "ca.crt"), 0o644);
+  chmodSync(join(dir, "ca.key"), 0o644);
+  const logPath = join(dir, "mitm.jsonl");
+  const mitmJs = fileURLToPath(new URL("./mitm.js", import.meta.url));
+  const extra = arg("--mitm-domains");
+  const child = spawn("sudo", [
+    "-n", "-u", "nobody", process.execPath, mitmJs,
+    "--mock-port", String(mockPort), "--ca-dir", dir, "--log", logPath,
+    ...(extra ? ["--domains", extra] : []),
+  ], { stdio: ["ignore", "pipe", "inherit"] });
+  const port = await new Promise<number>((res) => {
+    let acc = "";
+    const done = (p: number) => { res(p); };
+    child.stdout!.on("data", (c) => {
+      acc += c;
+      const m = acc.match(/PORT=(\d+)/);
+      if (m) done(Number(m[1]));
+    });
+    child.once("exit", () => done(0));
+    child.once("error", () => done(0));
+    setTimeout(() => done(0), 10000);
+  });
+  if (!port) {
+    console.log("  [mitm] proxy failed to start (sudo/nobody missing?) — skipped");
+    return null;
+  }
+  const mkRule = (dest: string) => [
+    "-t", "nat", "-A", "OUTPUT", "-p", "tcp", "--dport", "443",
+    "!", "-d", dest, "-m", "owner", "!", "--uid-owner", "nobody",
+    "-j", "REDIRECT", "--to-ports", String(port),
+  ];
+  const rules: MitmHandle["rules"] = [];
+  const v4 = mkRule("127.0.0.0/8");
+  if (!sudo("iptables", v4)) {
+    console.log("  [mitm] iptables redirect failed — skipped");
+    child.kill();
+    return null;
+  }
+  rules.push({ bin: "iptables", args: v4 });
+  const v6 = mkRule("::1");
+  if (sudo("ip6tables", v6)) rules.push({ bin: "ip6tables", args: v6 });
+  // system CA store covers Go/Rust/OpenSSL harnesses; Node/Python get env below
+  sudo("cp", [join(dir, "ca.crt"), "/usr/local/share/ca-certificates/acp-probe-mitm.crt"]);
+  sudo("update-ca-certificates", []);
+  console.log(`  [mitm] transparent proxy :${port} — model domains → mock :${mockPort}, rest relayed`);
+  return { port, caCrt: join(dir, "ca.crt"), logPath, child, rules, closed: false };
+}
+
+function teardownMitm(m: MitmHandle | null) {
+  if (!m || m.closed) return;
+  m.closed = true;
+  for (const r of m.rules) {
+    sudo(r.bin, r.args.map((a) => (a === "-A" ? "-D" : a)));
+  }
+  try { m.child.kill(); } catch { /* already dead */ }
+}
+
 async function main() {
   let llm: Awaited<ReturnType<typeof startMockLlm>> | null = null;
   if (needsMock) {
@@ -87,6 +187,19 @@ async function main() {
     env.ANTHROPIC_BASE_URL = llm.url.replace(/\/v1$/, "");
     console.log(`mock llm: ${llm.url}`);
   }
+  let mitm: MitmHandle | null = null;
+  if (useMitm && llm) {
+    mitm = await setupMitm(Number(new URL(llm.url).port));
+    if (mitm) {
+      // per-runtime CA trust: every SDK family gets its own pointer
+      env.NODE_EXTRA_CA_CERTS = mitm.caCrt;
+      env.SSL_CERT_FILE = mitm.caCrt;
+      env.REQUESTS_CA_BUNDLE = mitm.caCrt;
+      env.CURL_CA_BUNDLE = mitm.caCrt;
+      env.GIT_SSL_CAINFO = mitm.caCrt;
+    }
+  }
+  process.on("exit", () => teardownMitm(mitm));
   // controlled session workspace FIRST: ${WORK_DIR} substitution in env,
   // run cmd and sessionFiles all resolve against it. The agent is spawned
   // here, session/new's cwd points here — the real repo stays untouched.
@@ -177,6 +290,28 @@ async function main() {
   }
   applyViolations(ctx);
 
+  let transport: Report["transport"] | undefined;
+  if (mitm != null) {
+    const impersonated: string[] = [];
+    let impersonations = 0;
+    let relayed = 0;
+    let drops = 0;
+    try {
+      for (const line of readFileSync(mitm.logPath, "utf8").split("\n")) {
+        if (line.length === 0) continue;
+        const rec = JSON.parse(line) as { action?: string; sni?: string };
+        const action = String(rec.action ?? "");
+        if (action === "impersonate") {
+          impersonations += 1;
+          const sni = String(rec.sni ?? "");
+          if (!impersonated.includes(sni)) impersonated.push(sni);
+        } else if (action === "relay") relayed += 1;
+        else if (["drop", "dns-fail", "unreachable", "mint-fail"].includes(action)) drops += 1;
+      }
+    } catch { /* log is best effort */ }
+    transport = { mitm: { port: mitm.port, impersonated, impersonations, relayed, drops } };
+  }
+
   const report = buildReport({
     harness: name,
     initResult: ctx.initResult,
@@ -184,6 +319,7 @@ async function main() {
     dishonesty: ctx.dishonesty,
     violations: ctx.violations,
     transcript: rpc.transcript,
+    transport,
   });
 
   mkdirSync(dirname(out), { recursive: true });
@@ -193,6 +329,7 @@ async function main() {
   }
   rpc.close();
   llm?.close();
+  teardownMitm(mitm);
 
   console.log(`\n  score ${report.score}/100 · tier ${report.tier.toUpperCase()}`);
   if (report.dishonesty.length) {

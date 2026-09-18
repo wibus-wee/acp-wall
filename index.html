@@ -399,12 +399,13 @@ function detailHTML(h){
   const viols=(h.violations&&h.violations.length)
     ?`<div class="viol"><b>⚠ SCHEMA VIOLATIONS · ${h.violations.length}</b>${h.violations.slice(0,6).map(v=>`<div>${v.method} ${v.where}${v.path?' · '+v.path:''} — ${v.msg}</div>`).join('')}${h.violations.length>6?`<div>…and ${h.violations.length-6} more</div>`:''}</div>`:'';
   const probed=h.probedAt?`<div class="probed">probed ${h.probedAt.slice(0,10)}${h.run?` · $ ${h.run}`:''}</div>`:'';
+  const mitm=(h.mitm&&h.mitm.length)?`<div class="probed">model traffic intercepted at transport layer (TLS impersonation): ${h.mitm.join(', ')}</div>`:'';
   return `<div class="lg-x-in">
     <div class="bx">
       <div class="sh-lab"><span>Capabilities</span><span class="mono">${h.cells.filter(c=>c===1).length}/${CAPS.length} · score ${done?'—':s}</span></div>
       ${liars}${viols}
       <div class="pills">${CAPS.map((c,j)=>`<span class="${PCLS[h.cells[j]]}">${CELL[h.cells[j]]} ${c}</span>`).join('')}</div>
-      ${probed}
+      ${probed}${mitm}
     </div>
     <div class="bx">
       <div class="sh-lab"><span>Probe transcript</span><button class="sh-btn" data-copy>copy report</button></div>

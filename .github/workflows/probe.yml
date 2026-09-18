@@ -60,6 +60,9 @@ jobs:
           npm run build
 
       - name: Install + probe each entry
+        env:
+          # same transparent SNI proxy as the wall — see wall.yml
+          ACP_MITM: "1"
         run: |
           mkdir -p probe/reports
           for entry in ${{ steps.changed.outputs.entries }}; do
