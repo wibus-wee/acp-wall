@@ -137,7 +137,6 @@
 
   /* ——— inline expandable dossier ——— */
   .xp{max-height:0;overflow:hidden;transition:max-height .35s ease}
-  .xp.on{max-height:760px}
   .lg-x td{padding:0;height:auto;text-align:left}
   /* dossier fits the scroll viewport, not the full table width */
   .lg-x .xp{position:sticky;left:0}
@@ -548,11 +547,16 @@ function wireCopy(root,h){
 let openXP=null;
 function toggleXP(xp,row){
   const was=xp.classList.contains('on');
-  if(openXP&&openXP!==xp){openXP.classList.remove('on');openXP._row&&openXP._row.classList.remove('open')}
+  if(openXP&&openXP!==xp){closeXP(openXP)}
   xp.classList.toggle('on',!was);
+  xp.style.maxHeight=was?'0':xp.scrollHeight+'px';
   if(row)row.classList.toggle('open',!was);
   xp._row=row;openXP=was?null:xp;
   fitXP(xp);
+}
+function closeXP(xp){
+  xp.classList.remove('on');xp.style.maxHeight='0';
+  xp._row&&xp._row.classList.remove('open');
 }
 /* league-table dossiers live inside the horizontally-scrolled .lg-wrap:
    pin them to the visible viewport width, not the full table width. */
@@ -560,8 +564,8 @@ function fitXP(xp){
   const wrap=xp&&xp.closest('.lg-wrap');
   if(wrap)xp.style.width=(wrap.clientWidth-2)+'px';
 }
-addEventListener('resize',()=>{if(openXP)fitXP(openXP)});
-function closeOpenXP(){if(openXP){openXP.classList.remove('on');openXP._row&&openXP._row.classList.remove('open');openXP=null}}
+addEventListener('resize',()=>{if(openXP){fitXP(openXP);openXP.style.maxHeight=openXP.scrollHeight+'px'}});
+function closeOpenXP(){if(openXP){closeXP(openXP);openXP=null}}
 function openCase(h){
   if(!h._xp||!h._row)return;
   if(!h._xp.classList.contains('on'))toggleXP(h._xp,h._row);
