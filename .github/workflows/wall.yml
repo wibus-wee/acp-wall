@@ -43,10 +43,10 @@ jobs:
       # commit may carry registry entries that did not exist at trigger time
       sha: ${{ steps.sha.outputs.sha }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
 
       - name: Sync official ACP registry
         run: node tools/sync-registry.mjs
@@ -96,12 +96,12 @@ jobs:
       matrix:
         entry: ${{ fromJSON(needs.sync.outputs.entries) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.sync.outputs.sha }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 24
 
       - name: Resolve harness name
         id: h
@@ -131,7 +131,7 @@ jobs:
             --out "probe/reports/${{ steps.h.outputs.name }}.report.json" --transcript || true
 
       - name: Upload report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           # artifact names may not contain '/' — use the resolved name, not the path
           name: report-${{ steps.h.outputs.name }}
@@ -152,13 +152,13 @@ jobs:
       contents: write
       pages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: ${{ needs.sync.outputs.sha }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: 22
-      - uses: actions/download-artifact@v4
+          node-version: 24
+      - uses: actions/download-artifact@v7
         with:
           pattern: report-*
           path: probe/reports
