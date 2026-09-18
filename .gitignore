@@ -4,3 +4,6 @@ probe/reports/
 reports/
 .DS_Store
 .cache/
+
+# Stakpak session files
+.stakpak/session*
