@@ -1,0 +1,3 @@
+{
+  "notes": "sigit is a local-inference agent (Onde Inference, 'no API keys, no cloud round-trips') — nothing to wire; probed as-is. Whether its bundled model runs in CI is itself a data point."
+}

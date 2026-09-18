@@ -10,8 +10,20 @@
   "license": "Apache-2.0",
   "install": "node tools/install-dist.mjs registry/agents/kimchi.json",
   "run": "${REPO_ROOT}/.cache/agents/kimchi/bin/kimchi --mode acp",
-  "env": {},
-  "sessionFiles": null,
+  "env": {
+    "KIMCHI_API_KEY": "probe-mock-key",
+    "HOME": "${WORK_DIR}"
+  },
+  "sessionFiles": {
+    ".kimchi/config.json": {
+      "apiKey": "probe-mock-key",
+      "llmEndpoint": "${MOCK_LLM_URL}"
+    },
+    ".config/kimchi/config.json": {
+      "apiKey": "probe-mock-key",
+      "llmEndpoint": "${MOCK_LLM_URL}"
+    }
+  },
   "dist": {
     "type": "binary",
     "per_platform": {
@@ -64,6 +76,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "kimchi resolves project .kimchi/config.json then ~/.config/kimchi/config.json — llmEndpoint is a documented OpenAI-compatible base (default llm.kimchi.dev/openai/v1) pointed at the mock; KIMCHI_API_KEY satisfies the credential path.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

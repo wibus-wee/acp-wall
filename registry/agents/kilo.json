@@ -10,8 +10,37 @@
   "license": "MIT",
   "install": null,
   "run": "npx -y @kilocode/cli@7.7.3 acp",
-  "env": {},
-  "sessionFiles": null,
+  "env": {
+    "HOME": "${WORK_DIR}",
+    "KILO_API_KEY": "probe-mock-key",
+    "OPENAI_API_KEY": "probe-mock-key"
+  },
+  "sessionFiles": {
+    "kilo.json": {
+      "$schema": "https://app.kilo.ai/config.json",
+      "model": "openai-compatible/probe-model",
+      "provider": {
+        "openai-compatible": {
+          "npm": "@ai-sdk/openai-compatible",
+          "options": {
+            "baseURL": "${MOCK_LLM_URL}",
+            "apiKey": "probe-mock-key"
+          },
+          "models": {
+            "probe-model": {
+              "name": "probe-model",
+              "tool_call": true
+            }
+          }
+        }
+      },
+      "permission": {
+        "bash": "ask",
+        "edit": "ask",
+        "webfetch": "ask"
+      }
+    }
+  },
   "dist": {
     "type": "npx",
     "package": "@kilocode/cli@7.7.3",
@@ -21,6 +50,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Kilo CLI is an OpenCode fork reading ./kilo.json[c] from cwd — mirrors the verified opencode wiring: openai-compatible provider → mock LLM, permission=ask to deterministically exercise session/request_permission.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

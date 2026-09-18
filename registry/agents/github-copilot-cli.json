@@ -10,7 +10,11 @@
   "license": "proprietary",
   "install": null,
   "run": "npx -y @github/copilot@1.0.86 --acp",
-  "env": {},
+  "env": {
+    "COPILOT_GITHUB_TOKEN": "probe-mock-key",
+    "GH_TOKEN": "probe-mock-key",
+    "GITHUB_TOKEN": "probe-mock-key"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "npx",
@@ -21,6 +25,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "GitHub Copilot CLI validates the token against GitHub's Copilot entitlement endpoint — a placeholder cannot pass. Honest result: harness requires a real Copilot subscription; no documented BYOK/custom-endpoint path exists.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

@@ -1,0 +1,6 @@
+{
+  "env": {
+    "CURSOR_API_KEY": "probe-mock-key"
+  },
+  "notes": "cursor-agent authenticates against Cursor's backend with a server-validated API key; placeholder key reaches the auth rejection. No documented custom-endpoint/BYOK path."
+}

@@ -1,0 +1,7 @@
+{
+  "env": {
+    "AMP_API_KEY": "probe-mock-key",
+    "HOME": "${WORK_DIR}"
+  },
+  "notes": "Sourcegraph Amp requires a real Amp account API key (server-validated). Placeholder included so the probe reaches the genuine auth rejection."
+}

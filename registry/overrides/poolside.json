@@ -1,0 +1,7 @@
+{
+  "env": {
+    "POOLSIDE_API_KEY": "probe-mock-key",
+    "HOME": "${WORK_DIR}"
+  },
+  "notes": "poolside requires a real poolside account key; server-validated, no documented custom endpoint."
+}

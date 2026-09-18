@@ -10,7 +10,12 @@
   "license": "Apache-2.0",
   "install": "node tools/install-dist.mjs registry/agents/harn.json",
   "run": "${REPO_ROOT}/.cache/agents/harn/harn serve acp",
-  "env": {},
+  "env": {
+    "HARN_LLM_PROVIDER": "local",
+    "LOCAL_LLM_BASE_URL": "${MOCK_LLM_URL}",
+    "OPENAI_API_KEY": "probe-mock-key",
+    "OPENAI_BASE_URL": "${MOCK_LLM_URL}"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "binary",
@@ -64,6 +69,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "harn serve acp resolves its LLM provider via HARN_LLM_PROVIDER; 'local' + LOCAL_LLM_BASE_URL is the documented self-hosted endpoint path — routes model calls to the mock LLM. OPENAI_* covers the openai fallback.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

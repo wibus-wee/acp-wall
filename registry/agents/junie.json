@@ -9,8 +9,10 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/junie.svg",
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/junie.json",
-  "run": "${REPO_ROOT}/.cache/agents/junie/junie-app/bin/junie --acp=true",
-  "env": {},
+  "run": "${REPO_ROOT}/.cache/agents/junie/Applications/junie.app/Contents/MacOS/junie --acp=true",
+  "env": {
+    "JUNIE_API_KEY": "probe-mock-key"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "binary",
@@ -61,6 +63,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Junie (JetBrains) requires a JetBrains AI subscription; auth is server-validated with no documented custom-endpoint path.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

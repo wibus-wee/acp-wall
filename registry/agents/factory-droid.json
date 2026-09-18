@@ -10,8 +10,25 @@
   "license": "proprietary",
   "install": null,
   "run": "npx -y droid@0.222.0 exec --output-format acp-daemon",
-  "env": {},
-  "sessionFiles": null,
+  "env": {
+    "HOME": "${WORK_DIR}",
+    "FACTORY_API_KEY": "probe-mock-key"
+  },
+  "sessionFiles": {
+    ".factory/settings.json": {
+      "model": "custom:Probe-0",
+      "customModels": [
+        {
+          "model": "probe-model",
+          "displayName": "Probe",
+          "baseUrl": "${MOCK_LLM_URL}",
+          "apiKey": "probe-mock-key",
+          "provider": "generic-chat-completion-api",
+          "maxOutputTokens": 16384
+        }
+      ]
+    }
+  },
   "dist": {
     "type": "npx",
     "package": "droid@0.222.0",
@@ -23,6 +40,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Documented BYOK path: ~/.factory/settings.json customModels (generic-chat-completion-api) pointed at the mock LLM, model=custom:Probe-0 selects it. Whether the ACP daemon accepts a BYOK-only setup without Factory login is untested — CI transcript decides.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

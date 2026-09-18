@@ -1,0 +1,6 @@
+{
+  "env": {
+    "JUNIE_API_KEY": "probe-mock-key"
+  },
+  "notes": "Junie (JetBrains) requires a JetBrains AI subscription; auth is server-validated with no documented custom-endpoint path."
+}

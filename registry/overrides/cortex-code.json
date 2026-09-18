@@ -1,0 +1,6 @@
+{
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
+  "notes": "Cortex Code is bound to a Snowflake account (host/account/token); no self-hosted or BYOK path exists — honest account gate."
+}

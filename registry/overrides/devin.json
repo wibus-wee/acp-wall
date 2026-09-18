@@ -1,0 +1,6 @@
+{
+  "env": {
+    "DEVIN_API_KEY": "probe-mock-key"
+  },
+  "notes": "Devin CLI requires a real Cognition account API key — server-validated, no self-hosted/BYOK option."
+}

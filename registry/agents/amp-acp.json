@@ -10,7 +10,10 @@
   "license": "Apache-2.0",
   "install": "node tools/install-dist.mjs registry/agents/amp-acp.json",
   "run": "${REPO_ROOT}/.cache/agents/amp-acp/amp-acp",
-  "env": {},
+  "env": {
+    "AMP_API_KEY": "probe-mock-key",
+    "HOME": "${WORK_DIR}"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "binary",
@@ -44,6 +47,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Sourcegraph Amp requires a real Amp account API key (server-validated). Placeholder included so the probe reaches the genuine auth rejection.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

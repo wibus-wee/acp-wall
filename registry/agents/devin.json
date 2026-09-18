@@ -10,7 +10,9 @@
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/devin.json",
   "run": "${REPO_ROOT}/.cache/agents/devin/bin/devin acp",
-  "env": {},
+  "env": {
+    "DEVIN_API_KEY": "probe-mock-key"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "binary",
@@ -61,6 +63,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Devin CLI requires a real Cognition account API key — server-validated, no self-hosted/BYOK option.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

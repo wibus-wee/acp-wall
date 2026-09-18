@@ -1,0 +1,6 @@
+{
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
+  "notes": "Google Antigravity uses interactive Google OAuth against a real account — cannot be satisfied in CI; no API-key or custom-endpoint path."
+}

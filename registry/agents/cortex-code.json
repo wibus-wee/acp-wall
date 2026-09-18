@@ -9,8 +9,10 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/cortex-code.svg",
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/cortex-code.json",
-  "run": "${REPO_ROOT}/.cache/agents/cortex-code/coco-1.0.73+180523.e6179a031de9-linux-amd64/cortex acp serve",
-  "env": {},
+  "run": "${REPO_ROOT}/.cache/agents/cortex-code/coco-1.0.73+180523.e6179a031de9-darwin-arm64/cortex acp serve",
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "binary",
@@ -67,6 +69,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Cortex Code is bound to a Snowflake account (host/account/token); no self-hosted or BYOK path exists — honest account gate.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

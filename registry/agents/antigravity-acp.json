@@ -9,8 +9,10 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/antigravity-acp.svg",
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/antigravity-acp.json",
-  "run": "${REPO_ROOT}/.cache/agents/antigravity-acp/agy_acp_server.par --uid=",
-  "env": {},
+  "run": "${REPO_ROOT}/.cache/agents/antigravity-acp/agy_acp_server.par",
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "binary",
@@ -45,6 +47,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Google Antigravity uses interactive Google OAuth against a real account — cannot be satisfied in CI; no API-key or custom-endpoint path.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

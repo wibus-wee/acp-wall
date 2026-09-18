@@ -1,0 +1,17 @@
+{
+  "env": {
+    "KIMCHI_API_KEY": "probe-mock-key",
+    "HOME": "${WORK_DIR}"
+  },
+  "sessionFiles": {
+    ".kimchi/config.json": {
+      "apiKey": "probe-mock-key",
+      "llmEndpoint": "${MOCK_LLM_URL}"
+    },
+    ".config/kimchi/config.json": {
+      "apiKey": "probe-mock-key",
+      "llmEndpoint": "${MOCK_LLM_URL}"
+    }
+  },
+  "notes": "kimchi resolves project .kimchi/config.json then ~/.config/kimchi/config.json — llmEndpoint is a documented OpenAI-compatible base (default llm.kimchi.dev/openai/v1) pointed at the mock; KIMCHI_API_KEY satisfies the credential path."
+}

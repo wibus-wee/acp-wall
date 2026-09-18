@@ -1,0 +1,9 @@
+{
+  "env": {
+    "HARN_LLM_PROVIDER": "local",
+    "LOCAL_LLM_BASE_URL": "${MOCK_LLM_URL}",
+    "OPENAI_API_KEY": "probe-mock-key",
+    "OPENAI_BASE_URL": "${MOCK_LLM_URL}"
+  },
+  "notes": "harn serve acp resolves its LLM provider via HARN_LLM_PROVIDER; 'local' + LOCAL_LLM_BASE_URL is the documented self-hosted endpoint path — routes model calls to the mock LLM. OPENAI_* covers the openai fallback."
+}

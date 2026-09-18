@@ -10,8 +10,12 @@
   "license": "Apache-2.0",
   "install": "node tools/install-dist.mjs registry/agents/stakpak.json",
   "run": "${REPO_ROOT}/.cache/agents/stakpak/stakpak acp",
-  "env": {},
-  "sessionFiles": null,
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
+  "sessionFiles": {
+    ".stakpak/config.toml": "[profiles.default]\nprovider = \"local\"\nmodel = \"probe/probe-model\"\n\n[profiles.default.providers.probe]\ntype = \"custom\"\napi_endpoint = \"${MOCK_LLM_URL}\"\napi_key = \"probe-mock-key\"\n"
+  },
   "dist": {
     "type": "binary",
     "per_platform": {
@@ -54,6 +58,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Documented BYO-LLM path: ~/.stakpak/config.toml declares a custom OpenAI-compatible provider (type=custom, api_endpoint) pointed at the mock LLM; HOME=${WORK_DIR} confines ~/.stakpak. No stakpak account needed.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

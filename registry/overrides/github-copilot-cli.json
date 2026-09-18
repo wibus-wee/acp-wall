@@ -1,0 +1,8 @@
+{
+  "env": {
+    "COPILOT_GITHUB_TOKEN": "probe-mock-key",
+    "GH_TOKEN": "probe-mock-key",
+    "GITHUB_TOKEN": "probe-mock-key"
+  },
+  "notes": "GitHub Copilot CLI validates the token against GitHub's Copilot entitlement endpoint — a placeholder cannot pass. Honest result: harness requires a real Copilot subscription; no documented BYOK/custom-endpoint path exists."
+}

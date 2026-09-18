@@ -1,0 +1,24 @@
+{
+  "env": {
+    "HOME": "${WORK_DIR}",
+    "QODER_PERSONAL_ACCESS_TOKEN": "probe-mock-token"
+  },
+  "sessionFiles": {
+    ".qoder/config.json": {
+      "modelConfigs": {
+        "customModels": [
+          {
+            "provider": "openai",
+            "apiKey": "probe-mock-key",
+            "model": "probe-model",
+            "baseURL": "${MOCK_LLM_URL}",
+            "key": "probe",
+            "displayName": "Probe",
+            "format": "openai"
+          }
+        ]
+      }
+    }
+  },
+  "notes": "Attempted wiring: documented BYOK customModels shape (provider/apiKey/baseURL) planted via HOME=${WORK_DIR}. Whether the ACP session gate accepts a placeholder PAT is unknown — CI transcript will show if it demands a real qoder.com token."
+}
