@@ -1,4 +1,5 @@
 {
+  "lodyAdapter": "kimi",
   "env": {
     "KIMI_CODE_HOME": "${WORK_DIR}/kimi-home"
   },

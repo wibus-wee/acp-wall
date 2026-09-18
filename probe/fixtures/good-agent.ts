@@ -53,6 +53,21 @@ peer.onRequest = async (method, params: any) => {
           loadSession: true,
           promptCapabilities: { image: false, audio: false, embeddedContext: true },
           mcpCapabilities: { http: true, sse: false },
+          // acp-extension-core: Lody contracts ride _meta.lody on the standard
+          // capability map, each feature independently versioned.
+          _meta: {
+            lody: {
+              rateLimits: { version: 1 },
+              goal: {
+                version: 1,
+                actions: ["set", "pause", "resume", "clear"],
+                controlActions: ["pause", "clear"],
+                promptActions: ["set", "resume", "pause", "clear"],
+              },
+              worktreeProject: { version: 1 },
+              task: { version: 1 },
+            },
+          },
         },
         agentInfo: { name: "good-agent", title: "Good Agent", version: "0.1.0" },
         authMethods: [],
@@ -113,6 +128,8 @@ peer.onRequest = async (method, params: any) => {
           title: "Run tests",
           kind: "execute",
           status: "in_progress",
+          // lody ext: canonical tool identity rides the standard envelope
+          _meta: { lody: { toolName: "Bash" } },
         },
       });
       const term = (await peer.request("terminal/create", { sessionId: sid, command: "npm test" })) as any;
@@ -153,6 +170,15 @@ peer.onRequest = async (method, params: any) => {
       });
       return { stopReason: "end_turn" };
     }
+    // _lody/* extension namespace (acp-extension-core) — read-only surface.
+    case "_lody/rate_limits/get":
+      return { rateLimits: [], fetchedAtEpochSeconds: Math.floor(Date.now() / 1000) };
+    case "_lody/subagents/list":
+      return { tasks: [] };
+    case "_lody/session/history/read":
+      return {};
+    case "_lody/session/goal":
+      return { goal: null };
     default:
       throw { code: -32601, message: "method_not_found" };
   }

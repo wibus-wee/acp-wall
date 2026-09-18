@@ -79,6 +79,21 @@ the mock LLM logs which tools the agent exposed, so "the model called the
 fixture tool but the call never reached the server" and "tools discovered but
 never exposed to the model" are distinct `±` rungs — not silent `+`s.
 
+## Lody extension (side-channel)
+
+Alongside the standard surface the probe also records Lody extension evidence
+([acp-extension-core](https://github.com/LodyAI/acp-extension-core)): which
+features an agent advertises under `agentCapabilities._meta.lody`, which
+read-only `_lody/*` endpoints answer (`rate_limits/get`, `subagents/list`,
+`session/history/read`, `session/goal`), and which `_meta.lody.*` keys show up
+on wire traffic. It lands in `report.lody` and the wall's trailing `lody`
+column — annex data, never part of cells, score, or tier.
+
+A `◆ lody` mark on a harness means Lody ships a provider adapter for it
+(`acp-extension-{claude,codex,grok,dsh,kimi,pi}`) — marked via `lodyAdapter`
+in `registry/overrides/<id>.json`. The page's LODY EXT toggle strikes all lody
+surface from the record.
+
 ## Cell semantics
 
 | cell | meaning |

@@ -1,4 +1,4 @@
-import type { MethodResult, Status, ViolationRec } from "./probes.js";
+import type { LodyProbeInfo, MethodResult, Status, ViolationRec } from "./probes.js";
 import type { TranscriptEntry } from "./rpc.js";
 
 /** Cell order matches the wall's CAPS columns (24 methods/features). */
@@ -63,6 +63,10 @@ export interface Report {
   dishonesty: Array<{ claim: string; detail: string }>;
   violations: ViolationRec[];
   transcript: TranscriptEntry[];
+  /** Lody extension evidence (acp-extension-core) — `_meta.lody` capabilities
+   * advertised, `_lody/*` endpoints that answered, `_meta.lody.*` keys seen on
+   * wire traffic. Side-channel stat: never part of cells/score/tier. */
+  lody?: LodyProbeInfo;
   /** Disclosed when the probe impersonated model endpoints at the transport
    * layer (transparent SNI proxy) rather than via documented config. */
   transport?: {
@@ -83,6 +87,7 @@ export function buildReport(opts: {
   dishonesty: Array<{ claim: string; detail: string }>;
   violations: ViolationRec[];
   transcript: TranscriptEntry[];
+  lody?: LodyProbeInfo;
   transport?: Report["transport"];
 }): Report {
   const notes: Record<string, string> = {};
@@ -124,6 +129,7 @@ export function buildReport(opts: {
     dishonesty: opts.dishonesty,
     violations: opts.violations,
     transcript: opts.transcript,
+    lody: opts.lody,
     transport: opts.transport,
   };
 }

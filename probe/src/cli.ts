@@ -10,7 +10,7 @@ import {
   probeInitialize, probeAuthenticate, probeSessionNew, probeSessionLoad,
   probeSessionMgmt, probeSetMode, probeSetConfig, probeSessionPrompt,
   probeCancel, probeClientCalls, probeUpdateShapes, probeMcp, probeLogout,
-  probeSessionFork, probeLoadReplay, probeProviders, probeNes,
+  probeSessionFork, probeLoadReplay, probeProviders, probeNes, probeLody,
   checkAgentRequest, checkNotification, checkClientResponse, applyViolations,
   recordEnvelopeViolation,
   type ProbeContext,
@@ -289,6 +289,9 @@ async function main() {
     await step("providers", () => probeProviders(ctx));
     await step("nes", () => probeNes(ctx));
     await step("mcp", () => probeMcp(ctx));
+    // lody ext last but before logout — it also inspects the wire traffic the
+    // suite has accumulated, so it runs after every other probe has spoken.
+    await step("lody", () => probeLody(ctx));
     // logout last — it may terminate the agent/session
     await step("logout", () => probeLogout(ctx));
   }
@@ -323,6 +326,7 @@ async function main() {
     dishonesty: ctx.dishonesty,
     violations: ctx.violations,
     transcript: rpc.transcript,
+    lody: ctx.lody,
     transport,
   });
 

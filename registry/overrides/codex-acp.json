@@ -1,4 +1,5 @@
 {
+  "lodyAdapter": "codex",
   "env": {
     "CODEX_HOME": "${WORK_DIR}/codex-home",
     "OPENAI_API_KEY": "probe-mock-key"

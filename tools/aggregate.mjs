@@ -80,6 +80,21 @@ function loadRegistryDir(dir) {
 loadRegistryDir(registryDir);
 loadRegistryDir(join(registryDir, "agents"));
 
+// registry/overrides/<id>.json — human-authored probe config AND wall
+// annotations (e.g. lodyAdapter). Keyed by filename = agent id, which synced
+// entries carry as their `name`.
+const overridesById = {};
+const ovDir = join(registryDir, "overrides");
+if (existsSync(ovDir)) {
+  for (const f of readdirSync(ovDir).filter((f) => f.endsWith(".json") && !f.startsWith("_"))) {
+    try {
+      overridesById[f.replace(/\.json$/, "")] = JSON.parse(readFileSync(join(ovDir, f), "utf8"));
+    } catch (e) {
+      console.warn(`skip overrides/${f}: ${e.message}`);
+    }
+  }
+}
+
 const harnesses = [];
 if (existsSync(reportsDir)) {
   for (const f of readdirSync(reportsDir).filter((f) => f.endsWith(".report.json"))) {
@@ -111,6 +126,13 @@ if (existsSync(reportsDir)) {
       repo: reg.repo ?? null,
       dishonesty: r.dishonesty ?? [],
       violations: r.violations ?? [],
+      // acp-extension-core side-channel: _meta.lody capabilities advertised,
+      // _lody/* endpoints answered, _meta.lody.* keys seen on the wire.
+      // Absent on reports from before the extension probe existed.
+      lody: r.lody ?? null,
+      // Lody ships a provider adapter for this harness → ◆ lody mark
+      // (acp-extension-<slug>, e.g. claude/codex/grok/dsh/kimi/pi).
+      lodyAdapter: overridesById[r.harness]?.lodyAdapter ?? reg.lodyAdapter ?? null,
       // disclosure: model endpoints the probe TLS-impersonated (transport
       // layer), vs documented-config wiring — honesty about the measurement
       mitm: r.transport?.mitm?.impersonated?.length ? r.transport.mitm.impersonated : null,

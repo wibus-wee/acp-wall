@@ -159,6 +159,32 @@
   .viol div{margin-top:5px;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#b0955f;word-break:break-all}
   .probed{margin-top:8px;font-family:ui-monospace,Menlo,monospace;font-size:9.5px;color:var(--faint);letter-spacing:.06em}
 
+  /* ——— lody ext: optional column + dossier block, gated by the toggle ——— */
+  .lody-tog{display:inline-flex;align-items:center;gap:7px;margin-left:14px;font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.14em;color:var(--faint);cursor:pointer;user-select:none}
+  .lody-tog:hover{color:var(--ink-dim)}
+  .lody-tog input{appearance:none;-webkit-appearance:none;width:24px;height:13px;border:1px solid var(--line2);border-radius:8px;position:relative;cursor:pointer;background:transparent;transition:border-color .2s;flex:none}
+  .lody-tog input::after{content:"";position:absolute;top:2px;left:2px;width:7px;height:7px;border-radius:50%;background:var(--faint);transition:.2s}
+  .lody-tog input:checked{border-color:var(--gold-deep)}
+  .lody-tog input:checked::after{left:13px;background:var(--gold)}
+  body.no-lody .lody-col,body.no-lody .lody-only{display:none}
+  /* ◆ lody mark — Lody ships an acp-extension-* adapter for this harness */
+  .ldy{display:inline-block;margin-left:8px;font-family:ui-monospace,Menlo,monospace;font-size:8.5px;letter-spacing:.12em;color:var(--gold);border:1px solid rgba(217,180,95,.45);border-radius:4px;padding:1px 6px;vertical-align:2px;text-decoration:none}
+  a.ldy:hover{color:#eac97e;border-color:var(--gold)}
+  .pal-item .ldy{margin-left:8px;padding:0 5px;font-size:8px}
+
+  /* ——— extension desk (acp-extension-core intro) ——— */
+  .ext{margin-top:14px;border:1px solid var(--line2);background:var(--paper2);padding:22px 24px 20px}
+  .ext p{color:var(--ink-dim);font-size:14px;line-height:1.85;max-width:70ch}
+  .ext p+p{margin-top:10px}
+  .ext .mono{font-size:12px;background:#1b1710;border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:#cfc39f}
+  .ext b{color:var(--ink);font-weight:600}
+  .ext-lab{font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.18em;color:var(--faint);text-transform:uppercase}
+  .ext-ads{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+  .ext-ads .ext-lab{margin-right:4px}
+  .ext-ads a{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.06em;border:1px solid var(--line2);border-radius:4px;padding:3px 9px;color:var(--ink-dim);text-decoration:none}
+  .ext-ads a:hover{color:var(--gold);border-color:var(--gold-deep)}
+  .ext-ads .core{margin-left:auto;border-style:dashed}
+
   .foot-note{margin-top:52px;text-align:center;font-size:13.5px;font-style:italic;color:var(--ink-dim);line-height:1.9;max-width:60ch;margin-left:auto;margin-right:auto}
   .foot-note .who{display:block;margin-top:10px;font-style:normal;font-size:10px;letter-spacing:.2em;color:var(--faint)}
   .fine{margin-top:56px;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:9px;color:var(--faint);letter-spacing:.16em}
@@ -212,8 +238,8 @@
 <!-- league table runs the full broadsheet width -->
 <div class="page wide">
   <section class="sec" id="league">
-    <div class="sec-h"><span class="t">The League Table</span><span class="zh">合规矩阵</span><span class="n" id="league-count">READ ACROSS</span></div>
-    <p class="lg-note">As printed after each probe run. <span class="mono" style="font-size:10.5px">+ implemented / ± partial / − missing / · not exercised.</span> A name may be clicked to subpoena its case file.</p>
+    <div class="sec-h"><span class="t">The League Table</span><span class="zh">合规矩阵</span><span class="n" id="league-count">READ ACROSS</span><label class="lody-tog" title="include the Lody extension (acp-extension-core) column and case-file stats"><input type="checkbox" id="lody-tog" checked>LODY EXT</label></div>
+    <p class="lg-note">As printed after each probe run. <span class="mono" style="font-size:10.5px">+ implemented / ± partial / − missing / · not exercised.</span> The trailing <span class="mono" style="font-size:10.5px">lody</span> column counts advertised <span class="mono" style="font-size:10.5px">_meta.lody</span> extension features — it is annex evidence, not part of the score; the toggle strikes it from the record. A name may be clicked to subpoena its case file.</p>
     <div class="lg-wrap"><table class="lg-t"><thead><tr id="lg-head"><th>HARNESS</th></tr></thead><tbody id="lg-body"></tbody></table></div>
   </section>
 </div>
@@ -232,6 +258,36 @@
   <section class="sec limited">
     <div class="sec-h"><span class="t">Limited Compatibility</span><span class="zh">兼容性有限</span><span class="n" id="cnt-limited"></span></div>
     <div id="list-limited"></div>
+  </section>
+
+  <section class="sec" id="ext-desk">
+    <div class="sec-h"><span class="t">The Extension Desk</span><span class="zh">扩展契约</span><span class="n">BEYOND STANDARD ACP</span></div>
+    <div class="ext">
+      <p><b>acp-extension-core</b> is the Lody extension contract — provider-neutral
+        agreements for capabilities standard ACP doesn't carry. Lody semantics ride
+        as <span class="mono">_meta.lody.&lt;feature&gt;</span> on ordinary ACP
+        envelopes; what the protocol can't express earns a
+        <span class="mono">_lody/*</span> method. Optional features advertise under
+        <span class="mono">agentCapabilities._meta.lody</span>, each with its own
+        integer <span class="mono">version</span> — the probe reads that
+        advertisement and knocks on the read-only <span class="mono">_lody/*</span>
+        endpoints. A <span class="mono">method_not_found</span> means unspoken;
+        anything else means the namespace is wired.</p>
+      <p>A <span class="ldy">◆ lody</span> mark on the ledger means Lody ships a
+        provider adapter for that harness — native behavior translated into the
+        same contracts, so clients never branch on provider payloads. Details
+        live in the repos:</p>
+      <div class="ext-ads">
+        <span class="ext-lab">provider adapters</span>
+        <a href="https://github.com/LodyAI/acp-extension-claude" target="_blank" rel="noopener">claude</a>
+        <a href="https://github.com/LodyAI/acp-extension-codex" target="_blank" rel="noopener">codex</a>
+        <a href="https://github.com/LodyAI/acp-extension-grok" target="_blank" rel="noopener">grok</a>
+        <a href="https://github.com/LodyAI/acp-extension-dsh" target="_blank" rel="noopener">dsh</a>
+        <a href="https://github.com/LodyAI/acp-extension-kimi" target="_blank" rel="noopener">kimi</a>
+        <a href="https://github.com/LodyAI/acp-extension-pi" target="_blank" rel="noopener">pi</a>
+        <a class="core" href="https://github.com/LodyAI/acp-extension-core" target="_blank" rel="noopener">acp-extension-core ↗</a>
+      </div>
+    </div>
   </section>
 
   <p class="foot-note">
@@ -308,13 +364,30 @@ const MCLS={1:"ok",2:"pr",0:"no","-1":"un"};
 const all=H.slice().sort((a,b)=>score(b)-score(a));
 all.forEach((h,i)=>h._rk=i+1);
 
+/* lody ext: advertised feature names are agent-supplied — escape before
+ * they reach innerHTML. */
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const lodyFeats=h=>Object.keys(h?.lody?.advertised??{});
+const lodyChip=h=>h.lodyAdapter
+  ?`<a class="ldy lody-only" href="https://github.com/LodyAI/acp-extension-${esc(h.lodyAdapter)}" target="_blank" rel="noopener" title="Lody extension adapter: acp-extension-${esc(h.lodyAdapter)}">◆ lody</a>`
+  :'';
+function lodyMark(h){
+  const lz=h.lody,feats=lodyFeats(h);
+  const tip=!lz?'lody ext not probed on this report'
+    :`advertised: ${esc(feats.join(', '))||'none'} · _lody/* answered: ${esc((lz.answered||[]).join(', '))||'none'}`;
+  if(!lz)return{cls:'un',txt:'·',tip};
+  if(feats.length)return{cls:'ok',txt:`+${feats.length}`,tip};
+  if((lz.answered||[]).length||(lz.observed||[]).length)return{cls:'pr',txt:'±',tip};
+  return{cls:'un',txt:'·',tip};
+}
+
 /* ---------- ledger entries ---------- */
 function entry(h){
   const s=score(h),done=h.cells.every(c=>c===-1);
   const el=document.createElement('div');el.className='entry';
   el.innerHTML=`<div class="e-row">
       <span class="e-rk mono">${String(h._rk).padStart(2,'0')}</span>
-      <span class="e-nm">${h.n}${h.star?' <span class="star">✦</span>':''}<span class="ven">${h.v||''}</span></span>
+      <span class="e-nm">${h.n}${h.star?' <span class="star">✦</span>':''}${lodyChip(h)}<span class="ven">${h.v||''}</span></span>
       <span class="e-sc"><b class="mono">${done?'—':s}</b><span class="ms">${done?'0/'+CAPS.length:'/100'}</span><span class="chev">➤</span></span>
     </div>`;
   const xp=document.createElement('div');xp.className='e-x xp';
@@ -352,6 +425,7 @@ document.getElementById('cnt-limited').textContent=`${byTier('limited').length} 
   const thead=document.getElementById('lg-head');
   document.getElementById('league-count').textContent=`${CAPS.length} METHODS · READ ACROSS`;
   CAPS.forEach(c=>{const th=document.createElement('th');th.textContent=c;thead.appendChild(th)});
+  {const th=document.createElement('th');th.textContent='lody';th.className='lody-col';thead.appendChild(th)}
   {const th=document.createElement('th');th.textContent='SCORE';th.style.paddingRight='14px';thead.appendChild(th)}
   const tb=document.getElementById('lg-body');
   if(!all.length){
@@ -361,8 +435,9 @@ document.getElementById('cnt-limited').textContent=`${byTier('limited').length} 
   all.forEach(h=>{
     const s=score(h),done=h.cells.every(c=>c===-1);
     const tr=document.createElement('tr');tr.className='rowhead t-'+h.tier;
-    let h2=`<th>${h.n}<small>${(h.v||'').split('—')[0].trim()}</small></th>`;
+    let h2=`<th>${h.n}${lodyChip(h)}<small>${(h.v||'').split('—')[0].trim()}</small></th>`;
     h.cells.forEach(c=>{h2+=`<td><span class="mc ${MCLS[c]}">${CELL[c]}</span></td>`});
+    h2+=`<td class="lody-col"><span class="mc ${lodyMark(h).cls}" title="${lodyMark(h).tip}">${lodyMark(h).txt}</span></td>`;
     h2+=`<td class="lg-sc">${done?'—':s}</td>`;
     tr.innerHTML=h2;
     const dtr=document.createElement('tr');dtr.className='lg-x';
@@ -404,12 +479,19 @@ function detailHTML(h){
     ?`<div class="viol"><b>⚠ SCHEMA VIOLATIONS · ${h.violations.length}</b>${h.violations.slice(0,6).map(v=>`<div>${v.method} ${v.where}${v.path?' · '+v.path:''} — ${v.msg}</div>`).join('')}${h.violations.length>6?`<div>…and ${h.violations.length-6} more</div>`:''}</div>`:'';
   const probed=h.probedAt?`<div class="probed">probed ${h.probedAt.slice(0,10)}${h.run?` · $ ${h.run}`:''}</div>`:'';
   const mitm=(h.mitm&&h.mitm.length)?`<div class="probed">model traffic intercepted at transport layer (TLS impersonation): ${h.mitm.join(', ')}</div>`:'';
+  const lz=h.lody,lf=lodyFeats(h);
+  const lodyBlock=(lz||h.lodyAdapter)?`<div class="lody-only">
+      <div class="sh-lab" style="margin-top:16px"><span>Lody extension · _meta.lody</span><span class="mono">${lz?(lf.length?`${lf.length} advertised`:'none advertised'):'not probed'}</span></div>
+      ${lz&&lf.length?`<div class="pills">${lf.map(f=>`<span class="ok">${esc(f)}${lz.advertised[f]?.version!=null?` v${esc(lz.advertised[f].version)}`:''}</span>`).join('')}</div>`:''}
+      ${lz?`<div class="probed">_lody/* answered: ${esc((lz.answered||[]).join(', '))||'none'}${lz.missing?.length?` · absent: ${esc(lz.missing.join(', '))}`:''}${lz.observed?.length?` · on wire: ${esc(lz.observed.join(', '))}`:''}</div>`:''}
+      ${h.lodyAdapter?`<div class="probed">adapter: <a href="https://github.com/LodyAI/acp-extension-${esc(h.lodyAdapter)}" target="_blank" rel="noopener">acp-extension-${esc(h.lodyAdapter)} ↗</a></div>`:''}
+    </div>`:'';
   return `<div class="lg-x-in">
     <div class="bx">
       <div class="sh-lab"><span>Capabilities</span><span class="mono">${h.cells.filter(c=>c===1).length}/${CAPS.length} · score ${done?'—':s}</span></div>
       ${liars}${viols}
       <div class="pills">${CAPS.map((c,j)=>`<span class="${PCLS[h.cells[j]]}">${CELL[h.cells[j]]} ${c}</span>`).join('')}</div>
-      ${probed}${mitm}
+      ${probed}${mitm}${lodyBlock}
     </div>
     <div class="bx">
       <div class="sh-lab"><span>Probe transcript</span><button class="sh-btn" data-copy>copy report</button></div>
@@ -462,11 +544,12 @@ function renderPal(q){
   let list=all;
   const m=q.match(/^tier:(verified|partial|limited)$/);
   if(m)list=list.filter(h=>h.tier===m[1]);
+  else if(/^ext:lody$/.test(q))list=list.filter(h=>lodyFeats(h).length>0||h.lodyAdapter);
   else if(q)list=list.filter(h=>h.n.toLowerCase().includes(q.toLowerCase())||(h.v||'').toLowerCase().includes(q.toLowerCase()));
   palItems=list;palIdx=0;
   plist.innerHTML=list.map((h,i)=>`
     <div class="pal-item ${i===0?'sel':''}" data-i="${i}">
-      <span class="mk">${h.n[0]}</span>${h.n}
+      <span class="mk">${h.n[0]}</span>${h.n}${h.lodyAdapter?'<span class="ldy lody-only" title="Lody extension adapter: acp-extension-'+esc(h.lodyAdapter)+'">◆</span>':''}
       <span class="tt ${h.tier}">${h.tier.toUpperCase()}</span>
       <span class="tr">№${h._rk} · ${score(h)||'—'}</span>
     </div>`).join('')||'<div style="padding:16px;color:var(--faint);font-size:12px;font-style:italic">no such harness on file.</div>';
@@ -485,6 +568,14 @@ addEventListener('keydown',e=>{
 pin.addEventListener('input',()=>renderPal(pin.value));
 plist.addEventListener('click',e=>{const it=e.target.closest('.pal-item');if(!it)return;closePal();openCase(palItems[+it.dataset.i])});
 pscrim.onclick=closePal;
+
+/* lody ext toggle: the column + dossier blocks ride in the DOM regardless —
+ * `no-lody` on <body> strikes them from the record without re-rendering. */
+document.getElementById('lody-tog').addEventListener('change',e=>{
+  document.body.classList.toggle('no-lody',!e.target.checked);
+});
+/* ◆ lody chips sit inside clickable rows — don't let the row eat the click. */
+document.addEventListener('click',e=>{if(e.target.closest('a.ldy'))e.stopPropagation()},true);
 </script>
 </body>
 </html>

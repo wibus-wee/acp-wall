@@ -1,4 +1,5 @@
 {
+  "lodyAdapter": "pi",
   "install": "npm i -g --ignore-scripts @earendil-works/pi-coding-agent",
   "env": {
     "HOME": "${WORK_DIR}"

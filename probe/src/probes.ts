@@ -246,11 +246,9 @@ export async function probeInitialize(ctx: ProbeContext) {
     90_000
   );
   if (!r.ok) {
-    if (isStructured(r.err)) {
-      put(ctx, "initialize", { status: "partial", note: `endpoint exists — returned error: ${String(r.err?.message ?? r.err).slice(0, 80)}`, latencyMs: r.latencyMs });
-    } else {
-      put(ctx, "initialize", { status: "fail", note: `no valid response: ${String(r.err?.message ?? r.err)}`, latencyMs: r.latencyMs });
-    }
+    put(ctx, "initialize", isStructured(r.err)
+      ? { status: "pass", note: `endpoint exists — returned error: ${String(r.err?.message ?? r.err).slice(0, 80)}`, latencyMs: r.latencyMs }
+      : { status: "fail", note: `no valid response: ${String(r.err?.message ?? r.err)}`, latencyMs: r.latencyMs });
     return false;
   }
   const res: any = r.value;
@@ -280,22 +278,14 @@ export async function probeAuthenticate(ctx: ProbeContext) {
         ctx.dishonesty.push({ claim: "authMethods", detail: "advertised but authenticate → method_not_found" });
         put(ctx, "authenticate", { status: "fail", note: "authMethods advertised but method absent", latencyMs: r.latencyMs });
       } else {
-        put(ctx, "authenticate", { status: "na", note: "not implemented", definitive: true });
+        put(ctx, "authenticate", { status: "fail", note: "not implemented", definitive: true, latencyMs: r.latencyMs });
       }
       return;
     }
-    if (isAuth(r.err)) {
-      put(ctx, "authenticate", { status: "partial", note: `endpoint exists — needs real credentials: ${String(r.err?.message ?? r.err).slice(0, 70)}`, latencyMs: r.latencyMs });
-      return;
-    }
     const msg = String(r.err?.message ?? r.err);
-    put(ctx, "authenticate", {
-      status: isStructured(r.err) ? "partial" : "fail",
-      note: isStructured(r.err)
-        ? (advertised ? `endpoint exists — returned error: ${msg.slice(0, 70)}` : `rejects unknown methodId (endpoint exists): ${msg.slice(0, 60)}`)
-        : `no valid response: ${msg.slice(0, 80)}`,
-      latencyMs: r.latencyMs,
-    });
+    put(ctx, "authenticate", isStructured(r.err)
+      ? { status: "pass", note: advertised ? `endpoint exists — returned error: ${msg.slice(0, 70)}` : `rejects unknown methodId (endpoint exists): ${msg.slice(0, 60)}`, latencyMs: r.latencyMs }
+      : { status: "fail", note: `no valid response: ${msg.slice(0, 80)}`, latencyMs: r.latencyMs });
     return;
   }
   put(ctx, "authenticate", { status: "pass", note: `methodId=${methodId}`, latencyMs: r.latencyMs });
@@ -307,14 +297,10 @@ export async function probeSessionNew(ctx: ProbeContext) {
   ctx.sessionNewParams = params;
   const r = await callAgent(ctx, "session/new", params);
   if (!r.ok) {
-    if (isAuth(r.err)) {
-      // domain answer proves the endpoint exists — account-gated, not absent
-      put(ctx, "session/new", { status: "partial", note: `endpoint exists — account-gated: ${String(r.err?.message ?? r.err).slice(0, 70)}`, latencyMs: r.latencyMs });
-    } else if (isStructured(r.err)) {
-      put(ctx, "session/new", { status: "partial", note: `endpoint exists — returned error: ${String(r.err?.message ?? r.err).slice(0, 70)}`, latencyMs: r.latencyMs });
-    } else {
-      put(ctx, "session/new", { status: "fail", note: `no valid response: ${String(r.err?.message ?? r.err)}`, latencyMs: r.latencyMs });
-    }
+    const msg = String(r.err?.message ?? r.err);
+    put(ctx, "session/new", isStructured(r.err)
+      ? { status: "pass", note: `endpoint exists — ${isAuth(r.err) ? "account-gated" : "returned error"}: ${msg.slice(0, 70)}`, latencyMs: r.latencyMs }
+      : { status: "fail", note: `no valid response: ${msg.slice(0, 80)}`, latencyMs: r.latencyMs });
     return;
   }
   const sid = r.value?.sessionId;
@@ -349,37 +335,29 @@ function verdictAlways(
         ctx.dishonesty.push({ claim, detail: `advertised but ${key} → method_not_found` });
         put(ctx, key, { status: "fail", note: "advertised but method_not_found", latencyMs: r.latencyMs });
       } else {
-        put(ctx, key, { status: "na", note: "not implemented", definitive: true });
+        put(ctx, key, { status: "fail", note: "not implemented", definitive: true, latencyMs: r.latencyMs });
       }
       return;
     }
     const msg = String(r.err?.message ?? r.err);
-    // "invalid params" on a session-scoped call proves the endpoint exists and
-    // validates input — it just has nothing live to operate on. The error code
-    // is the reliable signal; message phrasing varies across harnesses.
-    if (code(r.err) === -32602 || /(unknown|not found|invalid).{0,30}session|session.{0,30}(unknown|not found)/i.test(msg)) {
-      put(ctx, key, { status: "partial", note: `endpoint exists — rejects unknown session: ${msg.slice(0, 60)}`, latencyMs: r.latencyMs });
+    // Any structured JSON-RPC error is a conforming answer: the dispatcher
+    // routed the call and a handler refused it for its own reason — unknown
+    // session, account gate, internal state. That proves the endpoint EXISTS;
+    // whether it also *works* is the agent's business, not protocol support.
+    // Only a transport failure (timeout, exit, malformed reply) proves
+    // nothing.
+    if (!isStructured(r.err)) {
+      put(ctx, key, { status: "fail", note: `no valid response: ${msg.slice(0, 80)}`, latencyMs: r.latencyMs });
       return;
     }
-    // an auth/quota rejection is a domain answer — the endpoint exists and is
-    // gated, identical whether or not it advertised. It is not a defect.
-    if (isAuth(r.err)) {
-      put(ctx, key, { status: "partial", note: `endpoint exists — account-gated: ${msg.slice(0, 70)}`, latencyMs: r.latencyMs });
-      return;
-    }
-    // any remaining structured error still proves the handler exists — an
-    // internal refusal (resource not found, adapter bug, bad state) is an
-    // implementation detail, not absence. Only transport failures can't
-    // prove the endpoint is there at all.
-    put(ctx, key, {
-      status: isStructured(r.err) ? "partial" : "fail",
-      note: isStructured(r.err) ? `endpoint exists — returned error: ${msg.slice(0, 80)}` : `no valid response: ${msg.slice(0, 80)}`,
-      latencyMs: r.latencyMs,
-    });
+    const flavor = code(r.err) === -32602 || /(unknown|not found|invalid).{0,30}session|session.{0,30}(unknown|not found)/i.test(msg)
+      ? "rejects unknown session"
+      : isAuth(r.err) ? "account-gated" : "returned error";
+    put(ctx, key, { status: "pass", note: `endpoint exists — ${flavor}: ${msg.slice(0, 70)}`, latencyMs: r.latencyMs });
     return;
   }
   put(ctx, key, {
-    status: advertised ? "pass" : "partial",
+    status: "pass",
     note: advertised ? passNote : "works but not advertised",
     latencyMs: r.latencyMs,
   });
@@ -498,25 +476,14 @@ export async function probeSessionPrompt(ctx: ProbeContext) {
   }
   if (!first) {
     const e = firstErr?.err;
-    if (isAuth(e)) {
-      // an auth rejection is a domain answer, not method_not_found — the
-      // endpoint exists and understood the request; only the account gate
-      // blocks the turn. Same semantics as authenticate's partial.
+    if (isStructured(e)) {
+      // a structured error is a conforming answer — the endpoint exists and a
+      // handler refused the turn (account gate, model config, internal state).
+      // The turn didn't run, so downstream probes must not assume it did.
       ctx.promptBlocked = true;
       put(ctx, "session/prompt", {
-        status: "partial",
-        note: `endpoint exists — turn blocked by account gate: ${String(e?.message ?? e).slice(0, 90)}`,
-        latencyMs: firstErr?.latencyMs,
-      });
-    } else if (isStructured(e)) {
-      // same principle: a handler that answers with a structured error exists
-      // — whatever its internal reason for refusing (model config, adapter
-      // bug, missing state). The turn did not run, so downstream cancel/fork
-      // probes must not assume it did.
-      ctx.promptBlocked = true;
-      put(ctx, "session/prompt", {
-        status: "partial",
-        note: `endpoint exists — turn errored: ${String(e?.message ?? e).slice(0, 90)}`,
+        status: "pass",
+        note: `endpoint exists — turn ${isAuth(e) ? "blocked by account gate" : "errored"}: ${String(e?.message ?? e).slice(0, 90)}`,
         latencyMs: firstErr?.latencyMs,
       });
     } else {
@@ -688,7 +655,13 @@ export async function probeLoadReplay(ctx: ProbeContext) {
   if (replayed.length > 0) {
     put(ctx, "load:replay", { status: "pass", note: `${replayed.length} replayed update(s): ${kinds.join(", ")}` });
   } else {
-    put(ctx, "load:replay", { status: "partial", note: `${method} succeeded but replayed no conversation` });
+    // A zero-history session has nothing to replay — silence is unprovable,
+    // not non-conforming. Only when the turn actually produced history does an
+    // empty replay show a real gap.
+    const hadHistory = ctx.updates.slice(0, before).some((u) => u.method === "session/update" && u.params?.sessionId === ctx.sessionId);
+    put(ctx, "load:replay", hadHistory
+      ? { status: "partial", note: `${method} succeeded but replayed no conversation` }
+      : { status: "na", note: `${method} ok — no history to replay` });
   }
 }
 
@@ -696,11 +669,10 @@ export async function probeLoadReplay(ctx: ProbeContext) {
  *  set/disable run against a probe-owned providerId so they cannot disturb the
  *  real provider routing; they still prove the endpoint exists. */
 export async function probeProviders(ctx: ProbeContext) {
-  const advertised = capOn(ctx.initResult?.agentCapabilities ?? {}, "providers");
   const results: string[] = [];
   const list = await callAgent(ctx, "providers/list", {});
   if (!list.ok && isMissing(list.err)) {
-    put(ctx, "providers", { status: "na", note: "not implemented", definitive: true });
+    put(ctx, "providers", { status: "fail", note: "not implemented", definitive: true, latencyMs: list.latencyMs });
     return;
   }
   results.push(list.ok ? `list→${Array.isArray(list.value?.providers) ? list.value.providers.length : "?"} providers` : `list errored`);
@@ -708,25 +680,22 @@ export async function probeProviders(ctx: ProbeContext) {
   results.push(set.ok ? "set ok" : `set: ${String(set.err?.message ?? set.err).slice(0, 40)}`);
   const disable = await callAgent(ctx, "providers/disable", { providerId: "acp-probe" });
   results.push(disable.ok ? "disable ok" : `disable: ${String(disable.err?.message ?? disable.err).slice(0, 40)}`);
-  const okCount = [list, set, disable].filter((x) => x.ok).length;
   const allMissing = [set, disable].every((x) => !x.ok && isMissing(x.err)) && !list.ok;
+  const anyAnswer = [list, set, disable].some((x) => x.ok || isStructured(x.err));
   if (allMissing) {
-    put(ctx, "providers", { status: "na", note: "not implemented", definitive: true });
-  } else if (okCount === 3) {
-    put(ctx, "providers", { status: advertised ? "pass" : "partial", note: advertised ? results.join(" · ") : `works but not advertised · ${results.join(" · ")}` });
+    put(ctx, "providers", { status: "fail", note: "not implemented", definitive: true });
   } else {
-    const anyAnswer = [list, set, disable].some((x) => x.ok || isStructured(x.err));
-    put(ctx, "providers", { status: anyAnswer ? "partial" : "fail", note: `${anyAnswer ? "endpoint exists — " : "no valid response — "}${results.join(" · ")}` });
+    const allOk = [list, set, disable].every((x) => x.ok);
+    put(ctx, "providers", { status: anyAnswer ? "pass" : "fail", note: `${anyAnswer ? (allOk ? "" : "endpoint exists — ") : "no valid response — "}${results.join(" · ")}` });
   }
 }
 
 /** nes/* — UNSTABLE Next-Edit-Suggestions surface. nes/start + nes/suggest are
  *  the two meaningful request endpoints; accept/reject are notifications. */
 export async function probeNes(ctx: ProbeContext) {
-  const advertised = capOn(ctx.initResult?.agentCapabilities ?? {}, "nes");
   const start = await callAgent(ctx, "nes/start", { workspaceUri: `file://${ctx.sessionCwd}` });
   if (!start.ok && isMissing(start.err)) {
-    put(ctx, "nes", { status: "na", note: "not implemented", definitive: true });
+    put(ctx, "nes", { status: "fail", note: "not implemented", definitive: true, latencyMs: start.latencyMs });
     return;
   }
   const suggest = await callAgent(ctx, "nes/suggest", {
@@ -739,7 +708,7 @@ export async function probeNes(ctx: ProbeContext) {
   const note = `start ${start.ok ? "ok" : String(start.err?.message ?? start.err).slice(0, 40)} · suggest ${suggest.ok ? "ok" : String(suggest.err?.message ?? suggest.err).slice(0, 40)}`;
   const anyAnswer = start.ok || suggest.ok || isStructured(start.err) || isStructured(suggest.err);
   put(ctx, "nes", {
-    status: start.ok && suggest.ok ? (advertised ? "pass" : "partial") : anyAnswer ? "partial" : "fail",
+    status: anyAnswer ? "pass" : "fail",
     note: (anyAnswer && !(start.ok && suggest.ok) ? "endpoint exists — " : "") + note,
   });
 }
@@ -906,7 +875,7 @@ export async function probeLogout(ctx: ProbeContext) {
   const r = await callAgent(ctx, "logout", {});
   if (!r.ok) {
     put(ctx, "logout", {
-      status: isMissing(r.err) ? "na" : isStructured(r.err) ? "partial" : "fail",
+      status: isStructured(r.err) && !isMissing(r.err) ? "pass" : "fail",
       note: isMissing(r.err) ? "not implemented" : isStructured(r.err) ? `endpoint exists — returned error: ${String(r.err?.message ?? r.err).slice(0, 70)}` : `no valid response: ${String(r.err?.message ?? r.err).slice(0, 70)}`,
       definitive: isMissing(r.err),
       latencyMs: r.latencyMs,
