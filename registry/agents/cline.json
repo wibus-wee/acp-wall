@@ -1,0 +1,26 @@
+{
+  "name": "cline",
+  "display": "Cline",
+  "vendor": "Cline Bot Inc.",
+  "version": "3.0.62",
+  "description": "Autonomous coding agent CLI - capable of creating/editing files, running commands, using the browser, and more",
+  "repo": "cline/cline",
+  "website": "https://cline.bot/cli",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/cline.svg",
+  "license": "Apache-2.0",
+  "install": null,
+  "run": "npx -y cline@3.0.62 --acp",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "cline@3.0.62",
+    "args": [
+      "--acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

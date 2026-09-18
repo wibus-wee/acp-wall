@@ -1,0 +1,24 @@
+{
+  "name": "pi-acp",
+  "display": "pi ACP",
+  "vendor": "Sergii Kozak <svkozak@gmail.com>",
+  "version": "0.0.33",
+  "description": "ACP adapter for pi coding agent",
+  "repo": "svkozak/pi-acp",
+  "website": null,
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/pi-acp.svg",
+  "license": "MIT",
+  "install": null,
+  "run": "npx -y pi-acp@0.0.33",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "pi-acp@0.0.33",
+    "args": []
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

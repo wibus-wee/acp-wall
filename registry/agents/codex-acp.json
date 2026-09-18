@@ -1,0 +1,24 @@
+{
+  "name": "codex-acp",
+  "display": "Codex",
+  "vendor": "OpenAI, JetBrains s.r.o, Zed Industries",
+  "version": "1.12.0",
+  "description": "ACP adapter for OpenAI's coding assistant",
+  "repo": "agentclientprotocol/codex-acp",
+  "website": null,
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/codex-acp.svg",
+  "license": "Apache-2.0",
+  "install": null,
+  "run": "npx -y @agentclientprotocol/codex-acp@1.12.0",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@agentclientprotocol/codex-acp@1.12.0",
+    "args": []
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

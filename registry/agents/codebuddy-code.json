@@ -1,0 +1,26 @@
+{
+  "name": "codebuddy-code",
+  "display": "Codebuddy Code",
+  "vendor": "Tencent Cloud",
+  "version": "2.151.0",
+  "description": "Tencent Cloud's official intelligent coding tool",
+  "repo": null,
+  "website": "https://www.codebuddy.cn/cli/",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/codebuddy-code.svg",
+  "license": "Proprietary",
+  "install": null,
+  "run": "npx -y @tencent-ai/codebuddy-code@2.151.0 --acp",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@tencent-ai/codebuddy-code@2.151.0",
+    "args": [
+      "--acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

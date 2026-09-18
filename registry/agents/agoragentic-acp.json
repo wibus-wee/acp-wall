@@ -1,0 +1,26 @@
+{
+  "name": "agoragentic-acp",
+  "display": "Agoragentic",
+  "vendor": "ACRE / Agoragentic",
+  "version": "1.3.0",
+  "description": "Agent marketplace with 174+ AI capabilities. Browse, invoke, and pay for agent services settled in USDC on Base L2.",
+  "repo": "rhein1/agoragentic-integrations",
+  "website": "https://agoragentic.com",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/agoragentic-acp.svg",
+  "license": "MIT",
+  "install": null,
+  "run": "npx -y agoragentic-mcp@1.3.0 --acp",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "agoragentic-mcp@1.3.0",
+    "args": [
+      "--acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

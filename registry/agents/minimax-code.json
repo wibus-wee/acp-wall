@@ -1,0 +1,26 @@
+{
+  "name": "minimax-code",
+  "display": "MiniMax Code",
+  "vendor": "MiniMax",
+  "version": "0.2.7",
+  "description": "MiniMax Code is an AI coding agent with Agent Client Protocol support.",
+  "repo": null,
+  "website": "https://agent.minimax.io",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/minimax-code.svg",
+  "license": "MIT",
+  "install": null,
+  "run": "npx -y @minimax-ai/code@0.2.7 acp",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@minimax-ai/code@0.2.7",
+    "args": [
+      "acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

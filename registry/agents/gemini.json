@@ -1,0 +1,28 @@
+{
+  "name": "gemini",
+  "display": "Gemini CLI",
+  "vendor": "Google",
+  "version": "0.60.0",
+  "description": "Google's official CLI for Gemini",
+  "repo": "google-gemini/gemini-cli",
+  "website": "https://geminicli.com",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/gemini.svg",
+  "license": "Apache-2.0",
+  "install": null,
+  "run": "npx -y @google/gemini-cli@0.60.0 --acp",
+  "env": {
+    "GEMINI_API_KEY": "probe-mock-key"
+  },
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@google/gemini-cli@0.60.0",
+    "args": [
+      "--acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": "Gemini auth is not OpenAI-compatible — no known env route to the mock LLM; prompt-dependent cells may show unverified.",
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

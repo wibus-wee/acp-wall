@@ -1,0 +1,28 @@
+{
+  "name": "factory-droid",
+  "display": "Factory Droid",
+  "vendor": "Factory AI",
+  "version": "0.221.0",
+  "description": "Factory Droid - AI coding agent powered by Factory AI",
+  "repo": null,
+  "website": "https://factory.ai/product/cli",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/factory-droid.svg",
+  "license": "proprietary",
+  "install": null,
+  "run": "npx -y droid@0.221.0 exec --output-format acp-daemon",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "droid@0.221.0",
+    "args": [
+      "exec",
+      "--output-format",
+      "acp-daemon"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

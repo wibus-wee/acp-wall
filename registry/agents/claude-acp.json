@@ -1,0 +1,27 @@
+{
+  "name": "claude-acp",
+  "display": "Claude Agent",
+  "vendor": "Anthropic, Zed Industries, JetBrains",
+  "version": "0.79.0",
+  "description": "ACP wrapper for Anthropic's Claude",
+  "repo": "agentclientprotocol/claude-agent-acp",
+  "website": null,
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/claude-acp.svg",
+  "license": "proprietary",
+  "install": null,
+  "run": "npx -y @agentclientprotocol/claude-agent-acp@0.79.0",
+  "env": {
+    "ANTHROPIC_BASE_URL": "${MOCK_LLM_URL}",
+    "ANTHROPIC_API_KEY": "probe-mock-key"
+  },
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@agentclientprotocol/claude-agent-acp@0.79.0",
+    "args": []
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": "Official ACP adapter wrapping the Claude Agent SDK. Mock LLM depends on the SDK honoring ANTHROPIC_BASE_URL.",
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/schema.json",
+  "_comment": "ACP Wall registry entry schema. Copy this file to <your-harness>.json. All fields except `name` and `run` are optional but `install`+`version` are strongly recommended so CI probes a pinned release.",
+
+  "name": "example-agent",
+  "vendor": "Example Corp",
+  "repo": "example/agent",
+  "homepage": "https://example.com/agent",
+
+  "install": "npm i -g example-agent@1.2.3",
+  "version_cmd": "example-agent --version",
+  "run": "example-agent acp",
+
+  "env": {
+    "_comment_env": "env vars set on the agent process. ${MOCK_LLM_URL} is replaced with the probe's mock LLM base URL (OpenAI-compatible /v1). Wire whichever var makes the harness talk to it.",
+    "OPENAI_BASE_URL": "${MOCK_LLM_URL}",
+    "EXAMPLE_API_KEY": "probe-not-a-real-key"
+  },
+
+  "_comment_sessionFiles": "optional: files written into the probe's temp session workspace before session/new (agent also spawns there). ${MOCK_LLM_URL} and ${REPO_ROOT} are substituted. Use for harness config — e.g. pin the provider at the mock LLM, or set an ask permission policy so session/request_permission is exercised.",
+  "sessionFiles": {
+    "example-agent.json": { "permissions": "ask" }
+  },
+
+  "disabled": false,
+  "notes": "anything reviewers should know — e.g. 'requires OAuth, prompt probes will be unverified'"
+}

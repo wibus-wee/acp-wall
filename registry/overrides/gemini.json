@@ -1,0 +1,6 @@
+{
+  "env": {
+    "GEMINI_API_KEY": "probe-mock-key"
+  },
+  "notes": "Gemini auth is not OpenAI-compatible — no known env route to the mock LLM; prompt-dependent cells may show unverified."
+}

@@ -1,0 +1,26 @@
+{
+  "name": "dirac",
+  "display": "Dirac",
+  "vendor": "Dirac Delta Labs",
+  "version": "0.5.13",
+  "description": "Reduces API costs by more than 50%, produces better and faster work. Uses Hash anchored parallel edits, AST manipulation and a whole lot of neat optimizations. Fully Open Source.",
+  "repo": "dirac-run/dirac",
+  "website": "https://dirac.run",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/dirac.svg",
+  "license": "Apache-2.0",
+  "install": null,
+  "run": "npx -y dirac-cli@0.5.13 --acp",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "dirac-cli@0.5.13",
+    "args": [
+      "--acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

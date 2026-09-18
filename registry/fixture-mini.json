@@ -1,0 +1,8 @@
+{
+  "name": "fixture-mini",
+  "vendor": "acp-wall (selftest)",
+  "run": "node ${REPO_ROOT}/probe/dist/fixtures/mini-agent.js",
+  "disabled": false,
+  "notes": "Self-test fixture \u2014 honest minimal implementation. Expected PARTIAL tier, no dishonesty flags.",
+  "selftest": true
+}

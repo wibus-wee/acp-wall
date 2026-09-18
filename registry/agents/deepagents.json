@@ -1,0 +1,24 @@
+{
+  "name": "deepagents",
+  "display": "DeepAgents",
+  "vendor": "LangChain",
+  "version": "0.1.7",
+  "description": "Batteries-included AI coding and general purpose agent powered by LangChain.",
+  "repo": "langchain-ai/deepagentsjs",
+  "website": "https://docs.langchain.com/oss/javascript/deepagents/overview",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/deepagents.svg",
+  "license": "MIT",
+  "install": null,
+  "run": "npx -y deepagents-acp@0.1.7",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "deepagents-acp@0.1.7",
+    "args": []
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

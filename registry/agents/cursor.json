@@ -1,0 +1,66 @@
+{
+  "name": "cursor",
+  "display": "Cursor",
+  "vendor": "Cursor",
+  "version": "2026.09.15",
+  "description": "Cursor's coding agent",
+  "repo": null,
+  "website": "https://cursor.com/docs/cli/acp",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/cursor.svg",
+  "license": "proprietary",
+  "install": "node tools/install-dist.mjs registry/agents/cursor.json",
+  "run": "${REPO_ROOT}/.cache/agents/cursor/dist-package/cursor-agent acp",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "binary",
+    "per_platform": {
+      "darwin-aarch64": {
+        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/darwin/arm64/agent-cli-package.tar.gz",
+        "cmd": "./dist-package/cursor-agent",
+        "args": [
+          "acp"
+        ]
+      },
+      "darwin-x86_64": {
+        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/darwin/x64/agent-cli-package.tar.gz",
+        "cmd": "./dist-package/cursor-agent",
+        "args": [
+          "acp"
+        ]
+      },
+      "linux-aarch64": {
+        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/linux/arm64/agent-cli-package.tar.gz",
+        "cmd": "./dist-package/cursor-agent",
+        "args": [
+          "acp"
+        ]
+      },
+      "linux-x86_64": {
+        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/linux/x64/agent-cli-package.tar.gz",
+        "cmd": "./dist-package/cursor-agent",
+        "args": [
+          "acp"
+        ]
+      },
+      "windows-aarch64": {
+        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/windows/arm64/agent-cli-package.zip",
+        "cmd": "./dist-package\\cursor-agent.cmd",
+        "args": [
+          "acp"
+        ]
+      },
+      "windows-x86_64": {
+        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/windows/x64/agent-cli-package.zip",
+        "cmd": "./dist-package\\cursor-agent.cmd",
+        "args": [
+          "acp"
+        ]
+      }
+    }
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

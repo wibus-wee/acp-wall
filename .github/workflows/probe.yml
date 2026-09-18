@@ -1,0 +1,120 @@
+name: probe
+# Submission gate: a PR that touches registry/** gets its harness(es)
+# probed automatically, and the report is posted back as a PR comment.
+# registry/agents/ is synced from the official ACP registry — PRs there
+# mean upstream changed; registry/overrides/ is where humans submit tweaks.
+on:
+  pull_request:
+    paths: ["registry/**", "probe/**", "tools/**"]
+
+# a new push to the same PR cancels the stale probe — only the newest
+# submission state matters
+concurrency:
+  group: probe-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Sync official ACP registry
+        run: node tools/sync-registry.mjs
+
+      - name: Find changed registry entries
+        id: changed
+        run: |
+          CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'registry/' | grep -v '_schema' | grep -v 'overrides/' || true)
+          # overrides changes → probe the affected agents, not the override file
+          OVERRIDES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'registry/overrides/' | sed 's|registry/overrides/|registry/agents/|' || true)
+          CHANGED="$CHANGED $OVERRIDES"
+          # Fallback for probe/tools changes: probe the fixtures only
+          if [ -z "$(echo $CHANGED | tr -d ' ')" ]; then
+            CHANGED="registry/fixture-good.json registry/fixture-liar.json registry/fixture-mini.json"
+          fi
+          # filenames flow into an unquoted for-loop below — only allow boring
+          # paths so a crafted filename cannot inject shell
+          CHANGED=$(echo "$CHANGED" | tr ' ' '\n' | grep -E '^registry/[a-zA-Z0-9._/-]+\.json$' | grep -v '\.\.' || true)
+          if [ -z "$(echo $CHANGED | tr -d ' ')" ]; then
+            CHANGED="registry/fixture-good.json registry/fixture-liar.json registry/fixture-mini.json"
+          fi
+          echo "entries=$(echo $CHANGED | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+          echo "will probe: $CHANGED"
+
+      - name: Build probe
+        working-directory: probe
+        run: |
+          npm ci || npm install
+          npm run build
+
+      - name: Install + probe each entry
+        run: |
+          mkdir -p probe/reports
+          for entry in ${{ steps.changed.outputs.entries }}; do
+            [ -f "$entry" ] || { echo "missing $entry — skipped"; continue; }
+            name=$(node -e "console.log(JSON.parse(require('fs').readFileSync('$entry','utf8')).name)")
+            echo "═══ $name ($entry)"
+            install=$(node -e "console.log(JSON.parse(require('fs').readFileSync('$entry','utf8')).install||'')")
+            if [ -n "$install" ]; then
+              echo "install: $install"
+              timeout 600 sh -c "$install" || echo "install failed — probe will report what it found"
+            fi
+            timeout 600 node probe/dist/src/cli.js --entry "$entry" \
+              --out "probe/reports/$name.report.json" --transcript || true
+          done
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: probe-reports
+          path: probe/reports/*.report.json
+
+      - name: Comment results on PR
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          {
+            echo "<!-- acp-probe -->"
+            echo "## acp-probe results"
+            echo ""
+            echo "| harness | score | tier | dishonesty |"
+            echo "|---|---|---|---|"
+            for r in probe/reports/*.report.json; do
+              [ -f "$r" ] || continue
+              node -e "
+                const r=require('./$r');
+                const d=(r.dishonesty||[]).map(x=>x.claim).join(', ')||'—';
+                console.log(\`|\${r.harness}|\${r.score}/100|\${r.tier.toUpperCase()}|\${d}|\`);
+              "
+            done
+            echo ""
+            echo "Full transcripts in the probe-reports artifact."
+          } > probe-comment.md
+          # update the existing probe comment if there is one — a force-push
+          # must not leave a trail of stale scorecards
+          PR=${{ github.event.pull_request.number }}
+          CID=$(gh api "repos/${{ github.repository }}/issues/$PR/comments" \
+            --jq '.[] | select(.body | contains("<!-- acp-probe -->")) | .id' \
+            | tail -1 || true)
+          if [ -n "$CID" ]; then
+            gh api "repos/${{ github.repository }}/issues/comments/$CID" \
+              -X PATCH -F body=@probe-comment.md \
+            || echo "comment update failed (read-only token?) — results in artifacts"
+          else
+            gh pr comment "$PR" --repo ${{ github.repository }} \
+              --body-file probe-comment.md \
+            || echo "comment failed (read-only token on fork PR?) — results in artifacts"
+          fi

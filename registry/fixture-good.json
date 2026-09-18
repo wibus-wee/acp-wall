@@ -1,0 +1,8 @@
+{
+  "name": "fixture-good",
+  "vendor": "acp-wall (selftest)",
+  "run": "node ${REPO_ROOT}/probe/dist/fixtures/good-agent.js",
+  "disabled": false,
+  "notes": "Self-test fixture \u2014 fully compliant reference agent. Should always score HONOR.",
+  "selftest": true
+}

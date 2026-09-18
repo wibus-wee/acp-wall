@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The Wall — a public ledger of ACP (Agent Client Protocol) conformance. Which harnesses implement the protocol honestly, and which leave methods out.">
+<title>The Wall — ACP Conformance Ledger</title>
+<style>
+  :root{
+    --paper:#12100c; --paper2:#171410; --ink:#e8dfc8; --ink-dim:#a89d83;
+    --faint:#6b6151; --line:#2c2619; --line2:#3d3421;
+    --gold:#d9b45f; --gold-deep:#8a6c28; --red:#cd6259; --green:#8fb070;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"Charter","Iowan Old Style","Palatino",Georgia,serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:radial-gradient(rgba(255,255,255,.02) 1px,transparent 1px);
+    background-size:4px 4px;
+  }
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+  a{color:var(--ink);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
+  a:hover{color:var(--gold)}
+  .page{max-width:880px;margin:0 auto;padding:34px 24px 100px;position:relative;z-index:1}
+  .page.wide{max-width:1360px;padding-top:0;padding-bottom:0}
+  .page.wide .sec{margin-top:34px}
+
+  /* masthead */
+  .mast{display:flex;align-items:baseline;justify-content:space-between;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim)}
+  .mast .mono{font-size:9.5px}
+  .mast .price{color:var(--faint)}
+  hr.rule{border:0;border-top:2px solid var(--ink);margin:12px 0 0}
+  hr.rule.thin{border-top:1px solid var(--line2);margin-top:3px}
+  .nameplate{text-align:center;padding:34px 0 26px;border-bottom:1px solid var(--line)}
+  .nameplate .gl{font-size:10px;letter-spacing:.5em;color:var(--gold-deep);margin-bottom:16px}
+  .nameplate h1{font-size:clamp(40px,6vw,64px);font-weight:700;line-height:1;font-variant:small-caps;text-shadow:0 1px 0 #000}
+  .nameplate .sub-t{margin-top:14px;font-size:11px;letter-spacing:.3em;color:var(--faint);text-transform:uppercase}
+  .dateline{display:flex;justify-content:space-between;padding:9px 2px;font-size:10px;color:var(--faint);letter-spacing:.14em;border-bottom:1px solid var(--line)}
+
+  /* headline */
+  .headline{padding:44px 0 10px;text-align:center}
+  .headline h2{font-size:clamp(30px,4.4vw,44px);font-weight:500;line-height:1.14}
+  .headline h2 em{font-style:italic;color:var(--gold)}
+  .headline h2 em.s{color:var(--red)}
+  .standfirst{margin:24px auto 0;max-width:58ch;color:var(--ink-dim);font-size:15.5px;line-height:1.8}
+  .standfirst b{color:var(--ink);font-weight:600}
+  .standfirst .mono{font-size:12.5px;background:#1b1710;border:1px solid var(--line);border-radius:4px;padding:1px 6px;color:#cfc39f}
+  .kbd-hint{margin-top:18px;font-size:10px;letter-spacing:.16em;color:var(--faint)}
+  .kbd-hint .mono{border:1px solid var(--line2);border-radius:4px;padding:2px 7px;color:var(--ink-dim)}
+
+  /* ticker tape */
+  .tape{margin:34px 0 0;border:1px solid var(--line2);background:var(--paper2);overflow:hidden;position:relative}
+  .tape::before,.tape::after{content:"";position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+  .tape::before{left:0;background:linear-gradient(90deg,var(--paper2),transparent)}
+  .tape::after{right:0;background:linear-gradient(-90deg,var(--paper2),transparent)}
+  .tape-in{display:inline-block;white-space:nowrap;padding:11px 0;font-size:11px;color:var(--ink-dim);letter-spacing:.06em;animation:tape 46s linear infinite}
+  .tape-in b{color:var(--gold);font-weight:400}
+  .tape-in i{color:var(--red);font-style:normal}
+  .tape-in .u{color:var(--faint)}
+  @keyframes tape{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* section heads */
+  .sec{margin-top:46px}
+  .sec-h{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:9px}
+  .sec-h .t{font-size:12px;letter-spacing:.26em;text-transform:uppercase;font-weight:700}
+  .sec-h .zh{font-size:12px;color:var(--faint)}
+  .sec-h .n{margin-left:auto;font-size:10px;color:var(--faint);letter-spacing:.14em}
+  .sec.honor .sec-h .t{color:var(--gold)}
+  .sec.shame .sec-h .t{color:var(--red)}
+
+  /* entries */
+  .entry{border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s}
+  .entry:hover{background:rgba(255,255,255,.015)}
+  .e-row{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:baseline;padding:15px 4px}
+  .e-rk{font-size:10px;color:var(--faint)}
+  .e-nm{font-size:18px}
+  .e-nm .ven{display:block;font-size:12px;color:var(--ink-dim);font-style:italic;margin-top:3px}
+  .e-sc{text-align:right}
+  .e-sc b{font-size:16px;font-weight:500}
+  .e-sc .ms{display:block;font-size:9px;color:var(--faint);margin-top:2px;letter-spacing:.08em}
+  .honor .e-sc b{color:var(--gold)} .shame .e-sc b{color:var(--red)}
+  .star{color:var(--gold)}
+  .chev{display:inline-block;font-size:9px;color:var(--faint);margin-left:10px;transition:transform .2s}
+  .entry:hover .chev{color:var(--gold)}
+  .empty-sec{padding:22px 4px;font-size:13px;font-style:italic;color:var(--faint);border-bottom:1px solid var(--line)}
+
+  /* banknote plaque for #1 */
+  .plaque-no1{margin-top:26px;border:2px solid var(--gold-deep);padding:3px;background:linear-gradient(160deg,#1d1810,#14110a);cursor:pointer}
+  .plaque-in{border:1px solid var(--gold-deep);padding:26px 30px;position:relative;text-align:center}
+  .plaque-in::before,.plaque-in::after{content:"❦";position:absolute;top:10px;font-size:14px;color:var(--gold-deep)}
+  .plaque-in::before{left:12px}.plaque-in::after{right:12px}
+  .plaque-in .cert{font-size:9.5px;letter-spacing:.3em;color:var(--gold-deep);text-transform:uppercase}
+  .plaque-in h3{font-size:30px;margin-top:10px;color:var(--gold)}
+  .plaque-in .of{font-size:12px;font-style:italic;color:var(--ink-dim);margin-top:8px}
+  .plaque-in .serial{position:absolute;bottom:8px;left:14px;font-size:8.5px;color:var(--faint);letter-spacing:.16em}
+  .plaque-in .score-big{position:absolute;bottom:8px;right:14px;font-size:8.5px;color:var(--faint);letter-spacing:.16em}
+  .plaque-no1:hover .plaque-in{background:rgba(217,180,95,.03)}
+
+  /* ——— league table (the matrix, gazette style) ——— */
+  .lg-note{font-size:12px;font-style:italic;color:var(--ink-dim);padding:10px 2px 0}
+  .lg-wrap{margin-top:12px;border:1px solid var(--line2);background:var(--paper2);overflow-x:auto}
+  .lg-t{border-collapse:separate;border-spacing:0;width:100%;min-width:1100px}
+  .lg-t thead th{
+    position:sticky;top:0;z-index:3;background:#1a1610;
+    font-family:ui-monospace,Menlo,monospace;font-size:9.5px;font-weight:400;color:var(--faint);
+    letter-spacing:.04em;padding:11px 6px;border-bottom:1px solid var(--line2);text-align:center;white-space:nowrap;
+  }
+  .lg-t thead th:first-child,.lg-t tbody th{
+    position:sticky;left:0;z-index:2;text-align:left;padding-left:16px;min-width:190px;
+    font-family:"Charter",Georgia,serif;font-size:14.5px;font-weight:600;color:var(--ink);
+  }
+  .lg-t thead th:first-child{background:#1a1610;z-index:4;font-family:ui-monospace,Menlo,monospace;font-size:9px;color:var(--faint);font-weight:400;letter-spacing:.14em}
+  .lg-t tbody th{background:var(--paper2);font-weight:600;cursor:pointer;border-bottom:1px solid var(--line);white-space:nowrap}
+  .lg-t tbody th small{display:block;font-family:ui-monospace,Menlo,monospace;font-size:8.5px;color:var(--faint);font-weight:400;margin-top:2px}
+  .lg-t tbody th:hover{color:var(--gold)}
+  .lg-t td{border-bottom:1px solid var(--line);text-align:center;padding:0;height:44px}
+  .lg-t tbody tr:hover td{background:rgba(217,180,95,.02)}
+  .mc{font-family:ui-monospace,Menlo,monospace;font-size:15px;font-weight:600}
+  .mc.ok{color:var(--green)} .mc.pr{color:var(--gold)} .mc.no{color:var(--red)} .mc.un{color:#4a4336}
+  .lg-t td.lg-sc{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink);padding-right:14px;text-align:right}
+  .lg-t tr.t-honor td.lg-sc{color:var(--gold)}
+  .lg-t tr.t-shame td.lg-sc{color:var(--red)}
+  .lg-t tbody tr{ cursor:pointer}
+  .lg-empty{padding:30px;text-align:center;font-style:italic;color:var(--faint);font-size:14px}
+
+  /* ——— inline expandable dossier ——— */
+  .xp{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .xp.on{max-height:760px}
+  .lg-x td{padding:0;height:auto;text-align:left}
+  .lg-x-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);background:#0f0d09;border-top:1px solid var(--line)}
+  .bx{padding:14px 18px 18px}
+  .bx+.bx{border-left:1px solid var(--line)}
+  @media(max-width:760px){.lg-x-in{grid-template-columns:1fr}.bx+.bx{border-left:0;border-top:1px solid var(--line)}}
+  tr.rowhead.open td{background:rgba(217,180,95,.035)}
+  tr.rowhead.open th{color:var(--gold)}
+  .entry.open .chev{transform:rotate(90deg)}
+  .entry .e-x .lg-x-in{border-top:0}
+  .sh-lab{font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.18em;color:var(--faint);text-transform:uppercase;margin:0 0 8px;display:flex;justify-content:space-between;align-items:center}
+  .sh-lab .mono{letter-spacing:.06em;text-transform:none}
+  .pills{display:flex;flex-wrap:wrap;gap:5px}
+  .pills span{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;border:1px solid var(--line2);border-radius:4px;padding:4px 9px;color:var(--ink-dim)}
+  .pills span.miss{color:var(--red);border-color:rgba(205,98,89,.4)}
+  .pills span.part{color:#c9a44e;border-color:rgba(201,164,78,.35)}
+  .pills span.ok{color:var(--green);border-color:rgba(143,176,112,.3)}
+  .sh-pre{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;line-height:1.8;color:var(--ink-dim);background:#0d0b08;border:1px solid var(--line);border-radius:6px;padding:12px 14px;overflow-x:auto;margin-top:8px}
+  .sh-pre .p{color:var(--green)} .sh-pre .r{color:var(--red)} .sh-pre .c{color:var(--faint)} .sh-pre .g{color:#c9a44e}
+  .sh-btn{border:1px solid var(--line2);background:transparent;color:var(--ink-dim);font:inherit;font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.08em;padding:4px 9px;cursor:pointer;border-radius:5px}
+  .sh-btn:hover{color:var(--ink);border-color:var(--faint)}
+  .liar{margin:0 0 10px;border:1px solid rgba(205,98,89,.45);border-radius:6px;background:rgba(205,98,89,.06);padding:10px 12px;font-size:12px;color:var(--red)}
+  .liar b{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.14em}
+  .liar div{margin-top:5px;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:#d99a93}
+  .viol{margin:0 0 10px;border:1px solid rgba(201,164,78,.4);border-radius:6px;background:rgba(201,164,78,.05);padding:10px 12px;font-size:12px;color:#c9a44e}
+  .viol b{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.14em}
+  .viol div{margin-top:5px;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#b0955f;word-break:break-all}
+  .probed{margin-top:8px;font-family:ui-monospace,Menlo,monospace;font-size:9.5px;color:var(--faint);letter-spacing:.06em}
+
+  .foot-note{margin-top:52px;text-align:center;font-size:13.5px;font-style:italic;color:var(--ink-dim);line-height:1.9;max-width:60ch;margin-left:auto;margin-right:auto}
+  .foot-note .who{display:block;margin-top:10px;font-style:normal;font-size:10px;letter-spacing:.2em;color:var(--faint)}
+  .fine{margin-top:56px;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:9px;color:var(--faint);letter-spacing:.16em}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="mast">
+    <span>THE CONFORMANCE GAZETTE</span>
+    <span class="mono" id="issue-no">VOL. I</span>
+    <span class="price">PRICE: ONE METHOD</span>
+  </div>
+  <hr class="rule"><hr class="rule thin">
+
+  <div class="nameplate">
+    <div class="gl">✦ ❦ ✦</div>
+    <h1>The Wall</h1>
+    <div class="sub-t">荣誉墙 · 耻辱墙 · A PUBLIC LEDGER OF ACP CONFORMANCE</div>
+  </div>
+  <div class="dateline">
+    <span id="dateline-day">—</span>
+    <span id="dateline-mid">ACP v1 · AWAITING FIRST PRINTING</span>
+    <span>DAILY EDITION</span>
+  </div>
+
+  <div class="headline">
+    <h2>Who keeps <em>the protocol</em> honest —<br>and who lets it <em class="s">take the blame.</em></h2>
+    <p class="standfirst">
+      Every harness claims <b>“ACP support.”</b> Our probe asks a ruder question:
+      <i>which methods, exactly?</i> Tonight's ledger records <span id="lede-count">no</span> implementations.
+      Below: the <b>league table</b> — fourteen methods to a row — then the honours,
+      the middle ground, and the wall of shame. <b>Click any name to open its case file.</b>
+    </p>
+    <p class="kbd-hint">PRESS <span class="mono">⌘K</span> TO CONSULT THE INDEX</p>
+  </div>
+
+  <div class="tape"><div class="tape-in" id="tape"></div></div>
+
+  <div class="plaque-no1" id="plaque" style="display:none">
+    <div class="plaque-in">
+      <div class="cert">Certificate № 001 · Hall of Honor · 荣誉墙</div>
+      <h3 id="plaque-name"></h3>
+      <div class="of" id="plaque-of"></div>
+      <div class="serial" id="plaque-sn"></div>
+      <div class="score-big" id="plaque-score"></div>
+    </div>
+  </div>
+</div><!-- /page (narrow) -->
+
+<!-- league table runs the full broadsheet width -->
+<div class="page wide">
+  <section class="sec" id="league">
+    <div class="sec-h"><span class="t">The League Table</span><span class="zh">合规矩阵</span><span class="n" id="league-count">READ ACROSS</span></div>
+    <p class="lg-note">As printed after each probe run. <span class="mono" style="font-size:10.5px">✓ implemented · ~ partial · ✗ missing · — not exercised.</span> A name may be clicked to subpoena its case file.</p>
+    <div class="lg-wrap"><table class="lg-t"><thead><tr id="lg-head"><th>HARNESS</th></tr></thead><tbody id="lg-body"></tbody></table></div>
+  </section>
+</div>
+
+<div class="page">
+  <section class="sec honor">
+    <div class="sec-h"><span class="t">Hall of Honor</span><span class="zh">荣誉墙</span><span class="n" id="cnt-honor"></span></div>
+    <div id="list-honor"></div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h"><span class="t">The Middle Ground</span><span class="zh">半成品</span><span class="n" id="cnt-mid"></span></div>
+    <div id="list-partial"></div>
+  </section>
+
+  <section class="sec shame">
+    <div class="sec-h"><span class="t">Wall of Shame</span><span class="zh">耻辱墙</span><span class="n" id="cnt-shame"></span></div>
+    <div id="list-shame"></div>
+  </section>
+
+  <p class="foot-note">
+    “If you implement ACP, implement it — leave a few methods out and it's the
+    protocol itself, and the rest of us clients, that get yelled at.”
+    <span class="who">— OVERHEARD IN THE CLIENT MINES, NOW PRINTED IN THE PUBLIC INTEREST</span>
+  </p>
+
+  <div class="fine">
+    <span>SET IN CHARTER &amp; SF MONO</span>
+    <span id="fine-mid">DATA BY acp-probe · TRANSCRIPTS ON FILE</span>
+    <span>© THE WALL, MMXXVI</span>
+  </div>
+</div>
+
+<!-- index palette -->
+<div class="pal-scrim" id="pal-scrim"></div>
+<div class="pal" id="pal">
+  <input id="pal-in" placeholder="Consult the index — harness, or tier:honor / tier:shame …" autocomplete="off">
+  <div class="pal-list" id="pal-list"></div>
+  <div class="pal-foot"><span>↑↓ navigate</span><span>↵ open case file</span><span>esc close</span></div>
+</div>
+<style>
+  .pal-scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:90;display:none}
+  .pal-scrim.open{display:block}
+  .pal{position:fixed;top:16vh;left:50%;transform:translateX(-50%);width:min(560px,92vw);z-index:91;background:#17130c;border:1px solid var(--gold-deep);border-radius:10px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.7);display:none}
+  .pal.open{display:block}
+  .pal input{width:100%;background:transparent;border:0;outline:0;color:var(--ink);font:inherit;font-size:15px;padding:16px 18px;border-bottom:1px solid var(--line)}
+  .pal input::placeholder{color:var(--faint);font-style:italic}
+  .pal-list{max-height:300px;overflow-y:auto;padding:6px}
+  .pal-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;cursor:pointer;font-size:14px}
+  .pal-item .mk{width:24px;height:24px;border:1px solid var(--line2);display:grid;place-items:center;font-size:13px;color:var(--gold);font-variant:small-caps;flex:none}
+  .pal-item .tr{margin-left:auto;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--faint)}
+  .pal-item.sel{background:rgba(217,180,95,.08)}
+  .pal-item .tt{font-size:8.5px;font-family:ui-monospace,Menlo,monospace;letter-spacing:.14em;padding:2px 6px;border-radius:4px;border:1px solid var(--line2);color:var(--dim,var(--faint))}
+  .pal-item .tt.honor{color:var(--gold);border-color:rgba(217,180,95,.4)}
+  .pal-item .tt.shame{color:var(--red);border-color:rgba(205,98,89,.4)}
+  .pal-foot{padding:9px 14px;border-top:1px solid var(--line);font-size:9.5px;color:var(--faint);display:flex;gap:14px;font-family:ui-monospace,Menlo,monospace}
+</style>
+
+<script src="data/conformance.js"></script>
+<script>
+const CAPS=(window.__ACP_WALL__&&window.__ACP_WALL__.caps)||["initialize","authenticate","session/new","session/load","session/prompt",
+"sessions/*","set_mode","set_config","cancel","logout","message*","tool_call*","permission","plan","slash_cmds","fs/*","terminal/*","elicitation","mcp"];
+const H=(window.__ACP_WALL__&&window.__ACP_WALL__.harnesses)||[];
+
+function score(h){let p=0,m=0;h.cells.forEach(c=>{if(c===-1)return;m++;p+=c===1?1:c===2?.5:0});return m?Math.round(p/m*100):0}
+
+/* dateline / issue furniture from the data's own timestamp */
+(function(){
+  const days=["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
+  const months=["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"];
+  const g=window.__ACP_WALL__&&window.__ACP_WALL__.generatedAt;
+  const d=g?new Date(g):new Date();
+  const ds=d.toISOString().slice(0,10);
+  document.getElementById('dateline-day').textContent=
+    `${days[d.getUTCDay()]}, ${months[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
+  if(g){
+    document.getElementById('dateline-mid').textContent=`ACP v1 · PROBED ${ds}`;
+    document.getElementById('fine-mid').textContent=`PROBED ${ds} · ${H.length} REPORT(S) · acp-probe`;
+    document.getElementById('issue-no').textContent=`№ ${Math.max(1,Math.floor((Date.now()-d.getTime())/86400000)+1)}`;
+  }
+  document.getElementById('lede-count').textContent=H.length?String(H.length):"no";
+})();
+
+const CELL={1:"✓",2:"~",0:"✗","-1":"—"};
+const PCLS={1:"ok",2:"part",0:"miss","-1":"miss"};
+const MCLS={1:"ok",2:"pr",0:"no","-1":"un"};
+const all=H.slice().sort((a,b)=>score(b)-score(a));
+all.forEach((h,i)=>h._rk=i+1);
+
+/* ---------- ledger entries ---------- */
+function entry(h){
+  const s=score(h),done=h.cells.every(c=>c===-1);
+  const el=document.createElement('div');el.className='entry';
+  el.innerHTML=`<div class="e-row">
+      <span class="e-rk mono">${String(h._rk).padStart(2,'0')}</span>
+      <span class="e-nm">${h.n}${h.star?' <span class="star">✦</span>':''}<span class="ven">${h.v||''}</span></span>
+      <span class="e-sc"><b class="mono">${done?'—':s}</b><span class="ms">${done?'0/14':'/100'}</span><span class="chev">➤</span></span>
+    </div>`;
+  const xp=document.createElement('div');xp.className='e-x xp';
+  xp.innerHTML=detailHTML(h);wireCopy(xp,h);
+  el.appendChild(xp);
+  el.querySelector('.e-row').addEventListener('click',()=>toggleXP(xp,el));
+  return el;
+}
+const byTier=t=>all.filter(h=>h.tier===t);
+['honor','partial','shame'].forEach(t=>{
+  const list=byTier(t);
+  const box=document.getElementById('list-'+t);
+  if(list.length)box.append(...list.map(entry));
+  else box.innerHTML='<div class="empty-sec">— no entries this edition —</div>';
+});
+document.getElementById('cnt-honor').textContent=`${byTier('honor').length} ENTRIES`;
+document.getElementById('cnt-mid').textContent=`${byTier('partial').length} ENTRIES`;
+document.getElementById('cnt-shame').textContent=`${byTier('shame').length} ENTRIES`;
+
+/* №1 plaque: minted for the top-scoring honor entry, if any */
+(function(){
+  const top=all.find(h=>h.tier==='honor');
+  if(!top)return;
+  const passed=top.cells.filter(c=>c===1).length;
+  const pl=document.getElementById('plaque');pl.style.display='';
+  document.getElementById('plaque-name').textContent=top.n;
+  document.getElementById('plaque-of').textContent=`${passed} of ${CAPS.length} methods verified — ${top.v||'probed clean'}`;
+  document.getElementById('plaque-sn').textContent=`SN 0xACP-${String(top._rk).padStart(4,'0')}`;
+  document.getElementById('plaque-score').textContent=`SCORE ${score(top)}`;
+  pl.addEventListener('click',()=>openCase(top));
+})();
+
+/* ---------- league table ---------- */
+(function(){
+  const thead=document.getElementById('lg-head');
+  document.getElementById('league-count').textContent=`${CAPS.length} METHODS · READ ACROSS`;
+  CAPS.forEach(c=>{const th=document.createElement('th');th.textContent=c;thead.appendChild(th)});
+  {const th=document.createElement('th');th.textContent='SCORE';th.style.paddingRight='14px';thead.appendChild(th)}
+  const tb=document.getElementById('lg-body');
+  if(!all.length){
+    tb.innerHTML=`<tr><td colspan="${CAPS.length+2}"><div class="lg-empty">No probe reports on file yet — see README to submit a harness.</div></td></tr>`;
+    return;
+  }
+  all.forEach(h=>{
+    const s=score(h),done=h.cells.every(c=>c===-1);
+    const tr=document.createElement('tr');tr.className='rowhead t-'+h.tier;
+    let h2=`<th>${h.n}<small>${(h.v||'').split('—')[0].trim()}</small></th>`;
+    h.cells.forEach(c=>{h2+=`<td><span class="mc ${MCLS[c]}">${CELL[c]}</span></td>`});
+    h2+=`<td class="lg-sc">${done?'—':s}</td>`;
+    tr.innerHTML=h2;
+    const dtr=document.createElement('tr');dtr.className='lg-x';
+    dtr.innerHTML=`<td colspan="${CAPS.length+2}"><div class="xp">${detailHTML(h)}</div></td>`;
+    const xp=dtr.querySelector('.xp');wireCopy(xp,h);
+    h._xp=xp;h._row=tr;
+    tr.addEventListener('click',()=>toggleXP(xp,tr));
+    tb.appendChild(tr);tb.appendChild(dtr);
+  });
+})();
+
+/* ---------- ticker ---------- */
+(function(){
+  const items=all.length?all.map(h=>{
+    const s=score(h);
+    const cls=h.tier==='honor'?'b':h.tier==='shame'?'i':'u';
+    return `<span>${h.n.toUpperCase().replace(/[\s()]/g,'_')} <${cls}>${h.cells.every(c=>c===-1)?'——':s}</${cls}></span>`;
+  }).join('&nbsp;&nbsp;·&nbsp;&nbsp;'):'<span>THE LEDGER AWAITS ITS FIRST PRINTING</span>';
+  document.getElementById('tape').innerHTML=(items+'&nbsp;&nbsp;·&nbsp;&nbsp;<i>耻辱墙 — PROBED DAILY</i>&nbsp;&nbsp;·&nbsp;&nbsp;').repeat(2);
+})();
+
+/* ---------- inline dossier (expandable detail) ---------- */
+function transcript(h){
+  const N=h.notes||{};
+  return CAPS.map((c,j)=>{
+    const v=h.cells[j];
+    const note=N[c]||'';
+    return v===1?`<span class="p">  ✓ ${c.padEnd(18)} ${note||'ok'}</span>`
+      :v===2?`<span class="g">  ~ ${c.padEnd(18)} ${note||'partial'}</span>`
+      :v===0?`<span class="r">  ✗ ${c.padEnd(18)} ${note||'method_not_found'}</span>`
+      :`<span class="c">  — ${c.padEnd(18)} ${note||'not exercised'}</span>`;
+  }).join('\n');
+}
+function detailHTML(h){
+  const s=score(h),done=h.cells.every(c=>c===-1);
+  const liars=(h.dishonesty&&h.dishonesty.length)
+    ?`<div class="liar"><b>⚠ CLAIMED BUT ABSENT</b>${h.dishonesty.map(d=>`<div>${d.claim} — ${d.detail}</div>`).join('')}</div>`:'';
+  const viols=(h.violations&&h.violations.length)
+    ?`<div class="viol"><b>⚠ SCHEMA VIOLATIONS · ${h.violations.length}</b>${h.violations.slice(0,6).map(v=>`<div>${v.method} ${v.where}${v.path?' · '+v.path:''} — ${v.msg}</div>`).join('')}${h.violations.length>6?`<div>…and ${h.violations.length-6} more</div>`:''}</div>`:'';
+  const probed=h.probedAt?`<div class="probed">probed ${h.probedAt.slice(0,10)}${h.run?` · $ ${h.run}`:''}</div>`:'';
+  return `<div class="lg-x-in">
+    <div class="bx">
+      <div class="sh-lab"><span>Capabilities</span><span class="mono">${h.cells.filter(c=>c===1).length}/${CAPS.length} · score ${done?'—':s}</span></div>
+      ${liars}${viols}
+      <div class="pills">${CAPS.map((c,j)=>`<span class="${PCLS[h.cells[j]]}">${CELL[h.cells[j]]} ${c}</span>`).join('')}</div>
+      ${probed}
+    </div>
+    <div class="bx">
+      <div class="sh-lab"><span>Probe transcript</span><button class="sh-btn" data-copy>copy report</button></div>
+      <pre class="sh-pre">$ ${h.run||'acp-probe'}\n${transcript(h)}</pre>
+    </div>
+  </div>`;
+}
+function wireCopy(root,h){
+  const b=root.querySelector('[data-copy]');if(!b)return;
+  b.onclick=e=>{
+    e.stopPropagation();
+    const done=h.cells.every(c=>c===-1);
+    const txt=`${h.n} — ACP conformance ${done?'no cells exercised':score(h)+'/100'} (${h.tier}) — The Wall`;
+    (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).catch(()=>{});
+    b.textContent='✓ copied';setTimeout(()=>b.textContent='copy report',1400);
+  };
+}
+let openXP=null;
+function toggleXP(xp,row){
+  const was=xp.classList.contains('on');
+  if(openXP&&openXP!==xp){openXP.classList.remove('on');openXP._row&&openXP._row.classList.remove('open')}
+  xp.classList.toggle('on',!was);
+  if(row)row.classList.toggle('open',!was);
+  xp._row=row;openXP=was?null:xp;
+}
+function closeOpenXP(){if(openXP){openXP.classList.remove('on');openXP._row&&openXP._row.classList.remove('open');openXP=null}}
+function openCase(h){
+  if(!h._xp||!h._row)return;
+  if(!h._xp.classList.contains('on'))toggleXP(h._xp,h._row);
+  h._row.scrollIntoView({block:'center',behavior:'smooth'});
+}
+/* deep-link: ?case=<name> expands that row on load */
+(function(){
+  const q=new URLSearchParams(location.search).get('case');
+  if(!q)return;
+  const h=all.find(x=>{
+    const slug=x.n.toLowerCase().replace(/[\s()]/g,'-').replace(/-+/g,'-').replace(/-$/,'');
+    return slug===q.toLowerCase()||x.n.toLowerCase()===q.toLowerCase()||x.n.toLowerCase().startsWith(q.toLowerCase());
+  });
+  if(h)openCase(h);
+})();
+
+/* ---------- index palette (⌘K) ---------- */
+const pal=document.getElementById('pal'),pscrim=document.getElementById('pal-scrim'),
+      pin=document.getElementById('pal-in'),plist=document.getElementById('pal-list');
+let palIdx=0,palItems=[];
+function openPal(){pal.classList.add('open');pscrim.classList.add('open');pin.value='';renderPal('');pin.focus()}
+function closePal(){pal.classList.remove('open');pscrim.classList.remove('open')}
+function renderPal(q){
+  let list=all;
+  const m=q.match(/^tier:(honor|partial|shame)$/);
+  if(m)list=list.filter(h=>h.tier===m[1]);
+  else if(q)list=list.filter(h=>h.n.toLowerCase().includes(q.toLowerCase())||(h.v||'').toLowerCase().includes(q.toLowerCase()));
+  palItems=list;palIdx=0;
+  plist.innerHTML=list.map((h,i)=>`
+    <div class="pal-item ${i===0?'sel':''}" data-i="${i}">
+      <span class="mk">${h.n[0]}</span>${h.n}
+      <span class="tt ${h.tier}">${h.tier.toUpperCase()}</span>
+      <span class="tr">№${h._rk} · ${score(h)||'—'}</span>
+    </div>`).join('')||'<div style="padding:16px;color:var(--faint);font-size:12px;font-style:italic">no such harness on file.</div>';
+}
+addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();pal.classList.contains('open')?closePal():openPal()}
+  else if(e.key==='Escape'){closePal();closeOpenXP()}
+  else if(pal.classList.contains('open')){
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      e.preventDefault();
+      palIdx=(palIdx+(e.key==='ArrowDown'?1:-1)+palItems.length)%palItems.length;
+      plist.querySelectorAll('.pal-item').forEach((x,i)=>x.classList.toggle('sel',i===palIdx));
+    }else if(e.key==='Enter'&&palItems[palIdx]){closePal();openCase(palItems[palIdx])}
+  }
+});
+pin.addEventListener('input',()=>renderPal(pin.value));
+plist.addEventListener('click',e=>{const it=e.target.closest('.pal-item');if(!it)return;closePal();openCase(palItems[+it.dataset.i])});
+pscrim.onclick=closePal;
+</script>
+</body>
+</html>

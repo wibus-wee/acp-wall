@@ -1,0 +1,21 @@
+{
+  "run": "npx -y opencode-ai@1.18.31 acp",
+  "env": {
+    "OPENAI_BASE_URL": "${MOCK_LLM_URL}",
+    "OPENAI_API_KEY": "probe-mock-key"
+  },
+  "sessionFiles": {
+    "opencode.json": {
+      "$schema": "https://opencode.ai/config.json",
+      "model": "openai/probe-model",
+      "provider": {
+        "openai": {
+          "options": { "baseURL": "${MOCK_LLM_URL}", "apiKey": "probe-mock-key" },
+          "models": { "probe-model": { "name": "probe-model" } }
+        }
+      },
+      "permission": { "bash": "ask", "edit": "ask", "webfetch": "ask" }
+    }
+  },
+  "notes": "Official dist is binary-only; the opencode-ai npm package is equivalent and easier in CI. sessionFiles pins the agent to the mock LLM and sets permission=ask so session/request_permission is deterministically exercised."
+}

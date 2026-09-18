@@ -1,0 +1,26 @@
+{
+  "name": "fast-agent",
+  "display": "fast-agent",
+  "vendor": "enquiries@fast-agent.ai",
+  "version": "0.10.1",
+  "description": "Code and build agents with comprehensive multi-provider support",
+  "repo": "evalstate/fast-agent",
+  "website": "https://fast-agent.ai",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/fast-agent.svg",
+  "license": "Apache 2.0",
+  "install": "node tools/install-dist.mjs registry/agents/fast-agent.json",
+  "run": "uvx fast-agent-acp==0.10.1 -x",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "uvx",
+    "package": "fast-agent-acp==0.10.1",
+    "args": [
+      "-x"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

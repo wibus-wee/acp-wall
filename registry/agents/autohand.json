@@ -1,0 +1,24 @@
+{
+  "name": "autohand",
+  "display": "Autohand Code",
+  "vendor": "Autohand AI",
+  "version": "0.2.1",
+  "description": "Autohand Code - AI coding agent powered by Autohand AI",
+  "repo": "autohandai/autohand-acp",
+  "website": "https://www.autohand.ai/cli/",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/autohand.svg",
+  "license": "Apache-2.0",
+  "install": null,
+  "run": "npx -y @autohandai/autohand-acp@0.2.1",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@autohandai/autohand-acp@0.2.1",
+    "args": []
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

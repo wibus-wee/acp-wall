@@ -1,0 +1,7 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "${MOCK_LLM_URL}",
+    "ANTHROPIC_API_KEY": "probe-mock-key"
+  },
+  "notes": "Official ACP adapter wrapping the Claude Agent SDK. Mock LLM depends on the SDK honoring ANTHROPIC_BASE_URL."
+}

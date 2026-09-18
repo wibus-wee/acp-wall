@@ -1,0 +1,26 @@
+{
+  "name": "qoder",
+  "display": "Qoder CLI",
+  "vendor": "Qoder AI",
+  "version": "0.2.14",
+  "description": "AI coding assistant with agentic capabilities",
+  "repo": null,
+  "website": "https://qoder.com",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/qoder.svg",
+  "license": "proprietary",
+  "install": null,
+  "run": "npx -y @qoder-ai/qodercli@0.2.14 --acp",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@qoder-ai/qodercli@0.2.14",
+    "args": [
+      "--acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "antigravity-acp",
+  "display": "Google Antigravity",
+  "vendor": "Google LLC",
+  "version": "1.1.1",
+  "description": "Google’s AI coding agent",
+  "repo": null,
+  "website": "https://antigravity.google/docs/ide/extensions",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/antigravity-acp.svg",
+  "license": "proprietary",
+  "install": "node tools/install-dist.mjs registry/agents/antigravity-acp.json",
+  "run": "${REPO_ROOT}/.cache/agents/antigravity-acp/agy_acp_server.par",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "binary",
+    "per_platform": {
+      "darwin-aarch64": {
+        "archive": "https://dl.google.com/agy-extensions/releases/macos/agy-acp-server-agy_acp_server_1.1.1-darwin-arm64.zip",
+        "cmd": "./agy_acp_server.par"
+      },
+      "linux-x86_64": {
+        "archive": "https://dl.google.com/agy-extensions/releases/linux/agy-acp-server-agy_acp_server_1.1.1-linux-x86_64.zip",
+        "cmd": "./agy_acp_server.par",
+        "args": [
+          "--uid="
+        ]
+      },
+      "linux-aarch64": {
+        "archive": "https://dl.google.com/agy-extensions/releases/linux/agy-acp-server-agy_acp_server_1.1.1-linux-arm64.zip",
+        "cmd": "./agy_acp_server.par",
+        "args": [
+          "--uid="
+        ]
+      },
+      "windows-x86_64": {
+        "archive": "https://dl.google.com/agy-extensions/releases/windows/agy-acp-server-agy_acp_server_1.1.1-windows-x86_64.zip",
+        "cmd": "./agy_acp_server.exe"
+      },
+      "windows-aarch64": {
+        "archive": "https://dl.google.com/agy-extensions/releases/windows/agy-acp-server-agy_acp_server_1.1.1-windows-arm64.zip",
+        "cmd": "./agy_acp_server.exe"
+      }
+    }
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

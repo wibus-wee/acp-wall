@@ -1,0 +1,27 @@
+{
+  "name": "qwen-code",
+  "display": "Qwen Code",
+  "vendor": "Alibaba Qwen Team",
+  "version": "0.24.0",
+  "description": "Alibaba's Qwen coding assistant",
+  "repo": "QwenLM/qwen-code",
+  "website": "https://qwenlm.github.io/qwen-code-docs/en/users/overview",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/qwen-code.svg",
+  "license": "Apache-2.0",
+  "install": null,
+  "run": "npx -y @qwen-code/qwen-code@0.24.0 --acp --experimental-skills",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@qwen-code/qwen-code@0.24.0",
+    "args": [
+      "--acp",
+      "--experimental-skills"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

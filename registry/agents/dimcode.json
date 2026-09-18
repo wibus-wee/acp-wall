@@ -1,0 +1,26 @@
+{
+  "name": "dimcode",
+  "display": "DimCode",
+  "vendor": "ArcShips",
+  "version": "0.5.6",
+  "description": "A coding agent that puts leading models at your command.",
+  "repo": null,
+  "website": "https://dimcode.dev/docs/acp.html",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/dimcode.svg",
+  "license": "proprietary",
+  "install": null,
+  "run": "npx -y dimcode@0.5.6 acp",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "dimcode@0.5.6",
+    "args": [
+      "acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

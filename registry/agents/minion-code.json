@@ -1,0 +1,26 @@
+{
+  "name": "minion-code",
+  "display": "Minion Code",
+  "vendor": "femto",
+  "version": "0.1.44",
+  "description": "An enhanced AI code assistant built on the Minion framework with rich development tools",
+  "repo": "femto/minion-code",
+  "website": null,
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/minion-code.svg",
+  "license": "AGPL-3.0",
+  "install": "node tools/install-dist.mjs registry/agents/minion-code.json",
+  "run": "uvx minion-code@0.1.44 acp",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "uvx",
+    "package": "minion-code@0.1.44",
+    "args": [
+      "acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

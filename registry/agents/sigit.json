@@ -1,0 +1,24 @@
+{
+  "name": "sigit",
+  "display": "siGit Code",
+  "vendor": "smbCloud",
+  "version": "1.5.10",
+  "description": "Local-first coding agent. Runs entirely on your machine with optional on-device LLM inference via Onde.",
+  "repo": "getsigit/sigit",
+  "website": "https://github.com/getsigit/sigit",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/sigit.svg",
+  "license": "Apache-2.0",
+  "install": null,
+  "run": "npx -y @smbcloud/sigit@1.5.10",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@smbcloud/sigit@1.5.10",
+    "args": []
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}

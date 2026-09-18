@@ -1,0 +1,181 @@
+name: wall
+# Full-matrix probing: pulls the official ACP registry, probes every enabled
+# agent, aggregates reports into data/conformance.js, commits it.
+# Runs daily (harnesses ship new versions constantly — regressions are the
+# whole point of the wall), on relevant merges, and manually for one harness.
+on:
+  schedule:
+    - cron: "17 4 * * *" # daily, off-peak
+  workflow_dispatch:
+    inputs:
+      harness:
+        description: "agent id (e.g. opencode); empty = all"
+        required: false
+        type: string
+  push:
+    branches: [main]
+    # registry/agents/** is deliberately absent: it is bot-maintained by the
+    # sync job below, and including it would make every sync commit retrigger
+    # a full-matrix run. Human submissions live in registry/overrides/.
+    paths:
+      - "registry/overrides/**"
+      - "registry/fixture-*.json"
+      - "registry/_schema.json"
+      - "probe/**"
+      - "tools/**"
+
+# cron, push and dispatch must never overlap: concurrent runs race the
+# conformance.js commit and lose to non-fast-forward. Serialize instead of
+# cancelling — every completed run is a data point.
+concurrency:
+  group: wall
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    outputs:
+      entries: ${{ steps.list.outputs.entries }}
+      # downstream jobs must check out this SHA, not github.sha — the sync
+      # commit may carry registry entries that did not exist at trigger time
+      sha: ${{ steps.sha.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Sync official ACP registry
+        run: node tools/sync-registry.mjs
+
+      - name: Build probe target list
+        id: list
+        run: |
+          node -e '
+            const {readdirSync,readFileSync}=require("fs");
+            const target="${{ github.event.inputs.harness }}";
+            const entries=[];
+            for (const f of readdirSync("registry/agents").filter(f=>f.endsWith(".json"))) {
+              const e=JSON.parse(readFileSync("registry/agents/"+f,"utf8"));
+              if (e.disabled) continue;
+              if (target && e.name!==target) continue;
+              entries.push("registry/agents/"+f);
+            }
+            // selftest fixtures ride along when probing everything
+            if (!target) for (const f of ["fixture-good","fixture-liar","fixture-mini"])
+              entries.push("registry/"+f+".json");
+            console.log("entries="+JSON.stringify(entries));
+          ' >> "$GITHUB_OUTPUT"
+
+      - name: Commit synced registry
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: |
+          git config user.name "acp-wall-bot"
+          git config user.email "bot@acp-wall"
+          git add registry/agents data/acp-registry.json
+          git diff --cached --quiet || git commit -m "registry: sync $(date -u +%Y-%m-%d)"
+          # checkout is a detached HEAD — push HEAD explicitly, and rebase
+          # first in case a queued wall run landed in between
+          git pull --rebase origin main || true
+          git push origin HEAD:main
+
+      - name: Record HEAD for downstream jobs
+        id: sha
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  matrix:
+    needs: sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        entry: ${{ fromJSON(needs.sync.outputs.entries) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.sync.outputs.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Resolve harness name
+        id: h
+        run: echo "name=$(node -p "JSON.parse(require('fs').readFileSync('${{ matrix.entry }}','utf8')).name")" >> "$GITHUB_OUTPUT"
+
+      - name: Build probe
+        working-directory: probe
+        run: |
+          npm ci || npm install
+          npm run build
+
+      - name: Install harness distribution
+        run: |
+          install=$(node -p "JSON.parse(require('fs').readFileSync('${{ matrix.entry }}','utf8')).install||''")
+          [ -n "$install" ] && timeout 600 sh -c "$install" || true
+
+      - name: Probe
+        run: |
+          mkdir -p probe/reports
+          # generous ceiling: cold npx/binary downloads happen inside the run
+          timeout 600 node probe/dist/src/cli.js --entry "${{ matrix.entry }}" \
+            --out "probe/reports/${{ steps.h.outputs.name }}.report.json" --transcript || true
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          # artifact names may not contain '/' — use the resolved name, not the path
+          name: report-${{ steps.h.outputs.name }}
+          path: probe/reports/*.report.json
+          # a probe that died before writing a report is a data point, not a red job
+          if-no-files-found: warn
+          include-hidden-files: true
+
+  aggregate:
+    needs: [sync, matrix]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # job-level permissions replace the workflow-level grant, so restate
+    # contents:write for the commit and add pages:write for the rebuild ping —
+    # GITHUB_TOKEN pushes never trigger a Pages build on their own
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.sync.outputs.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: report-*
+          path: probe/reports
+          merge-multiple: true
+
+      - name: Aggregate → conformance.js
+        run: node tools/aggregate.mjs
+
+      - name: Commit updated wall data
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "acp-wall-bot"
+          git config user.email "bot@acp-wall"
+          git add data/conformance.js
+          git diff --cached --quiet || git commit -m "wall: conformance update $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main || true
+          git push origin HEAD:main
+
+      - name: Trigger Pages rebuild
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api "repos/${{ github.repository }}/pages/builds" -X POST \
+            || echo "Pages not enabled — turn it on once: Settings → Pages → deploy from branch → main / (root)"

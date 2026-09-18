@@ -1,0 +1,26 @@
+{
+  "name": "auggie",
+  "display": "Auggie CLI",
+  "vendor": "Augment Code <support@augmentcode.com>",
+  "version": "0.36.0",
+  "description": "Augment Code's powerful software agent, backed by industry-leading context engine",
+  "repo": "augmentcode/auggie",
+  "website": "https://www.augmentcode.com/",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/auggie.svg",
+  "license": "proprietary",
+  "install": null,
+  "run": "npx -y @augmentcode/auggie@0.36.0 --acp",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@augmentcode/auggie@0.36.0",
+    "args": [
+      "--acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+}
