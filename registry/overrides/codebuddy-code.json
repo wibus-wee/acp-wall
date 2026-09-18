@@ -1,0 +1,7 @@
+{
+  "env": {
+    "CODEBUDDY_API_KEY": "probe-mock-key",
+    "CODEBUDDY_BASE_URL": "${MOCK_LLM_URL}"
+  },
+  "notes": "Documented third-party-model path: CODEBUDDY_API_KEY + CODEBUDDY_BASE_URL point the model endpoint at the mock LLM. International edition needs no CODEBUDDY_INTERNET_ENVIRONMENT."
+}

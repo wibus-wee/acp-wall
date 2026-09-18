@@ -1,0 +1,9 @@
+{
+  "env": {
+    "DIRAC_PROVIDER": "deepseek",
+    "DIRAC_MODEL": "probe-model",
+    "DIRAC_API_KEY": "probe-mock-key",
+    "DIRAC_BASE_URL": "${MOCK_LLM_URL}"
+  },
+  "notes": "Documented ACP env authentication: DIRAC_PROVIDER/MODEL/API_KEY/BASE_URL select an OpenAI-compatible provider pointed at the mock LLM — overrides persisted defaults for the ACP process, no `dirac auth` needed."
+}

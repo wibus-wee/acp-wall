@@ -9,8 +9,10 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/dimcode.svg",
   "license": "proprietary",
   "install": null,
-  "run": "npx -y dimcode@0.5.6 acp",
-  "env": {},
+  "run": "npx -y dimcode@0.5.6 provider add probe --base-url ${MOCK_LLM_URL} --model probe-model --api-key probe-mock-key ; npx -y dimcode@0.5.6 provider switch probe ; npx -y dimcode@0.5.6 acp",
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "npx",
@@ -21,6 +23,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Documented CLI path: `dim provider add <id> --base-url --model --api-key` registers a custom OpenAI-compatible provider against the mock LLM, `provider switch` activates it; HOME=${WORK_DIR} confines ~/.dimcode state to the probe workspace.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

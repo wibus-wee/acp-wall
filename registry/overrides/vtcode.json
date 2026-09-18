@@ -1,0 +1,10 @@
+{
+  "env": {
+    "PROBE_API_KEY": "probe-mock-key",
+    "OPENAI_API_KEY": "probe-mock-key"
+  },
+  "sessionFiles": {
+    "vtcode.toml": "[agent]\nprovider = \"probe\"\nmodel = \"probe-model\"\napi_key_env = \"PROBE_API_KEY\"\n\n[[custom_providers]]\nname = \"probe\"\ndisplay_name = \"Probe\"\nbase_url = \"${MOCK_LLM_URL}\"\napi_key_env = \"PROBE_API_KEY\"\nmodels = [\"probe-model\"]\n"
+  },
+  "notes": "vtcode.toml in the session workspace declares a custom OpenAI-compatible provider (documented custom_providers shape) pointed at the mock LLM; api_key_env references the probe key."
+}

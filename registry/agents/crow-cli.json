@@ -10,8 +10,13 @@
   "license": "Apache-2.0",
   "install": "node tools/install-dist.mjs registry/agents/crow-cli.json",
   "run": "${REPO_ROOT}/.cache/agents/crow-cli/crow-cli acp",
-  "env": {},
-  "sessionFiles": null,
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
+  "sessionFiles": {
+    ".agents/crow/config.yaml": "providers:\n  probe:\n    api_key: probe-mock-key\n    base_url: ${MOCK_LLM_URL}\nmodels:\n  probe-model:\n    provider: probe\n    model: probe-model\n",
+    ".agents/crow/.env": "PROBE_API_KEY=probe-mock-key\n"
+  },
   "dist": {
     "type": "binary",
     "per_platform": {
@@ -54,6 +59,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "crow-cli reads providers/models from ~/.agents/crow/config.yaml (documented openai-compatible shape); HOME=${WORK_DIR} lets sessionFiles plant the config pointing at the mock LLM.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

@@ -1,0 +1,10 @@
+{
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
+  "sessionFiles": {
+    ".agents/crow/config.yaml": "providers:\n  probe:\n    api_key: probe-mock-key\n    base_url: ${MOCK_LLM_URL}\nmodels:\n  probe-model:\n    provider: probe\n    model: probe-model\n",
+    ".agents/crow/.env": "PROBE_API_KEY=probe-mock-key\n"
+  },
+  "notes": "crow-cli reads providers/models from ~/.agents/crow/config.yaml (documented openai-compatible shape); HOME=${WORK_DIR} lets sessionFiles plant the config pointing at the mock LLM."
+}

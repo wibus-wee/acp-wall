@@ -1,0 +1,24 @@
+{
+  "install": "npm i -g --ignore-scripts @earendil-works/pi-coding-agent",
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
+  "sessionFiles": {
+    ".pi/agent/models.json": {
+      "providers": {
+        "probe": {
+          "baseUrl": "${MOCK_LLM_URL}",
+          "api": "openai-completions",
+          "apiKey": "probe-mock-key",
+          "authHeader": true,
+          "models": [{ "id": "probe-model", "name": "probe-model" }]
+        }
+      }
+    },
+    ".pi/agent/settings.json": {
+      "defaultModel": "probe/probe-model",
+      "quietStartup": true
+    }
+  },
+  "notes": "pi-acp spawns `pi --mode rpc` — install puts pi on PATH and HOME=${WORK_DIR} lets sessionFiles plant .pi/agent/models.json declaring a custom openai-completions provider pointed at the mock LLM (documented models.json format). No pi account/subscription needed."
+}

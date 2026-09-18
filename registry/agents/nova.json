@@ -9,8 +9,10 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/nova.svg",
   "license": "proprietary",
   "install": null,
-  "run": "npx -y @compass-ai/nova@1.1.43 acp",
-  "env": {},
+  "run": "npx -y @compass-ai/nova@1.1.43 models register --name probe --api openai --base-url ${MOCK_LLM_URL} --api-key probe-mock-key --model probe-model --default ; npx -y @compass-ai/nova@1.1.43 acp",
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "npx",
@@ -21,6 +23,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Attempted wiring: `nova models register` (documented custom-endpoint command) registers an OpenAI provider against the mock LLM; flag names inferred — CI transcript will show if the CLI differs. HOME=${WORK_DIR} confines ~/.nova state.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

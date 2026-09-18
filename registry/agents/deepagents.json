@@ -10,7 +10,12 @@
   "license": "MIT",
   "install": null,
   "run": "npx -y deepagents-acp@0.1.7",
-  "env": {},
+  "env": {
+    "ANTHROPIC_API_KEY": "probe-mock-key",
+    "ANTHROPIC_BASE_URL": "${MOCK_LLM_URL}",
+    "OPENAI_API_KEY": "probe-mock-key",
+    "OPENAI_BASE_URL": "${MOCK_LLM_URL}"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "npx",
@@ -19,6 +24,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "DeepAgents (LangChain) uses the anthropic/openai SDKs which honor ANTHROPIC_BASE_URL/OPENAI_BASE_URL env — model traffic routes to the mock LLM without any account.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

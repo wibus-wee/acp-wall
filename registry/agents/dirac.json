@@ -10,7 +10,12 @@
   "license": "Apache-2.0",
   "install": null,
   "run": "npx -y dirac-cli@0.5.13 --acp",
-  "env": {},
+  "env": {
+    "DIRAC_PROVIDER": "deepseek",
+    "DIRAC_MODEL": "probe-model",
+    "DIRAC_API_KEY": "probe-mock-key",
+    "DIRAC_BASE_URL": "${MOCK_LLM_URL}"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "npx",
@@ -21,6 +26,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Documented ACP env authentication: DIRAC_PROVIDER/MODEL/API_KEY/BASE_URL select an OpenAI-compatible provider pointed at the mock LLM — overrides persisted defaults for the ACP process, no `dirac auth` needed.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

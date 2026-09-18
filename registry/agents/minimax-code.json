@@ -9,8 +9,10 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/minimax-code.svg",
   "license": "MIT",
   "install": null,
-  "run": "npx -y @minimax-ai/code@0.2.7 acp",
-  "env": {},
+  "run": "npx -y @minimax-ai/code@0.2.7 provider add --name probe --base-url ${MOCK_LLM_URL} --model probe-model --api-key probe-mock-key --yes ; npx -y @minimax-ai/code@0.2.7 acp",
+  "env": {
+    "MINIMAX_API_KEY": "probe-mock-key"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "npx",
@@ -21,6 +23,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "Attempted wiring: `mcode provider add` (documented CLI) registers an OpenAI-compatible provider pointed at the mock LLM before `acp` starts. The --api-key flag is inferred from the documented --name/--base-url/--model form; MINIMAX_API_KEY env covers the MiniMax-native path.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

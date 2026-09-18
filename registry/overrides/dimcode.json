@@ -1,0 +1,7 @@
+{
+  "run": "npx -y dimcode@0.5.6 provider add probe --base-url ${MOCK_LLM_URL} --model probe-model --api-key probe-mock-key ; npx -y dimcode@0.5.6 provider switch probe ; npx -y dimcode@0.5.6 acp",
+  "env": {
+    "HOME": "${WORK_DIR}"
+  },
+  "notes": "Documented CLI path: `dim provider add <id> --base-url --model --api-key` registers a custom OpenAI-compatible provider against the mock LLM, `provider switch` activates it; HOME=${WORK_DIR} confines ~/.dimcode state to the probe workspace."
+}

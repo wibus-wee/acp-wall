@@ -1,0 +1,9 @@
+{
+  "env": {
+    "ANTHROPIC_API_KEY": "probe-mock-key",
+    "ANTHROPIC_BASE_URL": "${MOCK_LLM_URL}",
+    "OPENAI_API_KEY": "probe-mock-key",
+    "OPENAI_BASE_URL": "${MOCK_LLM_URL}"
+  },
+  "notes": "DeepAgents (LangChain) uses the anthropic/openai SDKs which honor ANTHROPIC_BASE_URL/OPENAI_BASE_URL env — model traffic routes to the mock LLM without any account."
+}

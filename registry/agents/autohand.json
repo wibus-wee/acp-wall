@@ -8,10 +8,29 @@
   "website": "https://www.autohand.ai/cli/",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/autohand.svg",
   "license": "Apache-2.0",
-  "install": null,
+  "install": "npm i -g @autohandai/code-cli",
   "run": "npx -y @autohandai/autohand-acp@0.2.1",
-  "env": {},
-  "sessionFiles": null,
+  "env": {
+    "AUTOHAND_CONFIG": "${WORK_DIR}/autohand-config.json",
+    "AUTOHAND_HOME": "${WORK_DIR}/autohand-home",
+    "AUTOHAND_PERMISSION_MODE": "external"
+  },
+  "sessionFiles": {
+    "autohand-config.json": {
+      "provider": "custom:probe",
+      "customProviders": {
+        "probe": {
+          "id": "probe",
+          "displayName": "Probe",
+          "apiFormat": "openai-compatible",
+          "baseUrl": "${MOCK_LLM_URL}",
+          "apiKey": "probe-mock-key",
+          "apiKeyRequired": true,
+          "model": "probe-model"
+        }
+      }
+    }
+  },
   "dist": {
     "type": "npx",
     "package": "@autohandai/autohand-acp@0.2.1",
@@ -19,6 +38,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "autohand-acp spawns the autohand CLI — install puts it on PATH, AUTOHAND_CONFIG points at a workspace config declaring a custom openai-compatible provider against the mock (mock /models lists probe-model so the provider validation passes). AUTOHAND_PERMISSION_MODE=external forwards permission prompts to the ACP client.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }
