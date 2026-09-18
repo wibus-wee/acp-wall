@@ -199,6 +199,32 @@ function openaiResponse(body: any) {
   };
 }
 
+/** SSE chunk sequence for `stream:true` chat completions — same tool
+ *  decision as openaiResponse, emitted as deltas + [DONE]. */
+function openaiSse(body: any): string {
+  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
+  if (tool) toolRound++;
+  const sawCanary = JSON.stringify(body).includes(CANARY);
+  const base = {
+    id: "chatcmpl-probe",
+    object: "chat.completion.chunk",
+    created: Math.floor(Date.now() / 1000),
+    model: body?.model ?? "probe-model",
+  };
+  const chunk = (delta: any, finish: string | null = null) =>
+    `data: ${JSON.stringify({ ...base, choices: [{ index: 0, delta, finish_reason: finish }] })}\n\n`;
+  let out = chunk({ role: "assistant", content: tool ? null : "" });
+  if (tool) {
+    out += chunk({ tool_calls: [{ index: 0, id: "call_probe_1", type: "function", function: { name: tool.name, arguments: "" } }] });
+    out += chunk({ tool_calls: [{ index: 0, function: { arguments: JSON.stringify(tool.args) } }] });
+    out += chunk({}, "tool_calls");
+  } else {
+    out += chunk({ content: `PROBE_OK${sawCanary ? " CANARY_ACK" : ""} — exercised by acp-probe mock llm` });
+    out += chunk({}, "stop");
+  }
+  return out + "data: [DONE]\n\n";
+}
+
 /** Gemini generateContent — parts carry functionCall or text. */
 function geminiResponse(body: any) {
   const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
@@ -307,7 +333,12 @@ export function startMockLlm(port = 0): Promise<MockLlm> {
             res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
             res.end(`data: ${JSON.stringify(geminiResponse(body))}\n\n`);
           } else if (url.includes(":generateContent")) json(geminiResponse(body));
-          else if (path.endsWith("/chat/completions") || path.endsWith("/completions")) json(openaiResponse(body));
+          else if (path.endsWith("/chat/completions") || path.endsWith("/completions")) {
+            if (body?.stream) {
+              res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
+              res.end(openaiSse(body));
+            } else json(openaiResponse(body));
+          }
           else if (path.endsWith("/messages")) {
             if (body?.stream) {
               res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
@@ -334,7 +365,14 @@ export function startMockLlm(port = 0): Promise<MockLlm> {
       }
       if (url.includes(":generateContent")) return json(geminiResponse(body));
       if (url.includes(":countTokens")) return json({ totalTokens: 1 });
-      if (path.endsWith("/chat/completions") || path.endsWith("/completions")) return json(openaiResponse(body));
+      if (path.endsWith("/chat/completions") || path.endsWith("/completions")) {
+        if (body?.stream) {
+          res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
+          res.end(openaiSse(body));
+          return;
+        }
+        return json(openaiResponse(body));
+      }
       if (path.endsWith("/messages")) {
         if (body?.stream) {
           res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
