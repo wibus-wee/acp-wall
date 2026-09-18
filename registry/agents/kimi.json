@@ -14,7 +14,7 @@
     "KIMI_CODE_HOME": "${WORK_DIR}/kimi-home"
   },
   "sessionFiles": {
-    "kimi-home/config.toml": "default_model = \"probe-model\"\ndefault_permission_mode = \"ask\"\ntelemetry = false\n\n[providers.probe]\ntype = \"openai_legacy\"\nbase_url = \"${MOCK_LLM_URL}\"\napi_key = \"probe-mock-key\"\n\n[models.probe-model]\nprovider = \"probe\"\nmodel = \"probe-model\"\ncapabilities = [\"tool_use\"]\n",
+    "kimi-home/config.toml": "defaultModel = \"probe-model\"\ndefault_permission_mode = \"ask\"\ntelemetry = false\n\n[models.probe-model]\nname = \"probe-model\"\nprotocol = \"openai\"\nbaseUrl = \"${MOCK_LLM_URL}\"\napiKey = \"probe-mock-key\"\nmaxContextSize = 8192\n",
     "kimi-home/credentials/kimi-code.json": {
       "access_token": "acp-probe-fake-token",
       "refresh_token": "acp-probe-refresh",
