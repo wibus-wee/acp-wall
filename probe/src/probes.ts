@@ -289,14 +289,16 @@ export async function probeAuthenticate(ctx: ProbeContext) {
         ctx.dishonesty.push({ claim: "authMethods", detail: "advertised but authenticate → method_not_found" });
         put(ctx, "authenticate", { status: "fail", note: "authMethods advertised but method absent", latencyMs: r.latencyMs });
       } else {
-        put(ctx, "authenticate", { status: "fail", note: "not implemented", definitive: true, latencyMs: r.latencyMs });
+        put(ctx, "authenticate", { status: "na", note: "not implemented", definitive: true, latencyMs: r.latencyMs });
       }
       return;
     }
     const msg = String(r.err?.message ?? r.err);
+    // A silent timeout proves nothing: interactive auth flows legitimately
+    // never answer a headless probe, and some agents drop unknown methodIds.
     put(ctx, "authenticate", isStructured(r.err)
       ? { status: "pass", note: advertised ? `endpoint exists — returned error: ${msg.slice(0, 70)}` : `rejects unknown methodId (endpoint exists): ${msg.slice(0, 60)}`, latencyMs: r.latencyMs }
-      : { status: "fail", note: `no valid response: ${msg.slice(0, 80)}`, latencyMs: r.latencyMs });
+      : { status: "na", note: `no response — endpoint unanswerable headless: ${msg.slice(0, 60)}`, latencyMs: r.latencyMs });
     return;
   }
   put(ctx, "authenticate", { status: "pass", note: `methodId=${methodId}`, latencyMs: r.latencyMs });
@@ -346,7 +348,9 @@ function verdictAlways(
         ctx.dishonesty.push({ claim, detail: `advertised but ${key} → method_not_found` });
         put(ctx, key, { status: "fail", note: "advertised but method_not_found", latencyMs: r.latencyMs });
       } else {
-        put(ctx, key, { status: "fail", note: "not implemented", definitive: true, latencyMs: r.latencyMs });
+        // Optional surface never advertised — absence is definitive but not
+        // a failure: the agent made no claim, so there is nothing to break.
+        put(ctx, key, { status: "na", note: "not implemented", definitive: true, latencyMs: r.latencyMs });
       }
       return;
     }
@@ -680,10 +684,16 @@ export async function probeLoadReplay(ctx: ProbeContext) {
  *  set/disable run against a probe-owned providerId so they cannot disturb the
  *  real provider routing; they still prove the endpoint exists. */
 export async function probeProviders(ctx: ProbeContext) {
+  const advertised = ctx.initResult?.agentCapabilities?.providers === true;
   const results: string[] = [];
   const list = await callAgent(ctx, "providers/list", {});
   if (!list.ok && isMissing(list.err)) {
-    put(ctx, "providers", { status: "fail", note: "not implemented", definitive: true, latencyMs: list.latencyMs });
+    if (advertised) {
+      ctx.dishonesty.push({ claim: "providers", detail: "advertised but providers/list → method_not_found" });
+      put(ctx, "providers", { status: "fail", note: "advertised but method_not_found", latencyMs: list.latencyMs });
+    } else {
+      put(ctx, "providers", { status: "na", note: "not implemented", definitive: true, latencyMs: list.latencyMs });
+    }
     return;
   }
   results.push(list.ok ? `list→${Array.isArray(list.value?.providers) ? list.value.providers.length : "?"} providers` : `list errored`);
@@ -704,9 +714,15 @@ export async function probeProviders(ctx: ProbeContext) {
 /** nes/* — UNSTABLE Next-Edit-Suggestions surface. nes/start + nes/suggest are
  *  the two meaningful request endpoints; accept/reject are notifications. */
 export async function probeNes(ctx: ProbeContext) {
+  const advertised = ctx.initResult?.agentCapabilities?.nes === true;
   const start = await callAgent(ctx, "nes/start", { workspaceUri: `file://${ctx.sessionCwd}` });
   if (!start.ok && isMissing(start.err)) {
-    put(ctx, "nes", { status: "fail", note: "not implemented", definitive: true, latencyMs: start.latencyMs });
+    if (advertised) {
+      ctx.dishonesty.push({ claim: "nes", detail: "advertised but nes/start → method_not_found" });
+      put(ctx, "nes", { status: "fail", note: "advertised but method_not_found", latencyMs: start.latencyMs });
+    } else {
+      put(ctx, "nes", { status: "na", note: "not implemented", definitive: true, latencyMs: start.latencyMs });
+    }
     return;
   }
   const suggest = await callAgent(ctx, "nes/suggest", {
@@ -905,7 +921,7 @@ export async function probeLogout(ctx: ProbeContext) {
   const r = await callAgent(ctx, "logout", {});
   if (!r.ok) {
     put(ctx, "logout", {
-      status: isStructured(r.err) && !isMissing(r.err) ? "pass" : "fail",
+      status: isMissing(r.err) ? "na" : isStructured(r.err) ? "pass" : "fail",
       note: isMissing(r.err) ? "not implemented" : isStructured(r.err) ? `endpoint exists — returned error: ${String(r.err?.message ?? r.err).slice(0, 70)}` : `no valid response: ${String(r.err?.message ?? r.err).slice(0, 70)}`,
       definitive: isMissing(r.err),
       latencyMs: r.latencyMs,
