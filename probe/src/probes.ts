@@ -46,6 +46,9 @@ export interface ProbeContext {
   /** stdio MCP fixture: command spec + marker file the fixture appends to. */
   mcpServer?: { name: string; command: string; args: string[]; env: Array<{ name: string; value: string }> };
   mcpMarker?: string;
+  /** true when session/prompt was answered but the turn is account-gated —
+   *  the endpoint exists, downstream probes must not treat it as "ran". */
+  promptBlocked?: boolean;
   updates: Array<{ method: string; params: any }>; // observed notifications
   results: Record<string, MethodResult>;
   violations: ViolationRec[];
@@ -196,6 +199,7 @@ const toolCallsOfKind = (ctx: ProbeContext, kinds: string[]) =>
 
 /** Did a prompt turn complete (vs. blocked/never run)? */
 const promptDone = (ctx: ProbeContext) =>
+  !ctx.promptBlocked &&
   ["pass", "partial"].includes(ctx.results["session/prompt"]?.status ?? "");
 
 /* ------------------------------------------------------------------ */
@@ -267,7 +271,12 @@ export async function probeSessionNew(ctx: ProbeContext) {
   if (ctx.mcpServer) params.mcpServers = [ctx.mcpServer];
   const r = await callAgent(ctx, "session/new", params);
   if (!r.ok) {
-    put(ctx, "session/new", { status: "fail", note: String(r.err?.message ?? r.err), latencyMs: r.latencyMs });
+    if (isAuth(r.err)) {
+      // domain answer proves the endpoint exists — account-gated, not absent
+      put(ctx, "session/new", { status: "partial", note: `endpoint exists — account-gated: ${String(r.err?.message ?? r.err).slice(0, 70)}`, latencyMs: r.latencyMs });
+    } else {
+      put(ctx, "session/new", { status: "fail", note: String(r.err?.message ?? r.err), latencyMs: r.latencyMs });
+    }
     return;
   }
   const sid = r.value?.sessionId;
@@ -312,6 +321,12 @@ function verdictAlways(
     // is the reliable signal; message phrasing varies across harnesses.
     if (code(r.err) === -32602 || /(unknown|not found|invalid).{0,30}session|session.{0,30}(unknown|not found)/i.test(msg)) {
       put(ctx, key, { status: "partial", note: `endpoint exists — rejects unknown session: ${msg.slice(0, 60)}`, latencyMs: r.latencyMs });
+      return;
+    }
+    // an auth/quota rejection is a domain answer — the endpoint exists and is
+    // gated, identical whether or not it advertised. It is not a defect.
+    if (isAuth(r.err)) {
+      put(ctx, key, { status: "partial", note: `endpoint exists — account-gated: ${msg.slice(0, 70)}`, latencyMs: r.latencyMs });
       return;
     }
     put(ctx, key, {
@@ -406,9 +421,10 @@ const PROMPTS = [
 ];
 
 /** Three sequential turns: the mock LLM rotates which tool it invokes, giving
- *  coverage of bash/read/write paths and their client-side calls. A turn that
- *  can only run with a real account is a fail — the wall runs on CI, not on
- *  someone's monthly quota. */
+ *  coverage of bash/read/write paths and their client-side calls. An
+ *  account-gated turn is PARTIAL — the endpoint demonstrably exists (it gave
+ *  a domain answer, not method_not_found); only the credentials are missing.
+ *  The wall measures protocol support, not someone's subscription. */
 export async function probeSessionPrompt(ctx: ProbeContext) {
   if (!ctx.sessionId) {
     // never got a session — prompt is untested, not missing. The failure is
@@ -436,13 +452,23 @@ export async function probeSessionPrompt(ctx: ProbeContext) {
   }
   if (!first) {
     const e = firstErr?.err;
-    put(ctx, "session/prompt", {
-      status: "fail",
-      note: isAuth(e)
-        ? `turn needs a real account — not CI-probeable: ${String(e?.message ?? e).slice(0, 90)}`
-        : String(e?.message ?? e ?? "prompt failed"),
-      latencyMs: firstErr?.latencyMs,
-    });
+    if (isAuth(e)) {
+      // an auth rejection is a domain answer, not method_not_found — the
+      // endpoint exists and understood the request; only the account gate
+      // blocks the turn. Same semantics as authenticate's partial.
+      ctx.promptBlocked = true;
+      put(ctx, "session/prompt", {
+        status: "partial",
+        note: `endpoint exists — turn blocked by account gate: ${String(e?.message ?? e).slice(0, 90)}`,
+        latencyMs: firstErr?.latencyMs,
+      });
+    } else {
+      put(ctx, "session/prompt", {
+        status: "fail",
+        note: String(e?.message ?? e ?? "prompt failed"),
+        latencyMs: firstErr?.latencyMs,
+      });
+    }
     return;
   }
   const stop = first.value?.stopReason;
@@ -464,7 +490,7 @@ export async function probeCancel(ctx: ProbeContext) {
   }
   // a turn that cannot start has nothing to cancel — auth/quota-blocked
   // prompt makes cancel untestable, not absent
-  if (ctx.results["session/prompt"]?.status === "fail") {
+  if (ctx.promptBlocked || ctx.results["session/prompt"]?.status === "fail") {
     put(ctx, "cancel", { status: "na", note: "no turn to cancel" });
     return;
   }
@@ -715,6 +741,7 @@ export async function probeLogout(ctx: ProbeContext) {
     put(ctx, "logout", {
       status: isMissing(r.err) ? "na" : "partial",
       note: isMissing(r.err) ? "not implemented" : `endpoint exists but errored: ${String(r.err?.message ?? r.err).slice(0, 70)}`,
+      definitive: isMissing(r.err),
       latencyMs: r.latencyMs,
     });
     return;
