@@ -72,7 +72,7 @@ const isAuth = (e: any) =>
 
 function put(ctx: ProbeContext, key: string, r: MethodResult) {
   ctx.results[key] = r;
-  const mark = { pass: "✓", partial: "~", fail: "✗", na: "·" }[r.status];
+  const mark = { pass: "+", partial: "±", fail: "−", na: "·" }[r.status];
   console.log(`  ${mark} ${key.padEnd(22)} ${r.status.padEnd(9)} ${r.note ?? ""}`);
 }
 

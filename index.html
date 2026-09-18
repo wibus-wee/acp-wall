@@ -146,6 +146,7 @@
   .pills span.miss{color:var(--red);border-color:rgba(205,98,89,.4)}
   .pills span.part{color:#c9a44e;border-color:rgba(201,164,78,.35)}
   .pills span.ok{color:var(--green);border-color:rgba(143,176,112,.3)}
+  .pills span.na{color:var(--faint)}
   .sh-pre{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;line-height:1.8;color:var(--ink-dim);background:#0d0b08;border:1px solid var(--line);border-radius:6px;padding:12px 14px;overflow-x:auto;margin-top:8px}
   .sh-pre .p{color:var(--green)} .sh-pre .r{color:var(--red)} .sh-pre .c{color:var(--faint)} .sh-pre .g{color:#c9a44e}
   .sh-btn{border:1px solid var(--line2);background:transparent;color:var(--ink-dim);font:inherit;font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.08em;padding:4px 9px;cursor:pointer;border-radius:5px}
@@ -212,7 +213,7 @@
 <div class="page wide">
   <section class="sec" id="league">
     <div class="sec-h"><span class="t">The League Table</span><span class="zh">合规矩阵</span><span class="n" id="league-count">READ ACROSS</span></div>
-    <p class="lg-note">As printed after each probe run. <span class="mono" style="font-size:10.5px">✓ implemented · ~ partial · ✗ missing · — not exercised.</span> A name may be clicked to subpoena its case file.</p>
+    <p class="lg-note">As printed after each probe run. <span class="mono" style="font-size:10.5px">+ implemented / ± partial / − missing / · not exercised.</span> A name may be clicked to subpoena its case file.</p>
     <div class="lg-wrap"><table class="lg-t"><thead><tr id="lg-head"><th>HARNESS</th></tr></thead><tbody id="lg-body"></tbody></table></div>
   </section>
 </div>
@@ -297,8 +298,8 @@ function score(h){let p=0,m=0;h.cells.forEach(c=>{if(c===-1)return;m++;p+=c===1?
   document.getElementById('lede-caps').textContent=CAPS.length;
 })();
 
-const CELL={1:"✓",2:"~",0:"✗","-1":"—"};
-const PCLS={1:"ok",2:"part",0:"miss","-1":"miss"};
+const CELL={1:"+",2:"±",0:"−","-1":"·"};
+const PCLS={1:"ok",2:"part",0:"miss","-1":"na"};
 const MCLS={1:"ok",2:"pr",0:"no","-1":"un"};
 const all=H.slice().sort((a,b)=>score(b)-score(a));
 all.forEach((h,i)=>h._rk=i+1);
@@ -385,10 +386,10 @@ function transcript(h){
   return CAPS.map((c,j)=>{
     const v=h.cells[j];
     const note=N[c]||'';
-    return v===1?`<span class="p">  ✓ ${c.padEnd(18)} ${note||'ok'}</span>`
-      :v===2?`<span class="g">  ~ ${c.padEnd(18)} ${note||'partial'}</span>`
-      :v===0?`<span class="r">  ✗ ${c.padEnd(18)} ${note||'method_not_found'}</span>`
-      :`<span class="c">  — ${c.padEnd(18)} ${note||'not exercised'}</span>`;
+    return v===1?`<span class="p">  + ${c.padEnd(18)} ${note||'ok'}</span>`
+      :v===2?`<span class="g">  ± ${c.padEnd(18)} ${note||'partial'}</span>`
+      :v===0?`<span class="r">  − ${c.padEnd(18)} ${note||'method_not_found'}</span>`
+      :`<span class="c">  · ${c.padEnd(18)} ${note||'not exercised'}</span>`;
   }).join('\n');
 }
 function detailHTML(h){

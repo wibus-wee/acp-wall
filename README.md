@@ -74,9 +74,9 @@ sessions), config (`set_mode`, `set_config`), `cancel`, streaming
 
 | cell | meaning |
 |---|---|
-| `✓` pass | method works and response validates against the schema |
-| `~` partial | works but schema violations, or works-but-not-advertised, or the endpoint exists but rejected the call |
-| `✗` fail | missing, errors, or claims support but fails when exercised |
+| `+` pass | method works and response validates against the schema |
+| `±` partial | works but schema violations, or works-but-not-advertised, or the endpoint exists but rejected the call |
+| `−` fail | missing, errors, or claims support but fails when exercised |
 | `·` n/a | reverse-direction capability the agent never exercised — client-side methods are only testable when the agent calls them |
 
 No unverifiable cells: every agent-side method is always invoked (capability
@@ -84,16 +84,16 @@ flags only drive dishonesty checks, never skip calls). An endpoint that
 answers `method_not_found` is absent; an endpoint that answers anything else —
 including an auth error — exists. Client-side methods (`fs/*`, `terminal/*`,
 `request_permission`, `elicitation`) can only be proven when the agent calls
-them, so "never called" is a factual `·`, never a silent `✗`.
+them, so "never called" is a factual `·`, never a silent `−`.
 
 Three distinct failure flavors, kept separate on purpose:
 
-- **absent** — `method_not_found` → `✗` (core methods) or `·` (optional ones)
+- **absent** — `method_not_found` → `−` (core methods) or `·` (optional ones)
 - **claimed-but-absent** — advertised in `initialize` but `method_not_found`
   when exercised → `report.dishonesty`; dishonest harnesses cannot be marked
   verified
 - **auth-blocked** — the endpoint exists but demands proprietary credentials
-  (e.g. `kimi acp` requires Moonshot OAuth — issue #1330) → `✗`/`~` cells with
+  (e.g. `kimi acp` requires Moonshot OAuth — issue #1330) → `−`/`±` cells with
   the auth error as note. Requiring a vendor account is itself a wall-worthy
   fact: the probe is CI-driven and holds no accounts
 
