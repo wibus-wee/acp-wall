@@ -70,6 +70,15 @@ sessions), config (`set_mode`, `set_config`), `cancel`, streaming
 (`message*`, `tool_call*`, `plan`, `slash_cmds`), reverse calls
 (`fs/*`, `terminal/*`, `permission`, `elicitation`), and `mcp`.
 
+The `mcp` column grades an evidence ladder, not a boolean — the stdio fixture
+marks every protocol step it observes: `tools/call` (full chain) or
+`tools/list` (connect + discovery) → `+`; handshake-only, spawned-but-stuck,
+or relay-only → `±`; never touched → `·` (lazy connect is spec-legal, so
+"didn't" can't be told from "can't"). Model-side evidence sharpens it further:
+the mock LLM logs which tools the agent exposed, so "the model called the
+fixture tool but the call never reached the server" and "tools discovered but
+never exposed to the model" are distinct `±` rungs — not silent `+`s.
+
 ## Cell semantics
 
 | cell | meaning |

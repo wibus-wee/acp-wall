@@ -246,6 +246,7 @@ async function main() {
       env: [{ name: "MCP_MARKER", value: mcpMarker }],
     },
     mcpMarker,
+    mcpLlmEvidence: llm?.evidence,
   };
 
   const stubs = makeClientStubs(calls);

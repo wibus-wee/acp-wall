@@ -104,6 +104,13 @@ export class RpcPeer {
     if (msg.id !== undefined && msg.result !== undefined && msg.error !== undefined) {
       this.onEnvelopeViolation("response carries both result and error");
     }
+    // error object shape is part of the envelope too: integer code + string message
+    if (msg.error !== undefined) {
+      const e = msg.error;
+      if (e === null || typeof e !== "object" || typeof e.code !== "number" || !Number.isInteger(e.code) || typeof e.message !== "string") {
+        this.onEnvelopeViolation(`malformed error object: ${sum(e, 80)}`);
+      }
+    }
     if (msg.id !== undefined && (msg.result !== undefined || msg.error !== undefined)) {
       const p = this.pending.get(msg.id);
       if (!p) this.onEnvelopeViolation(`response for unknown id ${msg.id}`);

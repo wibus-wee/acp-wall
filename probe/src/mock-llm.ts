@@ -15,9 +15,19 @@ import { createServer, type Server } from "node:http";
  *   no tools offered → plain text completion (PROBE_OK).
  */
 
+/** What the model side of the run actually saw — lets the probe distinguish
+ *  "agent never exposed the MCP tool" from "model called it, call vanished". */
+export interface MockLlmEvidence {
+  /** every tool name ever present in a request's tools array */
+  seenTools: Set<string>;
+  /** tool calls the mock issued back to the agent */
+  issuedCalls: PickedTool[];
+}
+
 export interface MockLlm {
   url: string;
   close: () => void;
+  evidence: MockLlmEvidence;
 }
 
 const CANARY = "CANARY-7729";
@@ -32,6 +42,8 @@ interface PickedTool {
  *  exec → write → read paths instead of always the same tool kind. */
 let toolRound = 0;
 
+const evidence: MockLlmEvidence = { seenTools: new Set(), issuedCalls: [] };
+
 /** Choose a permission-worthy tool and synthesize args from its JSON schema. */
 function pickToolCall(tools: any[]): PickedTool | null {
   const norm = (tools ?? [])
@@ -40,11 +52,13 @@ function pickToolCall(tools: any[]): PickedTool | null {
       params: t?.function?.parameters ?? t?.input_schema ?? t?.parameters ?? {},
     }))
     .filter((t) => typeof t.name === "string");
+  for (const t of norm) evidence.seenTools.add(t.name);
   if (norm.length === 0) return null;
 
   // our own MCP fixture tool wins outright — invoking it proves the full
-  // client→agent→MCP→tool→result chain end to end
-  const fixture = norm.find((t) => t.name === "probe_noop");
+  // client→agent→MCP→tool→result chain end to end. Match loosely: harnesses
+  // commonly namespace MCP tools (mcp__server__tool, server.tool, …).
+  const fixture = norm.find((t) => /probe_noop/i.test(t.name));
   if (fixture) return { name: fixture.name, args: {} };
 
   const base = [/bash|shell|exec|command|terminal|run|process/i, /write|edit|create|patch|apply/i, /read|open|view|cat|grep|search/i];
@@ -103,7 +117,7 @@ const hasToolResult = (body: any): boolean => {
 /** OpenAI Responses API output items for a completed response. */
 function responsesOutput(body: any): { output: any[]; tool: PickedTool | null } {
   const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
-  if (tool) toolRound++;
+  if (tool) { toolRound++; evidence.issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const output = tool
     ? [
@@ -178,7 +192,7 @@ function responsesSse(output: any[], tool: PickedTool | null, model: string): st
 
 function openaiResponse(body: any) {
   const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
-  if (tool) toolRound++;
+  if (tool) { toolRound++; evidence.issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const message: any = tool
     ? {
@@ -203,7 +217,7 @@ function openaiResponse(body: any) {
  *  decision as openaiResponse, emitted as deltas + [DONE]. */
 function openaiSse(body: any): string {
   const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
-  if (tool) toolRound++;
+  if (tool) { toolRound++; evidence.issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const base = {
     id: "chatcmpl-probe",
@@ -228,7 +242,7 @@ function openaiSse(body: any): string {
 /** Gemini generateContent — parts carry functionCall or text. */
 function geminiResponse(body: any) {
   const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
-  if (tool) toolRound++;
+  if (tool) { toolRound++; evidence.issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const parts = tool
     ? [{ functionCall: { name: tool.name, args: tool.args } }]
@@ -243,7 +257,7 @@ function geminiResponse(body: any) {
 
 function anthropicResponse(body: any) {
   const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
-  if (tool) toolRound++;
+  if (tool) { toolRound++; evidence.issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const content = tool
     ? [{ type: "tool_use", id: "toolu_probe_1", name: tool.name, input: tool.args }]
@@ -264,7 +278,7 @@ function anthropicResponse(body: any) {
 /** Anthropic SSE sequence for stream:true requests. */
 function anthropicSse(body: any): string {
   const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
-  if (tool) toolRound++;
+  if (tool) { toolRound++; evidence.issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const model = body?.model ?? "probe-model";
   let out = ev("message_start", {
@@ -394,7 +408,7 @@ export function startMockLlm(port = 0): Promise<MockLlm> {
     server.listen(port, "127.0.0.1", () => {
       const addr = server.address();
       const p = typeof addr === "object" && addr ? addr.port : port;
-      resolve({ url: `http://127.0.0.1:${p}/v1`, close: () => server.close() });
+      resolve({ url: `http://127.0.0.1:${p}/v1`, close: () => server.close(), evidence });
     });
   });
 }

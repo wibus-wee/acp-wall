@@ -2,12 +2,47 @@
  * good-agent — a fully conformant stub ACP agent.
  * Exercises: initialize, session/new, session/load, session/prompt
  * (with message/tool_call/plan updates + fs/permission reverse calls),
- * and cancellable prompts via session/cancel.
+ * cancellable prompts via session/cancel, and the full MCP stdio chain
+ * (spawn → initialize → tools/list → tools/call on the probe fixture).
  */
+import { spawn } from "node:child_process";
+import { createInterface } from "node:readline";
 import { RpcPeer } from "../src/rpc.js";
 
 const peer = RpcPeer.stdio();
 let releaseSlow: (() => void) | null = null;
+
+/** Minimal MCP stdio client — enough to prove the full tool chain. */
+function mcpConnect(server: any) {
+  const child = spawn(server.command, server.args ?? [], {
+    env: { ...process.env, ...Object.fromEntries((server.env ?? []).map((e: any) => [e.name, e.value])) },
+    stdio: ["pipe", "pipe", "inherit"],
+  });
+  const pending = new Map<number, (v: any) => void>();
+  let nextId = 1;
+  createInterface({ input: child.stdout! }).on("line", (line) => {
+    let msg: any;
+    try { msg = JSON.parse(line); } catch { return; }
+    if (msg.id !== undefined && pending.has(msg.id)) {
+      pending.get(msg.id)!(msg);
+      pending.delete(msg.id);
+    }
+  });
+  const send = (m: any) => child.stdin!.write(JSON.stringify(m) + "\n");
+  const request = (method: string, params: any) =>
+    Promise.race([
+      new Promise<any>((resolve) => {
+        const id = nextId++;
+        pending.set(id, resolve);
+        send({ jsonrpc: "2.0", id, method, params });
+      }),
+      new Promise<any>((resolve) => setTimeout(() => resolve(null), 3000)),
+    ]);
+  const notify = (method: string) => send({ jsonrpc: "2.0", method });
+  return { request, notify };
+}
+
+const mcpClients: Array<ReturnType<typeof mcpConnect>> = [];
 
 peer.onRequest = async (method, params: any) => {
   switch (method) {
@@ -22,8 +57,22 @@ peer.onRequest = async (method, params: any) => {
         agentInfo: { name: "good-agent", title: "Good Agent", version: "0.1.0" },
         authMethods: [],
       };
-    case "session/new":
+    case "session/new": {
+      // connect every configured stdio MCP server: handshake + discovery
+      for (const s of params?.mcpServers ?? []) {
+        if (!s?.command) continue;
+        const c = mcpConnect(s);
+        await c.request("initialize", {
+          protocolVersion: "2025-03-26",
+          capabilities: {},
+          clientInfo: { name: "good-agent", version: "0.1.0" },
+        });
+        c.notify("notifications/initialized");
+        await c.request("tools/list", {});
+        mcpClients.push(c);
+      }
       return { sessionId: "sess-good-1" };
+    }
     case "session/load": {
       const sid = params?.sessionId;
       peer.notify("session/update", {
@@ -51,6 +100,10 @@ peer.onRequest = async (method, params: any) => {
         sessionId: sid,
         update: { sessionUpdate: "agent_message_chunk", content: { type: "text", text: "reading your file…" } },
       });
+      // exercise connected MCP servers end to end
+      for (const c of mcpClients) {
+        await c.request("tools/call", { name: "probe_noop", arguments: {} });
+      }
       const file = (await peer.request("fs/read_text_file", { sessionId: sid, path: "/etc/hostname" })) as any;
       peer.notify("session/update", {
         sessionId: sid,

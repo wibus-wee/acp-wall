@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import type { RpcPeer } from "./rpc.js";
 import type { ClientCalls } from "./stubs.js";
+import type { MockLlmEvidence } from "./mock-llm.js";
 import { schema } from "./schema.js";
 
 /**
@@ -46,6 +47,9 @@ export interface ProbeContext {
   /** stdio MCP fixture: command spec + marker file the fixture appends to. */
   mcpServer?: { name: string; command: string; args: string[]; env: Array<{ name: string; value: string }> };
   mcpMarker?: string;
+  /** model-side evidence from the mock LLM: which tools the agent exposed and
+   *  which calls it received back — absent when the probe ran without a mock. */
+  mcpLlmEvidence?: MockLlmEvidence;
   /** true when session/prompt was answered but the turn is account-gated —
    *  the endpoint exists, downstream probes must not treat it as "ran". */
   promptBlocked?: boolean;
@@ -503,6 +507,9 @@ export async function probeCancel(ctx: ProbeContext) {
     25_000
   );
   await wait(400);
+  // outbound notifications get the same self-check as requests — a malformed
+  // cancel must surface as our bug, not silently pass through
+  checkRequestParams(ctx, "session/cancel", { sessionId: ctx.sessionId });
   ctx.rpc.notify("session/cancel", { sessionId: ctx.sessionId });
   const r = await p;
   if (!r.ok) {
@@ -697,8 +704,19 @@ export function probeUpdateShapes(ctx: ProbeContext) {
 }
 
 /** MCP: the probe's stdio fixture server is passed via mcpServers in
- *  session/new. Whether the agent actually connected is recorded in the
- *  marker file the fixture appends to. */
+ *  session/new. The fixture marks every protocol step it observes, so the
+ *  cell grades an evidence ladder, not a boolean:
+ *    tools/call    full client→agent→MCP→tool→result chain          → pass
+ *    tools/list    connect + discovery — protocol duties proven,
+ *                  invocation unexercised                           → pass
+ *                  (but partial when the mock proves the tool was
+ *                  exposed to the model and the call never arrived,
+ *                  or the tool was discovered yet never exposed)
+ *    initialize    transport handshake only, tools never discovered → partial
+ *    spawned       process launched, handshake never completed      → partial
+ *    nothing       never touched — lazy connect is spec-legal, so   → na
+ *                  "didn't" can't be distinguished from "can't"
+ */
 export async function probeMcp(ctx: ProbeContext) {
   if (!ctx.mcpMarker) {
     put(ctx, "mcp", { status: "na", note: "no fixture configured" });
@@ -708,7 +726,7 @@ export async function probeMcp(ctx: ProbeContext) {
   const events = existsSync(ctx.mcpMarker)
     ? readFileSync(ctx.mcpMarker, "utf8").trim().split("\n").map((l) => {
         try { return JSON.parse(l); } catch { return null; }
-      }).filter(Boolean) as Array<{ event: string }>
+      }).filter(Boolean) as Array<{ event: string; name?: string; method?: string }>
     : [];
   const names = new Set(events.map((e) => e.event));
   const caps = ctx.initResult?.agentCapabilities?.mcpCapabilities ?? {};
@@ -720,12 +738,37 @@ export async function probeMcp(ctx: ProbeContext) {
   // MCP-over-ACP: agents advertising mcpCapabilities.acp take mcp/message
   // themselves; agents may also relay THROUGH the client (mcp/connect|message).
   const relay = ctx.calls.mcpRelayCalls.length > 0 ? ` · client relay ×${ctx.calls.mcpRelayCalls.length}` : "";
-  if (names.has("tools/call")) {
-    put(ctx, "mcp", { status: "pass", note: `stdio handshake + tool call · ${capNote}${relay}` });
+  // odd traffic is worth surfacing: methods the fixture doesn't model
+  const unexpected = [...new Set(events.filter((e) => e.event === "other").map((e) => e.method).filter(Boolean))];
+  const extra = unexpected.length ? ` · unexpected methods: ${unexpected.join(",")}` : "";
+
+  const called = events.filter((e) => e.event === "tools/call").map((e) => e.name).filter(Boolean) as string[];
+  const llm = ctx.mcpLlmEvidence;
+  const isFixtureTool = (n: string) => /probe_noop/i.test(n);
+  const issuedFixtureCall = llm?.issuedCalls.some((c) => isFixtureTool(c.name)) ?? false;
+  // undefined = no model-side evidence (no mock, or agent never sent tools);
+  // false = tools were offered but the fixture tool was never among them
+  const offeredToModel = llm && llm.seenTools.size > 0 ? [...llm.seenTools].some(isFixtureTool) : undefined;
+
+  if (called.length > 0) {
+    const alien = called.filter((n) => !isFixtureTool(n));
+    put(ctx, "mcp", {
+      status: "pass",
+      note: `stdio handshake + tool call${alien.length ? ` (unexpected: ${alien.join(",")})` : ""} · ${capNote}${relay}${extra}`,
+    });
+  } else if (issuedFixtureCall) {
+    // the model invoked it — the call died between model and MCP server
+    put(ctx, "mcp", { status: "partial", note: `model called fixture tool — call never reached server · ${capNote}${relay}${extra}` });
+  } else if (names.has("tools/list")) {
+    if (offeredToModel === false) {
+      put(ctx, "mcp", { status: "partial", note: `handshake + discovery ok — fixture tool never exposed to model · ${capNote}${relay}${extra}` });
+    } else {
+      put(ctx, "mcp", { status: "pass", note: `stdio handshake + tool discovery · call unexercised · ${capNote}${relay}${extra}` });
+    }
   } else if (names.has("initialize") || names.has("initialized")) {
-    put(ctx, "mcp", { status: "pass", note: `stdio handshake observed · ${capNote}${relay}` });
+    put(ctx, "mcp", { status: "partial", note: `stdio handshake only — tools never discovered · ${capNote}${relay}${extra}` });
   } else if (names.has("spawned")) {
-    put(ctx, "mcp", { status: "partial", note: `fixture spawned but never initialized · ${capNote}${relay}` });
+    put(ctx, "mcp", { status: "partial", note: `fixture spawned but never initialized · ${capNote}${relay}${extra}` });
   } else if (ctx.calls.mcpRelayCalls.length > 0) {
     put(ctx, "mcp", { status: "partial", note: `no stdio fixture use; client relay ×${ctx.calls.mcpRelayCalls.length} · ${capNote}` });
   } else {
