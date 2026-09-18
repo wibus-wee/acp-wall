@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><style>
+  :root{
+    --paper:#12100c; --paper2:#171410; --ink:#e8dfc8; --ink-dim:#a89d83;
+    --faint:#6b6151; --line:#2c2619; --line2:#3d3421;
+    --gold:#d9b45f; --gold-deep:#8a6c28; --red:#cd6259; --green:#8fb070;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"Charter","Iowan Old Style","Palatino",Georgia,serif;
+    position:relative;
+  }
+  body::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:4px 4px;
+  }
+  .frame{position:absolute;inset:14px;border:1px solid var(--line2);padding:0 44px;display:flex;flex-direction:column}
+  .mast{display:flex;justify-content:space-between;align-items:baseline;padding-top:16px;
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}
+  .mast .mono{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--faint)}
+  hr.rule{border:0;border-top:2px solid var(--ink);margin:9px 0 0}
+  hr.rule.thin{border-top:1px solid var(--line2);margin-top:3px}
+  .plate{text-align:center;padding:22px 0 14px}
+  .plate .gl{font-size:10px;letter-spacing:.5em;color:var(--gold-deep);margin-bottom:10px}
+  .plate h1{font-size:66px;font-weight:700;line-height:.95;font-variant:small-caps;text-shadow:0 1px 0 #000;letter-spacing:.02em}
+  .plate .sub{margin-top:10px;font-size:12px;letter-spacing:.3em;color:var(--faint);text-transform:uppercase}
+  .plate .zh{color:var(--gold);font-size:13px;letter-spacing:.6em;margin-top:7px}
+  table{width:100%;border-collapse:collapse;margin-top:6px}
+  td,th{padding:5.5px 0;border-bottom:1px solid var(--line);font-size:14px}
+  th{text-align:left;font-weight:600;font-variant:small-caps;letter-spacing:.06em;font-size:15px}
+  .rk{font-family:ui-monospace,Menlo,monospace;color:var(--faint);font-size:12px;width:34px}
+  .cells{font-family:ui-monospace,Menlo,monospace;font-size:15px;letter-spacing:2px;white-space:nowrap}
+  .sc{font-family:ui-monospace,Menlo,monospace;text-align:right;font-size:14px;color:var(--ink-dim);width:70px}
+  .tr{text-align:right;font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.18em;width:86px;text-transform:uppercase}
+  .tr.v{color:var(--green)} .tr.p{color:var(--gold)} .tr.l{color:var(--red)}
+  .ok{color:var(--green)} .pr{color:var(--gold)} .no{color:var(--red)} .un{color:#4a4336}
+  .legend{margin-top:16px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink-dim);letter-spacing:.08em}
+  .foot{margin-top:auto;padding:11px 0 14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
+    font-size:10.5px;color:var(--faint);letter-spacing:.14em;text-transform:uppercase}
+  .foot .mono{font-family:ui-monospace,Menlo,monospace}
+  .foot em{font-style:italic;color:var(--ink-dim);text-transform:none;letter-spacing:.02em;font-size:12px}
+</style></head><body>
+<div class="frame">
+  <div class="mast"><span>Vol. I · The Protocol Ledger</span><span class="mono">PROBE-VERIFIED — NOT SELF-REPORTED</span><span>Price: Free</span></div>
+  <hr class="rule"><hr class="rule thin">
+  <div class="plate">
+    <div class="gl">◆ ◆ ◆</div>
+    <h1>The Wall</h1>
+    <div class="zh">合 规 矩 阵</div>
+    <div class="sub">A Public Ledger of ACP Compatibility</div>
+  </div>
+  <table id="t"></table>
+  <div class="legend"><span class="ok">+</span> implemented&ensp;·&ensp;<span class="pr">±</span> partial&ensp;·&ensp;<span class="no">−</span> missing&ensp;·&ensp;<span class="un">·</span> not exercised&ensp;·&ensp;<span style="color:var(--faint)">24 cells per harness</span></div>
+  <div class="foot">
+    <span><em>“Every + is a probed endpoint — evidence, not vibes.”</em></span>
+    <span class="mono">wibus-wee.github.io/acp-wall</span>
+  </div>
+</div>
+<script>
+const M={1:['+','ok'],2:['±','pr'],0:['−','no'],'-1':['·','un']};
+const rows=[
+ ["Claude Agent","verified",79,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,-1,-1,-1,1,-1,1]],
+ ["Codex","verified",75,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,-1,1,-1,2,-1,1,-1,2]],
+ ["Kimi CLI","verified",75,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,-1,-1,-1,-1,-1,1]],
+ ["Mistral Vibe","verified",67,[1,1,1,1,1,-1,1,1,1,1,1,-1,1,1,1,1,-1,1,-1,-1,-1,-1,1]],
+ ["Grok Build","verified",63,[2,1,1,1,1,-1,-1,1,1,1,1,-1,1,1,1,1,-1,1,-1,1,-1,-1,-1,2]],
+ ["Dirac","limited",58,[1,1,1,1,1,0,-1,1,1,1,-1,1,1,1,1,-1,-1,1,-1,-1,-1,1,-1,-1]],
+ ["GLM Agent","partial",58,[1,1,1,1,1,-1,1,1,1,1,1,-1,1,1,-1,-1,-1,1,-1,-1,-1,-1,-1,1]],
+];
+document.getElementById('t').innerHTML=rows.map((r,i)=>{
+  const cells=r[3].map(c=>`<span class="${M[c][1]}">${M[c][0]}</span>`).join('');
+  const tc=r[1]==='verified'?'v':r[1]==='partial'?'p':'l';
+  return `<tr><td class="rk">${String(i+1).padStart(2,'0')}</td><th>${r[0]}</th><td class="cells">${cells}</td><td class="tr ${tc}">${r[1]}</td><td class="sc">${r[2]}/100</td></tr>`;
+}).join('');
+</script>
+</body></html>
