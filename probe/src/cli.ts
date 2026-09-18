@@ -125,7 +125,10 @@ async function setupMitm(mockPort: number): Promise<MitmHandle | null> {
   chmodSync(join(dir, "ca.crt"), 0o644);
   chmodSync(join(dir, "ca.key"), 0o644);
   const logPath = join(dir, "mitm.jsonl");
-  const mitmJs = fileURLToPath(new URL("./mitm.js", import.meta.url));
+  // nobody can't traverse /home/runner/work — run a copy from the 0777 dir
+  const mitmJs = join(dir, "mitm.js");
+  writeFileSync(mitmJs, readFileSync(fileURLToPath(new URL("./mitm.js", import.meta.url))));
+  chmodSync(mitmJs, 0o755);
   const extra = arg("--mitm-domains");
   const child = spawn("sudo", [
     "-n", "-u", "nobody", process.execPath, mitmJs,
