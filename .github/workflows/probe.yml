@@ -29,6 +29,8 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
+      # uvx dists (bub, fast-agent, minion-code) — runner image lacks uv
+      - uses: astral-sh/setup-uv@v10.0.1
 
       - name: Sync official ACP registry
         run: node tools/sync-registry.mjs
