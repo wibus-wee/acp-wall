@@ -184,6 +184,13 @@
   .ext-ads a{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.06em;border:1px solid var(--line2);border-radius:4px;padding:3px 9px;color:var(--ink-dim);text-decoration:none}
   .ext-ads a:hover{color:var(--gold);border-color:var(--gold-deep)}
   .ext-ads .core{margin-left:auto;border-style:dashed}
+  .ext-map{margin-top:14px;border:1px solid var(--line);padding:10px 12px 8px}
+  .em-row{display:grid;grid-template-columns:130px 1fr 1fr;gap:10px;padding:4px 0;border-top:1px solid var(--line);font-size:11.5px}
+  .em-row:first-of-type{border-top:none}
+  .em-row>span:first-child{color:var(--ink);font-weight:600}
+  .em-row>span:nth-child(2){font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:#cfc39f}
+  .em-row>span:last-child{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--faint)}
+  .ext-map .ext-lab{display:block;margin-bottom:6px}
 
   .foot-note{margin-top:52px;text-align:center;font-size:13.5px;font-style:italic;color:var(--ink-dim);line-height:1.9;max-width:60ch;margin-left:auto;margin-right:auto}
   .foot-note .who{display:block;margin-top:10px;font-style:normal;font-size:10px;letter-spacing:.2em;color:var(--faint)}
@@ -263,20 +270,35 @@
   <section class="sec" id="ext-desk">
     <div class="sec-h"><span class="t">The Extension Desk</span><span class="zh">扩展契约</span><span class="n">BEYOND STANDARD ACP</span></div>
     <div class="ext">
-      <p><b>acp-extension-core</b> is the Lody extension contract — provider-neutral
-        agreements for capabilities standard ACP doesn't carry. Lody semantics ride
+      <p>Standard ACP covers the handshake — not the job. Usage meters, rate
+        limits, steering, subagent rosters, goal control, session history,
+        compaction: every serious harness needs these, and today each answers
+        privately — <span class="mono">x.ai/*</span> here,
+        <span class="mono">claudeCode.*</span> there,
+        <span class="mono">jetbrains.air</span> somewhere else. Same features,
+        different dialects; a client that wants any of it ends up speaking all
+        of them. The dossiers above now print every dialect we hear.</p>
+      <p><b>acp-extension-core</b> is Lody's answer — the same feature set
+        written down once, as an open, provider-neutral contract. Semantics ride
         as <span class="mono">_meta.lody.&lt;feature&gt;</span> on ordinary ACP
-        envelopes; what the protocol can't express earns a
-        <span class="mono">_lody/*</span> method. Optional features advertise under
-        <span class="mono">agentCapabilities._meta.lody</span>, each with its own
-        integer <span class="mono">version</span> — the probe reads that
-        advertisement and knocks on the read-only <span class="mono">_lody/*</span>
-        endpoints. A <span class="mono">method_not_found</span> means unspoken;
-        anything else means the namespace is wired.</p>
-      <p>A <span class="ldy">◆ lody</span> mark on the ledger means Lody ships a
-        provider adapter for that harness — native behavior translated into the
-        same contracts, so clients never branch on provider payloads. Details
-        live in the repos:</p>
+        envelopes; what the protocol genuinely can't express earns a
+        <span class="mono">_lody/*</span> method, and every feature advertises
+        its own integer <span class="mono">version</span>. The private dialects
+        play this trick for one vendor each; this one plays it for everyone —
+        documented, versioned, and readable by any client, not just Lody's.</p>
+      <div class="ext-map">
+        <span class="ext-lab">one grammar · many dialects · as seen on this wall</span>
+        <div class="em-row"><span>usage · limits</span><span>_meta.lody.usage · _lody/rate_limits/*</span><span>codex.* · x.ai/*</span></div>
+        <div class="em-row"><span>steer · goal</span><span>_lody/session/steer · _lody/session/goal</span><span>jetbrains.air</span></div>
+        <div class="em-row"><span>subagents · tasks</span><span>_meta.lody.subagents · _lody/subagents/*</span><span>air async tasks</span></div>
+        <div class="em-row"><span>history · fork</span><span>_meta.lody.sessionHistory · forkAtTurn</span><span>session/load dialects</span></div>
+        <div class="em-row"><span>auth hints</span><span>authMethod _meta descriptors</span><span>terminal-auth · api-key · gateway · args</span></div>
+        <div class="em-row"><span>misc</span><span>_meta.lody.compaction · worktreeProject · plan</span><span>imageCapability · sigit · installUrl</span></div>
+      </div>
+      <p>A <span class="ldy">◆ lody</span> mark means that row runs Lody's
+        adapter — native behavior translated into this same contract, so one
+        client implementation serves every provider. Details live in the
+        repos:</p>
       <div class="ext-ads">
         <span class="ext-lab">provider adapters</span>
         <a href="https://github.com/LodyAI/acp-extension-claude" target="_blank" rel="noopener">claude</a>
@@ -479,11 +501,14 @@ function detailHTML(h){
     ?`<div class="viol"><b>⚠ SCHEMA VIOLATIONS · ${h.violations.length}</b>${h.violations.slice(0,6).map(v=>`<div>${v.method} ${v.where}${v.path?' · '+v.path:''} — ${v.msg}</div>`).join('')}${h.violations.length>6?`<div>…and ${h.violations.length-6} more</div>`:''}</div>`:'';
   const probed=h.probedAt?`<div class="probed">probed ${h.probedAt.slice(0,10)}${h.run?` · $ ${h.run}`:''}</div>`:'';
   const mitm=(h.mitm&&h.mitm.length)?`<div class="probed">model traffic intercepted at transport layer (TLS impersonation): ${h.mitm.join(', ')}</div>`:'';
-  const lz=h.lody,lf=lodyFeats(h);
-  const lodyBlock=(lz||h.lodyAdapter)?`<div class="lody-only">
+  const lz=h.lody,lf=lodyFeats(h),ex=h.ext;
+  const extLine=(ex&&(ex.advertised?.length||ex.observed?.length))
+    ?`<div class="probed">ext surface: ${esc((ex.advertised||[]).join(', '))||'—'}${ex.observed?.length?` · wire: ${esc(ex.observed.join(', '))}`:''}</div>`:'';
+  const lodyBlock=(lz||h.lodyAdapter||ex)?`<div class="lody-only">
       <div class="sh-lab" style="margin-top:16px"><span>Lody extension · _meta.lody</span><span class="mono">${lz?(lf.length?`${lf.length} advertised`:'none advertised'):'not probed'}</span></div>
       ${lz&&lf.length?`<div class="pills">${lf.map(f=>`<span class="ok">${esc(f)}${lz.advertised[f]?.version!=null?` v${esc(lz.advertised[f].version)}`:''}</span>`).join('')}</div>`:''}
       ${lz?`<div class="probed">_lody/* answered: ${esc((lz.answered||[]).join(', '))||'none'}${lz.missing?.length?` · absent: ${esc(lz.missing.join(', '))}`:''}${lz.observed?.length?` · on wire: ${esc(lz.observed.join(', '))}`:''}</div>`:''}
+      ${extLine}
       ${h.lodyAdapter?`<div class="probed">adapter: <a href="https://github.com/LodyAI/acp-extension-${esc(h.lodyAdapter)}" target="_blank" rel="noopener">acp-extension-${esc(h.lodyAdapter)} ↗</a></div>`:''}
     </div>`:'';
   return `<div class="lg-x-in">

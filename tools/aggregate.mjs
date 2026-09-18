@@ -130,6 +130,8 @@ if (existsSync(reportsDir)) {
       // _lody/* endpoints answered, _meta.lody.* keys seen on the wire.
       // Absent on reports from before the extension probe existed.
       lody: r.lody ?? null,
+      // generic extension surface: _meta namespaces advertised + seen on wire
+      ext: r.ext ?? null,
       // Lody ships a provider adapter for this harness → ◆ lody mark
       // (acp-extension-<slug>, e.g. claude/codex/grok/dsh/kimi/pi).
       lodyAdapter: overridesById[r.harness]?.lodyAdapter ?? reg.lodyAdapter ?? null,

@@ -1,4 +1,4 @@
-import type { LodyProbeInfo, MethodResult, Status, ViolationRec } from "./probes.js";
+import type { ExtSurface, LodyProbeInfo, MethodResult, Status, ViolationRec } from "./probes.js";
 import type { TranscriptEntry } from "./rpc.js";
 
 /** Cell order matches the wall's CAPS columns (24 methods/features). */
@@ -67,6 +67,10 @@ export interface Report {
    * advertised, `_lody/*` endpoints that answered, `_meta.lody.*` keys seen on
    * wire traffic. Side-channel stat: never part of cells/score/tier. */
   lody?: LodyProbeInfo;
+  /** Generic extension surface — every `_meta` namespace advertised (caps,
+   * top-level, authMethods) and every `_meta.<ns>.<key>` pair seen on wire.
+   * Vendor-agnostic; lody is just one namespace here. */
+  ext?: ExtSurface;
   /** Disclosed when the probe impersonated model endpoints at the transport
    * layer (transparent SNI proxy) rather than via documented config. */
   transport?: {
@@ -88,6 +92,7 @@ export function buildReport(opts: {
   violations: ViolationRec[];
   transcript: TranscriptEntry[];
   lody?: LodyProbeInfo;
+  ext?: ExtSurface;
   transport?: Report["transport"];
 }): Report {
   const notes: Record<string, string> = {};
@@ -130,6 +135,7 @@ export function buildReport(opts: {
     violations: opts.violations,
     transcript: opts.transcript,
     lody: opts.lody,
+    ext: opts.ext,
     transport: opts.transport,
   };
 }

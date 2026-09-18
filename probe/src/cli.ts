@@ -327,6 +327,7 @@ async function main() {
     violations: ctx.violations,
     transcript: rpc.transcript,
     lody: ctx.lody,
+    ext: ctx.ext,
     transport,
   });
 

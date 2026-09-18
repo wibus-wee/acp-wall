@@ -48,11 +48,22 @@ export interface LodyProbeInfo {
   observed: string[];
 }
 
+/** Generic extension surface — vendor-agnostic evidence that an agent
+ *  extends ACP. Namespaces are collected from `agentCapabilities._meta`,
+ *  top-level `initialize._meta`, and `authMethods[*]._meta` (reported as
+ *  `auth:<key>`); wire evidence is every `_meta.<ns>.<key>` pair seen on
+ *  agent traffic. No per-vendor rules — lody is just one namespace here. */
+export interface ExtSurface {
+  advertised: string[];
+  observed: string[];
+}
+
 export interface ProbeContext {
   rpc: RpcPeer;
   calls: ClientCalls;
   initResult: any; // initialize response
   lody?: LodyProbeInfo;
+  ext?: ExtSurface;
   sessionId?: string;
   sessionModes?: any;
   sessionConfigOptions?: any;
@@ -824,6 +835,17 @@ export async function probeLody(ctx: ProbeContext) {
   const info: LodyProbeInfo = { advertised, answered: [], missing: [], observed: [] };
   ctx.lody = info;
 
+  // Generic extension surface — every _meta namespace, not only lody.
+  const capMeta = ctx.initResult?.agentCapabilities?._meta ?? {};
+  const topMeta = ctx.initResult?._meta ?? {};
+  const authNs = ((ctx.initResult?.authMethods ?? []) as any[]).flatMap((m) =>
+    Object.keys(m?._meta ?? {}).map((k) => `auth:${k}`),
+  );
+  ctx.ext = {
+    advertised: [...new Set([...Object.keys(capMeta), ...Object.keys(topMeta), ...authNs])].sort(),
+    observed: [],
+  };
+
   const sid = ctx.sessionId ?? "probe-session";
   const calls: Array<[string, any]> = [
     ["_lody/rate_limits/get", {}],
@@ -842,13 +864,21 @@ export async function probeLody(ctx: ProbeContext) {
   }
 
   const observed = new Set<string>();
+  const extObserved = new Set<string>();
   for (const u of ctx.updates) {
-    const lody = u.params?.update?._meta?.lody ?? u.params?._meta?.lody;
-    if (lody && typeof lody === "object") {
-      for (const k of Object.keys(lody)) observed.add(k);
+    const um = (u.params?.update?._meta ?? u.params?._meta) as Record<string, any> | undefined;
+    if (!um || typeof um !== "object") continue;
+    for (const [ns, v] of Object.entries(um)) {
+      if (v && typeof v === "object" && !Array.isArray(v)) {
+        for (const k of Object.keys(v)) {
+          extObserved.add(`${ns}.${k}`);
+          if (ns === "lody") observed.add(k);
+        }
+      } else extObserved.add(ns);
     }
   }
   info.observed = [...observed];
+  ctx.ext.observed = [...extObserved];
 
   const featList = feats
     .map((f) => `${f}${typeof advertised[f]?.version === "number" ? " v" + advertised[f].version : ""}`)
