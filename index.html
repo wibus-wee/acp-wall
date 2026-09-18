@@ -508,6 +508,7 @@ function detailHTML(h){
       <div class="sh-lab" style="margin-top:16px"><span>Lody extension · _meta.lody</span><span class="mono">${lz?(lf.length?`${lf.length} advertised`:'none advertised'):'not probed'}</span></div>
       ${lz&&lf.length?`<div class="pills">${lf.map(f=>`<span class="ok">${esc(f)}${lz.advertised[f]?.version!=null?` v${esc(lz.advertised[f].version)}`:''}</span>`).join('')}</div>`:''}
       ${lz?`<div class="probed">_lody/* answered: ${esc((lz.answered||[]).join(', '))||'none'}${lz.missing?.length?` · absent: ${esc(lz.missing.join(', '))}`:''}${lz.observed?.length?` · on wire: ${esc(lz.observed.join(', '))}`:''}</div>`:''}
+      ${lz&&!lf.length&&(lz.answered||[]).length?`<div class="probed" style="color:var(--gold)">wired but unadvertised — endpoints answer, yet _meta.lody is empty, so clients cannot discover this</div>`:''}
       ${extLine}
       ${h.lodyAdapter?`<div class="probed">adapter: <a href="https://github.com/LodyAI/acp-extension-${esc(h.lodyAdapter)}" target="_blank" rel="noopener">acp-extension-${esc(h.lodyAdapter)} ↗</a></div>`:''}
     </div>`:'';
