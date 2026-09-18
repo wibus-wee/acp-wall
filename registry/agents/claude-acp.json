@@ -8,8 +8,8 @@
   "website": null,
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/claude-acp.svg",
   "license": "proprietary",
-  "install": null,
-  "run": "npx -y @agentclientprotocol/claude-agent-acp@0.79.0",
+  "install": "node tools/lody-adapters.mjs claude",
+  "run": "node ${REPO_ROOT}/.cache/adapters/claude/dist/index.js",
   "env": {
     "ANTHROPIC_BASE_URL": "${MOCK_LLM_URL}",
     "ANTHROPIC_API_KEY": "probe-mock-key",

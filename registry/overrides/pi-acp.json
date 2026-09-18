@@ -1,6 +1,6 @@
 {
   "lodyAdapter": "pi",
-  "install": "npm i -g --ignore-scripts @earendil-works/pi-coding-agent",
+  "install": "node tools/lody-adapters.mjs pi",
   "env": {
     "HOME": "${WORK_DIR}"
   },
@@ -12,7 +12,12 @@
           "api": "openai-completions",
           "apiKey": "probe-mock-key",
           "authHeader": true,
-          "models": [{ "id": "probe-model", "name": "probe-model" }]
+          "models": [
+            {
+              "id": "probe-model",
+              "name": "probe-model"
+            }
+          ]
         }
       }
     },
@@ -21,5 +26,6 @@
       "quietStartup": true
     }
   },
-  "notes": "pi-acp spawns `pi --mode rpc` — install puts pi on PATH and HOME=${WORK_DIR} lets sessionFiles plant .pi/agent/models.json declaring a custom openai-completions provider pointed at the mock LLM (documented models.json format). No pi account/subscription needed."
+  "notes": "pi-acp spawns `pi --mode rpc` — install puts pi on PATH and HOME=${WORK_DIR} lets sessionFiles plant .pi/agent/models.json declaring a custom openai-completions provider pointed at the mock LLM (documented models.json format). No pi account/subscription needed.",
+  "run": "node ${REPO_ROOT}/.cache/adapters/pi/dist/index.js"
 }

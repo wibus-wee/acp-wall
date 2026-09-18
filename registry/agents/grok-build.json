@@ -8,12 +8,13 @@
   "website": "https://x.ai/cli",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/grok-build.svg",
   "license": "proprietary",
-  "install": null,
-  "run": "npx -y @xai-official/grok@1.0.36 agent stdio",
+  "install": "node tools/lody-adapters.mjs grok",
+  "run": "node ${REPO_ROOT}/.cache/adapters/grok/src/index.js",
   "env": {
     "GROK_HOME": "${WORK_DIR}/grok-home",
     "XAI_API_KEY": "probe-mock-key",
-    "GROK_DISABLE_AUTOUPDATER": "1"
+    "GROK_DISABLE_AUTOUPDATER": "1",
+    "GROK_PATH": "${REPO_ROOT}/.cache/adapters/grok-runtime/node_modules/.bin/grok"
   },
   "sessionFiles": {
     "grok-home/config.toml": "[models]\ndefault = \"probe-model\"\n\n[model.probe-model]\nmodel = \"probe-model\"\nbase_url = \"${MOCK_LLM_URL}\"\nenv_key = \"XAI_API_KEY\"\napi_backend = \"chat_completions\"\n"

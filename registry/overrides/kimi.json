@@ -14,5 +14,7 @@
       "expires_in": 31536000
     }
   },
-  "notes": "KIMI_CODE_HOME relocates kimi's data dir into the probe workspace. Documented limitation (moonshotai/kimi-code#1330): kimi acp's session gate only accepts the OAuth token file — BYO-LLM providers cannot create sessions even with a probe token, so turn-dependent cells fail as 'requires Moonshot OAuth — not CI-probeable'."
+  "notes": "KIMI_CODE_HOME relocates kimi's data dir into the probe workspace. Documented limitation (moonshotai/kimi-code#1330): kimi acp's session gate only accepts the OAuth token file — BYO-LLM providers cannot create sessions even with a probe token, so turn-dependent cells fail as 'requires Moonshot OAuth — not CI-probeable'.",
+  "install": "node tools/lody-adapters.mjs kimi",
+  "run": "node ${REPO_ROOT}/.cache/adapters/kimi/apps/kimi-code/dist/main.mjs acp"
 }

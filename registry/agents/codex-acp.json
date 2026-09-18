@@ -8,8 +8,8 @@
   "website": null,
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/codex-acp.svg",
   "license": "Apache-2.0",
-  "install": null,
-  "run": "npx -y @agentclientprotocol/codex-acp@1.12.0",
+  "install": "node tools/lody-adapters.mjs codex",
+  "run": "node ${REPO_ROOT}/.cache/adapters/codex/dist/index.js",
   "env": {
     "CODEX_HOME": "${WORK_DIR}/codex-home",
     "OPENAI_API_KEY": "probe-mock-key"

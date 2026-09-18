@@ -8,8 +8,8 @@
   "website": "https://moonshotai.github.io/kimi-cli/",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/kimi.svg",
   "license": "MIT",
-  "install": "node tools/install-dist.mjs registry/agents/kimi.json",
-  "run": "${REPO_ROOT}/.cache/agents/kimi/kimi acp",
+  "install": "node tools/lody-adapters.mjs kimi",
+  "run": "node ${REPO_ROOT}/.cache/adapters/kimi/apps/kimi-code/dist/main.mjs acp",
   "env": {
     "KIMI_CODE_HOME": "${WORK_DIR}/kimi-home"
   },

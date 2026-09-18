@@ -11,5 +11,7 @@
     },
     "codex-home/config.toml": "model = \"gpt-5\"\nmodel_provider = \"probe\"\n\n[model_providers.probe]\nname = \"Probe\"\nbase_url = \"${MOCK_LLM_URL}\"\nwire_api = \"responses\"\n"
   },
-  "notes": "CODEX_HOME relocates codex's state dir into the probe workspace; a probe-issued apikey auth.json satisfies the auth gate and a custom model_provider routes every call to the mock LLM (Responses API)."
+  "notes": "CODEX_HOME relocates codex's state dir into the probe workspace; a probe-issued apikey auth.json satisfies the auth gate and a custom model_provider routes every call to the mock LLM (Responses API).",
+  "install": "node tools/lody-adapters.mjs codex",
+  "run": "node ${REPO_ROOT}/.cache/adapters/codex/dist/index.js"
 }

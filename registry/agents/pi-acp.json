@@ -8,8 +8,8 @@
   "website": null,
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/pi-acp.svg",
   "license": "MIT",
-  "install": "npm i -g --ignore-scripts @earendil-works/pi-coding-agent",
-  "run": "npx -y pi-acp@0.0.33",
+  "install": "node tools/lody-adapters.mjs pi",
+  "run": "node ${REPO_ROOT}/.cache/adapters/pi/dist/index.js",
   "env": {
     "HOME": "${WORK_DIR}"
   },

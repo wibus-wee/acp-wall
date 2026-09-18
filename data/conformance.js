@@ -30,7 +30,7 @@ window.__ACP_WALL__ = {
   "harnesses": [
     {
       "n": "Claude Agent",
-      "v": "Anthropic, Zed Industries, JetBrains — v0.79.0",
+      "v": "Anthropic, Zed Industries, JetBrains — v0.70.0",
       "desc": "ACP wrapper for Anthropic's Claude",
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/claude-acp.svg",
       "url": "https://github.com/agentclientprotocol/claude-agent-acp",
@@ -62,20 +62,20 @@ window.__ACP_WALL__ = {
         1
       ],
       "notes": {
-        "initialize": "v1 · @agentclientprotocol/claude-agent-acp 0.79.0",
+        "initialize": "v1 · acp-extension-claude 0.70.0",
         "authenticate": "rejects unknown methodId (endpoint exists): Internal error — Method not implemented.",
-        "session/new": "sessionId=b2e36525-e40",
+        "session/new": "sessionId=423fda5d-cb9",
         "session/prompt": "3/3 turns · stopReason=end_turn · canary round-trip verified",
-        "load:replay": "9 replayed update(s): user_message_chunk, tool_call, tool_call_update, agent_message_chunk",
+        "load:replay": "15 replayed update(s): available_commands_update, user_message_chunk, tool_call, session_info_update, tool_call_update, agent_message_chunk",
         "set_mode": "modeId=default",
         "set_config": "configId=mode=default",
-        "cancel": "cancelled in 401ms",
+        "cancel": "cancelled in 402ms",
         "message*": "6 chunk(s)",
         "tool_call*": "6 update(s)",
         "usage": "12",
         "permission": "1 request(s)",
         "plan": "none emitted",
-        "slash_cmds": "5",
+        "slash_cmds": "6",
         "fs/*": "agent never delegated a file read",
         "terminal/*": "agent never used a client terminal",
         "elicitation": "agent never elicited",
@@ -84,22 +84,61 @@ window.__ACP_WALL__ = {
         "mcp": "stdio handshake + tool call · http+sse"
       },
       "score": 79,
-      "version": "0.79.0",
-      "probedAt": "2026-09-18T09:10:08.677Z",
-      "run": "npx -y @agentclientprotocol/claude-agent-acp@0.79.0",
+      "version": "0.70.0",
+      "probedAt": "2026-09-18T10:12:15.928Z",
+      "run": "node ${REPO_ROOT}/.cache/adapters/claude/dist/index.js",
       "repo": "agentclientprotocol/claude-agent-acp",
       "dishonesty": [],
       "violations": [],
       "lody": {
-        "advertised": {},
-        "answered": [],
-        "missing": [
+        "advertised": {
+          "usage": {
+            "version": 1
+          },
+          "rateLimits": {
+            "version": 1,
+            "query": true
+          },
+          "forkAtTurn": {
+            "version": 1
+          },
+          "steering": {
+            "version": 1,
+            "transport": "prompt",
+            "upstreamTurn": "handoff",
+            "configPolicy": "apply"
+          },
+          "tasks": {
+            "version": 1,
+            "background": true
+          },
+          "subagents": {
+            "version": 1,
+            "lifecycle": true
+          },
+          "goal": {
+            "version": 1,
+            "actions": [
+              "set",
+              "clear"
+            ]
+          },
+          "compaction": {
+            "version": 1
+          }
+        },
+        "answered": [
           "_lody/rate_limits/get",
-          "_lody/subagents/list",
-          "_lody/session/history/read",
           "_lody/session/goal"
         ],
-        "observed": []
+        "missing": [
+          "_lody/subagents/list",
+          "_lody/session/history/read"
+        ],
+        "observed": [
+          "toolName",
+          "turnId"
+        ]
       },
       "lodyAdapter": "claude",
       "mitm": null,
@@ -128,7 +167,7 @@ window.__ACP_WALL__ = {
         1,
         1,
         1,
-        1,
+        0,
         -1,
         1,
         -1,
@@ -139,19 +178,19 @@ window.__ACP_WALL__ = {
         2
       ],
       "notes": {
-        "initialize": "v1 · @agentclientprotocol/codex-acp 1.12.0",
+        "initialize": "v1 · acp-extension-codex 1.12.0",
         "authenticate": "methodId=api-key",
-        "session/new": "sessionId=01a0b3c7-f09",
-        "session/load": "endpoint exists — returned error: Internal error — no rollout found for thread id 01a0b3c7-f09d-7470-a4a",
+        "session/new": "sessionId=01a0b400-93f",
+        "session/load": "endpoint exists — returned error: Internal error — no rollout found for thread id 01a0b400-93f3-7290-a62",
         "session/prompt": "3/3 turns · stopReason=end_turn",
-        "load:replay": "11 replayed update(s): session_info_update, available_commands_update, user_message_chunk, tool_call, tool_call_update, agent_message_chunk",
-        "set_mode": "modeId=read-only",
-        "set_config": "configId=mode=read-only",
-        "cancel": "cancelled in 407ms",
-        "message*": "8 chunk(s)",
-        "tool_call*": "3 update(s)",
+        "load:replay": "11 replayed update(s): available_commands_update, session_info_update, user_message_chunk, tool_call, tool_call_update, agent_message_chunk",
+        "set_mode": "modeId=agent-auto-review",
+        "set_config": "configId=mode=agent-auto-review",
+        "cancel": "cancelled in 405ms",
+        "message*": "4 chunk(s)",
+        "tool_call*": "6 update(s)",
         "usage": "4",
-        "permission": "1 request(s)",
+        "permission": "ran 2 permission-worthy tool call(s) without session/request_permission despite ask policy",
         "plan": "none emitted",
         "slash_cmds": "2",
         "fs/*": "agent never delegated a file read",
@@ -161,23 +200,82 @@ window.__ACP_WALL__ = {
         "nes": "not implemented",
         "mcp": "handshake + discovery ok — fixture tool never exposed to model · http"
       },
-      "score": 79,
+      "score": 75,
       "version": "1.12.0",
-      "probedAt": "2026-09-18T09:10:23.011Z",
-      "run": "npx -y @agentclientprotocol/codex-acp@1.12.0",
+      "probedAt": "2026-09-18T10:12:15.207Z",
+      "run": "node ${REPO_ROOT}/.cache/adapters/codex/dist/index.js",
       "repo": "agentclientprotocol/codex-acp",
       "dishonesty": [],
       "violations": [],
       "lody": {
-        "advertised": {},
-        "answered": [],
-        "missing": [
+        "advertised": {
+          "usage": {
+            "version": 1
+          },
+          "rateLimits": {
+            "version": 1,
+            "query": true
+          },
+          "forkAtTurn": {
+            "version": 1
+          },
+          "steering": {
+            "version": 1,
+            "transport": "request",
+            "upstreamTurn": "same",
+            "configPolicy": "active"
+          },
+          "tasks": {
+            "version": 1,
+            "background": true
+          },
+          "subagents": {
+            "version": 1,
+            "lifecycle": true
+          },
+          "goal": {
+            "version": 1,
+            "actions": [
+              "set",
+              "pause",
+              "resume",
+              "clear"
+            ],
+            "controlActions": [
+              "pause",
+              "clear"
+            ],
+            "promptActions": [
+              "set",
+              "pause",
+              "resume",
+              "clear"
+            ]
+          },
+          "compaction": {
+            "version": 1
+          },
+          "sessionHistory": {
+            "version": 1
+          },
+          "worktreeProject": {
+            "version": 1
+          }
+        },
+        "answered": [
           "_lody/rate_limits/get",
-          "_lody/subagents/list",
           "_lody/session/history/read",
           "_lody/session/goal"
         ],
-        "observed": []
+        "missing": [
+          "_lody/subagents/list"
+        ],
+        "observed": [
+          "notice",
+          "turnId",
+          "titleSource",
+          "goal"
+        ]
       },
       "lodyAdapter": "codex",
       "mitm": null,
@@ -523,7 +621,7 @@ window.__ACP_WALL__ = {
       "desc": "xAI's coding agent and CLI",
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/grok-build.svg",
       "url": "https://x.ai/cli",
-      "tier": "partial",
+      "tier": "verified",
       "cells": [
         2,
         1,
@@ -539,7 +637,7 @@ window.__ACP_WALL__ = {
         0,
         1,
         1,
-        -1,
+        1,
         1,
         -1,
         1,
@@ -553,21 +651,21 @@ window.__ACP_WALL__ = {
       "notes": {
         "initialize": "missing agentInfo.name",
         "authenticate": "methodId=xai.api_key",
-        "session/new": "sessionId=01a0b3c8-a75",
+        "session/new": "sessionId=01a0b400-8f9",
         "session/prompt": "3/3 turns · stopReason=end_turn",
         "sessions/*": "not implemented",
         "fork": "not implemented",
-        "load:replay": "8 replayed update(s): user_message_chunk, tool_call, agent_message_chunk",
+        "load:replay": "13 replayed update(s): usage_update, user_message_chunk, tool_call, agent_message_chunk, config_option_update, available_commands_update",
         "set_mode": "works but not advertised",
-        "set_config": "configId=model=probe-model",
-        "cancel": "cancelled in 402ms",
+        "set_config": "endpoint exists — rejects unknown session: Grok permission mode requires the current Lody clientIdentifier",
+        "cancel": "cancelled in 405ms",
         "logout": "not implemented",
         "message*": "6 chunk(s)",
         "tool_call*": "4 update(s)",
-        "usage": "none emitted",
+        "usage": "12",
         "permission": "1 request(s)",
         "plan": "none emitted",
-        "slash_cmds": "6",
+        "slash_cmds": "7",
         "fs/*": "agent never delegated a file read",
         "terminal/*": "create×1 lifecycle×3",
         "elicitation": "agent never elicited",
@@ -575,17 +673,26 @@ window.__ACP_WALL__ = {
         "nes": "not implemented",
         "mcp": "handshake + discovery ok — fixture tool never exposed to model · http+sse"
       },
-      "score": 58,
-      "probedAt": "2026-09-18T09:11:09.420Z",
-      "run": "npx -y @xai-official/grok@1.0.36 agent stdio",
+      "score": 63,
+      "probedAt": "2026-09-18T10:12:24.210Z",
+      "run": "node ${REPO_ROOT}/.cache/adapters/grok/src/index.js",
       "repo": null,
       "dishonesty": [],
       "violations": [],
       "lody": {
-        "advertised": {},
-        "answered": [],
+        "advertised": {
+          "usage": {
+            "version": 1
+          },
+          "rateLimits": {
+            "version": 1,
+            "query": true
+          }
+        },
+        "answered": [
+          "_lody/rate_limits/get"
+        ],
         "missing": [
-          "_lody/rate_limits/get",
           "_lody/subagents/list",
           "_lody/session/history/read",
           "_lody/session/goal"
@@ -593,9 +700,7 @@ window.__ACP_WALL__ = {
         "observed": []
       },
       "lodyAdapter": "grok",
-      "mitm": [
-        "api.x.ai"
-      ],
+      "mitm": null,
       "star": 0
     },
     {
@@ -1002,7 +1107,7 @@ window.__ACP_WALL__ = {
     },
     {
       "n": "pi ACP",
-      "v": "Sergii Kozak <svkozak@gmail.com> — v0.0.33",
+      "v": "Sergii Kozak <svkozak@gmail.com> — v0.85.1",
       "desc": "ACP adapter for pi coding agent",
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/pi-acp.svg",
       "url": "https://github.com/svkozak/pi-acp",
@@ -1011,69 +1116,90 @@ window.__ACP_WALL__ = {
         1,
         1,
         1,
-        1,
+        0,
         1,
         0,
         0,
-        1,
-        1,
-        1,
-        1,
+        -1,
         0,
-        1,
         1,
         -1,
         0,
         -1,
+        -1,
         1,
         -1,
-        2,
+        1,
+        -1,
+        -1,
+        -1,
         -1,
         0,
         0,
-        -1
+        1
       ],
       "notes": {
-        "initialize": "v1 · pi-acp 0.0.33",
-        "authenticate": "methodId=pi_terminal_login",
-        "session/new": "sessionId=01a0b3c9-766",
-        "session/prompt": "3/3 turns · stopReason=end_turn · canary round-trip verified",
+        "initialize": "v1 · pi-rpc 0.85.1",
+        "authenticate": "rejects unknown methodId (endpoint exists): Invalid request: Authenticate through Pi on the execution ma",
+        "session/new": "sessionId=/var/folders",
+        "session/load": "not implemented",
+        "session/prompt": "endpoint exists — turn errored: Internal error — Pi session does not match the active session",
         "sessions/*": "not implemented",
         "fork": "not implemented",
-        "load:replay": "9 replayed update(s): user_message_chunk, tool_call, tool_call_update, agent_message_chunk",
-        "set_mode": "modeId=minimal",
-        "set_config": "configId=model=probe/probe-model",
-        "cancel": "cancelled in 410ms",
+        "load:replay": "session/load errored: \"Method not found\": session/load — {\"method\":\"session/load\"}",
+        "set_mode": "not implemented",
+        "set_config": "endpoint exists — returned error: Internal error — Pi session does not match the active session",
+        "cancel": "no turn to cancel",
         "logout": "not implemented",
-        "message*": "6 chunk(s)",
-        "tool_call*": "7 update(s)",
-        "usage": "none emitted",
-        "permission": "ran 2 permission-worthy tool call(s) without session/request_permission despite ask policy",
-        "plan": "none emitted",
-        "slash_cmds": "3",
+        "message*": "no completed turn",
+        "tool_call*": "no tool calls this run",
+        "usage": "3",
+        "permission": "ask policy set but no permission-worthy tool ran",
+        "plan": "3",
+        "slash_cmds": "none emitted",
         "fs/*": "agent never delegated a file read",
-        "terminal/*": "bypassed client terminal — ran 2 exec tool call(s) internally",
+        "terminal/*": "agent never used a client terminal",
         "elicitation": "agent never elicited",
         "providers": "not implemented",
         "nes": "not implemented",
-        "mcp": "agent never touched the stdio fixture · no mcpCapabilities"
+        "mcp": "stdio handshake + tool discovery · call unexercised · no mcpCapabilities"
       },
-      "score": 52,
-      "version": "0.0.33",
-      "probedAt": "2026-09-18T09:12:05.102Z",
-      "run": "npx -y pi-acp@0.0.33",
+      "score": 33,
+      "version": "0.85.1",
+      "probedAt": "2026-09-18T10:12:13.479Z",
+      "run": "node ${REPO_ROOT}/.cache/adapters/pi/dist/index.js",
       "repo": "svkozak/pi-acp",
       "dishonesty": [],
       "violations": [],
       "lody": {
-        "advertised": {},
-        "answered": [],
-        "missing": [
+        "advertised": {
+          "usage": {
+            "version": 1
+          },
+          "compaction": {
+            "version": 1
+          },
+          "subagents": {
+            "version": 1,
+            "lifecycle": true,
+            "list": true,
+            "cancel": true,
+            "output": true
+          },
+          "steering": {
+            "version": 1,
+            "transport": "request",
+            "upstreamTurn": "same",
+            "configPolicy": "active"
+          }
+        },
+        "answered": [
           "_lody/rate_limits/get",
           "_lody/subagents/list",
           "_lody/session/history/read",
           "_lody/session/goal"
         ],
+        "missing": [],
         "observed": []
       },
       "lodyAdapter": "pi",
@@ -2955,24 +3081,24 @@ window.__ACP_WALL__ = {
     },
     {
       "n": "Kimi CLI",
-      "v": "Moonshot AI — v1.50.0",
+      "v": "Moonshot AI — v0.39.1",
       "desc": "Moonshot AI's coding assistant",
       "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/kimi.svg",
       "url": "https://moonshotai.github.io/kimi-cli/",
-      "tier": "limited",
+      "tier": "partial",
       "cells": [
         1,
-        0,
+        1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
         1,
         1,
         -1,
-        0,
-        -1,
-        -1,
         1,
-        0,
-        -1,
-        0,
         -1,
         -1,
         -1,
@@ -2987,18 +3113,16 @@ window.__ACP_WALL__ = {
         -1
       ],
       "notes": {
-        "initialize": "v1 · Kimi Code CLI 1.50.0",
-        "authenticate": "no valid response: authenticate timed out after 15000ms",
-        "session/new": "endpoint exists — account-gated: Authentication required — {\"authMethods\":[{\"id\":\"login\",\"name\":\"Login ",
-        "session/load": "endpoint exists — account-gated: Authentication required — {\"authMethods\":[{\"id\":\"login\",\"name\":\"Login ",
+        "initialize": "v1 · Kimi Code CLI 0.39.1",
+        "authenticate": "endpoint exists — returned error: Authentication required",
+        "session/new": "endpoint exists — account-gated: Authentication required",
+        "session/load": "endpoint exists — account-gated: Authentication required",
         "session/prompt": "no session — prompt untested",
-        "sessions/*": "not implemented",
         "fork": "no session to fork",
         "load:replay": "no loadable session",
-        "set_mode": "endpoint exists — returned error: Internal error — Only default mode is supported",
-        "set_config": "not implemented",
+        "set_mode": "endpoint exists — rejects unknown session: Invalid params: Unknown sessionId: probe-session — {\"sessionId\":\"probe",
+        "set_config": "endpoint exists — rejects unknown session: Invalid params: Unknown sessionId: probe-session — {\"sessionId\":\"probe",
         "cancel": "no sessionId",
-        "logout": "not implemented",
         "message*": "no completed turn",
         "tool_call*": "no tool calls this run",
         "usage": "none emitted",
@@ -3010,24 +3134,50 @@ window.__ACP_WALL__ = {
         "elicitation": "agent never elicited",
         "providers": "not implemented",
         "nes": "not implemented",
-        "mcp": "agent never touched the stdio fixture · http"
+        "mcp": "agent never touched the stdio fixture · http+sse"
       },
-      "score": 17,
-      "version": "1.50.0",
-      "probedAt": "2026-09-18T09:11:44.201Z",
-      "run": "${REPO_ROOT}/.cache/agents/kimi/kimi acp",
+      "score": 33,
+      "version": "0.39.1",
+      "probedAt": "2026-09-18T10:14:41.147Z",
+      "run": "node ${REPO_ROOT}/.cache/adapters/kimi/apps/kimi-code/dist/main.mjs acp",
       "repo": "MoonshotAI/kimi-cli",
       "dishonesty": [],
       "violations": [],
       "lody": {
-        "advertised": {},
+        "advertised": {
+          "usage": {
+            "version": 1
+          },
+          "rateLimits": {
+            "version": 1,
+            "query": true
+          },
+          "forkAtTurn": {
+            "version": 1
+          },
+          "tasks": {
+            "version": 1,
+            "background": true
+          },
+          "subagents": {
+            "version": 1,
+            "lifecycle": true,
+            "list": true,
+            "cancel": true,
+            "output": true
+          },
+          "compaction": {
+            "version": 1
+          }
+        },
         "answered": [
           "_lody/rate_limits/get",
-          "_lody/subagents/list",
+          "_lody/subagents/list"
+        ],
+        "missing": [
           "_lody/session/history/read",
           "_lody/session/goal"
         ],
-        "missing": [],
         "observed": []
       },
       "lodyAdapter": "kimi",
