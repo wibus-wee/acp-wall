@@ -17,63 +17,75 @@
     background-image:radial-gradient(rgba(255,255,255,.025) 1px,transparent 1px);
     background-size:4px 4px;
   }
-  .frame{position:absolute;inset:14px;border:1px solid var(--line2);padding:0 44px;display:flex;flex-direction:column}
-  .mast{display:flex;justify-content:space-between;align-items:baseline;padding-top:16px;
-    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}
+  .frame{position:absolute;inset:14px;border:1px solid var(--line2);padding:0 48px;display:flex;flex-direction:column}
+  .mast{display:flex;justify-content:space-between;align-items:baseline;padding-top:18px;
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim)}
   .mast .mono{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--faint)}
-  hr.rule{border:0;border-top:2px solid var(--ink);margin:9px 0 0}
+  hr.rule{border:0;border-top:2px solid var(--ink);margin:10px 0 0}
   hr.rule.thin{border-top:1px solid var(--line2);margin-top:3px}
-  .plate{text-align:center;padding:22px 0 14px}
-  .plate .gl{font-size:10px;letter-spacing:.5em;color:var(--gold-deep);margin-bottom:10px}
-  .plate h1{font-size:66px;font-weight:700;line-height:.95;font-variant:small-caps;text-shadow:0 1px 0 #000;letter-spacing:.02em}
-  .plate .sub{margin-top:10px;font-size:12px;letter-spacing:.3em;color:var(--faint);text-transform:uppercase}
-  .plate .zh{color:var(--gold);font-size:13px;letter-spacing:.6em;margin-top:7px}
-  table{width:100%;border-collapse:collapse;margin-top:6px}
-  td,th{padding:5.5px 0;border-bottom:1px solid var(--line);font-size:14px}
-  th{text-align:left;font-weight:600;font-variant:small-caps;letter-spacing:.06em;font-size:15px}
-  .rk{font-family:ui-monospace,Menlo,monospace;color:var(--faint);font-size:12px;width:34px}
-  .cells{font-family:ui-monospace,Menlo,monospace;font-size:15px;letter-spacing:2px;white-space:nowrap}
-  .sc{font-family:ui-monospace,Menlo,monospace;text-align:right;font-size:14px;color:var(--ink-dim);width:70px}
-  .tr{text-align:right;font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.18em;width:86px;text-transform:uppercase}
-  .tr.v{color:var(--green)} .tr.p{color:var(--gold)} .tr.l{color:var(--red)}
-  .ok{color:var(--green)} .pr{color:var(--gold)} .no{color:var(--red)} .un{color:#4a4336}
-  .legend{margin-top:16px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink-dim);letter-spacing:.08em}
-  .foot{margin-top:auto;padding:11px 0 14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;
-    font-size:10.5px;color:var(--faint);letter-spacing:.14em;text-transform:uppercase}
-  .foot .mono{font-family:ui-monospace,Menlo,monospace}
-  .foot em{font-style:italic;color:var(--ink-dim);text-transform:none;letter-spacing:.02em;font-size:12px}
+  .mid{flex:1;display:flex;align-items:center;gap:56px;padding:0 6px}
+  .left{flex:0 0 480px}
+  .gl{font-size:11px;letter-spacing:.55em;color:var(--gold-deep);margin-bottom:20px}
+  h1{font-size:104px;font-weight:700;line-height:.9;font-variant:small-caps;letter-spacing:.01em;text-shadow:0 1px 0 #000}
+  .zh{font-size:15px;letter-spacing:.85em;color:var(--gold);margin-top:18px;padding-left:4px}
+  .stand{margin-top:30px;font-style:italic;font-size:20.5px;line-height:1.6;color:var(--ink-dim);max-width:26ch}
+  .stand b{color:var(--ink);font-weight:600}
+  .legend{margin-top:34px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink-dim);letter-spacing:.1em;line-height:2.1}
+  .legend .mc{font-weight:700}
+  .matrix{flex:1;align-self:stretch;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--line);padding-left:52px}
+  .matrix .lab{font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.3em;color:var(--faint);text-transform:uppercase;margin-bottom:14px}
+  .mrow{display:flex;align-items:center;gap:14px;padding:6.5px 0;border-bottom:1px solid #1c1810}
+  .mrow:last-of-type{border-bottom:0}
+  .mrow .n{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:#4a4336;width:22px}
+  .mrow .c{font-family:ui-monospace,Menlo,monospace;font-size:15px;letter-spacing:2.5px;white-space:nowrap}
+  .mrow .t{margin-left:auto;font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+  .mc.ok{color:var(--green)} .mc.pr{color:var(--gold)} .mc.no{color:var(--red)} .mc.un{color:#4a4336}
+  .t.v{color:var(--green)} .t.p{color:var(--gold)} .t.l{color:var(--red)}
+  .foot{padding:13px 0 15px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
+  .foot em{font-style:italic;color:var(--ink-dim);font-size:13px}
+  .foot .mono{font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--faint);letter-spacing:.14em}
 </style></head><body>
 <div class="frame">
   <div class="mast"><span>Vol. I · The Protocol Ledger</span><span class="mono">PROBE-VERIFIED — NOT SELF-REPORTED</span><span>Price: Free</span></div>
   <hr class="rule"><hr class="rule thin">
-  <div class="plate">
-    <div class="gl">◆ ◆ ◆</div>
-    <h1>The Wall</h1>
-    <div class="zh">合 规 矩 阵</div>
-    <div class="sub">A Public Ledger of ACP Compatibility</div>
+  <div class="mid">
+    <div class="left">
+      <div class="gl">◆ ◆ ◆</div>
+      <h1>The Wall</h1>
+      <div class="zh">合 规 矩 阵</div>
+      <div class="stand">A public ledger of <b>ACP</b> compatibility — how much of the protocol each harness <b>actually implements</b>, measured by probe.</div>
+      <div class="legend">
+        <span class="mc ok">+</span> implemented&ensp;&ensp;<span class="mc pr">±</span> partial&ensp;&ensp;<span class="mc no">−</span> missing&ensp;&ensp;<span class="mc un">·</span> not exercised<br>
+        <span style="color:var(--faint)">41 harnesses · 24 cells each · every mark is evidence</span>
+      </div>
+    </div>
+    <div class="matrix">
+      <div class="lab">the matrix, anonymized — read across</div>
+      <div id="m"></div>
+    </div>
   </div>
-  <table id="t"></table>
-  <div class="legend"><span class="ok">+</span> implemented&ensp;·&ensp;<span class="pr">±</span> partial&ensp;·&ensp;<span class="no">−</span> missing&ensp;·&ensp;<span class="un">·</span> not exercised&ensp;·&ensp;<span style="color:var(--faint)">24 cells per harness</span></div>
   <div class="foot">
     <span><em>“Every + is a probed endpoint — evidence, not vibes.”</em></span>
-    <span class="mono">wibus-wee.github.io/acp-wall</span>
+    <span class="mono">WIBUS-WEE.GITHUB.IO/ACP-WALL</span>
   </div>
 </div>
 <script>
 const M={1:['+','ok'],2:['±','pr'],0:['−','no'],'-1':['·','un']};
 const rows=[
- ["Claude Agent","verified",79,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,-1,-1,-1,1,-1,1]],
- ["Codex","verified",75,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,-1,1,-1,2,-1,1,-1,2]],
- ["Kimi CLI","verified",75,[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,-1,-1,-1,-1,-1,1]],
- ["Mistral Vibe","verified",67,[1,1,1,1,1,-1,1,1,1,1,1,-1,1,1,1,1,-1,1,-1,-1,-1,-1,1]],
- ["Grok Build","verified",63,[2,1,1,1,1,-1,-1,1,1,1,1,-1,1,1,1,1,-1,1,-1,1,-1,-1,-1,2]],
- ["Dirac","limited",58,[1,1,1,1,1,0,-1,1,1,1,-1,1,1,1,1,-1,-1,1,-1,-1,-1,1,-1,-1]],
- ["GLM Agent","partial",58,[1,1,1,1,1,-1,1,1,1,1,1,-1,1,1,-1,-1,-1,1,-1,-1,-1,-1,-1,1]],
+ [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,-1,-1,-1,1,-1,1],'v','verified'],
+ [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,-1,1,-1,2,-1,1,-1,2],'v','verified'],
+ [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,-1,1,-1,-1,-1,-1,-1,1],'v','verified'],
+ [[1,1,1,1,1,-1,1,1,1,1,1,-1,1,1,1,1,-1,1,-1,-1,-1,-1,-1,1],'v','verified'],
+ [[2,1,1,1,1,-1,-1,1,1,1,1,-1,1,1,1,1,-1,1,-1,1,-1,-1,-1,2],'v','verified'],
+ [[1,1,1,1,1,-1,-1,1,1,1,1,-1,1,1,-1,1,1,1,2,-1,-1,-1,-1,-1],'p','partial'],
+ [[1,1,1,1,1,0,-1,1,1,1,-1,1,1,1,1,-1,-1,1,-1,-1,-1,1,-1,-1],'l','limited'],
+ [[1,1,1,1,1,-1,1,1,1,1,1,-1,1,1,-1,-1,-1,1,-1,-1,-1,-1,-1,1],'p','partial'],
+ [[1,1,1,1,1,-1,1,1,1,1,1,-1,1,1,-1,0,-1,1,-1,2,-1,-1,-1,2],'p','partial'],
+ [[1,-1,1,1,1,-1,-1,1,-1,1,1,1,1,1,1,1,-1,1,-1,2,-1,-1,-1,2],'p','partial'],
 ];
-document.getElementById('t').innerHTML=rows.map((r,i)=>{
-  const cells=r[3].map(c=>`<span class="${M[c][1]}">${M[c][0]}</span>`).join('');
-  const tc=r[1]==='verified'?'v':r[1]==='partial'?'p':'l';
-  return `<tr><td class="rk">${String(i+1).padStart(2,'0')}</td><th>${r[0]}</th><td class="cells">${cells}</td><td class="tr ${tc}">${r[1]}</td><td class="sc">${r[2]}/100</td></tr>`;
+document.getElementById('m').innerHTML=rows.map((r,i)=>{
+  const cells=r[0].map(c=>`<span class="mc ${M[c][1]}">${M[c][0]}</span>`).join('');
+  return `<div class="mrow"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="c">${cells}</span><span class="t ${r[1]}">${r[2]}</span></div>`;
 }).join('');
 </script>
 </body></html>
