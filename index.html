@@ -131,6 +131,8 @@
   .xp{max-height:0;overflow:hidden;transition:max-height .35s ease}
   .xp.on{max-height:760px}
   .lg-x td{padding:0;height:auto;text-align:left}
+  /* dossier fits the scroll viewport, not the full table width */
+  .lg-x .xp{position:sticky;left:0}
   .lg-x-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);background:#0f0d09;border-top:1px solid var(--line)}
   .bx{padding:14px 18px 18px}
   .bx+.bx{border-left:1px solid var(--line)}
@@ -542,7 +544,15 @@ function toggleXP(xp,row){
   xp.classList.toggle('on',!was);
   if(row)row.classList.toggle('open',!was);
   xp._row=row;openXP=was?null:xp;
+  fitXP(xp);
 }
+/* league-table dossiers live inside the horizontally-scrolled .lg-wrap:
+   pin them to the visible viewport width, not the full table width. */
+function fitXP(xp){
+  const wrap=xp&&xp.closest('.lg-wrap');
+  if(wrap)xp.style.width=(wrap.clientWidth-2)+'px';
+}
+addEventListener('resize',()=>{if(openXP)fitXP(openXP)});
 function closeOpenXP(){if(openXP){openXP.classList.remove('on');openXP._row&&openXP._row.classList.remove('open');openXP=null}}
 function openCase(h){
   if(!h._xp||!h._row)return;
