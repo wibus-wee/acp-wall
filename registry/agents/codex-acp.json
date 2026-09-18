@@ -10,8 +10,17 @@
   "license": "Apache-2.0",
   "install": null,
   "run": "npx -y @agentclientprotocol/codex-acp@1.12.0",
-  "env": {},
-  "sessionFiles": null,
+  "env": {
+    "CODEX_HOME": "${WORK_DIR}/codex-home",
+    "OPENAI_API_KEY": "probe-mock-key"
+  },
+  "sessionFiles": {
+    "codex-home/auth.json": {
+      "auth_mode": "apikey",
+      "OPENAI_API_KEY": "probe-mock-key"
+    },
+    "codex-home/config.toml": "model = \"gpt-5\"\nmodel_provider = \"probe\"\n\n[model_providers.probe]\nname = \"Probe\"\nbase_url = \"${MOCK_LLM_URL}\"\nwire_api = \"responses\"\n"
+  },
   "dist": {
     "type": "npx",
     "package": "@agentclientprotocol/codex-acp@1.12.0",
@@ -19,6 +28,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "CODEX_HOME relocates codex's state dir into the probe workspace; a probe-issued apikey auth.json satisfies the auth gate and a custom model_provider routes every call to the mock LLM (Responses API).",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

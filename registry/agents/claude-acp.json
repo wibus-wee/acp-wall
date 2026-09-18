@@ -12,7 +12,8 @@
   "run": "npx -y @agentclientprotocol/claude-agent-acp@0.79.0",
   "env": {
     "ANTHROPIC_BASE_URL": "${MOCK_LLM_URL}",
-    "ANTHROPIC_API_KEY": "probe-mock-key"
+    "ANTHROPIC_API_KEY": "probe-mock-key",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
   "sessionFiles": null,
   "dist": {
@@ -22,6 +23,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": "Official ACP adapter wrapping the Claude Agent SDK. Mock LLM depends on the SDK honoring ANTHROPIC_BASE_URL.",
+  "notes": "Official ACP adapter wrapping the Claude Agent SDK. Verified locally: claude honors ANTHROPIC_BASE_URL and completes full tool_use→end_turn turns against the mock's /messages SSE endpoint — the earlier failure was mock-side (query-string routing + model-name mismatch), not auth.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

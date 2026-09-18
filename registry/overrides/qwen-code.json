@@ -1,0 +1,14 @@
+{
+  "env": {
+    "OPENAI_API_KEY": "probe-mock-key",
+    "OPENAI_BASE_URL": "${MOCK_LLM_URL}",
+    "OPENAI_MODEL": "probe-model"
+  },
+  "sessionFiles": {
+    ".qwen/settings.json": {
+      "security": { "auth": { "selectedType": "openai" } },
+      "model": { "name": "probe-model" }
+    }
+  },
+  "notes": "OpenAI-compatible provider selected via project .qwen/settings.json (searched upward from the session cwd) plus OPENAI_* env — every model call routes to the probe's mock LLM. No qwen OAuth account needed."
+}

@@ -9,7 +9,7 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/antigravity-acp.svg",
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/antigravity-acp.json",
-  "run": "${REPO_ROOT}/.cache/agents/antigravity-acp/agy_acp_server.par --uid=",
+  "run": "${REPO_ROOT}/.cache/agents/antigravity-acp/agy_acp_server.par",
   "env": {},
   "sessionFiles": null,
   "dist": {

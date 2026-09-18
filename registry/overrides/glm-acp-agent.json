@@ -1,0 +1,8 @@
+{
+  "env": {
+    "Z_AI_API_KEY": "probe-mock-key",
+    "ACP_GLM_BASE_URL": "${MOCK_LLM_URL}",
+    "ACP_GLM_MODEL": "probe-model"
+  },
+  "notes": "Documented env wiring: ACP_GLM_BASE_URL overrides the Coding Plan endpoint (OpenAI-compatible chat completions) so every model call hits the probe's mock LLM; Z_AI_API_KEY satisfies the credential check. No Z.AI account needed."
+}

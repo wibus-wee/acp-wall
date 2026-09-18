@@ -10,8 +10,13 @@
   "license": "Apache 2.0",
   "install": "node tools/install-dist.mjs registry/agents/fast-agent.json",
   "run": "uvx fast-agent-acp==0.10.1 -x",
-  "env": {},
-  "sessionFiles": null,
+  "env": {
+    "OPENAI_API_KEY": "probe-mock-key",
+    "OPENAI_BASE_URL": "${MOCK_LLM_URL}"
+  },
+  "sessionFiles": {
+    ".fast-agent/fast-agent.yaml": "default_model: openai.probe-model\nopenai:\n  api_key: probe-mock-key\n  base_url: ${MOCK_LLM_URL}\n"
+  },
   "dist": {
     "type": "uvx",
     "package": "fast-agent-acp==0.10.1",
@@ -21,6 +26,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "fast-agent reads fast-agent.yaml from ./.fast-agent relative to the session cwd (probe workspace); OPENAI_* env is the documented override. Model pinned to the openai chat-completions provider — no account needed.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

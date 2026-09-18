@@ -1,6 +1,7 @@
 {
   "env": {
-    "GEMINI_API_KEY": "probe-mock-key"
+    "GEMINI_API_KEY": "probe-mock-key",
+    "GOOGLE_GEMINI_BASE_URL": "${MOCK_LLM_URL}"
   },
-  "notes": "Gemini auth is not OpenAI-compatible — no known env route to the mock LLM; prompt-dependent cells may show unverified."
+  "notes": "GEMINI_API_KEY selects the USE_GEMINI auth type (no OAuth login) and GOOGLE_GEMINI_BASE_URL redirects the genai SDK to the probe's mock LLM — http is permitted for loopback hosts. Mock answers :generateContent/:streamGenerateContent."
 }

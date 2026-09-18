@@ -10,8 +10,14 @@
   "license": "proprietary",
   "install": null,
   "run": "npx -y @xai-official/grok@1.0.36 agent stdio",
-  "env": {},
-  "sessionFiles": null,
+  "env": {
+    "GROK_HOME": "${WORK_DIR}/grok-home",
+    "XAI_API_KEY": "probe-mock-key",
+    "GROK_DISABLE_AUTOUPDATER": "1"
+  },
+  "sessionFiles": {
+    "grok-home/config.toml": "[models]\ndefault = \"probe-model\"\n\n[model.probe-model]\nmodel = \"probe-model\"\nbase_url = \"${MOCK_LLM_URL}\"\nenv_key = \"XAI_API_KEY\"\napi_backend = \"chat_completions\"\n"
+  },
   "dist": {
     "type": "npx",
     "package": "@xai-official/grok@1.0.36",
@@ -22,6 +28,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "GROK_HOME relocates grok's state dir into the probe workspace; config.toml defines a custom model whose base_url is the mock LLM (chat_completions backend) and XAI_API_KEY satisfies the api-key auth path — no grok login / SuperGrok subscription needed.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

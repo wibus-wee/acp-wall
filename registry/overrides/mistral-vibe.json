@@ -1,0 +1,11 @@
+{
+  "env": {
+    "VIBE_HOME": "${WORK_DIR}/vibe-home",
+    "PROBE_API_KEY": "probe-mock-key"
+  },
+  "sessionFiles": {
+    "vibe-home/config.toml": "active_model = \"probe\"\nenable_auto_update = false\nenable_telemetry = false\n\n[[providers]]\nname = \"probe\"\napi_base = \"${MOCK_LLM_URL}\"\napi_key_env_var = \"PROBE_API_KEY\"\napi_style = \"openai\"\nbackend = \"generic\"\n\n[[models]]\nname = \"probe-model\"\nprovider = \"probe\"\nalias = \"probe\"\n",
+    "vibe-home/.env": "PROBE_API_KEY=probe-mock-key\n"
+  },
+  "notes": "VIBE_HOME relocates vibe's config dir into the probe workspace; config.toml defines a generic/openai provider pointed at the mock LLM with a probe model alias, and .env supplies the referenced key. No Mistral account sign-in needed."
+}

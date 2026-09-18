@@ -1,0 +1,12 @@
+{
+  "env": {
+    "GOOSE_PROVIDER": "openai",
+    "GOOSE_PROVIDER__TYPE": "openai",
+    "GOOSE_MODEL": "probe-model",
+    "OPENAI_API_KEY": "probe-mock-key",
+    "OPENAI_HOST": "${MOCK_LLM_URL}",
+    "OPENAI_BASE_PATH": "chat/completions",
+    "GOOSE_PATH_ROOT": "${WORK_DIR}/goose-data"
+  },
+  "notes": "Highest-precedence env wiring: GOOSE_PROVIDER=openai selects the OpenAI-compatible provider; OPENAI_HOST (mock /v1 root) + OPENAI_BASE_PATH=chat/completions lands requests on the mock's /v1/chat/completions. No goose account or interactive configure needed."
+}

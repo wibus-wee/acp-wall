@@ -79,20 +79,30 @@ function pickToolCall(tools: any[]): PickedTool | null {
   return { name: pick.name, args };
 }
 
+/** Flatten provider-specific tool containers (OpenAI tools[], Gemini
+ *  tools[].functionDeclarations[], Anthropic tools[]) to one list. */
+function toolList(body: any): any[] {
+  const raw = Array.isArray(body?.tools) ? body.tools : [];
+  return raw.flatMap((t: any) => (Array.isArray(t?.functionDeclarations) ? t.functionDeclarations : [t]));
+}
+
 const hasToolResult = (body: any): boolean => {
   const msgs = body?.messages ?? body?.input ?? [];
-  if (!Array.isArray(msgs)) return false;
-  return msgs.some(
+  if (Array.isArray(msgs) && msgs.some(
     (m: any) =>
       m?.role === "tool" ||
       m?.type === "function_call_output" ||
       (Array.isArray(m?.content) && m.content.some((c: any) => c?.type === "tool_result"))
+  )) return true;
+  // Gemini: tool results ride back as functionResponse parts in contents[]
+  return Array.isArray(body?.contents) && body.contents.some(
+    (c: any) => Array.isArray(c?.parts) && c.parts.some((p: any) => p?.functionResponse)
   );
 };
 
 /** OpenAI Responses API output items for a completed response. */
 function responsesOutput(body: any): { output: any[]; tool: PickedTool | null } {
-  const tool = hasToolResult(body) ? null : pickToolCall(body?.tools);
+  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
   if (tool) toolRound++;
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const output = tool
@@ -120,22 +130,23 @@ function responsesOutput(body: any): { output: any[]; tool: PickedTool | null } 
   return { output, tool };
 }
 
-function responseObject(output: any[]) {
+function responseObject(output: any[], model: string) {
   return {
     id: "resp_probe",
     object: "response",
     created_at: Math.floor(Date.now() / 1000),
     status: "completed",
-    model: "probe-model",
+    model,
     output,
     usage: { input_tokens: 1, output_tokens: 3, total_tokens: 4 },
   };
 }
 
+const ev = (type: string, data: unknown) => `event: ${type}\ndata: ${JSON.stringify(data)}\n\n`;
+
 /** SSE event sequence for a streamed Responses API reply. */
-function responsesSse(output: any[], tool: PickedTool | null): string {
-  const ev = (type: string, data: unknown) => `event: ${type}\ndata: ${JSON.stringify(data)}\n\n`;
-  const final = responseObject(output);
+function responsesSse(output: any[], tool: PickedTool | null, model: string): string {
+  const final = responseObject(output, model);
   let out = ev("response.created", { type: "response.created", response: { ...final, status: "in_progress", output: [] } });
   const item = output[0];
   out += ev("response.output_item.added", {
@@ -166,7 +177,7 @@ function responsesSse(output: any[], tool: PickedTool | null): string {
 }
 
 function openaiResponse(body: any) {
-  const tool = hasToolResult(body) ? null : pickToolCall(body?.tools);
+  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
   if (tool) toolRound++;
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const message: any = tool
@@ -182,14 +193,30 @@ function openaiResponse(body: any) {
     id: "chatcmpl-probe",
     object: "chat.completion",
     created: Math.floor(Date.now() / 1000),
-    model: "probe-model",
+    model: body?.model ?? "probe-model",
     choices: [{ index: 0, message, finish_reason: tool ? "tool_calls" : "stop" }],
     usage: { prompt_tokens: 1, completion_tokens: 3, total_tokens: 4 },
   };
 }
 
+/** Gemini generateContent — parts carry functionCall or text. */
+function geminiResponse(body: any) {
+  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
+  if (tool) toolRound++;
+  const sawCanary = JSON.stringify(body).includes(CANARY);
+  const parts = tool
+    ? [{ functionCall: { name: tool.name, args: tool.args } }]
+    : [{ text: `PROBE_OK${sawCanary ? " CANARY_ACK" : ""} — exercised by acp-probe mock llm` }];
+  return {
+    candidates: [{ content: { role: "model", parts }, finishReason: "STOP", index: 0 }],
+    usageMetadata: { promptTokenCount: 1, candidatesTokenCount: 3, totalTokenCount: 4 },
+    modelVersion: "probe-model",
+    responseId: "probe-gemini",
+  };
+}
+
 function anthropicResponse(body: any) {
-  const tool = hasToolResult(body) ? null : pickToolCall(body?.tools);
+  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
   if (tool) toolRound++;
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const content = tool
@@ -199,11 +226,56 @@ function anthropicResponse(body: any) {
     id: "msg_probe",
     type: "message",
     role: "assistant",
-    model: "probe-model",
+    // echo the client's model — real clients reject a response whose model
+    // differs from what they requested ("model may not exist")
+    model: body?.model ?? "probe-model",
     content,
     stop_reason: tool ? "tool_use" : "end_turn",
     usage: { input_tokens: 1, output_tokens: 3 },
   };
+}
+
+/** Anthropic SSE sequence for stream:true requests. */
+function anthropicSse(body: any): string {
+  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body));
+  if (tool) toolRound++;
+  const sawCanary = JSON.stringify(body).includes(CANARY);
+  const model = body?.model ?? "probe-model";
+  let out = ev("message_start", {
+    type: "message_start",
+    message: {
+      id: "msg_probe", type: "message", role: "assistant", model,
+      content: [], stop_reason: null, usage: { input_tokens: 1, output_tokens: 1 },
+    },
+  });
+  if (tool) {
+    out += ev("content_block_start", {
+      type: "content_block_start", index: 0,
+      content_block: { type: "tool_use", id: "toolu_probe_1", name: tool.name, input: {} },
+    });
+    out += ev("content_block_delta", {
+      type: "content_block_delta", index: 0,
+      delta: { type: "input_json_delta", partial_json: JSON.stringify(tool.args) },
+    });
+    out += ev("content_block_stop", { type: "content_block_stop", index: 0 });
+    out += ev("message_delta", {
+      type: "message_delta", delta: { stop_reason: "tool_use" }, usage: { output_tokens: 3 },
+    });
+  } else {
+    const text = `PROBE_OK${sawCanary ? " CANARY_ACK" : ""} — exercised by acp-probe mock llm`;
+    out += ev("content_block_start", {
+      type: "content_block_start", index: 0, content_block: { type: "text", text: "" },
+    });
+    out += ev("content_block_delta", {
+      type: "content_block_delta", index: 0, delta: { type: "text_delta", text },
+    });
+    out += ev("content_block_stop", { type: "content_block_stop", index: 0 });
+    out += ev("message_delta", {
+      type: "message_delta", delta: { stop_reason: "end_turn" }, usage: { output_tokens: 3 },
+    });
+  }
+  out += ev("message_stop", { type: "message_stop" });
+  return out;
 }
 
 export function startMockLlm(port = 0): Promise<MockLlm> {
@@ -212,6 +284,7 @@ export function startMockLlm(port = 0): Promise<MockLlm> {
     req.on("data", (c) => (raw += c));
     req.on("end", () => {
       const url = req.url ?? "";
+      const path = url.split("?")[0];
       let body: any = {};
       try { body = JSON.parse(raw || "{}"); } catch { /* leave {} */ }
       const json = (payload: unknown, code = 200) => {
@@ -224,30 +297,56 @@ export function startMockLlm(port = 0): Promise<MockLlm> {
       // the turn to still be open when session/cancel lands
       if (raw.includes("__probe_slow__")) {
         setTimeout(() => {
-          if (url.endsWith("/responses")) {
+          if (path.endsWith("/responses")) {
             const { output, tool } = responsesOutput(body);
             if (body?.stream) {
               res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
-              res.end(responsesSse(output, tool));
-            } else json(responseObject(output));
-          } else if (url.endsWith("/chat/completions") || url.endsWith("/completions")) json(openaiResponse(body));
-          else if (url.endsWith("/messages")) json(anthropicResponse(body));
+              res.end(responsesSse(output, tool, body?.model ?? "probe-model"));
+            } else json(responseObject(output, body?.model ?? "probe-model"));
+          } else if (url.includes(":streamGenerateContent")) {
+            res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
+            res.end(`data: ${JSON.stringify(geminiResponse(body))}\n\n`);
+          } else if (url.includes(":generateContent")) json(geminiResponse(body));
+          else if (path.endsWith("/chat/completions") || path.endsWith("/completions")) json(openaiResponse(body));
+          else if (path.endsWith("/messages")) {
+            if (body?.stream) {
+              res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
+              res.end(anthropicSse(body));
+            } else json(anthropicResponse(body));
+          }
           else res.writeHead(404).end("not found");
         }, 8000);
         return;
       }
-      if (url.endsWith("/responses")) {
+      if (path.endsWith("/responses")) {
         const { output, tool } = responsesOutput(body);
         if (body?.stream) {
           res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
-          res.end(responsesSse(output, tool));
+          res.end(responsesSse(output, tool, body?.model ?? "probe-model"));
           return;
         }
-        return json(responseObject(output));
+        return json(responseObject(output, body?.model ?? "probe-model"));
       }
-      if (url.endsWith("/chat/completions") || url.endsWith("/completions")) return json(openaiResponse(body));
-      if (url.endsWith("/messages")) return json(anthropicResponse(body));
-      if (url.endsWith("/models")) {
+      if (url.includes(":streamGenerateContent")) {
+        res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
+        res.end(`data: ${JSON.stringify(geminiResponse(body))}\n\n`);
+        return;
+      }
+      if (url.includes(":generateContent")) return json(geminiResponse(body));
+      if (url.includes(":countTokens")) return json({ totalTokens: 1 });
+      if (path.endsWith("/chat/completions") || path.endsWith("/completions")) return json(openaiResponse(body));
+      if (path.endsWith("/messages")) {
+        if (body?.stream) {
+          res.writeHead(200, { "content-type": "text/event-stream", "cache-control": "no-cache" });
+          res.end(anthropicSse(body));
+          return;
+        }
+        return json(anthropicResponse(body));
+      }
+      if (path.endsWith("/models")) {
+        if (url.includes("beta")) {
+          return json({ models: [{ name: "models/probe-model", displayName: "probe-model", supportedGenerationMethods: ["generateContent", "streamGenerateContent"] }] });
+        }
         return json({ object: "list", data: [{ id: "probe-model", object: "model" }] });
       }
       res.writeHead(404).end("not found");

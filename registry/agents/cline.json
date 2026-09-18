@@ -9,8 +9,12 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/cline.svg",
   "license": "Apache-2.0",
   "install": null,
-  "run": "npx -y cline@3.0.62 --acp",
-  "env": {},
+  "run": "npx -y cline@3.0.62 auth -p openai -k probe-mock-key -b ${MOCK_LLM_URL} -m probe-model && npx -y cline@3.0.62 --acp",
+  "env": {
+    "CLINE_DIR": "${WORK_DIR}/cline-home",
+    "CLINE_PROVIDER": "openai",
+    "CLINE_MODEL": "probe-model"
+  },
   "sessionFiles": null,
   "dist": {
     "type": "npx",
@@ -21,6 +25,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": null,
+  "notes": "CLINE_DIR isolates cline's state dir; the auth subcommand preconfigures an openai-compatible provider against the mock LLM (documented headless path: -p/-k/-b/-m) before --acp starts. No cline account sign-in needed.",
   "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

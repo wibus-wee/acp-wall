@@ -1,0 +1,9 @@
+{
+  "run": "npx -y cline@3.0.62 auth -p openai -k probe-mock-key -b ${MOCK_LLM_URL} -m probe-model && npx -y cline@3.0.62 --acp",
+  "env": {
+    "CLINE_DIR": "${WORK_DIR}/cline-home",
+    "CLINE_PROVIDER": "openai",
+    "CLINE_MODEL": "probe-model"
+  },
+  "notes": "CLINE_DIR isolates cline's state dir; the auth subcommand preconfigures an openai-compatible provider against the mock LLM (documented headless path: -p/-k/-b/-m) before --acp starts. No cline account sign-in needed."
+}
