@@ -73,6 +73,10 @@ async function timed<T>(fn: () => Promise<T>): Promise<{ ok: boolean; value?: T;
 }
 const code = (e: any) => (typeof e?.code === "number" ? e.code : undefined);
 const isMissing = (e: any) => code(e) === -32601;
+/** a numeric JSON-RPC error proves the method exists — the dispatcher routed
+ *  the call and a handler answered, whatever its reason for refusing. Only
+ *  transport failures (timeout, exit, broken pipe) prove nothing. */
+const isStructured = (e: any) => typeof code(e) === "number" && !(e as any)?.timeout;
 const isAuth = (e: any) =>
   /auth|401|403|permission|quota|login|unauthorized|credential/i.test(String(e?.message ?? e)) ||
   code(e) === -32001;
@@ -222,7 +226,11 @@ export async function probeInitialize(ctx: ProbeContext) {
     90_000
   );
   if (!r.ok) {
-    put(ctx, "initialize", { status: "fail", note: `no valid response: ${String(r.err?.message ?? r.err)}`, latencyMs: r.latencyMs });
+    if (isStructured(r.err)) {
+      put(ctx, "initialize", { status: "partial", note: `endpoint exists — returned error: ${String(r.err?.message ?? r.err).slice(0, 80)}`, latencyMs: r.latencyMs });
+    } else {
+      put(ctx, "initialize", { status: "fail", note: `no valid response: ${String(r.err?.message ?? r.err)}`, latencyMs: r.latencyMs });
+    }
     return false;
   }
   const res: any = r.value;
@@ -260,9 +268,12 @@ export async function probeAuthenticate(ctx: ProbeContext) {
       put(ctx, "authenticate", { status: "partial", note: `endpoint exists — needs real credentials: ${String(r.err?.message ?? r.err).slice(0, 70)}`, latencyMs: r.latencyMs });
       return;
     }
+    const msg = String(r.err?.message ?? r.err);
     put(ctx, "authenticate", {
-      status: advertised ? "fail" : "partial",
-      note: advertised ? String(r.err?.message ?? r.err) : `rejects unknown methodId (endpoint exists): ${String(r.err?.message ?? r.err).slice(0, 60)}`,
+      status: isStructured(r.err) ? "partial" : "fail",
+      note: isStructured(r.err)
+        ? (advertised ? `endpoint exists — returned error: ${msg.slice(0, 70)}` : `rejects unknown methodId (endpoint exists): ${msg.slice(0, 60)}`)
+        : `no valid response: ${msg.slice(0, 80)}`,
       latencyMs: r.latencyMs,
     });
     return;
@@ -278,8 +289,10 @@ export async function probeSessionNew(ctx: ProbeContext) {
     if (isAuth(r.err)) {
       // domain answer proves the endpoint exists — account-gated, not absent
       put(ctx, "session/new", { status: "partial", note: `endpoint exists — account-gated: ${String(r.err?.message ?? r.err).slice(0, 70)}`, latencyMs: r.latencyMs });
+    } else if (isStructured(r.err)) {
+      put(ctx, "session/new", { status: "partial", note: `endpoint exists — returned error: ${String(r.err?.message ?? r.err).slice(0, 70)}`, latencyMs: r.latencyMs });
     } else {
-      put(ctx, "session/new", { status: "fail", note: String(r.err?.message ?? r.err), latencyMs: r.latencyMs });
+      put(ctx, "session/new", { status: "fail", note: `no valid response: ${String(r.err?.message ?? r.err)}`, latencyMs: r.latencyMs });
     }
     return;
   }
@@ -333,9 +346,13 @@ function verdictAlways(
       put(ctx, key, { status: "partial", note: `endpoint exists — account-gated: ${msg.slice(0, 70)}`, latencyMs: r.latencyMs });
       return;
     }
+    // any remaining structured error still proves the handler exists — an
+    // internal refusal (resource not found, adapter bug, bad state) is an
+    // implementation detail, not absence. Only transport failures can't
+    // prove the endpoint is there at all.
     put(ctx, key, {
-      status: advertised ? "fail" : "partial",
-      note: `${advertised ? "advertised but failed" : "endpoint exists but errored"}: ${msg.slice(0, 80)}`,
+      status: isStructured(r.err) ? "partial" : "fail",
+      note: isStructured(r.err) ? `endpoint exists — returned error: ${msg.slice(0, 80)}` : `no valid response: ${msg.slice(0, 80)}`,
       latencyMs: r.latencyMs,
     });
     return;
@@ -466,10 +483,21 @@ export async function probeSessionPrompt(ctx: ProbeContext) {
         note: `endpoint exists — turn blocked by account gate: ${String(e?.message ?? e).slice(0, 90)}`,
         latencyMs: firstErr?.latencyMs,
       });
+    } else if (isStructured(e)) {
+      // same principle: a handler that answers with a structured error exists
+      // — whatever its internal reason for refusing (model config, adapter
+      // bug, missing state). The turn did not run, so downstream cancel/fork
+      // probes must not assume it did.
+      ctx.promptBlocked = true;
+      put(ctx, "session/prompt", {
+        status: "partial",
+        note: `endpoint exists — turn errored: ${String(e?.message ?? e).slice(0, 90)}`,
+        latencyMs: firstErr?.latencyMs,
+      });
     } else {
       put(ctx, "session/prompt", {
         status: "fail",
-        note: String(e?.message ?? e ?? "prompt failed"),
+        note: `no valid response: ${String(e?.message ?? e ?? "prompt failed")}`,
         latencyMs: firstErr?.latencyMs,
       });
     }
@@ -513,9 +541,11 @@ export async function probeCancel(ctx: ProbeContext) {
   ctx.rpc.notify("session/cancel", { sessionId: ctx.sessionId });
   const r = await p;
   if (!r.ok) {
+    // the setup prompt never produced a turn — nothing was provably in-flight
+    // for cancel to interrupt, so the verdict is untestable either way
     put(ctx, "cancel", {
-      status: "fail",
-      note: `cancel prompt errored: ${String(r.err?.message ?? r.err).slice(0, 90)}`,
+      status: "na",
+      note: `no turn to cancel — prompt errored: ${String(r.err?.message ?? r.err).slice(0, 90)}`,
       latencyMs: r.latencyMs,
     });
     return;
@@ -660,7 +690,8 @@ export async function probeProviders(ctx: ProbeContext) {
   } else if (okCount === 3) {
     put(ctx, "providers", { status: advertised ? "pass" : "partial", note: advertised ? results.join(" · ") : `works but not advertised · ${results.join(" · ")}` });
   } else {
-    put(ctx, "providers", { status: advertised ? "fail" : "partial", note: `${advertised ? "advertised but failed — " : ""}${results.join(" · ")}` });
+    const anyAnswer = [list, set, disable].some((x) => x.ok || isStructured(x.err));
+    put(ctx, "providers", { status: anyAnswer ? "partial" : "fail", note: `${anyAnswer ? "endpoint exists — " : "no valid response — "}${results.join(" · ")}` });
   }
 }
 
@@ -681,9 +712,10 @@ export async function probeNes(ctx: ProbeContext) {
     triggerKind: "manual",
   });
   const note = `start ${start.ok ? "ok" : String(start.err?.message ?? start.err).slice(0, 40)} · suggest ${suggest.ok ? "ok" : String(suggest.err?.message ?? suggest.err).slice(0, 40)}`;
+  const anyAnswer = start.ok || suggest.ok || isStructured(start.err) || isStructured(suggest.err);
   put(ctx, "nes", {
-    status: start.ok && suggest.ok ? (advertised ? "pass" : "partial") : advertised ? "fail" : "partial",
-    note: (advertised && !(start.ok && suggest.ok) ? "advertised but failed — " : "") + note,
+    status: start.ok && suggest.ok ? (advertised ? "pass" : "partial") : anyAnswer ? "partial" : "fail",
+    note: (anyAnswer && !(start.ok && suggest.ok) ? "endpoint exists — " : "") + note,
   });
 }
 
@@ -786,8 +818,8 @@ export async function probeLogout(ctx: ProbeContext) {
   const r = await callAgent(ctx, "logout", {});
   if (!r.ok) {
     put(ctx, "logout", {
-      status: isMissing(r.err) ? "na" : "partial",
-      note: isMissing(r.err) ? "not implemented" : `endpoint exists but errored: ${String(r.err?.message ?? r.err).slice(0, 70)}`,
+      status: isMissing(r.err) ? "na" : isStructured(r.err) ? "partial" : "fail",
+      note: isMissing(r.err) ? "not implemented" : isStructured(r.err) ? `endpoint exists — returned error: ${String(r.err?.message ?? r.err).slice(0, 70)}` : `no valid response: ${String(r.err?.message ?? r.err).slice(0, 70)}`,
       definitive: isMissing(r.err),
       latencyMs: r.latencyMs,
     });
