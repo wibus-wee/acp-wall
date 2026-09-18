@@ -89,7 +89,7 @@ export class RpcPeer {
   }
 
   private log(dir: Dir, kind: TranscriptEntry["kind"], method: string | undefined, summary: string, raw?: unknown) {
-    this.transcript.push({ dir, kind, method, summary, ts: Date.now() });
+    this.transcript.push({ dir, kind, method, summary, raw, ts: Date.now() });
   }
 
   private write(obj: unknown) {
@@ -128,8 +128,9 @@ export class RpcPeer {
         this.pending.delete(msg.id);
         clearTimeout(p.timer);
         if (msg.error) {
-          this.log("in", "res", undefined, `error ${msg.error.code}: ${sum(msg.error.message)}`, msg);
-          p.reject(Object.assign(new Error(msg.error.message ?? "rpc error"), { code: msg.error.code }));
+          const detail = msg.error.data !== undefined ? ` — ${sum(msg.error.data?.details ?? msg.error.data, 120)}` : "";
+          this.log("in", "res", undefined, `error ${msg.error.code}: ${sum(msg.error.message)}${detail}`, msg);
+          p.reject(Object.assign(new Error((msg.error.message ?? "rpc error") + detail), { code: msg.error.code, data: msg.error.data }));
         } else {
           this.log("in", "res", undefined, `result ${sum(msg.result, 90)}`, msg);
           p.resolve(msg.result);

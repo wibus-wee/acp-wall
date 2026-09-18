@@ -32,13 +32,33 @@ export interface ViolationRec {
   path: string;
   msg: string;
 }
+/** Evidence for the Lody extension surface (acp-extension-core): what the
+ *  agent advertised under `agentCapabilities._meta.lody`, which `_lody/*`
+ *  endpoints answered, and which `_meta.lody.*` keys showed up on wire
+ *  traffic. Extension stats are reported alongside the ACP cells — they are
+ *  deliberately outside CELL_MAP and never touch score or tier. */
+export interface LodyProbeInfo {
+  /** raw `agentCapabilities._meta.lody` feature map ({} when absent). */
+  advertised: Record<string, any>;
+  /** `_lody/*` methods that gave any answer (ok or structured error). */
+  answered: string[];
+  /** `_lody/*` methods that returned method_not_found. */
+  missing: string[];
+  /** `_meta.lody.*` feature keys observed on agent notifications. */
+  observed: string[];
+}
+
 export interface ProbeContext {
   rpc: RpcPeer;
   calls: ClientCalls;
   initResult: any; // initialize response
+  lody?: LodyProbeInfo;
   sessionId?: string;
   sessionModes?: any;
   sessionConfigOptions?: any;
+  /** exact params sent to session/new — resume/load must replay them so
+   *  agents that fingerprint sessions by creation params see a match. */
+  sessionNewParams?: any;
   /** controlled workspace the session runs in (sessionFiles land here). */
   sessionCwd: string;
   /** true once we've actively configured an ask-before-act policy —
@@ -284,6 +304,7 @@ export async function probeAuthenticate(ctx: ProbeContext) {
 export async function probeSessionNew(ctx: ProbeContext) {
   const params: any = { cwd: ctx.sessionCwd, mcpServers: [] };
   if (ctx.mcpServer) params.mcpServers = [ctx.mcpServer];
+  ctx.sessionNewParams = params;
   const r = await callAgent(ctx, "session/new", params);
   if (!r.ok) {
     if (isAuth(r.err)) {
@@ -369,7 +390,7 @@ export async function probeSessionLoad(ctx: ProbeContext) {
   const r = await callAgent(ctx, "session/load", {
     cwd: ctx.sessionCwd,
     sessionId: ctx.sessionId ?? "probe-session",
-    mcpServers: [],
+    mcpServers: ctx.sessionNewParams?.mcpServers ?? [],
   });
   verdictAlways(ctx, "session/load", r, advertised, "loadSession");
 }
@@ -384,7 +405,11 @@ export async function probeSessionMgmt(ctx: ProbeContext) {
     verdictAlways(ctx, key, r, capOn(caps, flag), `sessionCapabilities.${flag}`);
   };
   await probe("session/list", "session/list", "list", () => ({}));
-  await probe("session/resume", "session/resume", "resume", (sid) => ({ sessionId: sid, cwd: ctx.sessionCwd, mcpServers: [] }));
+  // resume must replay the creation params verbatim: agents that fingerprint a
+  // live session by (cwd, mcpServers) treat a mismatch as "recreate me", which
+  // tears down the only session we have — a zero-turn session then can't resume
+  // and every later op answers Session not found.
+  await probe("session/resume", "session/resume", "resume", (sid) => ({ sessionId: sid, cwd: ctx.sessionCwd, mcpServers: ctx.sessionNewParams?.mcpServers ?? [] }));
   let disposable = ctx.sessionId ?? "probe-session";
   const extra = await callAgent(ctx, "session/new", { cwd: ctx.sessionCwd, mcpServers: [] });
   if (extra.ok && extra.value?.sessionId) disposable = extra.value.sessionId;
@@ -628,7 +653,7 @@ export async function probeSessionFork(ctx: ProbeContext) {
   const r = await callAgent(ctx, "session/fork", {
     sessionId: ctx.sessionId,
     cwd: ctx.sessionCwd,
-    mcpServers: [],
+    mcpServers: ctx.sessionNewParams?.mcpServers ?? [],
   });
   verdictAlways(ctx, "session/fork", r, advertised, "sessionCapabilities.fork");
   if (r.ok && r.value?.sessionId === ctx.sessionId) {
@@ -652,7 +677,7 @@ export async function probeLoadReplay(ctx: ProbeContext) {
   const r = await callAgent(ctx, method, {
     sessionId: ctx.sessionId,
     cwd: ctx.sessionCwd,
-    mcpServers: [],
+    mcpServers: ctx.sessionNewParams?.mcpServers ?? [],
   });
   if (!r.ok) {
     put(ctx, "load:replay", { status: "na", note: `${method} errored: ${String(r.err?.message ?? r.err).slice(0, 60)}` });
@@ -809,6 +834,69 @@ export async function probeMcp(ctx: ProbeContext) {
     put(ctx, "mcp", { status: "partial", note: `no stdio fixture use; client relay ×${ctx.calls.mcpRelayCalls.length} · ${capNote}` });
   } else {
     put(ctx, "mcp", { status: "na", note: `agent never touched the stdio fixture · ${capNote}` });
+  }
+}
+
+/** Lody extension surface (github.com/LodyAI/acp-extension-core). The contract
+ *  advertises optional features under `agentCapabilities._meta.lody` and keeps
+ *  custom traffic in the `_lody/*` namespace for what standard ACP cannot
+ *  carry. The probe reads the advertisement, then knocks on the read-only
+ *  `_lody/*` endpoints — a `method_not_found` means unspoken, any domain
+ *  answer (even "unknown session") proves the endpoint is wired. Session-scoped
+ *  calls get the working sessionId like every other probe; on a fresh probe
+ *  session `goal: pause` has no goal to touch, so it stays read-only in
+ *  practice. `steer`/`subagents/cancel`/`subagents/output` are skipped — they
+ *  mutate or need live task ids, and "exists" evidence isn't worth a
+ *  side-effecting call. */
+export async function probeLody(ctx: ProbeContext) {
+  const advertised =
+    (ctx.initResult?.agentCapabilities?._meta?.lody as Record<string, any> | undefined) ?? {};
+  const feats = Object.keys(advertised);
+  const info: LodyProbeInfo = { advertised, answered: [], missing: [], observed: [] };
+  ctx.lody = info;
+
+  const sid = ctx.sessionId ?? "probe-session";
+  const calls: Array<[string, any]> = [
+    ["_lody/rate_limits/get", {}],
+    ["_lody/subagents/list", { sessionId: sid }],
+    ["_lody/session/history/read", { sessionId: sid }],
+    ["_lody/session/goal", { sessionId: sid, action: "pause" }],
+  ];
+  for (const [method, params] of calls) {
+    // callAgent's schema checks no-op on unbound methods — extension traffic
+    // is contract-checked by acp-extension-core, not the ACP schema.
+    const r = await callAgent(ctx, method, params, 8_000);
+    if (r.ok) info.answered.push(method);
+    else if (isMissing(r.err)) info.missing.push(method);
+    else if (isStructured(r.err)) info.answered.push(method); // domain answer — endpoint exists
+    // timeout/transport errors are inconclusive: neither answered nor absent
+  }
+
+  const observed = new Set<string>();
+  for (const u of ctx.updates) {
+    const lody = u.params?.update?._meta?.lody ?? u.params?._meta?.lody;
+    if (lody && typeof lody === "object") {
+      for (const k of Object.keys(lody)) observed.add(k);
+    }
+  }
+  info.observed = [...observed];
+
+  const featList = feats
+    .map((f) => `${f}${typeof advertised[f]?.version === "number" ? " v" + advertised[f].version : ""}`)
+    .join(", ");
+  const nsNote = info.answered.length
+    ? `_lody/* answered: ${info.answered.map((m) => m.slice(6)).join(", ")}`
+    : "_lody/* silent";
+  if (feats.length > 0) {
+    put(ctx, "lody", {
+      status: "pass",
+      note: `${feats.length} feature(s) advertised: ${featList} · ${nsNote}${info.observed.length ? ` · on wire: ${info.observed.join(", ")}` : ""}`,
+    });
+  } else if (info.answered.length > 0 || info.observed.length > 0) {
+    const bits = [info.answered.length ? nsNote : "", info.observed.length ? `on wire: ${info.observed.join(", ")}` : ""].filter(Boolean).join(" · ");
+    put(ctx, "lody", { status: "partial", note: `${bits} — but no _meta.lody capabilities advertised` });
+  } else {
+    put(ctx, "lody", { status: "na", note: "no _meta.lody capabilities; _lody/* unanswered", definitive: true });
   }
 }
 
