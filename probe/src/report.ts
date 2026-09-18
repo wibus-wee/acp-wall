@@ -1,12 +1,12 @@
 import type { MethodResult, Status, ViolationRec } from "./probes.js";
 import type { TranscriptEntry } from "./rpc.js";
 
-/** Cell order matches the wall's CAPS columns (19 methods/features). */
+/** Cell order matches the wall's CAPS columns (24 methods/features). */
 export const CELL_ORDER = [
   "initialize", "authenticate", "session/new", "session/load", "session/prompt",
-  "sessions/*", "set_mode", "set_config", "cancel", "logout",
-  "message*", "tool_call*", "permission", "plan", "slash_cmds",
-  "fs/*", "terminal/*", "elicitation", "mcp",
+  "sessions/*", "fork", "load:replay", "set_mode", "set_config", "cancel", "logout",
+  "message*", "tool_call*", "usage", "permission", "plan", "slash_cmds",
+  "fs/*", "terminal/*", "elicitation", "providers", "nes", "mcp",
 ] as const;
 
 /** Map probe-result keys onto the wall's columns. */
@@ -17,18 +17,23 @@ const CELL_MAP: Record<string, string[]> = {
   "session/load": ["session/load"],
   "session/prompt": ["session/prompt"],
   "sessions/*": ["session/list", "session/resume", "session/close", "session/delete"],
+  "fork": ["session/fork"],
+  "load:replay": ["load:replay"],
   "set_mode": ["set_mode"],
   "set_config": ["set_config"],
   "cancel": ["cancel"],
   "logout": ["logout"],
   "message*": ["update:message"],
   "tool_call*": ["update:tool_call"],
+  "usage": ["update:usage"],
   "permission": ["request_permission"],
   "plan": ["update:plan"],
   "slash_cmds": ["update:commands"],
   "fs/*": ["fs/read_text_file", "fs/write_text_file"],
   "terminal/*": ["terminal/*"],
   "elicitation": ["elicitation"],
+  "providers": ["providers"],
+  "nes": ["nes"],
   "mcp": ["mcp"],
 };
 
@@ -69,11 +74,16 @@ export function buildReport(opts: {
   transcript: TranscriptEntry[];
 }): Report {
   const notes: Record<string, string> = {};
+  let exercised = 0;
   const cells = CELL_ORDER.map((col) => {
     const keys = CELL_MAP[col] ?? [];
     const w = worst(opts.results, keys);
     if (w === null) return -1;
     if (w.note) notes[col] = w.note;
+    // A method_not_found answer is a definitive "absent" — the endpoint was
+    // exercised. Only circumstantial `na` (no session, agent never asked)
+    // counts as untested.
+    if (keys.some((k) => { const r = opts.results[k]; return r && (r.status !== "na" || r.definitive); })) exercised++;
     return w.status === "pass" ? 1 : w.status === "partial" ? 2 : w.status === "fail" ? 0 : -1;
   });
   const counted = cells.filter((c) => c !== -1);
@@ -81,8 +91,7 @@ export function buildReport(opts: {
     ? Math.round((counted.reduce((a: number, c) => a + (c === 1 ? 1 : c === 2 ? 0.5 : 0), 0) / counted.length) * 100)
     : 0;
   // "Verified" is for *demonstrated* coverage, not just a clean average:
-  // ≥90 score AND ≥60% of columns actually exercised (not ?/na).
-  const exercised = counted.length;
+  // ≥90 score AND ≥60% of columns actually exercised.
   let tier: Report["tier"] =
     score >= 90 && exercised >= Math.ceil(CELL_ORDER.length * 0.6)
       ? "verified"

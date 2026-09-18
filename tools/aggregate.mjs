@@ -15,9 +15,52 @@ const registryDir = resolve(root, arg("--registry", "registry"));
 const out = resolve(root, arg("--out", "data/conformance.js"));
 
 const CAPS = ["initialize", "authenticate", "session/new", "session/load", "session/prompt",
-  "sessions/*", "set_mode", "set_config", "cancel", "logout",
-  "message*", "tool_call*", "permission", "plan", "slash_cmds",
-  "fs/*", "terminal/*", "elicitation", "mcp"];
+  "sessions/*", "fork", "load:replay", "set_mode", "set_config", "cancel", "logout",
+  "message*", "tool_call*", "usage", "permission", "plan", "slash_cmds",
+  "fs/*", "terminal/*", "elicitation", "providers", "nes", "mcp"];
+
+// Reports also carry a positional cells array, but positions shift whenever
+// columns are added — rebuild cells from the keyed methods map so reports from
+// any probe version align with the current columns.
+const CELL_MAP = {
+  "initialize": ["initialize"],
+  "authenticate": ["authenticate"],
+  "session/new": ["session/new"],
+  "session/load": ["session/load"],
+  "session/prompt": ["session/prompt"],
+  "sessions/*": ["session/list", "session/resume", "session/close", "session/delete"],
+  "fork": ["session/fork"],
+  "load:replay": ["load:replay"],
+  "set_mode": ["set_mode"],
+  "set_config": ["set_config"],
+  "cancel": ["cancel"],
+  "logout": ["logout"],
+  "message*": ["update:message"],
+  "tool_call*": ["update:tool_call"],
+  "usage": ["update:usage"],
+  "permission": ["request_permission"],
+  "plan": ["update:plan"],
+  "slash_cmds": ["update:commands"],
+  "fs/*": ["fs/read_text_file", "fs/write_text_file"],
+  "terminal/*": ["terminal/*"],
+  "elicitation": ["elicitation"],
+  "providers": ["providers"],
+  "nes": ["nes"],
+  "mcp": ["mcp"],
+};
+const RANK = { pass: 3, partial: 2, na: 1, fail: 0 };
+function cellsFromMethods(methods) {
+  return CAPS.map((col) => {
+    let w = null;
+    for (const k of CELL_MAP[col] ?? []) {
+      const r = methods?.[k];
+      if (!r) continue;
+      if (w === null || RANK[r.status] < RANK[w.status]) w = r;
+    }
+    if (!w) return -1;
+    return w.status === "pass" ? 1 : w.status === "partial" ? 2 : w.status === "fail" ? 0 : -1;
+  });
+}
 
 // registry: name → entry. Sources: registry/*.json (hand-written, incl.
 // selftest fixtures) and registry/agents/*.json (synced from the official
@@ -59,7 +102,7 @@ if (existsSync(reportsDir)) {
       icon: reg.icon ?? null,
       url: reg.website ?? (reg.repo ? `https://github.com/${reg.repo}` : null),
       tier: r.tier,
-      cells: r.cells,
+      cells: r.methods ? cellsFromMethods(r.methods) : r.cells,
       notes: r.notes ?? {},
       score: r.score,
       version: r.agentVersion,

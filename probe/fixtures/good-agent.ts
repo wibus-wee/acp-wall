@@ -24,8 +24,18 @@ peer.onRequest = async (method, params: any) => {
       };
     case "session/new":
       return { sessionId: "sess-good-1" };
-    case "session/load":
+    case "session/load": {
+      const sid = params?.sessionId;
+      peer.notify("session/update", {
+        sessionId: sid,
+        update: { sessionUpdate: "user_message_chunk", content: { type: "text", text: "earlier question" } },
+      });
+      peer.notify("session/update", {
+        sessionId: sid,
+        update: { sessionUpdate: "agent_message_chunk", content: { type: "text", text: "earlier answer" } },
+      });
       return {};
+    }
     case "session/prompt": {
       const text = params?.prompt?.[0]?.text ?? "";
       if (text.includes("__probe_slow__")) {

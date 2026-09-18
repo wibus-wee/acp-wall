@@ -12,6 +12,10 @@ export interface ClientCalls {
   terminalCalls: Array<{ method: string; terminalId?: string }>;
   permissionRequests: Array<{ options: unknown[]; toolCall?: unknown }>;
   elicitations: Array<{ message?: string }>;
+  /** agent→client MCP-over-ACP relay calls (mcp/connect|message|disconnect)
+   *  and elicitation/complete notifications. */
+  mcpRelayCalls: Array<{ method: string; params?: unknown }>;
+  elicitationCompletes: Array<{ elicitationId?: string }>;
 }
 
 export const STUB_FILE_CONTENT = "PROBE_CANNED_FILE_CONTENT\nline two\n";
@@ -68,6 +72,25 @@ export function makeClientStubs(calls: ClientCalls) {
       case "elicitation/create": {
         calls.elicitations.push({ message: params?.message });
         return { action: "accept", content: { probe: "accepted" } };
+      }
+      case "elicitation/complete": {
+        calls.elicitationCompletes.push({ elicitationId: params?.elicitationId });
+        return {};
+      }
+      // MCP-over-ACP relay: the agent proxies an MCP server through the client.
+      // connect allocates a connection id; message answers a canned result so
+      // the relay path is exercisable end to end.
+      case "mcp/connect": {
+        calls.mcpRelayCalls.push({ method, params });
+        return { connectionId: "probe-mcp-conn" };
+      }
+      case "mcp/disconnect": {
+        calls.mcpRelayCalls.push({ method, params });
+        return {};
+      }
+      case "mcp/message": {
+        calls.mcpRelayCalls.push({ method, params });
+        return { result: { tools: [] } };
       }
       default:
         throw { code: -32601, message: `probe client does not implement ${method}` };

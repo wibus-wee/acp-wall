@@ -20,6 +20,10 @@ export interface MethodResult {
   status: Status;
   note?: string;
   latencyMs?: number;
+  /** true when an `na` verdict is itself a definitive protocol answer
+   *  (the endpoint answered method_not_found) — counts toward exercised
+   *  coverage, unlike "no session"/"agent never X" which mean untested. */
+  definitive?: boolean;
 }
 export interface ViolationRec {
   where: "response" | "notification" | "request" | "client-response" | "client-request" | "envelope";
@@ -240,7 +244,7 @@ export async function probeAuthenticate(ctx: ProbeContext) {
         ctx.dishonesty.push({ claim: "authMethods", detail: "advertised but authenticate → method_not_found" });
         put(ctx, "authenticate", { status: "fail", note: "authMethods advertised but method absent", latencyMs: r.latencyMs });
       } else {
-        put(ctx, "authenticate", { status: "na", note: "not implemented" });
+        put(ctx, "authenticate", { status: "na", note: "not implemented", definitive: true });
       }
       return;
     }
@@ -298,14 +302,15 @@ function verdictAlways(
         ctx.dishonesty.push({ claim, detail: `advertised but ${key} → method_not_found` });
         put(ctx, key, { status: "fail", note: "advertised but method_not_found", latencyMs: r.latencyMs });
       } else {
-        put(ctx, key, { status: "na", note: "not implemented" });
+        put(ctx, key, { status: "na", note: "not implemented", definitive: true });
       }
       return;
     }
     const msg = String(r.err?.message ?? r.err);
-    // "unknown session" errors prove the endpoint exists and validates —
-    // it just has nothing live to operate on
-    if (/(unknown|not found|invalid).{0,30}session|session.{0,30}(unknown|not found)/i.test(msg)) {
+    // "invalid params" on a session-scoped call proves the endpoint exists and
+    // validates input — it just has nothing live to operate on. The error code
+    // is the reliable signal; message phrasing varies across harnesses.
+    if (code(r.err) === -32602 || /(unknown|not found|invalid).{0,30}session|session.{0,30}(unknown|not found)/i.test(msg)) {
       put(ctx, key, { status: "partial", note: `endpoint exists — rejects unknown session: ${msg.slice(0, 60)}`, latencyMs: r.latencyMs });
       return;
     }
@@ -406,7 +411,10 @@ const PROMPTS = [
  *  someone's monthly quota. */
 export async function probeSessionPrompt(ctx: ProbeContext) {
   if (!ctx.sessionId) {
-    put(ctx, "session/prompt", { status: "fail", note: "no sessionId" });
+    // never got a session — prompt is untested, not missing. The failure is
+    // already recorded on session/new; double-counting it here is a false
+    // "doesn't implement prompt" signal.
+    put(ctx, "session/prompt", { status: "na", note: "no session — prompt untested" });
     return;
   }
   let first: Awaited<ReturnType<typeof callAgent>> | null = null;
@@ -452,6 +460,12 @@ export async function probeSessionPrompt(ctx: ProbeContext) {
 export async function probeCancel(ctx: ProbeContext) {
   if (!ctx.sessionId) {
     put(ctx, "cancel", { status: "na", note: "no sessionId" });
+    return;
+  }
+  // a turn that cannot start has nothing to cancel — auth/quota-blocked
+  // prompt makes cancel untestable, not absent
+  if (ctx.results["session/prompt"]?.status === "fail") {
+    put(ctx, "cancel", { status: "na", note: "no turn to cancel" });
     return;
   }
   // __probe_slow__ makes the mock hold its response ~8s so the cancel lands
@@ -534,12 +548,115 @@ export function probeClientCalls(ctx: ProbeContext) {
   }
 }
 
+/** session/fork — fork the working session; a conformant implementation hands
+ *  back a NEW independent sessionId. Forking after the turn means the fork
+ *  carries real conversation history. */
+export async function probeSessionFork(ctx: ProbeContext) {
+  const caps = ctx.initResult?.agentCapabilities?.sessionCapabilities ?? {};
+  const advertised = capOn(caps, "fork");
+  if (!ctx.sessionId) {
+    put(ctx, "session/fork", { status: "na", note: "no session to fork" });
+    return;
+  }
+  const r = await callAgent(ctx, "session/fork", {
+    sessionId: ctx.sessionId,
+    cwd: ctx.sessionCwd,
+    mcpServers: [],
+  });
+  verdictAlways(ctx, "session/fork", r, advertised, "sessionCapabilities.fork");
+  if (r.ok && r.value?.sessionId === ctx.sessionId) {
+    put(ctx, "session/fork", { status: "partial", note: "returned the SAME sessionId — not a real fork", latencyMs: r.latencyMs });
+  }
+}
+
+/** session/load (or /resume) replay: loading a session is supposed to replay
+ *  its durable conversation as session/update notifications — this is what
+ *  separates a real session store from a stub that returns ok and loses state. */
+export async function probeLoadReplay(ctx: ProbeContext) {
+  const priorLoad = ctx.results["session/load"];
+  const priorResume = ctx.results["session/resume"];
+  const method = priorLoad && priorLoad.status !== "na" ? "session/load"
+    : priorResume && priorResume.status !== "na" ? "session/resume" : null;
+  if (!ctx.sessionId || !method) {
+    put(ctx, "load:replay", { status: "na", note: "no loadable session" });
+    return;
+  }
+  const before = ctx.updates.length;
+  const r = await callAgent(ctx, method, {
+    sessionId: ctx.sessionId,
+    cwd: ctx.sessionCwd,
+    mcpServers: [],
+  });
+  if (!r.ok) {
+    put(ctx, "load:replay", { status: "na", note: `${method} errored: ${String(r.err?.message ?? r.err).slice(0, 60)}` });
+    return;
+  }
+  const replayed = ctx.updates.slice(before).filter((u) => u.method === "session/update");
+  const kinds = [...new Set(replayed.map((u) => u.params?.update?.sessionUpdate))].filter(Boolean);
+  if (replayed.length > 0) {
+    put(ctx, "load:replay", { status: "pass", note: `${replayed.length} replayed update(s): ${kinds.join(", ")}` });
+  } else {
+    put(ctx, "load:replay", { status: "partial", note: `${method} succeeded but replayed no conversation` });
+  }
+}
+
+/** providers/list|set|disable — UNSTABLE surface (agentCapabilities.providers).
+ *  set/disable run against a probe-owned providerId so they cannot disturb the
+ *  real provider routing; they still prove the endpoint exists. */
+export async function probeProviders(ctx: ProbeContext) {
+  const advertised = capOn(ctx.initResult?.agentCapabilities ?? {}, "providers");
+  const results: string[] = [];
+  const list = await callAgent(ctx, "providers/list", {});
+  if (!list.ok && isMissing(list.err)) {
+    put(ctx, "providers", { status: "na", note: "not implemented", definitive: true });
+    return;
+  }
+  results.push(list.ok ? `list→${Array.isArray(list.value?.providers) ? list.value.providers.length : "?"} providers` : `list errored`);
+  const set = await callAgent(ctx, "providers/set", { providerId: "acp-probe", apiType: "openai", baseUrl: "http://127.0.0.1:9/v1" });
+  results.push(set.ok ? "set ok" : `set: ${String(set.err?.message ?? set.err).slice(0, 40)}`);
+  const disable = await callAgent(ctx, "providers/disable", { providerId: "acp-probe" });
+  results.push(disable.ok ? "disable ok" : `disable: ${String(disable.err?.message ?? disable.err).slice(0, 40)}`);
+  const okCount = [list, set, disable].filter((x) => x.ok).length;
+  const allMissing = [set, disable].every((x) => !x.ok && isMissing(x.err)) && !list.ok;
+  if (allMissing) {
+    put(ctx, "providers", { status: "na", note: "not implemented", definitive: true });
+  } else if (okCount === 3) {
+    put(ctx, "providers", { status: advertised ? "pass" : "partial", note: advertised ? results.join(" · ") : `works but not advertised · ${results.join(" · ")}` });
+  } else {
+    put(ctx, "providers", { status: advertised ? "fail" : "partial", note: `${advertised ? "advertised but failed — " : ""}${results.join(" · ")}` });
+  }
+}
+
+/** nes/* — UNSTABLE Next-Edit-Suggestions surface. nes/start + nes/suggest are
+ *  the two meaningful request endpoints; accept/reject are notifications. */
+export async function probeNes(ctx: ProbeContext) {
+  const advertised = capOn(ctx.initResult?.agentCapabilities ?? {}, "nes");
+  const start = await callAgent(ctx, "nes/start", { workspaceUri: `file://${ctx.sessionCwd}` });
+  if (!start.ok && isMissing(start.err)) {
+    put(ctx, "nes", { status: "na", note: "not implemented", definitive: true });
+    return;
+  }
+  const suggest = await callAgent(ctx, "nes/suggest", {
+    sessionId: ctx.sessionId ?? "probe-session",
+    uri: `file://${ctx.sessionCwd}/PROBE_CANARY.txt`,
+    version: 1,
+    position: { line: 0, character: 0 },
+    triggerKind: "manual",
+  });
+  const note = `start ${start.ok ? "ok" : String(start.err?.message ?? start.err).slice(0, 40)} · suggest ${suggest.ok ? "ok" : String(suggest.err?.message ?? suggest.err).slice(0, 40)}`;
+  put(ctx, "nes", {
+    status: start.ok && suggest.ok ? (advertised ? "pass" : "partial") : advertised ? "fail" : "partial",
+    note: (advertised && !(start.ok && suggest.ok) ? "advertised but failed — " : "") + note,
+  });
+}
+
 /** Notification-shape probes: what session/update variants were observed. */
 export function probeUpdateShapes(ctx: ProbeContext) {
   const chunks = updatesOf(ctx, "agent_message_chunk").length + updatesOf(ctx, "agent_thought_chunk").length;
   const tools = updatesOf(ctx, "tool_call").length + updatesOf(ctx, "tool_call_update").length;
-  const plans = updatesOf(ctx, "plan").length;
+  const plans = updatesOf(ctx, "plan").length + updatesOf(ctx, "plan_update").length + updatesOf(ctx, "plan_removed").length;
   const cmds = updatesOf(ctx, "available_commands_update").length;
+  const usage = updatesOf(ctx, "usage_update").length;
 
   // a missing-chunk fail requires a turn that actually COMPLETED —
   // cancelled/blocked turns never had the chance to stream
@@ -550,6 +667,7 @@ export function probeUpdateShapes(ctx: ProbeContext) {
   put(ctx, "update:tool_call", { status: tools > 0 ? "pass" : "na", note: tools ? `${tools} update(s)` : "no tool calls this run" });
   put(ctx, "update:plan", { status: plans > 0 ? "pass" : "na", note: plans ? `${plans}` : "none emitted" });
   put(ctx, "update:commands", { status: cmds > 0 ? "pass" : "na", note: cmds ? `${cmds}` : "none emitted" });
+  put(ctx, "update:usage", { status: usage > 0 ? "pass" : "na", note: usage ? `${usage}` : "none emitted" });
 }
 
 /** MCP: the probe's stdio fixture server is passed via mcpServers in
@@ -568,13 +686,22 @@ export async function probeMcp(ctx: ProbeContext) {
     : [];
   const names = new Set(events.map((e) => e.event));
   const caps = ctx.initResult?.agentCapabilities?.mcpCapabilities ?? {};
-  const capNote = caps.http || caps.sse ? `advertised ${[caps.http && "http", caps.sse && "sse"].filter(Boolean).join("+")}` : "no mcpCapabilities";
+  const capNote = [
+    caps.http && "http",
+    caps.sse && "sse",
+    caps.acp && "acp-relay",
+  ].filter(Boolean).join("+") || "no mcpCapabilities";
+  // MCP-over-ACP: agents advertising mcpCapabilities.acp take mcp/message
+  // themselves; agents may also relay THROUGH the client (mcp/connect|message).
+  const relay = ctx.calls.mcpRelayCalls.length > 0 ? ` · client relay ×${ctx.calls.mcpRelayCalls.length}` : "";
   if (names.has("tools/call")) {
-    put(ctx, "mcp", { status: "pass", note: `stdio handshake + tool call · ${capNote}` });
+    put(ctx, "mcp", { status: "pass", note: `stdio handshake + tool call · ${capNote}${relay}` });
   } else if (names.has("initialize") || names.has("initialized")) {
-    put(ctx, "mcp", { status: "pass", note: `stdio handshake observed · ${capNote}` });
+    put(ctx, "mcp", { status: "pass", note: `stdio handshake observed · ${capNote}${relay}` });
   } else if (names.has("spawned")) {
-    put(ctx, "mcp", { status: "partial", note: `fixture spawned but never initialized · ${capNote}` });
+    put(ctx, "mcp", { status: "partial", note: `fixture spawned but never initialized · ${capNote}${relay}` });
+  } else if (ctx.calls.mcpRelayCalls.length > 0) {
+    put(ctx, "mcp", { status: "partial", note: `no stdio fixture use; client relay ×${ctx.calls.mcpRelayCalls.length} · ${capNote}` });
   } else {
     put(ctx, "mcp", { status: "na", note: `agent never touched the stdio fixture · ${capNote}` });
   }

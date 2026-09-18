@@ -8,6 +8,7 @@ import {
   probeInitialize, probeAuthenticate, probeSessionNew, probeSessionLoad,
   probeSessionMgmt, probeSetMode, probeSetConfig, probeSessionPrompt,
   probeCancel, probeClientCalls, probeUpdateShapes, probeMcp, probeLogout,
+  probeSessionFork, probeLoadReplay, probeProviders, probeNes,
   checkAgentRequest, checkNotification, checkClientResponse, applyViolations,
   recordEnvelopeViolation,
   type ProbeContext,
@@ -114,7 +115,7 @@ async function main() {
   const rpc = RpcPeer.launch(runCmd, env, workDir);
   const calls: ClientCalls = {
     fsReads: [], fsWrites: [], terminalCreates: [], terminalCalls: [],
-    permissionRequests: [], elicitations: [],
+    permissionRequests: [], elicitations: [], mcpRelayCalls: [], elicitationCompletes: [],
   };
   const mcpMarker = join(workDir, ".mcp-marker.jsonl");
   const ctx: ProbeContext = {
@@ -164,8 +165,12 @@ async function main() {
     await step("set_config", () => probeSetConfig(ctx));
     await step("session/prompt", () => probeSessionPrompt(ctx));
     await step("cancel", () => probeCancel(ctx));
+    await step("session/fork", () => probeSessionFork(ctx));
+    await step("load:replay", () => probeLoadReplay(ctx));
     await step("client-calls", () => probeClientCalls(ctx));
     await step("update-shapes", () => probeUpdateShapes(ctx));
+    await step("providers", () => probeProviders(ctx));
+    await step("nes", () => probeNes(ctx));
     await step("mcp", () => probeMcp(ctx));
     // logout last — it may terminate the agent/session
     await step("logout", () => probeLogout(ctx));
