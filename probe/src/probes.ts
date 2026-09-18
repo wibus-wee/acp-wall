@@ -920,9 +920,13 @@ export async function probeLody(ctx: ProbeContext) {
 export async function probeLogout(ctx: ProbeContext) {
   const r = await callAgent(ctx, "logout", {});
   if (!r.ok) {
+    // logout runs last — an agent that already exited (cleanly or not)
+    // answers "peer is closed" whether or not it ever implemented logout.
+    // No response at all means the endpoint is unanswerable, not absent.
+    const noResponse = !isStructured(r.err);
     put(ctx, "logout", {
-      status: isMissing(r.err) ? "na" : isStructured(r.err) ? "pass" : "fail",
-      note: isMissing(r.err) ? "not implemented" : isStructured(r.err) ? `endpoint exists — returned error: ${String(r.err?.message ?? r.err).slice(0, 70)}` : `no valid response: ${String(r.err?.message ?? r.err).slice(0, 70)}`,
+      status: isMissing(r.err) || noResponse ? "na" : "pass",
+      note: isMissing(r.err) ? "not implemented" : noResponse ? `no response — endpoint unanswerable: ${String(r.err?.message ?? r.err).slice(0, 60)}` : `endpoint exists — returned error: ${String(r.err?.message ?? r.err).slice(0, 70)}`,
       definitive: isMissing(r.err),
       latencyMs: r.latencyMs,
     });

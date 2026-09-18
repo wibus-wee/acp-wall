@@ -1,0 +1,23 @@
+{
+  "name": "zcode",
+  "display": "ZCode",
+  "vendor": "Leeeon233",
+  "version": "0.38.0",
+  "description": "ACP bridge for the headless ZCode app-server (GLM Coding Plan) — translates its event stream into session/update, prefers elicitation/create",
+  "repo": "Leeeon233/acp-extension-zcode",
+  "website": "https://github.com/Leeeon233/acp-extension-zcode",
+  "icon": null,
+  "install": "npx -y acp-extension-zcode@0.38.0 --help",
+  "run": "npx -y acp-extension-zcode@0.38.0",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "acp-extension-zcode@0.38.0",
+    "args": []
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": "Bridge only — sessions need the real zcode CLI (desktop-app bundle or PATH) plus ~/.zcode creds; probe measures the adapter's own surface.",
+  "_synced": "hand-written · 2026-09-18"
+}
