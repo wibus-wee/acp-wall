@@ -111,6 +111,7 @@ if (existsSync(reportsDir)) {
       continue;
     }
     harnesses.push({
+      id: r.harness,
       n: reg.display ?? reg.name ?? r.harness,
       v: [reg.vendor, r.agentVersion ? `v${r.agentVersion}` : null].filter(Boolean).join(" — "),
       desc: reg.description ?? null,
@@ -143,6 +144,30 @@ if (existsSync(reportsDir)) {
     });
   }
 }
+
+// Carry forward rows for harnesses that weren't reprobed in this run: the
+// artifact download only sees THIS run's reports, so a partial matrix (a
+// single-harness dispatch, or one failed upload) would otherwise erase
+// everyone else. Carried rows keep their original probedAt, so staleness
+// stays visible. A row whose registry entry disappeared is dropped —
+// registry is the source of truth for who belongs on the wall.
+const fresh = new Set(harnesses.map((h) => h.id));
+const displayToId = {};
+for (const [name, e] of Object.entries(registry)) displayToId[e.display ?? name] = name;
+let prev = null;
+try {
+  const src = readFileSync(out, "utf8");
+  prev = JSON.parse(src.slice(src.indexOf("=") + 1).trim().replace(/;$/, ""));
+} catch { /* no prior file — first aggregate */ }
+let carried = 0;
+for (const old of prev?.harnesses ?? []) {
+  const oid = old.id ?? displayToId[old.n];
+  const reg = oid ? registry[oid] : null;
+  if (!reg || reg.selftest || fresh.has(oid)) continue;
+  harnesses.push(old);
+  carried++;
+}
+if (carried) console.log(`carried ${carried} harness(es) not reprobed this run`);
 
 harnesses.sort((a, b) => b.score - a.score);
 
