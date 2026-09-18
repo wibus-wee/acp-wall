@@ -1,10 +1,14 @@
 # The Wall
 
-A public ledger of ACP (Agent Client Protocol) conformance. Every harness claims
-"ACP support" — this repo asks a ruder question: *which methods, exactly?*
+A public ledger of ACP (Agent Client Protocol) compatibility. Every harness
+claims "ACP support" — this repo asks a ruder question: *which methods, exactly?*
 
-- **荣誉墙 Hall of Honor** — harnesses that implement the protocol correctly.
-- **耻辱墙 Wall of Shame** — harnesses that omit, misrepresent, or fumble it.
+- **已验证 Verified** — probed methods exercise cleanly against the schema.
+- **部分兼容 Partially compatible** — real support, with gaps.
+- **兼容性有限 Limited** — most exercised methods missing or failing.
+
+Compatibility is separate from honesty: a harness that advertises a method and
+then answers `method_not_found` carries a `dishonesty` flag whatever its tier.
 
 The site is a static page (`index.html` at the repo root — serve the repo or
 open it directly). The data behind it is real: produced by `acp-probe`, a
@@ -86,16 +90,16 @@ Three distinct failure flavors, kept separate on purpose:
 
 - **absent** — `method_not_found` → `✗` (core methods) or `·` (optional ones)
 - **claimed-but-absent** — advertised in `initialize` but `method_not_found`
-  when exercised → `report.dishonesty`; dishonest harnesses cannot sit on the
-  honor wall
+  when exercised → `report.dishonesty`; dishonest harnesses cannot be marked
+  verified
 - **auth-blocked** — the endpoint exists but demands proprietary credentials
   (e.g. `kimi acp` requires Moonshot OAuth — issue #1330) → `✗`/`~` cells with
   the auth error as note. Requiring a vendor account is itself a wall-worthy
   fact: the probe is CI-driven and holds no accounts
 
 Score = average over exercised cells (pass=1, partial=0.5); `·` cells don't
-count. Tier: `≥90` **and** ≥60% cells exercised → honor · `≥50` → partial ·
-else shame — then dishonesty adjustments.
+count. Tier: `≥90` **and** ≥60% cells exercised → verified · `≥50` → partial ·
+else limited — then dishonesty adjustments.
 
 ## Running locally
 
@@ -115,8 +119,8 @@ node tools/aggregate.mjs
 # then open index.html — it loads data/conformance.js live
 ```
 
-Expected self-test results: `fixture-good` → 100/honor · `fixture-mini` → partial
-· `fixture-liar` → shame with `dishonesty: loadSession`.
+Expected self-test results: `fixture-good` → 100/verified · `fixture-mini` →
+partial · `fixture-liar` → limited with `dishonesty: loadSession`.
 
 ## Appealing a result
 

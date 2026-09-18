@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="The Wall — a public ledger of ACP (Agent Client Protocol) conformance. Which harnesses implement the protocol honestly, and which leave methods out.">
-<title>The Wall — ACP Conformance Ledger</title>
+<meta name="description" content="The Wall — a public ledger of ACP (Agent Client Protocol) compatibility. How much of the protocol each harness actually implements, measured by probe.">
+<title>The Wall — ACP Compatibility Ledger</title>
 <style>
   :root{
     --paper:#12100c; --paper2:#171410; --ink:#e8dfc8; --ink-dim:#a89d83;
@@ -69,8 +69,8 @@
   .sec-h .t{font-size:12px;letter-spacing:.26em;text-transform:uppercase;font-weight:700}
   .sec-h .zh{font-size:12px;color:var(--faint)}
   .sec-h .n{margin-left:auto;font-size:10px;color:var(--faint);letter-spacing:.14em}
-  .sec.honor .sec-h .t{color:var(--gold)}
-  .sec.shame .sec-h .t{color:var(--red)}
+  .sec.verified .sec-h .t{color:var(--gold)}
+  .sec.limited .sec-h .t{color:var(--ink-dim)}
 
   /* entries */
   .entry{border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s}
@@ -82,7 +82,7 @@
   .e-sc{text-align:right}
   .e-sc b{font-size:16px;font-weight:500}
   .e-sc .ms{display:block;font-size:9px;color:var(--faint);margin-top:2px;letter-spacing:.08em}
-  .honor .e-sc b{color:var(--gold)} .shame .e-sc b{color:var(--red)}
+  .verified .e-sc b{color:var(--gold)} .limited .e-sc b{color:var(--ink-dim)}
   .star{color:var(--gold)}
   .chev{display:inline-block;font-size:9px;color:var(--faint);margin-left:10px;transition:transform .2s}
   .entry:hover .chev{color:var(--gold)}
@@ -122,8 +122,8 @@
   .mc{font-family:ui-monospace,Menlo,monospace;font-size:15px;font-weight:600}
   .mc.ok{color:var(--green)} .mc.pr{color:var(--gold)} .mc.no{color:var(--red)} .mc.un{color:#4a4336}
   .lg-t td.lg-sc{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink);padding-right:14px;text-align:right}
-  .lg-t tr.t-honor td.lg-sc{color:var(--gold)}
-  .lg-t tr.t-shame td.lg-sc{color:var(--red)}
+  .lg-t tr.t-verified td.lg-sc{color:var(--gold)}
+  .lg-t tr.t-limited td.lg-sc{color:var(--ink-dim)}
   .lg-t tbody tr{ cursor:pointer}
   .lg-empty{padding:30px;text-align:center;font-style:italic;color:var(--faint);font-size:14px}
 
@@ -176,7 +176,7 @@
   <div class="nameplate">
     <div class="gl">✦ ❦ ✦</div>
     <h1>The Wall</h1>
-    <div class="sub-t">荣誉墙 · 耻辱墙 · A PUBLIC LEDGER OF ACP CONFORMANCE</div>
+    <div class="sub-t">已验证 · 部分兼容 · 兼容性有限 · A PUBLIC LEDGER OF ACP COMPATIBILITY</div>
   </div>
   <div class="dateline">
     <span id="dateline-day">—</span>
@@ -185,12 +185,12 @@
   </div>
 
   <div class="headline">
-    <h2>Who keeps <em>the protocol</em> honest —<br>and who lets it <em class="s">take the blame.</em></h2>
+    <h2>Who actually <em>speaks the protocol</em> —<br>and who just <em class="s">claims to.</em></h2>
     <p class="standfirst">
       Every harness claims <b>“ACP support.”</b> Our probe asks a ruder question:
       <i>which methods, exactly?</i> Tonight's ledger records <span id="lede-count">no</span> implementations.
-      Below: the <b>league table</b> — fourteen methods to a row — then the honours,
-      the middle ground, and the wall of shame. <b>Click any name to open its case file.</b>
+      Below: the <b>league table</b> — <span id="lede-caps">nineteen</span> methods to a row — then the verified,
+      the partial, and the limited. <b>Click any name to open its case file.</b>
     </p>
     <p class="kbd-hint">PRESS <span class="mono">⌘K</span> TO CONSULT THE INDEX</p>
   </div>
@@ -199,7 +199,7 @@
 
   <div class="plaque-no1" id="plaque" style="display:none">
     <div class="plaque-in">
-      <div class="cert">Certificate № 001 · Hall of Honor · 荣誉墙</div>
+      <div class="cert">Certificate № 001 · Verified Compatible · 已验证兼容</div>
       <h3 id="plaque-name"></h3>
       <div class="of" id="plaque-of"></div>
       <div class="serial" id="plaque-sn"></div>
@@ -218,24 +218,24 @@
 </div>
 
 <div class="page">
-  <section class="sec honor">
-    <div class="sec-h"><span class="t">Hall of Honor</span><span class="zh">荣誉墙</span><span class="n" id="cnt-honor"></span></div>
-    <div id="list-honor"></div>
+  <section class="sec verified">
+    <div class="sec-h"><span class="t">Verified Compatible</span><span class="zh">已验证</span><span class="n" id="cnt-verified"></span></div>
+    <div id="list-verified"></div>
   </section>
 
   <section class="sec">
-    <div class="sec-h"><span class="t">The Middle Ground</span><span class="zh">半成品</span><span class="n" id="cnt-mid"></span></div>
+    <div class="sec-h"><span class="t">Partially Compatible</span><span class="zh">部分兼容</span><span class="n" id="cnt-partial"></span></div>
     <div id="list-partial"></div>
   </section>
 
-  <section class="sec shame">
-    <div class="sec-h"><span class="t">Wall of Shame</span><span class="zh">耻辱墙</span><span class="n" id="cnt-shame"></span></div>
-    <div id="list-shame"></div>
+  <section class="sec limited">
+    <div class="sec-h"><span class="t">Limited Compatibility</span><span class="zh">兼容性有限</span><span class="n" id="cnt-limited"></span></div>
+    <div id="list-limited"></div>
   </section>
 
   <p class="foot-note">
-    “If you implement ACP, implement it — leave a few methods out and it's the
-    protocol itself, and the rest of us clients, that get yelled at.”
+    “If you advertise a method, implement it — leave it silently absent and it's
+    the protocol itself, and the rest of us clients, that get yelled at.”
     <span class="who">— OVERHEARD IN THE CLIENT MINES, NOW PRINTED IN THE PUBLIC INTEREST</span>
   </p>
 
@@ -249,7 +249,7 @@
 <!-- index palette -->
 <div class="pal-scrim" id="pal-scrim"></div>
 <div class="pal" id="pal">
-  <input id="pal-in" placeholder="Consult the index — harness, or tier:honor / tier:shame …" autocomplete="off">
+  <input id="pal-in" placeholder="Consult the index — harness, or tier:verified / tier:limited …" autocomplete="off">
   <div class="pal-list" id="pal-list"></div>
   <div class="pal-foot"><span>↑↓ navigate</span><span>↵ open case file</span><span>esc close</span></div>
 </div>
@@ -266,8 +266,8 @@
   .pal-item .tr{margin-left:auto;font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--faint)}
   .pal-item.sel{background:rgba(217,180,95,.08)}
   .pal-item .tt{font-size:8.5px;font-family:ui-monospace,Menlo,monospace;letter-spacing:.14em;padding:2px 6px;border-radius:4px;border:1px solid var(--line2);color:var(--dim,var(--faint))}
-  .pal-item .tt.honor{color:var(--gold);border-color:rgba(217,180,95,.4)}
-  .pal-item .tt.shame{color:var(--red);border-color:rgba(205,98,89,.4)}
+  .pal-item .tt.verified{color:var(--gold);border-color:rgba(217,180,95,.4)}
+  .pal-item .tt.limited{color:var(--ink-dim);border-color:var(--line2)}
   .pal-foot{padding:9px 14px;border-top:1px solid var(--line);font-size:9.5px;color:var(--faint);display:flex;gap:14px;font-family:ui-monospace,Menlo,monospace}
 </style>
 
@@ -294,6 +294,7 @@ function score(h){let p=0,m=0;h.cells.forEach(c=>{if(c===-1)return;m++;p+=c===1?
     document.getElementById('issue-no').textContent=`№ ${Math.max(1,Math.floor((Date.now()-d.getTime())/86400000)+1)}`;
   }
   document.getElementById('lede-count').textContent=H.length?String(H.length):"no";
+  document.getElementById('lede-caps').textContent=CAPS.length;
 })();
 
 const CELL={1:"✓",2:"~",0:"✗","-1":"—"};
@@ -309,7 +310,7 @@ function entry(h){
   el.innerHTML=`<div class="e-row">
       <span class="e-rk mono">${String(h._rk).padStart(2,'0')}</span>
       <span class="e-nm">${h.n}${h.star?' <span class="star">✦</span>':''}<span class="ven">${h.v||''}</span></span>
-      <span class="e-sc"><b class="mono">${done?'—':s}</b><span class="ms">${done?'0/14':'/100'}</span><span class="chev">➤</span></span>
+      <span class="e-sc"><b class="mono">${done?'—':s}</b><span class="ms">${done?'0/'+CAPS.length:'/100'}</span><span class="chev">➤</span></span>
     </div>`;
   const xp=document.createElement('div');xp.className='e-x xp';
   xp.innerHTML=detailHTML(h);wireCopy(xp,h);
@@ -318,19 +319,19 @@ function entry(h){
   return el;
 }
 const byTier=t=>all.filter(h=>h.tier===t);
-['honor','partial','shame'].forEach(t=>{
+['verified','partial','limited'].forEach(t=>{
   const list=byTier(t);
   const box=document.getElementById('list-'+t);
   if(list.length)box.append(...list.map(entry));
   else box.innerHTML='<div class="empty-sec">— no entries this edition —</div>';
 });
-document.getElementById('cnt-honor').textContent=`${byTier('honor').length} ENTRIES`;
-document.getElementById('cnt-mid').textContent=`${byTier('partial').length} ENTRIES`;
-document.getElementById('cnt-shame').textContent=`${byTier('shame').length} ENTRIES`;
+document.getElementById('cnt-verified').textContent=`${byTier('verified').length} ENTRIES`;
+document.getElementById('cnt-partial').textContent=`${byTier('partial').length} ENTRIES`;
+document.getElementById('cnt-limited').textContent=`${byTier('limited').length} ENTRIES`;
 
-/* №1 plaque: minted for the top-scoring honor entry, if any */
+/* №1 plaque: minted for the top-scoring verified entry, if any */
 (function(){
-  const top=all.find(h=>h.tier==='honor');
+  const top=all.find(h=>h.tier==='verified');
   if(!top)return;
   const passed=top.cells.filter(c=>c===1).length;
   const pl=document.getElementById('plaque');pl.style.display='';
@@ -372,10 +373,10 @@ document.getElementById('cnt-shame').textContent=`${byTier('shame').length} ENTR
 (function(){
   const items=all.length?all.map(h=>{
     const s=score(h);
-    const cls=h.tier==='honor'?'b':h.tier==='shame'?'i':'u';
+    const cls=h.tier==='verified'?'b':'u';
     return `<span>${h.n.toUpperCase().replace(/[\s()]/g,'_')} <${cls}>${h.cells.every(c=>c===-1)?'——':s}</${cls}></span>`;
   }).join('&nbsp;&nbsp;·&nbsp;&nbsp;'):'<span>THE LEDGER AWAITS ITS FIRST PRINTING</span>';
-  document.getElementById('tape').innerHTML=(items+'&nbsp;&nbsp;·&nbsp;&nbsp;<i>耻辱墙 — PROBED DAILY</i>&nbsp;&nbsp;·&nbsp;&nbsp;').repeat(2);
+  document.getElementById('tape').innerHTML=(items+'&nbsp;&nbsp;·&nbsp;&nbsp;<span class="u">ACP COMPATIBILITY — PROBED DAILY</span>&nbsp;&nbsp;·&nbsp;&nbsp;').repeat(2);
 })();
 
 /* ---------- inline dossier (expandable detail) ---------- */
@@ -415,7 +416,7 @@ function wireCopy(root,h){
   b.onclick=e=>{
     e.stopPropagation();
     const done=h.cells.every(c=>c===-1);
-    const txt=`${h.n} — ACP conformance ${done?'no cells exercised':score(h)+'/100'} (${h.tier}) — The Wall`;
+    const txt=`${h.n} — ACP compatibility ${done?'no cells exercised':score(h)+'/100'} (${h.tier}) — The Wall`;
     (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).catch(()=>{});
     b.textContent='✓ copied';setTimeout(()=>b.textContent='copy report',1400);
   };
@@ -453,7 +454,7 @@ function openPal(){pal.classList.add('open');pscrim.classList.add('open');pin.va
 function closePal(){pal.classList.remove('open');pscrim.classList.remove('open')}
 function renderPal(q){
   let list=all;
-  const m=q.match(/^tier:(honor|partial|shame)$/);
+  const m=q.match(/^tier:(verified|partial|limited)$/);
   if(m)list=list.filter(h=>h.tier===m[1]);
   else if(q)list=list.filter(h=>h.n.toLowerCase().includes(q.toLowerCase())||(h.v||'').toLowerCase().includes(q.toLowerCase()));
   palItems=list;palIdx=0;

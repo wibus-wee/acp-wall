@@ -68,7 +68,7 @@ if (existsSync(reportsDir)) {
       repo: reg.repo ?? null,
       dishonesty: r.dishonesty ?? [],
       violations: r.violations ?? [],
-      star: r.tier === "honor" && r.score === 100 ? 1 : 0,
+      star: r.tier === "verified" && r.score === 100 ? 1 : 0,
       _file: f,
     });
   }
@@ -89,4 +89,4 @@ writeFileSync(
     `window.__ACP_WALL__ = ${JSON.stringify(payload, null, 2)};\n`
 );
 console.log(`aggregated ${harnesses.length} report(s) → ${out}`);
-for (const h of harnesses) console.log(`  ${h.tier.padEnd(7)} ${String(h.score).padStart(3)}  ${h.n}`);
+for (const h of harnesses) console.log(`  ${h.tier.padEnd(8)} ${String(h.score).padStart(3)}  ${h.n}`);

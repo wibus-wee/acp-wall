@@ -51,7 +51,7 @@ export interface Report {
   specVersion: number;
   probedAt: string;
   score: number;
-  tier: "honor" | "partial" | "shame";
+  tier: "verified" | "partial" | "limited";
   cells: number[]; // 1 pass · 2 partial · 0 fail · -1 n/a
   notes: Record<string, string>; // column → detail of the worst probe behind it
   methods: Record<string, MethodResult>;
@@ -80,18 +80,18 @@ export function buildReport(opts: {
   const score = counted.length
     ? Math.round((counted.reduce((a: number, c) => a + (c === 1 ? 1 : c === 2 ? 0.5 : 0), 0) / counted.length) * 100)
     : 0;
-  // Honor is for *demonstrated* coverage, not just a clean average:
-  // ≥90 score AND ≥60% of columns actually verified (not ?/na).
-  const verified = counted.length;
+  // "Verified" is for *demonstrated* coverage, not just a clean average:
+  // ≥90 score AND ≥60% of columns actually exercised (not ?/na).
+  const exercised = counted.length;
   let tier: Report["tier"] =
-    score >= 90 && verified >= Math.ceil(CELL_ORDER.length * 0.6)
-      ? "honor"
+    score >= 90 && exercised >= Math.ceil(CELL_ORDER.length * 0.6)
+      ? "verified"
       : score >= 50
         ? "partial"
-        : "shame";
-  // Claimed-but-absent is worse than absent: liars can't sit on the honor wall.
-  if (opts.dishonesty.length > 0 && tier === "honor") tier = "partial";
-  if (opts.dishonesty.length > 0 && score < 70) tier = "shame";
+        : "limited";
+  // Claimed-but-absent is worse than absent: liars can't be marked verified.
+  if (opts.dishonesty.length > 0 && tier === "verified") tier = "partial";
+  if (opts.dishonesty.length > 0 && score < 70) tier = "limited";
   return {
     harness: opts.harness,
     agentName: opts.initResult?.agentInfo?.name,

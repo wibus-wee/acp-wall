@@ -2,7 +2,7 @@
  * liar-agent — advertises capabilities it doesn't implement.
  * loadSession: true in initialize, but session/load → method_not_found.
  * session/prompt resolves without ever emitting session/update.
- * This is the wall of shame's raison d'être.
+ * This is the dishonesty flag's raison d'être.
  */
 import { RpcPeer } from "../src/rpc.js";
 
