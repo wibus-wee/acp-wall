@@ -1,0 +1,30 @@
+{
+  "name": "bub",
+  "display": "Bub",
+  "vendor": "Bub contributors",
+  "version": "0.4.4",
+  "description": "Python agent framework — agents that live alongside people; ACP served by the bub-acp-server plugin",
+  "repo": "bubbuild/bub",
+  "website": "https://bub.build",
+  "icon": null,
+  "install": "uvx --from bub==0.4.4 --with bub-acp-server==0.0.4 bub --help",
+  "run": "uvx --from bub==0.4.4 --with bub-acp-server==0.0.4 bub acp",
+  "env": {
+    "BUB_MODEL": "openai:probe-model",
+    "BUB_API_KEY": "probe-mock-key",
+    "BUB_API_BASE": "${MOCK_LLM_URL}",
+    "BUB_HOME": "${WORK_DIR}/bub-home"
+  },
+  "sessionFiles": null,
+  "dist": {
+    "type": "uvx",
+    "package": "bub",
+    "args": [
+      "acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": "ACP server plugin (bub-acp-server) rides alongside bub via uvx --with; model comes from BUB_* env.",
+  "_synced": "hand-written · 2026-09-18"
+}

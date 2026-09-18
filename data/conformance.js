@@ -1571,6 +1571,100 @@ window.__ACP_WALL__ = {
       "star": 0
     },
     {
+      "n": "Bub",
+      "v": "Bub contributors — v0.4.4",
+      "desc": "Python agent framework — agents that live alongside people; ACP served by the bub-acp-server plugin",
+      "icon": null,
+      "url": "https://bub.build",
+      "tier": "partial",
+      "cells": [
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        0,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "notes": {
+        "initialize": "v1 · bub 0.4.4",
+        "authenticate": "not implemented",
+        "session/new": "sessionId=954e0ef80f32",
+        "session/prompt": "3/3 turns · stopReason=end_turn",
+        "sessions/*": "not implemented",
+        "fork": "not implemented",
+        "load:replay": "10 replayed update(s): user_message_chunk, tool_call, tool_call_update, agent_message_chunk",
+        "set_mode": "not implemented",
+        "set_config": "configId=model=openai:probe-model",
+        "cancel": "turn ended stopReason=end_turn after 8018ms — cancel not honored",
+        "logout": "not implemented",
+        "message*": "8 chunk(s)",
+        "tool_call*": "5 update(s)",
+        "usage": "4",
+        "permission": "agent never asked; no ask policy configured",
+        "plan": "none emitted",
+        "slash_cmds": "none emitted",
+        "fs/*": "agent never delegated a file read",
+        "terminal/*": "create×1 lifecycle×3",
+        "elicitation": "agent never elicited",
+        "providers": "not implemented",
+        "nes": "not implemented",
+        "mcp": "agent never touched the stdio fixture · no mcpCapabilities"
+      },
+      "score": 42,
+      "version": "0.4.4",
+      "probedAt": "2026-09-18T15:38:11.219Z",
+      "run": "uvx --from bub==0.4.4 --with bub-acp-server==0.0.4 bub acp",
+      "repo": "bubbuild/bub",
+      "dishonesty": [],
+      "violations": [],
+      "lody": {
+        "advertised": {
+          "steering": {
+            "version": 1,
+            "transport": "request",
+            "upstreamTurn": "same",
+            "configPolicy": "active"
+          }
+        },
+        "answered": [],
+        "missing": [
+          "_lody/rate_limits/get",
+          "_lody/subagents/list",
+          "_lody/session/history/read",
+          "_lody/session/goal"
+        ],
+        "observed": []
+      },
+      "ext": {
+        "advertised": [
+          "lody",
+          "steering"
+        ],
+        "observed": []
+      },
+      "lodyAdapter": null,
+      "mitm": null,
+      "star": 0
+    },
+    {
       "n": "Devin",
       "v": "Cognition — v0.0.0-dev",
       "desc": "Devin CLI coding agent by Cognition",

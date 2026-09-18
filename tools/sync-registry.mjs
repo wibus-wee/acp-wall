@@ -108,3 +108,14 @@ for (const a of src.agents ?? []) {
 }
 console.log(`synced ${n} agent entr${n === 1 ? "y" : "ies"} → registry/agents/`);
 if (skipped.length) console.log(`skipped (no launch recipe): ${skipped.join(", ")}`);
+
+// Hand-written entries (registry/*.json — not in the upstream registry) ride
+// the same publish path: copy them in so CI's agents-dir enumeration sees
+// them. fixture-* and _schema stay out.
+let hand = 0;
+for (const f of readdirSync(join(root, "registry")).filter((f) => f.endsWith(".json") && !f.startsWith("fixture-") && !f.startsWith("_"))) {
+  const e = JSON.parse(readFileSync(join(root, "registry", f), "utf8"));
+  writeFileSync(join(agentsDir, f), JSON.stringify({ ...e, _synced: `hand-written · ${new Date().toISOString().slice(0, 10)}` }, null, 2) + "\n");
+  hand++;
+}
+if (hand) console.log(`carried ${hand} hand-written entr${hand === 1 ? "y" : "ies"} → registry/agents/`);

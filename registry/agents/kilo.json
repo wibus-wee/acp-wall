@@ -2,14 +2,14 @@
   "name": "kilo",
   "display": "Kilo",
   "vendor": "Kilo Code",
-  "version": "7.7.3",
+  "version": "7.7.5",
   "description": "The open source coding agent",
   "repo": "Kilo-Org/kilocode",
   "website": "https://kilo.ai/",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/kilo.svg",
   "license": "MIT",
   "install": null,
-  "run": "npx -y @kilocode/cli@7.7.3 acp",
+  "run": "npx -y @kilocode/cli@7.7.5 acp",
   "env": {
     "HOME": "${WORK_DIR}",
     "KILO_API_KEY": "probe-mock-key",
@@ -43,7 +43,7 @@
   },
   "dist": {
     "type": "npx",
-    "package": "@kilocode/cli@7.7.3",
+    "package": "@kilocode/cli@7.7.5",
     "args": [
       "acp"
     ]
