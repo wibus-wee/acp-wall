@@ -1,5 +1,6 @@
 node_modules/
 probe/dist/
 probe/reports/
+reports/
 .DS_Store
 .cache/
