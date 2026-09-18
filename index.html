@@ -280,7 +280,9 @@ const CAPS=(window.__ACP_WALL__&&window.__ACP_WALL__.caps)||["initialize","authe
 "sessions/*","set_mode","set_config","cancel","logout","message*","tool_call*","permission","plan","slash_cmds","fs/*","terminal/*","elicitation","mcp"];
 const H=(window.__ACP_WALL__&&window.__ACP_WALL__.harnesses)||[];
 
-function score(h){let p=0,m=0;h.cells.forEach(c=>{if(c===-1)return;m++;p+=c===1?1:c===2?.5:0});return m?Math.round(p/m*100):0}
+// prefer the report's score (authoritative); recompute as a completeness
+// index over the whole rubric — unexercised cells earn nothing
+function score(h){if(typeof h.score==="number")return h.score;let p=0;h.cells.forEach(c=>{p+=c===1?1:c===2?.5:0});return h.cells.length?Math.round(p/h.cells.length*100):0}
 
 /* dateline / issue furniture from the data's own timestamp */
 (function(){

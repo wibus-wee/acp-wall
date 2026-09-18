@@ -86,28 +86,25 @@ export function buildReport(opts: {
   transport?: Report["transport"];
 }): Report {
   const notes: Record<string, string> = {};
-  let exercised = 0;
   const cells = CELL_ORDER.map((col) => {
     const keys = CELL_MAP[col] ?? [];
     const w = worst(opts.results, keys);
     if (w === null) return -1;
     if (w.note) notes[col] = w.note;
-    // A method_not_found answer is a definitive "absent" — the endpoint was
-    // exercised. Only circumstantial `na` (no session, agent never asked)
-    // counts as untested.
-    if (keys.some((k) => { const r = opts.results[k]; return r && (r.status !== "na" || r.definitive); })) exercised++;
     return w.status === "pass" ? 1 : w.status === "partial" ? 2 : w.status === "fail" ? 0 : -1;
   });
-  const counted = cells.filter((c) => c !== -1);
-  const score = counted.length
-    ? Math.round((counted.reduce((a: number, c) => a + (c === 1 ? 1 : c === 2 ? 0.5 : 0), 0) / counted.length) * 100)
-    : 0;
-  // "Verified" is for *demonstrated* coverage, not just a clean average:
-  // ≥90 score AND ≥60% of columns actually exercised.
+  // The score is a completeness index over the WHOLE rubric: "not
+  // implemented" and "couldn't verify" both earn zero credit. Dividing only
+  // by exercised cells let a 9-of-24 harness print 100.
+  const score = Math.round(
+    (cells.reduce((a: number, c) => a + (c === 1 ? 1 : c === 2 ? 0.5 : 0), 0) / CELL_ORDER.length) * 100
+  );
+  // Coverage is already inside the score — verified means most of the ACP
+  // surface demonstrably works, not merely "whatever it answered was clean".
   let tier: Report["tier"] =
-    score >= 90 && exercised >= Math.ceil(CELL_ORDER.length * 0.6)
+    score >= 60
       ? "verified"
-      : score >= 50
+      : score >= 25
         ? "partial"
         : "limited";
   // Claimed-but-absent is worse than absent: liars can't be marked verified.
