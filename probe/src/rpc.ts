@@ -58,6 +58,16 @@ export class RpcPeer {
         this.pending.clear();
         this.onExit(code);
       });
+      // A dead agent's stdin emits EPIPE asynchronously; without a handler it
+      // crashes the probe before the exit event can report the real cause.
+      this.out.on("error", (err) => {
+        this.closed = true;
+        for (const p of this.pending.values()) {
+          clearTimeout(p.timer);
+          p.reject(new Error(`agent stdin closed: ${(err as Error).message}`));
+        }
+        this.pending.clear();
+      });
     }
   }
 

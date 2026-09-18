@@ -3,7 +3,7 @@
     "HOME": "${WORK_DIR}"
   },
   "sessionFiles": {
-    ".stakpak/config.toml": "[profiles.default]\nprovider = \"local\"\nmodel = \"probe/probe-model\"\n\n[profiles.default.providers.probe]\ntype = \"custom\"\napi_endpoint = \"${MOCK_LLM_URL}\"\napi_key = \"probe-mock-key\"\n"
+    ".stakpak/config.toml": "[profiles.default]\nprovider = \"local\"\nmodel = \"gpt-4.1\"\nrecent_models = [\"stakpak/gpt-4.1\"]\n\n[profiles.default.providers.openai]\ntype = \"openai\"\napi_endpoint = \"${MOCK_LLM_URL}\"\n\n[profiles.default.providers.openai.auth]\ntype = \"api\"\nkey = \"probe-mock-key\"\n\n[settings]\nmachine_name = \"acp-probe\"\nauto_append_gitignore = false\ncollect_telemetry = false\neditor = \"nano\"\n"
   },
-  "notes": "Documented BYO-LLM path: ~/.stakpak/config.toml declares a custom OpenAI-compatible provider (type=custom, api_endpoint) pointed at the mock LLM; HOME=${WORK_DIR} confines ~/.stakpak. No stakpak account needed."
+  "notes": "config.toml shape verified against `stakpak config sample` + `auth login` output (v0.3.88): [profiles.X.providers.<name>] type=openai + api_endpoint, [...auth] type=api + key, and a mandatory [settings] table — the earlier profiles.default.providers.probe shape failed TOML parse in both old and new formats and the binary exited 0. Verified locally: initialize → session/new → session/prompt reaches {endpoint}/v1/chat/completions and stakpak emits session/update + session/request_permission."
 }

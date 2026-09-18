@@ -12,7 +12,8 @@
   "run": "${REPO_ROOT}/.cache/agents/vtcode/vtcode acp",
   "env": {
     "PROBE_API_KEY": "probe-mock-key",
-    "OPENAI_API_KEY": "probe-mock-key"
+    "OPENAI_API_KEY": "probe-mock-key",
+    "VT_ACP_ENABLED": "1"
   },
   "sessionFiles": {
     "vtcode.toml": "[agent]\nprovider = \"probe\"\nmodel = \"probe-model\"\napi_key_env = \"PROBE_API_KEY\"\n\n[[custom_providers]]\nname = \"probe\"\ndisplay_name = \"Probe\"\nbase_url = \"${MOCK_LLM_URL}\"\napi_key_env = \"PROBE_API_KEY\"\nmodels = [\"probe-model\"]\n"

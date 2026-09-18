@@ -333,6 +333,9 @@ export function startMockLlm(port = 0): Promise<MockLlm> {
       };
       const tools = Array.isArray(body?.tools) ? body.tools.length : 0;
       console.error(`  [mock] ${req.method} ${url} tools=${tools} stream=${!!body?.stream} msgs=${body?.messages?.length ?? body?.input?.length ?? "-"}`);
+      // Claude Code pings {base}/api/hello as a connectivity check before any
+      // real request; a 404 makes it declare the backend unreachable.
+      if (path.endsWith("/api/hello")) return json({ message: "Hello" });
       // script word: the probe's cancel test sends __probe_slow__ and needs
       // the turn to still be open when session/cancel lands
       if (raw.includes("__probe_slow__")) {
@@ -395,7 +398,14 @@ export function startMockLlm(port = 0): Promise<MockLlm> {
         }
         return json(anthropicResponse(body));
       }
-      if (path.endsWith("/models")) {
+      // includes() not endsWith(): kimchi fetches {base}/v1/models/metadata
+      // (doubling /v1 when the configured endpoint already carries it) and
+      // wants its own metadata shape — provider "ai-enabler" routes through
+      // kimchi's openai-completions implementation at the same endpoint.
+      if (path.includes("/models/metadata")) {
+        return json({ models: [{ slug: "probe-model", display_name: "probe-model", provider: "ai-enabler", reasoning: false, input_modalities: ["text"], limits: { context_window: 128000, max_output_tokens: 16384 } }] });
+      }
+      if (path.includes("/models")) {
         if (url.includes("beta")) {
           return json({ models: [{ name: "models/probe-model", displayName: "probe-model", supportedGenerationMethods: ["generateContent", "streamGenerateContent"] }] });
         }

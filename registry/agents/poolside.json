@@ -9,7 +9,7 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/poolside.svg",
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/poolside.json",
-  "run": "${REPO_ROOT}/.cache/agents/poolside/pool-linux-amd64 acp",
+  "run": "${REPO_ROOT}/.cache/agents/poolside/pool-darwin-arm64 acp",
   "env": {
     "POOLSIDE_API_KEY": "probe-mock-key",
     "HOME": "${WORK_DIR}"

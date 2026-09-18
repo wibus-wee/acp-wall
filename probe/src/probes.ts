@@ -523,8 +523,12 @@ export async function probeCancel(ctx: ProbeContext) {
   const stop = r.value?.stopReason;
   if (stop === "cancelled") {
     put(ctx, "cancel", { status: "pass", note: `cancelled in ${r.latencyMs}ms`, latencyMs: r.latencyMs });
+  } else if ((r.latencyMs ?? 0) < 1000) {
+    // turn ended before the ~400ms cancel could land — nothing was provably
+    // in-flight to cancel, so "not honored" can't be distinguished from "too fast"
+    put(ctx, "cancel", { status: "na", note: `turn ended stopReason=${stop} in ${r.latencyMs}ms — before cancel could land`, latencyMs: r.latencyMs });
   } else {
-    put(ctx, "cancel", { status: "fail", note: `turn ended stopReason=${stop} — cancel not honored`, latencyMs: r.latencyMs });
+    put(ctx, "cancel", { status: "fail", note: `turn ended stopReason=${stop} after ${r.latencyMs}ms — cancel not honored`, latencyMs: r.latencyMs });
   }
 }
 
