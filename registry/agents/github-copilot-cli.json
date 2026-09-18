@@ -2,19 +2,19 @@
   "name": "github-copilot-cli",
   "display": "GitHub Copilot",
   "vendor": "GitHub",
-  "version": "1.0.85",
+  "version": "1.0.86",
   "description": "GitHub's AI pair programmer",
   "repo": "github/copilot-cli",
   "website": "https://github.com/features/copilot/cli/",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/github-copilot-cli.svg",
   "license": "proprietary",
   "install": null,
-  "run": "npx -y @github/copilot@1.0.85 --acp",
+  "run": "npx -y @github/copilot@1.0.86 --acp",
   "env": {},
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@github/copilot@1.0.85",
+    "package": "@github/copilot@1.0.86",
     "args": [
       "--acp"
     ]
@@ -22,5 +22,5 @@
   "disabled": false,
   "selftest": false,
   "notes": null,
-  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+  "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

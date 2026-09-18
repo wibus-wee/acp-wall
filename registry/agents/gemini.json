@@ -24,5 +24,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Gemini auth is not OpenAI-compatible — no known env route to the mock LLM; prompt-dependent cells may show unverified.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+  "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

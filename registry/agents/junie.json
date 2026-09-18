@@ -9,7 +9,7 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/junie.svg",
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/junie.json",
-  "run": "${REPO_ROOT}/.cache/agents/junie/Applications/junie.app/Contents/MacOS/junie --acp=true",
+  "run": "${REPO_ROOT}/.cache/agents/junie/junie-app/bin/junie --acp=true",
   "env": {},
   "sessionFiles": null,
   "dist": {
@@ -62,5 +62,5 @@
   "disabled": false,
   "selftest": false,
   "notes": null,
-  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+  "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }

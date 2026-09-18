@@ -2,19 +2,19 @@
   "name": "grok-build",
   "display": "Grok Build",
   "vendor": "xAI",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "xAI's coding agent and CLI",
   "repo": null,
   "website": "https://x.ai/cli",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/grok-build.svg",
   "license": "proprietary",
   "install": null,
-  "run": "npx -y @xai-official/grok@1.0.35 agent stdio",
+  "run": "npx -y @xai-official/grok@1.0.36 agent stdio",
   "env": {},
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@xai-official/grok@1.0.35",
+    "package": "@xai-official/grok@1.0.36",
     "args": [
       "agent",
       "stdio"
@@ -23,5 +23,5 @@
   "disabled": false,
   "selftest": false,
   "notes": null,
-  "_synced": "acp-registry 1.0.0 · 2026-09-17"
+  "_synced": "acp-registry 1.0.0 · 2026-09-18"
 }
