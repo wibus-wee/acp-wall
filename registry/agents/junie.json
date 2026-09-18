@@ -9,7 +9,7 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/junie.svg",
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/junie.json",
-  "run": "${REPO_ROOT}/.cache/agents/junie/Applications/junie.app/Contents/MacOS/junie --acp=true",
+  "run": "${REPO_ROOT}/.cache/agents/junie/junie-app/bin/junie --acp=true",
   "env": {
     "JUNIE_API_KEY": "probe-mock-key"
   },
