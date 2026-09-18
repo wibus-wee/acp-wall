@@ -124,6 +124,14 @@
   .lg-t td.lg-sc{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink);padding-right:14px;text-align:right}
   .lg-t tr.t-verified td.lg-sc{color:var(--gold)}
   .lg-t tr.t-limited td.lg-sc{color:var(--ink-dim)}
+  /* pin lody + SCORE to the right edge — annex evidence stays visible while
+     the method columns scroll underneath */
+  .lg-t td.lg-sc,.lg-t thead th:last-child{position:sticky;right:0;min-width:56px;box-sizing:border-box}
+  .lg-t td.lody-col,.lg-t thead th.lody-col{position:sticky;right:56px;min-width:44px;box-sizing:border-box}
+  .lg-t td.lody-col,.lg-t td.lg-sc{background:var(--paper2);z-index:2}
+  .lg-t thead th.lody-col,.lg-t thead th:last-child{background:#1a1610;z-index:4}
+  .lg-t tbody tr:hover td.lody-col,.lg-t tbody tr:hover td.lg-sc,
+  .lg-t tr.rowhead.open td.lody-col,.lg-t tr.rowhead.open td.lg-sc{background:#1e1a12}
   .lg-t tbody tr{ cursor:pointer}
   .lg-empty{padding:30px;text-align:center;font-style:italic;color:var(--faint);font-size:14px}
 
