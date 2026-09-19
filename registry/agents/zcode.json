@@ -19,5 +19,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Bridge only — sessions need the real zcode CLI (desktop-app bundle or PATH) plus ~/.zcode creds; probe measures the adapter's own surface.",
-  "_synced": "hand-written · 2026-09-18"
+  "_synced": "hand-written · 2026-09-19"
 }

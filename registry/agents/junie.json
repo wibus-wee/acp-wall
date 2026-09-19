@@ -64,5 +64,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Junie (JetBrains) requires a JetBrains AI subscription; auth is server-validated with no documented custom-endpoint path.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-18"
+  "_synced": "acp-registry 1.0.0 · 2026-09-19"
 }

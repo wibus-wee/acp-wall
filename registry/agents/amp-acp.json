@@ -48,5 +48,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Sourcegraph Amp requires a real Amp account API key (server-validated). Placeholder included so the probe reaches the genuine auth rejection.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-18"
+  "_synced": "acp-registry 1.0.0 · 2026-09-19"
 }

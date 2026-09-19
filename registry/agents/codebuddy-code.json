@@ -2,14 +2,14 @@
   "name": "codebuddy-code",
   "display": "Codebuddy Code",
   "vendor": "Tencent Cloud",
-  "version": "2.154.0",
+  "version": "2.155.0",
   "description": "Tencent Cloud's official intelligent coding tool",
   "repo": null,
   "website": "https://www.codebuddy.cn/cli/",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/codebuddy-code.svg",
   "license": "Proprietary",
   "install": null,
-  "run": "npx -y @tencent-ai/codebuddy-code@2.154.0 --acp",
+  "run": "npx -y @tencent-ai/codebuddy-code@2.155.0 --acp",
   "env": {
     "CODEBUDDY_API_KEY": "probe-mock-key",
     "CODEBUDDY_BASE_URL": "${MOCK_LLM_URL}"
@@ -17,7 +17,7 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@tencent-ai/codebuddy-code@2.154.0",
+    "package": "@tencent-ai/codebuddy-code@2.155.0",
     "args": [
       "--acp"
     ]
@@ -25,5 +25,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Documented third-party-model path: CODEBUDDY_API_KEY + CODEBUDDY_BASE_URL point the model endpoint at the mock LLM. International edition needs no CODEBUDDY_INTERNET_ENVIRONMENT.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-18"
+  "_synced": "acp-registry 1.0.0 · 2026-09-19"
 }

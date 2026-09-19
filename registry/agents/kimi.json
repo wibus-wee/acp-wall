@@ -72,5 +72,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "KIMI_CODE_HOME relocates kimi's data dir into the probe workspace. Documented limitation (moonshotai/kimi-code#1330): kimi acp's session gate only accepts the OAuth token file — BYO-LLM providers cannot create sessions even with a probe token, so turn-dependent cells fail as 'requires Moonshot OAuth — not CI-probeable'.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-18"
+  "_synced": "acp-registry 1.0.0 · 2026-09-19"
 }

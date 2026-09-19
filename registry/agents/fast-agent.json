@@ -27,5 +27,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "fast-agent reads fast-agent.yaml from ./.fast-agent relative to the session cwd (probe workspace); OPENAI_* env is the documented override. Model pinned to the openai chat-completions provider — no account needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-18"
+  "_synced": "acp-registry 1.0.0 · 2026-09-19"
 }

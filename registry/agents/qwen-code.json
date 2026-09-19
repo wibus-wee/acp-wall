@@ -38,5 +38,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "OpenAI-compatible provider selected via project .qwen/settings.json (searched upward from the session cwd) plus OPENAI_* env — every model call routes to the probe's mock LLM. No qwen OAuth account needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-18"
+  "_synced": "acp-registry 1.0.0 · 2026-09-19"
 }

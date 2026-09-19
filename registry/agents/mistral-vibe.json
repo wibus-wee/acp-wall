@@ -51,5 +51,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "VIBE_HOME relocates vibe's config dir into the probe workspace; config.toml defines a generic/openai provider pointed at the mock LLM with a probe model alias, and .env supplies the referenced key. No Mistral account sign-in needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-18"
+  "_synced": "acp-registry 1.0.0 · 2026-09-19"
 }

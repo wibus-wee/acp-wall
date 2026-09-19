@@ -39,5 +39,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "autohand-acp spawns the autohand CLI — install puts it on PATH, AUTOHAND_CONFIG points at a workspace config declaring a custom openai-compatible provider against the mock (mock /models lists probe-model so the provider validation passes). AUTOHAND_PERMISSION_MODE=external forwards permission prompts to the ACP client.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-18"
+  "_synced": "acp-registry 1.0.0 · 2026-09-19"
 }
