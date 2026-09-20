@@ -70,5 +70,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Cortex Code is bound to a Snowflake account (host/account/token); no self-hosted or BYOK path exists — honest account gate.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-19"
+  "_synced": "acp-registry 1.0.0 · 2026-09-20"
 }

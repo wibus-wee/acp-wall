@@ -24,5 +24,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Attempted wiring: `nova models register` (documented custom-endpoint command) registers an OpenAI provider against the mock LLM; flag names inferred — CI transcript will show if the CLI differs. HOME=${WORK_DIR} confines ~/.nova state.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-19"
+  "_synced": "acp-registry 1.0.0 · 2026-09-20"
 }

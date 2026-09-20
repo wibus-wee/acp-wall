@@ -94,5 +94,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Official dist is binary-only; the opencode-ai npm package is equivalent and easier in CI. sessionFiles pins the agent to the mock LLM and sets permission=ask so session/request_permission is deterministically exercised.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-19"
+  "_synced": "acp-registry 1.0.0 · 2026-09-20"
 }

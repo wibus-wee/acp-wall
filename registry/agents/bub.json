@@ -26,5 +26,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "ACP server plugin (bub-acp-server) rides alongside bub via uvx --with; model comes from BUB_* env.",
-  "_synced": "hand-written · 2026-09-19"
+  "_synced": "hand-written · 2026-09-20"
 }

@@ -22,5 +22,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Agoragentic ACP is a relay to a hosted Agent OS; public tools work keyless, paid execute tools require a real AGORAGENTIC_API_KEY + USDC — not fakeable, probe measures the public surface.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-19"
+  "_synced": "acp-registry 1.0.0 · 2026-09-20"
 }
