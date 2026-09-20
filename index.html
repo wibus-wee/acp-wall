@@ -149,12 +149,12 @@
   .lg-empty{padding:30px;text-align:center;font-style:italic;color:var(--faint);font-size:14px}
 
   /* ——— inline expandable dossier ——— */
-  .xp{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .xp{scroll-margin-block:24px}
   .lg-x td{padding:0;height:auto;text-align:left}
   /* dossier is pinned by JS transform — position:sticky inside a td is
      unreliable across engines */
   .lg-x-in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);background:#0f0d09;border-top:1px solid var(--line)}
-  .bx{padding:14px 18px 18px}
+  .bx{min-width:0;padding:14px 18px 18px;overflow-wrap:anywhere}
   .bx+.bx{border-left:1px solid var(--line)}
   @media(max-width:760px){.lg-x-in{grid-template-columns:1fr}.bx+.bx{border-left:0;border-top:1px solid var(--line)}}
   tr.rowhead.open td{background:rgba(217,180,95,.035)}
@@ -249,6 +249,7 @@
       the partial, and the limited. <b>Click any name to open its case file.</b>
     </p>
     <p class="kbd-hint">PRESS <span class="mono">⌘K</span> TO CONSULT THE INDEX</p>
+    <p class="kbd-hint"><button class="sh-btn" id="details-toggle" type="button">Expand all case files</button></p>
   </div>
 
   <div class="tape"><div class="tape-in" id="tape"></div></div>
@@ -434,10 +435,10 @@ function entry(h){
       <span class="e-nm">${h.n}${h.star?' <span class="star">✦</span>':''}${lodyChip(h)}<span class="ven">${h.v||''}</span></span>
       <span class="e-sc"><b class="mono">${done?'—':s}</b><span class="ms">${done?'0/'+CAPS.length:'/100'}</span><span class="chev">➤</span></span>
     </div>`;
-  const xp=document.createElement('div');xp.className='e-x xp';
+  const xp=document.createElement('div');xp.className='e-x xp';xp.setAttribute('hidden','until-found');
   xp.innerHTML=detailHTML(h);wireCopy(xp,h);
   el.appendChild(xp);
-  el.querySelector('.e-row').addEventListener('click',()=>toggleXP(xp,el));
+  el.querySelector('.e-row').addEventListener('click',()=>toggleXP(xp));
   return el;
 }
 const byTier=t=>all.filter(h=>h.tier===t);
@@ -485,10 +486,10 @@ document.getElementById('cnt-limited').textContent=`${byTier('limited').length} 
     h2+=`<td class="lg-sc">${done?'—':s}</td>`;
     tr.innerHTML=h2;
     const dtr=document.createElement('tr');dtr.className='lg-x';
-    dtr.innerHTML=`<td colspan="${CAPS.length+2}"><div class="xp">${detailHTML(h)}</div></td>`;
+    dtr.innerHTML=`<td colspan="${CAPS.length+3}"><div class="xp" hidden="until-found">${detailHTML(h)}</div></td>`;
     const xp=dtr.querySelector('.xp');wireCopy(xp,h);
     h._xp=xp;h._row=tr;
-    tr.addEventListener('click',()=>toggleXP(xp,tr));
+    tr.addEventListener('click',()=>toggleXP(xp));
     tb.appendChild(tr);tb.appendChild(dtr);
   });
 })();
@@ -558,18 +559,33 @@ function wireCopy(root,h){
   };
 }
 let openXP=null;
-function toggleXP(xp,row){
-  const was=xp.classList.contains('on');
-  if(openXP&&openXP!==xp){closeXP(openXP)}
-  xp.classList.toggle('on',!was);
-  xp.style.maxHeight=was?'0':xp.scrollHeight+'px';
-  if(row)row.classList.toggle('open',!was);
-  xp._row=row;openXP=was?null:xp;
+const detailsToggle=document.getElementById('details-toggle');
+document.querySelectorAll('.xp').forEach(xp=>{
+  xp._row=xp.closest('.entry')||xp.closest('tr').previousElementSibling;
+  xp.addEventListener('beforematch',()=>revealXP(xp));
+});
+function updateDetailsToggle(){
+  const expanded=[...document.querySelectorAll('.xp')].every(xp=>!xp.hasAttribute('hidden'));
+  detailsToggle.textContent=expanded?'Collapse all case files':'Expand all case files';
+}
+function revealXP(xp){
+  xp.removeAttribute('hidden');
+  xp.classList.add('on');
+  xp._row.classList.add('open');
+  openXP=xp;
   fitXP(xp);
+  updateDetailsToggle();
+}
+function toggleXP(xp){
+  const was=xp.classList.contains('on');
+  if(was)closeXP(xp);
+  else revealXP(xp);
 }
 function closeXP(xp){
-  xp.classList.remove('on');xp.style.maxHeight='0';
+  xp.classList.remove('on');xp.setAttribute('hidden','until-found');
   xp._row&&xp._row.classList.remove('open');
+  if(openXP===xp)openXP=null;
+  updateDetailsToggle();
 }
 /* league-table dossiers live inside the horizontally-scrolled .lg-wrap:
    pin them to the visible viewport — width AND position — because
@@ -580,12 +596,18 @@ function fitXP(xp){
   xp.style.width=(wrap.clientWidth-2)+'px';
   xp.style.transform=`translateX(${wrap.scrollLeft}px)`;
 }
-addEventListener('resize',()=>{if(openXP){fitXP(openXP);openXP.style.maxHeight=openXP.scrollHeight+'px'}});
-document.querySelector('.lg-wrap')?.addEventListener('scroll',()=>{if(openXP)fitXP(openXP)},{passive:true});
+function fitOpenXPs(){document.querySelectorAll('.xp.on').forEach(fitXP)}
+addEventListener('resize',fitOpenXPs);
+document.querySelector('.lg-wrap')?.addEventListener('scroll',fitOpenXPs,{passive:true});
+detailsToggle.addEventListener('click',()=>{
+  const panels=[...document.querySelectorAll('.xp')];
+  if(panels.every(xp=>!xp.hasAttribute('hidden')))panels.forEach(closeXP);
+  else panels.forEach(revealXP);
+});
 function closeOpenXP(){if(openXP){closeXP(openXP);openXP=null}}
 function openCase(h){
   if(!h._xp||!h._row)return;
-  if(!h._xp.classList.contains('on'))toggleXP(h._xp,h._row);
+  if(!h._xp.classList.contains('on'))toggleXP(h._xp);
   h._row.scrollIntoView({block:'center',behavior:'smooth'});
 }
 /* deep-link: ?case=<name> expands that row on load */
@@ -620,7 +642,11 @@ function renderPal(q){
     </div>`).join('')||'<div style="padding:16px;color:var(--faint);font-size:12px;font-style:italic">no such harness on file.</div>';
 }
 addEventListener('keydown',e=>{
-  if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();pal.classList.contains('open')?closePal():openPal()}
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='f'){
+    closePal();
+    if(!('onbeforematch' in document.documentElement))document.querySelectorAll('.xp[hidden]').forEach(revealXP);
+  }
+  else if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();pal.classList.contains('open')?closePal():openPal()}
   else if(e.key==='Escape'){closePal();closeOpenXP()}
   else if(pal.classList.contains('open')){
     if(e.key==='ArrowDown'||e.key==='ArrowUp'){
