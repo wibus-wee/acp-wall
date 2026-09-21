@@ -2,14 +2,14 @@
   "name": "glm-acp-agent",
   "display": "GLM Agent",
   "vendor": "Stefan de Vogelaere",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "description": "ACP agent powered by Zhipu AI's GLM Coding Plan models (glm-5.1, glm-5-turbo, glm-4.7, glm-4.5-air). Supports streaming, tool calls, mid-session model switching, image input via Z.AI Coding Plan Vision MCP, and session load/fork/resume with on-disk persistence.",
   "repo": "stefandevo/glm-acp-agent",
   "website": null,
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/glm-acp-agent.svg",
   "license": "Apache-2.0",
   "install": null,
-  "run": "npx -y glm-acp-agent@1.11.0",
+  "run": "npx -y glm-acp-agent@1.12.0",
   "env": {
     "Z_AI_API_KEY": "probe-mock-key",
     "ACP_GLM_BASE_URL": "${MOCK_LLM_URL}",
@@ -18,11 +18,11 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "glm-acp-agent@1.11.0",
+    "package": "glm-acp-agent@1.12.0",
     "args": []
   },
   "disabled": false,
   "selftest": false,
   "notes": "Documented env wiring: ACP_GLM_BASE_URL overrides the Coding Plan endpoint (OpenAI-compatible chat completions) so every model call hits the probe's mock LLM; Z_AI_API_KEY satisfies the credential check. No Z.AI account needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-20"
+  "_synced": "acp-registry 1.0.0 · 2026-09-21"
 }

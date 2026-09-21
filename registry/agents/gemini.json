@@ -25,5 +25,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "GEMINI_API_KEY selects the USE_GEMINI auth type (no OAuth login) and GOOGLE_GEMINI_BASE_URL redirects the genai SDK to the probe's mock LLM — http is permitted for loopback hosts. Mock answers :generateContent/:streamGenerateContent.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-20"
+  "_synced": "acp-registry 1.0.0 · 2026-09-21"
 }

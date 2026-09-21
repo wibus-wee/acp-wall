@@ -41,5 +41,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Documented BYOK path: ~/.factory/settings.json customModels (generic-chat-completion-api) pointed at the mock LLM, model=custom:Probe-0 selects it. Whether the ACP daemon accepts a BYOK-only setup without Factory login is untested — CI transcript decides.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-20"
+  "_synced": "acp-registry 1.0.0 · 2026-09-21"
 }

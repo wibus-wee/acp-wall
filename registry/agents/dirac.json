@@ -27,5 +27,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Documented ACP env authentication: DIRAC_PROVIDER/MODEL/API_KEY/BASE_URL select an OpenAI-compatible provider pointed at the mock LLM — overrides persisted defaults for the ACP process, no `dirac auth` needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-20"
+  "_synced": "acp-registry 1.0.0 · 2026-09-21"
 }

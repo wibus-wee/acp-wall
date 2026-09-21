@@ -2,7 +2,7 @@
   "name": "cursor",
   "display": "Cursor",
   "vendor": "Cursor",
-  "version": "2026.09.15",
+  "version": "2026.09.18",
   "description": "Cursor's coding agent",
   "repo": null,
   "website": "https://cursor.com/docs/cli/acp",
@@ -18,42 +18,42 @@
     "type": "binary",
     "per_platform": {
       "darwin-aarch64": {
-        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/darwin/arm64/agent-cli-package.tar.gz",
+        "archive": "https://downloads.cursor.com/lab/2026.09.18-9a7762b/darwin/arm64/agent-cli-package.tar.gz",
         "cmd": "./dist-package/cursor-agent",
         "args": [
           "acp"
         ]
       },
       "darwin-x86_64": {
-        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/darwin/x64/agent-cli-package.tar.gz",
+        "archive": "https://downloads.cursor.com/lab/2026.09.18-9a7762b/darwin/x64/agent-cli-package.tar.gz",
         "cmd": "./dist-package/cursor-agent",
         "args": [
           "acp"
         ]
       },
       "linux-aarch64": {
-        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/linux/arm64/agent-cli-package.tar.gz",
+        "archive": "https://downloads.cursor.com/lab/2026.09.18-9a7762b/linux/arm64/agent-cli-package.tar.gz",
         "cmd": "./dist-package/cursor-agent",
         "args": [
           "acp"
         ]
       },
       "linux-x86_64": {
-        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/linux/x64/agent-cli-package.tar.gz",
+        "archive": "https://downloads.cursor.com/lab/2026.09.18-9a7762b/linux/x64/agent-cli-package.tar.gz",
         "cmd": "./dist-package/cursor-agent",
         "args": [
           "acp"
         ]
       },
       "windows-aarch64": {
-        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/windows/arm64/agent-cli-package.zip",
+        "archive": "https://downloads.cursor.com/lab/2026.09.18-9a7762b/windows/arm64/agent-cli-package.zip",
         "cmd": "./dist-package\\cursor-agent.cmd",
         "args": [
           "acp"
         ]
       },
       "windows-x86_64": {
-        "archive": "https://downloads.cursor.com/lab/2026.09.15-d2fe57e/windows/x64/agent-cli-package.zip",
+        "archive": "https://downloads.cursor.com/lab/2026.09.18-9a7762b/windows/x64/agent-cli-package.zip",
         "cmd": "./dist-package\\cursor-agent.cmd",
         "args": [
           "acp"
@@ -64,5 +64,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "cursor-agent authenticates against Cursor's backend with a server-validated API key; placeholder key reaches the auth rejection. No documented custom-endpoint/BYOK path.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-20"
+  "_synced": "acp-registry 1.0.0 · 2026-09-21"
 }

@@ -60,5 +60,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "crow-cli reads providers/models from ~/.agents/crow/config.yaml (documented openai-compatible shape); HOME=${WORK_DIR} lets sessionFiles plant the config pointing at the mock LLM.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-20"
+  "_synced": "acp-registry 1.0.0 · 2026-09-21"
 }

@@ -2,7 +2,7 @@
   "name": "grok-build",
   "display": "Grok Build",
   "vendor": "xAI",
-  "version": "1.0.38",
+  "version": "1.0.40",
   "description": "xAI's coding agent and CLI",
   "repo": null,
   "website": "https://x.ai/cli",
@@ -21,7 +21,7 @@
   },
   "dist": {
     "type": "npx",
-    "package": "@xai-official/grok@1.0.38",
+    "package": "@xai-official/grok@1.0.40",
     "args": [
       "agent",
       "stdio"
@@ -30,5 +30,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "GROK_HOME relocates grok's state dir into the probe workspace; config.toml defines a custom model whose base_url is the mock LLM (chat_completions backend) and XAI_API_KEY satisfies the api-key auth path — no grok login / SuperGrok subscription needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-20"
+  "_synced": "acp-registry 1.0.0 · 2026-09-21"
 }
