@@ -25,5 +25,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "DeepAgents (LangChain) uses the anthropic/openai SDKs which honor ANTHROPIC_BASE_URL/OPENAI_BASE_URL env — model traffic routes to the mock LLM without any account.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-22"
+  "_synced": "acp-registry 1.0.0 · 2026-09-23"
 }

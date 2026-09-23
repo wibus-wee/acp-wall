@@ -2,7 +2,7 @@
   "name": "claude-acp",
   "display": "Claude Agent",
   "vendor": "Anthropic, Zed Industries, JetBrains",
-  "version": "0.79.0",
+  "version": "0.81.0",
   "description": "ACP wrapper for Anthropic's Claude",
   "repo": "agentclientprotocol/claude-agent-acp",
   "website": null,
@@ -18,11 +18,11 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@agentclientprotocol/claude-agent-acp@0.79.0",
+    "package": "@agentclientprotocol/claude-agent-acp@0.81.0",
     "args": []
   },
   "disabled": false,
   "selftest": false,
   "notes": "Official ACP adapter wrapping the Claude Agent SDK. Verified locally: claude honors ANTHROPIC_BASE_URL and completes full tool_use→end_turn turns against the mock's /messages SSE endpoint — the earlier failure was mock-side (query-string routing + model-name mismatch), not auth.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-22"
+  "_synced": "acp-registry 1.0.0 · 2026-09-23"
 }

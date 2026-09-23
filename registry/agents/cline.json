@@ -2,7 +2,7 @@
   "name": "cline",
   "display": "Cline",
   "vendor": "Cline Bot Inc.",
-  "version": "3.0.63",
+  "version": "3.0.64",
   "description": "Autonomous coding agent CLI - capable of creating/editing files, running commands, using the browser, and more",
   "repo": "cline/cline",
   "website": "https://cline.bot/cli",
@@ -18,7 +18,7 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "cline@3.0.63",
+    "package": "cline@3.0.64",
     "args": [
       "--acp"
     ]
@@ -26,5 +26,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "CLINE_DIR isolates cline's state dir; the auth subcommand preconfigures an openai-compatible provider against the mock LLM (documented headless path: -p/-k/-b/-m) before --acp starts. No cline account sign-in needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-22"
+  "_synced": "acp-registry 1.0.0 · 2026-09-23"
 }

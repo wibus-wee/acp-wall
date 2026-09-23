@@ -2,7 +2,7 @@
   "name": "mistral-vibe",
   "display": "Mistral Vibe",
   "vendor": "Mistral AI",
-  "version": "2.25.5",
+  "version": "2.25.7",
   "description": "Mistral's open-source coding assistant",
   "repo": "mistralai/mistral-vibe",
   "website": "https://mistral.ai/products/vibe",
@@ -22,34 +22,34 @@
     "type": "binary",
     "per_platform": {
       "darwin-aarch64": {
-        "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.25.5/vibe-acp-darwin-aarch64-2.25.5.tar.gz",
+        "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.25.7/vibe-acp-darwin-aarch64-2.25.7.tar.gz",
         "cmd": "./vibe-acp",
-        "sha256": "75fe105ac8c99bc6b6fe34f3c0531a38fbe7f0003f211a1cef7f7114daf56f64"
+        "sha256": "287146739954ef4498ec83de57e6281a83bbffd979ccd8993d440aac49744504"
       },
       "darwin-x86_64": {
-        "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.25.5/vibe-acp-darwin-x86_64-2.25.5.tar.gz",
+        "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.25.7/vibe-acp-darwin-x86_64-2.25.7.tar.gz",
         "cmd": "./vibe-acp",
-        "sha256": "e7b53ab3451ae8815d9aaccaaf4dfb139dee3a4f52da817d877037429da5ce98"
+        "sha256": "8bde840b851d7e9dc481d65697233459cca2c6535c6d77ff815dfd65829163df"
       },
       "linux-aarch64": {
-        "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.25.5/vibe-acp-linux-aarch64-2.25.5.tar.gz",
+        "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.25.7/vibe-acp-linux-aarch64-2.25.7.tar.gz",
         "cmd": "./vibe-acp",
-        "sha256": "06348a0635a34b9c2d2056231d37eb79a25fe27a8d97d01e55957364500c682c"
+        "sha256": "8ecef7e8bcfc3ba38d62d0e6411e40e50c8137f79c161fc4a5bef2d4b65d54de"
       },
       "linux-x86_64": {
-        "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.25.5/vibe-acp-linux-x86_64-2.25.5.tar.gz",
+        "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.25.7/vibe-acp-linux-x86_64-2.25.7.tar.gz",
         "cmd": "./vibe-acp",
-        "sha256": "a2d1126a6dbfd5def562cf74b424d659f46c155c220f53f2bddc9ccbaa152ec6"
+        "sha256": "912d4c3068529ff4773c3bca89268ed401dab5f0f90628100eb88eb0d1a0b189"
       },
       "windows-x86_64": {
-        "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.25.5/vibe-acp-windows-x86_64-2.25.5.zip",
+        "archive": "https://github.com/mistralai/mistral-vibe/releases/download/v2.25.7/vibe-acp-windows-x86_64-2.25.7.zip",
         "cmd": "./vibe-acp.exe",
-        "sha256": "9aaa01e43142bd65308f5131f88977ad5e0a9b6bf849e5c9486d6ee521c3e2ed"
+        "sha256": "d320220ef4a44860c199768af12291fd834a68262039cf89f828ed56476ab163"
       }
     }
   },
   "disabled": false,
   "selftest": false,
   "notes": "VIBE_HOME relocates vibe's config dir into the probe workspace; config.toml defines a generic/openai provider pointed at the mock LLM with a probe model alias, and .env supplies the referenced key. No Mistral account sign-in needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-22"
+  "_synced": "acp-registry 1.0.0 · 2026-09-23"
 }
