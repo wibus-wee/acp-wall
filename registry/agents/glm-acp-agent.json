@@ -24,5 +24,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Documented env wiring: ACP_GLM_BASE_URL overrides the Coding Plan endpoint (OpenAI-compatible chat completions) so every model call hits the probe's mock LLM; Z_AI_API_KEY satisfies the credential check. No Z.AI account needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-23"
+  "_synced": "acp-registry 1.0.0 · 2026-09-24"
 }

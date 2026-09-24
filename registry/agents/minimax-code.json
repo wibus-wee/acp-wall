@@ -24,5 +24,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Attempted wiring: `mcode provider add` (documented CLI) registers an OpenAI-compatible provider pointed at the mock LLM before `acp` starts. The --api-key flag is inferred from the documented --name/--base-url/--model form; MINIMAX_API_KEY env covers the MiniMax-native path.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-23"
+  "_synced": "acp-registry 1.0.0 · 2026-09-24"
 }

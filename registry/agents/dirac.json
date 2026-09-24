@@ -2,14 +2,14 @@
   "name": "dirac",
   "display": "Dirac",
   "vendor": "Dirac Delta Labs",
-  "version": "0.5.15",
+  "version": "0.5.16",
   "description": "Reduces API costs by more than 50%, produces better and faster work. Uses Hash anchored parallel edits, AST manipulation and a whole lot of neat optimizations. Fully Open Source.",
   "repo": "dirac-run/dirac",
   "website": "https://dirac.run",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/dirac.svg",
   "license": "Apache-2.0",
   "install": null,
-  "run": "npx -y dirac-cli@0.5.15 --acp",
+  "run": "npx -y dirac-cli@0.5.16 --acp",
   "env": {
     "DIRAC_PROVIDER": "deepseek",
     "DIRAC_MODEL": "probe-model",
@@ -19,7 +19,7 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "dirac-cli@0.5.15",
+    "package": "dirac-cli@0.5.16",
     "args": [
       "--acp"
     ]
@@ -27,5 +27,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Documented ACP env authentication: DIRAC_PROVIDER/MODEL/API_KEY/BASE_URL select an OpenAI-compatible provider pointed at the mock LLM — overrides persisted defaults for the ACP process, no `dirac auth` needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-23"
+  "_synced": "acp-registry 1.0.0 · 2026-09-24"
 }

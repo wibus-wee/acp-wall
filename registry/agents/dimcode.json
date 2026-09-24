@@ -2,7 +2,7 @@
   "name": "dimcode",
   "display": "DimCode",
   "vendor": "ArcShips",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "description": "A coding agent that puts leading models at your command.",
   "repo": null,
   "website": "https://dimcode.dev/docs/acp.html",
@@ -16,7 +16,7 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "dimcode@0.5.10",
+    "package": "dimcode@0.5.11",
     "args": [
       "acp"
     ]
@@ -24,5 +24,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Documented CLI path: `dim provider add <id> --base-url --model --api-key` registers a custom OpenAI-compatible provider against the mock LLM, `provider switch` activates it; HOME=${WORK_DIR} confines ~/.dimcode state to the probe workspace.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-23"
+  "_synced": "acp-registry 1.0.0 · 2026-09-24"
 }

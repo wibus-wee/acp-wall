@@ -2,7 +2,7 @@
   "name": "devin",
   "display": "Devin",
   "vendor": "Cognition",
-  "version": "3000.11.1",
+  "version": "3000.11.3",
   "description": "Devin CLI coding agent by Cognition",
   "repo": "CognitionAI/devin-cli",
   "website": "https://docs.devin.ai/cli",
@@ -18,42 +18,42 @@
     "type": "binary",
     "per_platform": {
       "darwin-aarch64": {
-        "archive": "https://static.devin.ai/cli/3000.11.1/devin-3000.11.1-aarch64-apple-darwin.tar.gz",
+        "archive": "https://static.devin.ai/cli/3000.11.3/devin-3000.11.3-aarch64-apple-darwin.tar.gz",
         "cmd": "./bin/devin",
         "args": [
           "acp"
         ]
       },
       "darwin-x86_64": {
-        "archive": "https://static.devin.ai/cli/3000.11.1/devin-3000.11.1-x86_64-apple-darwin.tar.gz",
+        "archive": "https://static.devin.ai/cli/3000.11.3/devin-3000.11.3-x86_64-apple-darwin.tar.gz",
         "cmd": "./bin/devin",
         "args": [
           "acp"
         ]
       },
       "linux-aarch64": {
-        "archive": "https://static.devin.ai/cli/3000.11.1/devin-3000.11.1-aarch64-unknown-linux.tar.gz",
+        "archive": "https://static.devin.ai/cli/3000.11.3/devin-3000.11.3-aarch64-unknown-linux.tar.gz",
         "cmd": "./bin/devin",
         "args": [
           "acp"
         ]
       },
       "linux-x86_64": {
-        "archive": "https://static.devin.ai/cli/3000.11.1/devin-3000.11.1-x86_64-unknown-linux.tar.gz",
+        "archive": "https://static.devin.ai/cli/3000.11.3/devin-3000.11.3-x86_64-unknown-linux.tar.gz",
         "cmd": "./bin/devin",
         "args": [
           "acp"
         ]
       },
       "windows-aarch64": {
-        "archive": "https://static.devin.ai/cli/3000.11.1/devin-3000.11.1-aarch64-pc-windows.zip",
+        "archive": "https://static.devin.ai/cli/3000.11.3/devin-3000.11.3-aarch64-pc-windows.zip",
         "cmd": "./bin\\devin.exe",
         "args": [
           "acp"
         ]
       },
       "windows-x86_64": {
-        "archive": "https://static.devin.ai/cli/3000.11.1/devin-3000.11.1-x86_64-pc-windows.zip",
+        "archive": "https://static.devin.ai/cli/3000.11.3/devin-3000.11.3-x86_64-pc-windows.zip",
         "cmd": "./bin\\devin.exe",
         "args": [
           "acp"
@@ -64,5 +64,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Devin CLI requires a real Cognition account API key — server-validated, no self-hosted/BYOK option.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-23"
+  "_synced": "acp-registry 1.0.0 · 2026-09-24"
 }
