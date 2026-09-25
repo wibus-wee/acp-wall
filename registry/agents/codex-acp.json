@@ -29,5 +29,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "CODEX_HOME relocates codex's state dir into the probe workspace; a probe-issued apikey auth.json satisfies the auth gate and a custom model_provider routes every call to the mock LLM (Responses API).",
-  "_synced": "acp-registry 1.0.0 · 2026-09-24"
+  "_synced": "acp-registry 1.0.0 · 2026-09-25"
 }

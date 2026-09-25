@@ -2,14 +2,14 @@
   "name": "factory-droid",
   "display": "Factory Droid",
   "vendor": "Factory AI",
-  "version": "0.226.1",
+  "version": "0.227.0",
   "description": "Factory Droid - AI coding agent powered by Factory AI",
   "repo": null,
   "website": "https://factory.ai/product/cli",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/factory-droid.svg",
   "license": "proprietary",
   "install": null,
-  "run": "npx -y droid@0.226.1 exec --output-format acp-daemon",
+  "run": "npx -y droid@0.227.0 exec --output-format acp-daemon",
   "env": {
     "HOME": "${WORK_DIR}",
     "FACTORY_API_KEY": "probe-mock-key"
@@ -31,7 +31,7 @@
   },
   "dist": {
     "type": "npx",
-    "package": "droid@0.226.1",
+    "package": "droid@0.227.0",
     "args": [
       "exec",
       "--output-format",
@@ -41,5 +41,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Documented BYOK path: ~/.factory/settings.json customModels (generic-chat-completion-api) pointed at the mock LLM, model=custom:Probe-0 selects it. Whether the ACP daemon accepts a BYOK-only setup without Factory login is untested — CI transcript decides.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-24"
+  "_synced": "acp-registry 1.0.0 · 2026-09-25"
 }

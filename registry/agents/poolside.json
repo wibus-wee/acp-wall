@@ -71,5 +71,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "poolside requires a real poolside account key; server-validated, no documented custom endpoint.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-24"
+  "_synced": "acp-registry 1.0.0 · 2026-09-25"
 }

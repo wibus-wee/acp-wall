@@ -2,7 +2,7 @@
   "name": "pi-acp",
   "display": "pi ACP",
   "vendor": "Sergii Kozak <svkozak@gmail.com>",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "description": "ACP adapter for pi coding agent",
   "repo": "svkozak/pi-acp",
   "website": null,
@@ -37,11 +37,11 @@
   },
   "dist": {
     "type": "npx",
-    "package": "pi-acp@0.0.33",
+    "package": "pi-acp@0.0.34",
     "args": []
   },
   "disabled": false,
   "selftest": false,
   "notes": "pi-acp spawns `pi --mode rpc` — install puts pi on PATH and HOME=${WORK_DIR} lets sessionFiles plant .pi/agent/models.json declaring a custom openai-completions provider pointed at the mock LLM (documented models.json format). No pi account/subscription needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-24"
+  "_synced": "acp-registry 1.0.0 · 2026-09-25"
 }

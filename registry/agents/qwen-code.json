@@ -2,14 +2,14 @@
   "name": "qwen-code",
   "display": "Qwen Code",
   "vendor": "Alibaba Qwen Team",
-  "version": "0.24.4",
+  "version": "0.24.5",
   "description": "Alibaba's Qwen coding assistant",
   "repo": "QwenLM/qwen-code",
   "website": "https://qwenlm.github.io/qwen-code-docs/en/users/overview",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/qwen-code.svg",
   "license": "Apache-2.0",
   "install": null,
-  "run": "npx -y @qwen-code/qwen-code@0.24.4 --acp --experimental-skills",
+  "run": "npx -y @qwen-code/qwen-code@0.24.5 --acp --experimental-skills",
   "env": {
     "OPENAI_API_KEY": "probe-mock-key",
     "OPENAI_BASE_URL": "${MOCK_LLM_URL}",
@@ -29,7 +29,7 @@
   },
   "dist": {
     "type": "npx",
-    "package": "@qwen-code/qwen-code@0.24.4",
+    "package": "@qwen-code/qwen-code@0.24.5",
     "args": [
       "--acp",
       "--experimental-skills"
@@ -38,5 +38,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "OpenAI-compatible provider selected via project .qwen/settings.json (searched upward from the session cwd) plus OPENAI_* env — every model call routes to the probe's mock LLM. No qwen OAuth account needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-24"
+  "_synced": "acp-registry 1.0.0 · 2026-09-25"
 }
