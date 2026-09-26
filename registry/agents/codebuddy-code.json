@@ -25,5 +25,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Documented third-party-model path: CODEBUDDY_API_KEY + CODEBUDDY_BASE_URL point the model endpoint at the mock LLM. International edition needs no CODEBUDDY_INTERNET_ENVIRONMENT.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-25"
+  "_synced": "acp-registry 1.0.0 · 2026-09-26"
 }

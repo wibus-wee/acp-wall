@@ -36,5 +36,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "corust-agent publishes no documented env/config for provider endpoints; binary distribution only. Probed as-is.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-25"
+  "_synced": "acp-registry 1.0.0 · 2026-09-26"
 }

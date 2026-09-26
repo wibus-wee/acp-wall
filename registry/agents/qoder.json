@@ -41,5 +41,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Attempted wiring: documented BYOK customModels shape (provider/apiKey/baseURL) planted via HOME=${WORK_DIR}. Whether the ACP session gate accepts a placeholder PAT is unknown — CI transcript will show if it demands a real qoder.com token.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-25"
+  "_synced": "acp-registry 1.0.0 · 2026-09-26"
 }

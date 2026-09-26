@@ -24,5 +24,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Official ACP adapter wrapping the Claude Agent SDK. Verified locally: claude honors ANTHROPIC_BASE_URL and completes full tool_use→end_turn turns against the mock's /messages SSE endpoint — the earlier failure was mock-side (query-string routing + model-name mismatch), not auth.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-25"
+  "_synced": "acp-registry 1.0.0 · 2026-09-26"
 }

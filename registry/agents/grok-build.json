@@ -30,5 +30,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "GROK_HOME relocates grok's state dir into the probe workspace; config.toml defines a custom model whose base_url is the mock LLM (chat_completions backend) and XAI_API_KEY satisfies the api-key auth path — no grok login / SuperGrok subscription needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-25"
+  "_synced": "acp-registry 1.0.0 · 2026-09-26"
 }

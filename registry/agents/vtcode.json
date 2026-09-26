@@ -70,5 +70,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "vtcode.toml in the session workspace declares a custom OpenAI-compatible provider (documented custom_providers shape) pointed at the mock LLM; api_key_env references the probe key.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-25"
+  "_synced": "acp-registry 1.0.0 · 2026-09-26"
 }
