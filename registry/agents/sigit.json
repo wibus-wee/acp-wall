@@ -2,23 +2,23 @@
   "name": "sigit",
   "display": "siGit Code",
   "vendor": "smbCloud",
-  "version": "1.5.10",
+  "version": "1.5.11",
   "description": "Local-first coding agent. Runs entirely on your machine with optional on-device LLM inference via Onde.",
   "repo": "getsigit/sigit",
   "website": "https://github.com/getsigit/sigit",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/sigit.svg",
   "license": "Apache-2.0",
   "install": null,
-  "run": "npx -y @smbcloud/sigit@1.5.10",
+  "run": "npx -y @smbcloud/sigit@1.5.11",
   "env": {},
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@smbcloud/sigit@1.5.10",
+    "package": "@smbcloud/sigit@1.5.11",
     "args": []
   },
   "disabled": false,
   "selftest": false,
   "notes": "sigit is a local-inference agent (Onde Inference, 'no API keys, no cloud round-trips') — nothing to wire; probed as-is. Whether its bundled model runs in CI is itself a data point.",
-  "_synced": "acp-registry 1.0.0 · 2026-09-29"
+  "_synced": "acp-registry 1.0.0 · 2026-09-30"
 }
