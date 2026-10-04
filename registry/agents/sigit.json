@@ -2,7 +2,7 @@
   "name": "sigit",
   "display": "siGit Code",
   "vendor": "smbCloud",
-  "version": "1.5.12",
+  "version": "1.5.13",
   "description": "Local-first coding agent. Runs entirely on your machine with optional on-device LLM inference via Onde.",
   "repo": "getsigit/sigit",
   "website": "https://github.com/getsigit/sigit",
@@ -16,7 +16,7 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@smbcloud/sigit@1.5.12",
+    "package": "@smbcloud/sigit@1.5.13",
     "args": []
   },
   "disabled": false,
