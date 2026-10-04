@@ -8,7 +8,7 @@
     "capabilities": {},
     "authMethods": []
   },
-  "probedAt": "2026-10-04T03:07:48.034Z",
+  "probedAt": "2026-10-04T03:22:15.379Z",
   "state": "blocked",
   "summary": {
     "pass": 0,
@@ -35,8 +35,8 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "7e54175a3b34af42fc85a0c23393571ab90c932d8947666b83f8b8f989eab1f5",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173012349",
-    "revision": "2ec771bcbbc98784d4718b16dfe13f1846dea343",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173726675",
+    "revision": "70fe6c77bb08cd3fb9c127e41c957fa5ae75ada0",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -59,7 +59,7 @@
           "status": "na",
           "reason": "transport",
           "note": "agent exited (code 2)",
-          "latencyMs": 66
+          "latencyMs": 87
         }
       ]
     },
@@ -502,7 +502,7 @@
       "status": "na",
       "reason": "transport",
       "note": "agent exited (code 2)",
-      "latencyMs": 66
+      "latencyMs": 87
     },
     "authenticate": {
       "status": "blocked",
@@ -715,16 +715,16 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-04T03:07:47.853Z",
+      "at": "2026-10-04T03:22:15.145Z",
       "outcome": "error",
-      "latencyMs": 111
+      "latencyMs": 143
     },
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-04T03:07:47.967Z",
+      "at": "2026-10-04T03:22:15.291Z",
       "outcome": "error",
-      "latencyMs": 66
+      "latencyMs": 87
     }
   ],
   "scenarios": [],
@@ -734,7 +734,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 40843,
+      "port": 37767,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 4,

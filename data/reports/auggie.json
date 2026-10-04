@@ -18,7 +18,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-10-04T03:05:57.491Z",
+  "probedAt": "2026-10-04T03:19:38.377Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -45,8 +45,8 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "6192532cacfe60e3176b0469bcb6094acc79798b6256802595bd07acab6fa7ef",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173012349",
-    "revision": "2ec771bcbbc98784d4718b16dfe13f1846dea343",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173726675",
+    "revision": "70fe6c77bb08cd3fb9c127e41c957fa5ae75ada0",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -68,7 +68,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · auggie",
-          "latencyMs": 2381
+          "latencyMs": 1826
         }
       ]
     },
@@ -96,7 +96,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Auggie does not currently support authenticating over ACP. Please run `auggie login` from your terminal then try again.",
-          "latencyMs": 2
+          "latencyMs": 1
         }
       ]
     },
@@ -158,7 +158,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -509,14 +509,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · auggie",
-      "latencyMs": 2381
+      "latencyMs": 1826
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Auggie does not currently support authenticating over ACP. Please run `auggie login` from your terminal then try again.",
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -593,7 +593,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "na",
@@ -726,29 +726,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-04T03:05:55.099Z",
+      "at": "2026-10-04T03:19:36.545Z",
       "outcome": "success",
-      "latencyMs": 2381
+      "latencyMs": 1826
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-04T03:05:57.481Z",
+      "at": "2026-10-04T03:19:38.372Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-04T03:05:57.485Z",
+      "at": "2026-10-04T03:19:38.374Z",
       "outcome": "success",
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-04T03:05:57.488Z",
+      "at": "2026-10-04T03:19:38.375Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -756,18 +756,18 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-04T03:05:57.489Z",
+      "at": "2026-10-04T03:19:38.376Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-04T03:05:57.490Z",
+      "at": "2026-10-04T03:19:38.376Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -793,7 +793,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 43287,
+      "port": 37989,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 4,
