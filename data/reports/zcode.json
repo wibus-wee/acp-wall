@@ -1,0 +1,1002 @@
+{
+  "reportVersion": 2,
+  "methodologyVersion": "2.1.0",
+  "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
+  "harness": "zcode",
+  "agentName": "acp-extension-zcode",
+  "agentVersion": "0.38.0",
+  "specVersion": 1,
+  "advertised": {
+    "capabilities": {
+      "loadSession": true,
+      "promptCapabilities": {
+        "image": true,
+        "audio": false,
+        "embeddedContext": false
+      },
+      "mcpCapabilities": {
+        "http": true,
+        "sse": false
+      },
+      "sessionCapabilities": {
+        "list": {},
+        "resume": {},
+        "fork": {}
+      },
+      "_meta": {
+        "zcode": {
+          "fs": true
+        },
+        "lody": {
+          "usage": {
+            "version": 1
+          },
+          "rateLimits": {
+            "version": 1,
+            "query": true
+          },
+          "tasks": {
+            "version": 1,
+            "background": true
+          },
+          "compaction": {
+            "version": 1
+          }
+        }
+      }
+    },
+    "authMethods": [
+      {
+        "id": "zcode-credentials",
+        "name": "ZCode built-in credentials",
+        "description": "Reads the GLM API key from ~/.zcode/v2/config.json managed by the ZCode desktop app. No editor-side credentials required."
+      }
+    ]
+  },
+  "probedAt": "2026-10-04T03:08:41.529Z",
+  "state": "blocked",
+  "summary": {
+    "pass": 3,
+    "observed": 8,
+    "blocked": 14,
+    "unsupported": 0,
+    "fail": 0,
+    "partial": 0,
+    "error": 0,
+    "na": 10,
+    "mixed": 0,
+    "legacy": 0,
+    "total": 35
+  },
+  "setup": {
+    "status": "not-configured"
+  },
+  "environment": {
+    "profile": "mock",
+    "client": "simulated",
+    "platform": "linux-x64",
+    "node": "v24.21.0",
+    "command": "npx -y acp-extension-zcode@0.38.0",
+    "discovery": false,
+    "authenticationAttempted": false,
+    "recipeSha256": "712b45af48962846e116b275c48cf02dfe2e2698c4942a90b7fb31d81a2fedb8",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173012349",
+    "revision": "2ec771bcbbc98784d4718b16dfe13f1846dea343",
+    "sourceDirty": false,
+    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
+    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "mcpSdkVersion": "1.32.0",
+    "mockRequests": 0,
+    "modelEvidence": {
+      "seenTools": [],
+      "issuedTools": [],
+      "skippedCalls": []
+    }
+  },
+  "cells": [
+    {
+      "key": "initialize",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "initialize",
+          "status": "pass",
+          "note": "Protocol 1 · acp-extension-zcode",
+          "latencyMs": 643
+        }
+      ]
+    },
+    {
+      "key": "authenticate",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "authenticate",
+          "status": "blocked",
+          "advertised": true,
+          "reason": "interactive-auth",
+          "note": "Advertised: zcode-credentials; login not attempted in unattended discovery"
+        }
+      ]
+    },
+    {
+      "key": "session/new",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/new",
+          "status": "pass",
+          "note": "Created a session without additional MCP dependencies",
+          "latencyMs": 5
+        }
+      ]
+    },
+    {
+      "key": "session/load",
+      "scope": "optional",
+      "status": "observed",
+      "items": [
+        {
+          "method": "session/load",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+          "advertised": true,
+          "latencyMs": 6
+        }
+      ]
+    },
+    {
+      "key": "session/prompt",
+      "scope": "core",
+      "status": "observed",
+      "items": [
+        {
+          "method": "session/prompt",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+          "latencyMs": 8
+        }
+      ]
+    },
+    {
+      "key": "prompt:content",
+      "scope": "optional",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "prompt:image",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+          "advertised": true
+        },
+        {
+          "method": "prompt:embedded-context",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "sessions/*",
+      "scope": "optional",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "session/list",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error — zcode list failed: zcode backend reader exited (backend dead)",
+          "advertised": true,
+          "latencyMs": 6
+        },
+        {
+          "method": "session/resume",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+          "advertised": true,
+          "latencyMs": 6
+        },
+        {
+          "method": "session/close",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "session/delete",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "fork",
+      "scope": "optional",
+      "status": "observed",
+      "items": [
+        {
+          "method": "session/fork",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+          "advertised": true,
+          "latencyMs": 5
+        }
+      ]
+    },
+    {
+      "key": "load:replay",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "load:replay",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/load",
+          "note": "Load attempt 1 rejected; replay could not be exercised"
+        }
+      ]
+    },
+    {
+      "key": "set_mode",
+      "scope": "optional",
+      "status": "observed",
+      "items": [
+        {
+          "method": "set_mode",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+          "advertised": true,
+          "latencyMs": 15
+        }
+      ]
+    },
+    {
+      "key": "set_config",
+      "scope": "optional",
+      "status": "observed",
+      "items": [
+        {
+          "method": "set_config",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+          "advertised": true,
+          "latencyMs": 7
+        }
+      ]
+    },
+    {
+      "key": "cancel",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "cancel",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No successful prompt to establish cancellation conditions"
+        }
+      ]
+    },
+    {
+      "key": "logout",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "logout",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "message*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:message",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "tool_call*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:tool_call",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "usage",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:usage",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "permission",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "request_permission",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "plan",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:plan",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "slash_cmds",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:commands",
+          "status": "pass",
+          "note": "1 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "fs/*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "fs/read_text_file",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        },
+        {
+          "method": "fs/write_text_file",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "terminal/*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "terminal/*",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "elicitation",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "elicitation",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "providers",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "providers/list",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "providers/set",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        },
+        {
+          "method": "providers/disable",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        }
+      ]
+    },
+    {
+      "key": "nes",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "nes/start",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "nes/suggest",
+          "status": "na",
+          "reason": "not-run",
+          "note": "No controlled scenario exercised this check"
+        }
+      ]
+    },
+    {
+      "key": "mcp",
+      "scope": "observation",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "mcp:stdio",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
+        },
+        {
+          "method": "mcp:http",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
+        },
+        {
+          "method": "mcp:sse",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    }
+  ],
+  "notes": {
+    "initialize": "initialize: Protocol 1 · acp-extension-zcode",
+    "authenticate": "authenticate: Advertised: zcode-credentials; login not attempted in unattended discovery",
+    "session/new": "session/new: Created a session without additional MCP dependencies",
+    "session/load": "session/load: Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+    "session/prompt": "session/prompt: Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+    "prompt:content": "prompt:image: Internal error — zcode create failed: zcode backend reader exited (backend dead) · prompt:embedded-context: Not advertised; optional method not invoked",
+    "sessions/*": "session/list: Internal error — zcode list failed: zcode backend reader exited (backend dead) · session/resume: Internal error — zcode create failed: zcode backend reader exited (backend dead) · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
+    "fork": "session/fork: Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+    "load:replay": "load:replay: Load attempt 1 rejected; replay could not be exercised",
+    "set_mode": "set_mode: Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+    "set_config": "set_config: Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+    "cancel": "cancel: No successful prompt to establish cancellation conditions",
+    "logout": "logout: Not advertised; optional method not invoked",
+    "message*": "update:message: No matching notifications observed; see scenario stimuli",
+    "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
+    "usage": "update:usage: No matching notifications observed; see scenario stimuli",
+    "permission": "request_permission: Not observed; prerequisite session/prompt unavailable",
+    "plan": "update:plan: No matching notifications observed; see scenario stimuli",
+    "slash_cmds": "update:commands: 1 notification(s) observed",
+    "fs/*": "fs/read_text_file: Not observed; prerequisite session/prompt unavailable · fs/write_text_file: Not observed; prerequisite session/prompt unavailable",
+    "terminal/*": "terminal/*: Not observed; prerequisite session/prompt unavailable",
+    "elicitation": "elicitation: Not observed; prerequisite session/prompt unavailable",
+    "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
+    "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
+    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: MCP scenario prerequisites unavailable · mcp:sse: Not advertised; optional method not invoked"
+  },
+  "methods": {
+    "initialize": {
+      "status": "pass",
+      "note": "Protocol 1 · acp-extension-zcode",
+      "latencyMs": 643
+    },
+    "session/new": {
+      "status": "pass",
+      "note": "Created a session without additional MCP dependencies",
+      "latencyMs": 5
+    },
+    "set_mode": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+      "advertised": true,
+      "latencyMs": 15
+    },
+    "set_config": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+      "advertised": true,
+      "latencyMs": 7
+    },
+    "session/prompt": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+      "latencyMs": 8
+    },
+    "cancel": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No successful prompt to establish cancellation conditions"
+    },
+    "session/load": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+      "advertised": true,
+      "latencyMs": 6
+    },
+    "load:replay": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/load",
+      "note": "Load attempt 1 rejected; replay could not be exercised"
+    },
+    "session/fork": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+      "advertised": true,
+      "latencyMs": 5
+    },
+    "prompt:image": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+      "advertised": true
+    },
+    "prompt:embedded-context": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/set": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "providers/disable": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "nes/start": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/list": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error — zcode list failed: zcode backend reader exited (backend dead)",
+      "advertised": true,
+      "latencyMs": 6
+    },
+    "session/resume": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
+      "advertised": true,
+      "latencyMs": 6
+    },
+    "session/close": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/delete": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "mcp:stdio": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
+    },
+    "mcp:http": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
+    },
+    "mcp:sse": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "fs/read_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "fs/write_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "terminal/*": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "request_permission": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "elicitation": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "update:message": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:tool_call": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:plan": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:commands": {
+      "status": "pass",
+      "note": "1 notification(s) observed"
+    },
+    "update:usage": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "lody": {
+      "status": "observed",
+      "note": "4 feature(s) advertised: usage v1, rateLimits v1, tasks v1, compaction v1 · _lody/* answered: rate_limits/get"
+    },
+    "authenticate": {
+      "status": "blocked",
+      "advertised": true,
+      "reason": "interactive-auth",
+      "note": "Advertised: zcode-credentials; login not attempted in unattended discovery"
+    },
+    "logout": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "nes/suggest": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled scenario exercised this check"
+    }
+  },
+  "claimMismatches": [],
+  "violations": [],
+  "attempts": [
+    {
+      "method": "initialize",
+      "scenario": "initialize",
+      "at": "2026-10-04T03:08:40.808Z",
+      "outcome": "success",
+      "latencyMs": 643
+    },
+    {
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-10-04T03:08:41.451Z",
+      "outcome": "success",
+      "latencyMs": 5
+    },
+    {
+      "method": "session/set_mode",
+      "scenario": "set_mode",
+      "at": "2026-10-04T03:08:41.457Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 15
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-10-04T03:08:41.472Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 7
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:exec",
+      "at": "2026-10-04T03:08:41.480Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 8
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-10-04T03:08:41.489Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 6
+    },
+    {
+      "method": "session/fork",
+      "scenario": "session/fork",
+      "at": "2026-10-04T03:08:41.496Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 5
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-04T03:08:41.502Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:image",
+      "at": "2026-10-04T03:08:41.503Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 7
+    },
+    {
+      "method": "session/list",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:08:41.510Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 6
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:08:41.516Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "session/resume",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:08:41.518Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 6
+    },
+    {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-10-04T03:08:41.525Z",
+      "outcome": "success",
+      "latencyMs": 2
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-04T03:08:41.527Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-10-04T03:08:41.527Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "default:exec",
+      "profile": "default",
+      "sessionId": "f5c86f28-e535-4ee9-8a72-a9cd9f1adc2f",
+      "configuration": {
+        "model": "builtin:bigmodel-coding-plan\\GLM-5.3",
+        "mode": "yolo",
+        "thought": "max"
+      },
+      "result": {
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "prompt:image",
+      "profile": "default",
+      "sessionId": "c55862e4-14e4-4fdb-9740-0aae0a04f4b1",
+      "configuration": {},
+      "result": {
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    }
+  ],
+  "uncertaintyReasons": {
+    "interactive-auth": 1,
+    "not-advertised": 7,
+    "prerequisite": 13,
+    "not-run": 3
+  },
+  "lody": {
+    "advertised": {
+      "usage": {
+        "version": 1
+      },
+      "rateLimits": {
+        "version": 1,
+        "query": true
+      },
+      "tasks": {
+        "version": 1,
+        "background": true
+      },
+      "compaction": {
+        "version": 1
+      }
+    },
+    "answered": [
+      "_lody/rate_limits/get"
+    ],
+    "missing": [
+      "_lody/subagents/list",
+      "_lody/session/history/read"
+    ],
+    "observed": []
+  },
+  "ext": {
+    "advertised": [
+      "lody",
+      "zcode"
+    ],
+    "observed": []
+  },
+  "transport": {
+    "mitm": {
+      "port": 38155,
+      "impersonated": [],
+      "impersonations": 0,
+      "relayed": 1,
+      "drops": 0
+    }
+  }
+}

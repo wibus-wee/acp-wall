@@ -1,0 +1,1051 @@
+{
+  "reportVersion": 2,
+  "methodologyVersion": "2.1.0",
+  "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
+  "harness": "junie",
+  "agentName": "@jetbrains/junie",
+  "agentVersion": "26.9.22 (3419.24)",
+  "specVersion": 1,
+  "advertised": {
+    "capabilities": {
+      "loadSession": true,
+      "promptCapabilities": {
+        "audio": false,
+        "image": true,
+        "embeddedContext": true
+      },
+      "mcpCapabilities": {
+        "http": true,
+        "sse": true
+      },
+      "sessionCapabilities": {
+        "fork": {},
+        "list": {},
+        "resume": {},
+        "delete": {},
+        "close": {},
+        "additionalDirectories": {}
+      },
+      "auth": {
+        "logout": {}
+      },
+      "providers": {}
+    },
+    "authMethods": [
+      {
+        "type": "agent",
+        "id": "jetbrains-account",
+        "name": "Junie Account",
+        "description": "Log in via Junie Account in a browser."
+      }
+    ]
+  },
+  "probedAt": "2026-10-04T03:07:33.025Z",
+  "state": "blocked",
+  "summary": {
+    "pass": 9,
+    "observed": 1,
+    "blocked": 17,
+    "unsupported": 0,
+    "fail": 0,
+    "partial": 0,
+    "error": 0,
+    "na": 8,
+    "mixed": 0,
+    "legacy": 0,
+    "total": 35
+  },
+  "setup": {
+    "status": "not-configured"
+  },
+  "environment": {
+    "profile": "mock",
+    "client": "simulated",
+    "platform": "linux-x64",
+    "node": "v24.21.0",
+    "command": "${REPO_ROOT}/.cache/agents/junie/agent --acp=true",
+    "discovery": false,
+    "authenticationAttempted": false,
+    "recipeSha256": "ebb5c79261be203e9acf37192b165bd5605348f985db6598c39e0391e315d399",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173012349",
+    "revision": "2ec771bcbbc98784d4718b16dfe13f1846dea343",
+    "sourceDirty": false,
+    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
+    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "mcpSdkVersion": "1.32.0",
+    "mockRequests": 0,
+    "modelEvidence": {
+      "seenTools": [],
+      "issuedTools": [],
+      "skippedCalls": []
+    }
+  },
+  "cells": [
+    {
+      "key": "initialize",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "initialize",
+          "status": "pass",
+          "note": "Protocol 1 · @jetbrains/junie",
+          "latencyMs": 6548
+        }
+      ]
+    },
+    {
+      "key": "authenticate",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "authenticate",
+          "status": "blocked",
+          "advertised": true,
+          "reason": "interactive-auth",
+          "note": "Advertised: jetbrains-account; login not attempted in unattended discovery"
+        }
+      ]
+    },
+    {
+      "key": "session/new",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/new",
+          "status": "pass",
+          "note": "Created a session without additional MCP dependencies",
+          "latencyMs": 774
+        }
+      ]
+    },
+    {
+      "key": "session/load",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/load",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 3
+        }
+      ]
+    },
+    {
+      "key": "session/prompt",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "session/prompt",
+          "status": "blocked",
+          "reason": "authentication",
+          "errorCode": -32000,
+          "note": "1 earlier turn(s) succeeded; subsequent attempt: Authentication is required before this operation can be performed.",
+          "latencyMs": 1095
+        }
+      ]
+    },
+    {
+      "key": "prompt:content",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "prompt:image",
+          "status": "blocked",
+          "reason": "authentication",
+          "errorCode": -32000,
+          "note": "Authentication is required before this operation can be performed.",
+          "advertised": true
+        },
+        {
+          "method": "prompt:embedded-context",
+          "status": "blocked",
+          "reason": "authentication",
+          "errorCode": -32000,
+          "note": "Authentication is required before this operation can be performed.",
+          "advertised": true
+        }
+      ]
+    },
+    {
+      "key": "sessions/*",
+      "scope": "optional",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "session/list",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 5
+        },
+        {
+          "method": "session/resume",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32602,
+          "note": "Session is already loaded: session-261004-030732-27qm — {\"reason\":\"session_already_loaded\"}",
+          "advertised": true,
+          "latencyMs": 6
+        },
+        {
+          "method": "session/close",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 18
+        },
+        {
+          "method": "session/delete",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 14
+        }
+      ]
+    },
+    {
+      "key": "fork",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/fork",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 77
+        }
+      ]
+    },
+    {
+      "key": "load:replay",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "load:replay",
+          "status": "na",
+          "reason": "not-triggered",
+          "note": "No conversation text observed during either of two load attempts"
+        }
+      ]
+    },
+    {
+      "key": "set_mode",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "set_mode",
+          "status": "na",
+          "reason": "not-advertised",
+          "note": "No session modes offered"
+        }
+      ]
+    },
+    {
+      "key": "set_config",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "set_config",
+          "status": "pass",
+          "note": "Accepted current value of mode",
+          "advertised": true,
+          "latencyMs": 44
+        }
+      ]
+    },
+    {
+      "key": "cancel",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "cancel",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No successful prompt to establish cancellation conditions"
+        }
+      ]
+    },
+    {
+      "key": "logout",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "logout",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": true,
+          "note": "No authentication established by this run; shared account state is not changed"
+        }
+      ]
+    },
+    {
+      "key": "message*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:message",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "tool_call*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:tool_call",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "usage",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:usage",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "permission",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "request_permission",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "plan",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:plan",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "slash_cmds",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:commands",
+          "status": "pass",
+          "note": "7 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "fs/*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "fs/read_text_file",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        },
+        {
+          "method": "fs/write_text_file",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "terminal/*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "terminal/*",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "elicitation",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "elicitation",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "providers",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "providers/list",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "providers/set",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        },
+        {
+          "method": "providers/disable",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        }
+      ]
+    },
+    {
+      "key": "nes",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "nes/start",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "nes/suggest",
+          "status": "na",
+          "reason": "not-run",
+          "note": "No controlled scenario exercised this check"
+        }
+      ]
+    },
+    {
+      "key": "mcp",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "mcp:stdio",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
+        },
+        {
+          "method": "mcp:http",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
+        },
+        {
+          "method": "mcp:sse",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
+        }
+      ]
+    }
+  ],
+  "notes": {
+    "initialize": "initialize: Protocol 1 · @jetbrains/junie",
+    "authenticate": "authenticate: Advertised: jetbrains-account; login not attempted in unattended discovery",
+    "session/new": "session/new: Created a session without additional MCP dependencies",
+    "session/load": "session/load: pass",
+    "session/prompt": "session/prompt: 1 earlier turn(s) succeeded; subsequent attempt: Authentication is required before this operation can be performed.",
+    "prompt:content": "prompt:image: Authentication is required before this operation can be performed. · prompt:embedded-context: Authentication is required before this operation can be performed.",
+    "sessions/*": "session/list: pass · session/resume: Session is already loaded: session-261004-030732-27qm — {\"reason\":\"session_already_loaded\"} · session/close: pass · session/delete: pass",
+    "fork": "session/fork: pass",
+    "load:replay": "load:replay: No conversation text observed during either of two load attempts",
+    "set_mode": "set_mode: No session modes offered",
+    "set_config": "set_config: Accepted current value of mode",
+    "cancel": "cancel: No successful prompt to establish cancellation conditions",
+    "logout": "logout: No authentication established by this run; shared account state is not changed",
+    "message*": "update:message: No matching notifications observed; see scenario stimuli",
+    "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
+    "usage": "update:usage: No matching notifications observed; see scenario stimuli",
+    "permission": "request_permission: Not observed; prerequisite session/prompt unavailable",
+    "plan": "update:plan: No matching notifications observed; see scenario stimuli",
+    "slash_cmds": "update:commands: 7 notification(s) observed",
+    "fs/*": "fs/read_text_file: Not observed; prerequisite session/prompt unavailable · fs/write_text_file: Not observed; prerequisite session/prompt unavailable",
+    "terminal/*": "terminal/*: Not observed; prerequisite session/prompt unavailable",
+    "elicitation": "elicitation: Not observed; prerequisite session/prompt unavailable",
+    "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
+    "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
+    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: MCP scenario prerequisites unavailable · mcp:sse: MCP scenario prerequisites unavailable"
+  },
+  "methods": {
+    "initialize": {
+      "status": "pass",
+      "note": "Protocol 1 · @jetbrains/junie",
+      "latencyMs": 6548
+    },
+    "session/new": {
+      "status": "pass",
+      "note": "Created a session without additional MCP dependencies",
+      "latencyMs": 774
+    },
+    "set_mode": {
+      "status": "na",
+      "reason": "not-advertised",
+      "note": "No session modes offered"
+    },
+    "set_config": {
+      "status": "pass",
+      "note": "Accepted current value of mode",
+      "advertised": true,
+      "latencyMs": 44
+    },
+    "session/prompt": {
+      "status": "blocked",
+      "reason": "authentication",
+      "errorCode": -32000,
+      "note": "1 earlier turn(s) succeeded; subsequent attempt: Authentication is required before this operation can be performed.",
+      "latencyMs": 1095
+    },
+    "cancel": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No successful prompt to establish cancellation conditions"
+    },
+    "session/load": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 3
+    },
+    "load:replay": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No conversation text observed during either of two load attempts"
+    },
+    "session/fork": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 77
+    },
+    "prompt:image": {
+      "status": "blocked",
+      "reason": "authentication",
+      "errorCode": -32000,
+      "note": "Authentication is required before this operation can be performed.",
+      "advertised": true
+    },
+    "prompt:embedded-context": {
+      "status": "blocked",
+      "reason": "authentication",
+      "errorCode": -32000,
+      "note": "Authentication is required before this operation can be performed.",
+      "advertised": true
+    },
+    "providers/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/set": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "providers/disable": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "nes/start": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/list": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 5
+    },
+    "session/resume": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32602,
+      "note": "Session is already loaded: session-261004-030732-27qm — {\"reason\":\"session_already_loaded\"}",
+      "advertised": true,
+      "latencyMs": 6
+    },
+    "session/close": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 18
+    },
+    "session/delete": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 14
+    },
+    "mcp:stdio": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
+    },
+    "mcp:http": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
+    },
+    "mcp:sse": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
+    },
+    "fs/read_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "fs/write_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "terminal/*": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "request_permission": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "elicitation": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "update:message": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:tool_call": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:plan": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:commands": {
+      "status": "pass",
+      "note": "7 notification(s) observed"
+    },
+    "update:usage": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "lody": {
+      "status": "na",
+      "note": "no _meta.lody capabilities; _lody/* unanswered",
+      "definitive": true
+    },
+    "authenticate": {
+      "status": "blocked",
+      "advertised": true,
+      "reason": "interactive-auth",
+      "note": "Advertised: jetbrains-account; login not attempted in unattended discovery"
+    },
+    "logout": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": true,
+      "note": "No authentication established by this run; shared account state is not changed"
+    },
+    "nes/suggest": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled scenario exercised this check"
+    }
+  },
+  "claimMismatches": [],
+  "violations": [],
+  "attempts": [
+    {
+      "method": "initialize",
+      "scenario": "initialize",
+      "at": "2026-10-04T03:07:20.522Z",
+      "outcome": "success",
+      "latencyMs": 6548
+    },
+    {
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-10-04T03:07:27.072Z",
+      "outcome": "success",
+      "latencyMs": 774
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-10-04T03:07:27.847Z",
+      "outcome": "success",
+      "latencyMs": 44
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:exec",
+      "at": "2026-10-04T03:07:27.895Z",
+      "outcome": "success",
+      "latencyMs": 1595
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:read",
+      "at": "2026-10-04T03:07:29.491Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 1095
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-10-04T03:07:30.587Z",
+      "outcome": "success",
+      "latencyMs": 5
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:2",
+      "at": "2026-10-04T03:07:30.593Z",
+      "outcome": "success",
+      "latencyMs": 3
+    },
+    {
+      "method": "session/fork",
+      "scenario": "session/fork",
+      "at": "2026-10-04T03:07:30.597Z",
+      "outcome": "success",
+      "latencyMs": 77
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-04T03:07:30.675Z",
+      "outcome": "success",
+      "latencyMs": 41
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:image",
+      "at": "2026-10-04T03:07:30.717Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 1061
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-04T03:07:31.778Z",
+      "outcome": "success",
+      "latencyMs": 30
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:embedded-context",
+      "at": "2026-10-04T03:07:31.808Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 1088
+    },
+    {
+      "method": "session/list",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:07:32.896Z",
+      "outcome": "success",
+      "latencyMs": 5
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:07:32.901Z",
+      "outcome": "success",
+      "latencyMs": 24
+    },
+    {
+      "method": "session/resume",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:07:32.925Z",
+      "outcome": "error",
+      "errorCode": -32602,
+      "latencyMs": 6
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:07:32.932Z",
+      "outcome": "success",
+      "latencyMs": 30
+    },
+    {
+      "method": "session/close",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:07:32.963Z",
+      "outcome": "success",
+      "latencyMs": 18
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:07:32.981Z",
+      "outcome": "success",
+      "latencyMs": 25
+    },
+    {
+      "method": "session/delete",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:07:33.006Z",
+      "outcome": "success",
+      "latencyMs": 14
+    },
+    {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-10-04T03:07:33.022Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-04T03:07:33.023Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-10-04T03:07:33.024Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "default:exec",
+      "profile": "default",
+      "sessionId": "session-261004-030727-rlvw",
+      "configuration": {
+        "mode": "default",
+        "model": "v1:12:jetbrains-ai:gemini-3.7-flash",
+        "effort": "medium",
+        "brave_mode": "brave-auto"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "available_commands_update",
+        "config_option_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:read",
+      "profile": "default",
+      "sessionId": "session-261004-030727-rlvw",
+      "configuration": {
+        "mode": "default",
+        "model": "v1:12:jetbrains-ai:gemini-3.7-flash",
+        "effort": "medium",
+        "brave_mode": "brave-auto"
+      },
+      "result": {
+        "status": "blocked",
+        "reason": "authentication",
+        "errorCode": -32000,
+        "note": "Authentication is required before this operation can be performed."
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "prompt:image",
+      "profile": "default",
+      "sessionId": "session-261004-030730-o3xj",
+      "configuration": {},
+      "result": {
+        "status": "blocked",
+        "reason": "authentication",
+        "errorCode": -32000,
+        "note": "Authentication is required before this operation can be performed."
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "prompt:embedded-context",
+      "profile": "default",
+      "sessionId": "session-261004-030731-1rqt",
+      "configuration": {},
+      "result": {
+        "status": "blocked",
+        "reason": "authentication",
+        "errorCode": -32000,
+        "note": "Authentication is required before this operation can be performed."
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "available_commands_update",
+        "config_option_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    }
+  ],
+  "uncertaintyReasons": {
+    "interactive-auth": 1,
+    "authentication": 3,
+    "not-triggered": 1,
+    "not-advertised": 3,
+    "prerequisite": 13,
+    "not-run": 4
+  },
+  "lody": {
+    "advertised": {},
+    "answered": [],
+    "missing": [
+      "_lody/rate_limits/get",
+      "_lody/subagents/list",
+      "_lody/session/history/read"
+    ],
+    "observed": []
+  },
+  "ext": {
+    "advertised": [
+      "jetbrains",
+      "requiredPlugins",
+      "steering"
+    ],
+    "observed": []
+  },
+  "transport": {
+    "mitm": {
+      "port": 44977,
+      "impersonated": [],
+      "impersonations": 0,
+      "relayed": 12,
+      "drops": 0
+    }
+  }
+}

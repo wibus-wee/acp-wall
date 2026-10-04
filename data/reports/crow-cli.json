@@ -1,0 +1,975 @@
+{
+  "reportVersion": 2,
+  "methodologyVersion": "2.1.0",
+  "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
+  "harness": "crow-cli",
+  "agentName": "crow-cli",
+  "agentVersion": "0.1.24",
+  "specVersion": 1,
+  "advertised": {
+    "capabilities": {
+      "loadSession": true,
+      "promptCapabilities": {
+        "audio": false,
+        "embeddedContext": true,
+        "image": true
+      }
+    },
+    "authMethods": [
+      {
+        "_meta": {
+          "terminal-auth": {
+            "command": "uvx",
+            "args": [
+              "crow-cli",
+              "acp"
+            ],
+            "label": "Crow Auth",
+            "env": {},
+            "type": "terminal"
+          }
+        },
+        "description": "This agent does not require authentication for FOSS deployments.",
+        "id": "none",
+        "name": "No Authentication Required"
+      }
+    ]
+  },
+  "probedAt": "2026-10-04T03:06:48.183Z",
+  "state": "blocked",
+  "summary": {
+    "pass": 7,
+    "observed": 0,
+    "blocked": 3,
+    "unsupported": 0,
+    "fail": 0,
+    "partial": 0,
+    "error": 0,
+    "na": 25,
+    "mixed": 0,
+    "legacy": 0,
+    "total": 35
+  },
+  "setup": {
+    "status": "not-configured"
+  },
+  "environment": {
+    "profile": "mock",
+    "client": "simulated",
+    "platform": "linux-x64",
+    "node": "v24.21.0",
+    "command": "${REPO_ROOT}/.cache/agents/crow-cli/agent acp",
+    "discovery": false,
+    "authenticationAttempted": false,
+    "recipeSha256": "ccbc464d1b1fb30aaab16122693a2cd3506c383460ec618f198046fcd5dad9dd",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173012349",
+    "revision": "2ec771bcbbc98784d4718b16dfe13f1846dea343",
+    "sourceDirty": false,
+    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
+    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "mcpSdkVersion": "1.32.0",
+    "mockRequests": 0,
+    "modelEvidence": {
+      "seenTools": [],
+      "issuedTools": [],
+      "skippedCalls": []
+    }
+  },
+  "cells": [
+    {
+      "key": "initialize",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "initialize",
+          "status": "pass",
+          "note": "Protocol 1 · crow-cli",
+          "latencyMs": 1708
+        }
+      ]
+    },
+    {
+      "key": "authenticate",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "authenticate",
+          "status": "blocked",
+          "advertised": true,
+          "reason": "interactive-auth",
+          "note": "Advertised: none; login not attempted in unattended discovery"
+        }
+      ]
+    },
+    {
+      "key": "session/new",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/new",
+          "status": "pass",
+          "note": "Created a session without additional MCP dependencies",
+          "latencyMs": 6150
+        }
+      ]
+    },
+    {
+      "key": "session/load",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/load",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 3
+        }
+      ]
+    },
+    {
+      "key": "session/prompt",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/prompt",
+          "status": "pass",
+          "note": "4 prompt responses received; content and tool choice are observed separately"
+        }
+      ]
+    },
+    {
+      "key": "prompt:content",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "prompt:image",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No distinct session for the content scenario"
+        },
+        {
+          "method": "prompt:embedded-context",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No distinct session for the content scenario"
+        }
+      ]
+    },
+    {
+      "key": "sessions/*",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "session/list",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "session/resume",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "session/close",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "session/delete",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "fork",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "session/fork",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "load:replay",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "load:replay",
+          "status": "na",
+          "reason": "not-triggered",
+          "note": "No conversation text observed during either of two load attempts"
+        }
+      ]
+    },
+    {
+      "key": "set_mode",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "set_mode",
+          "status": "na",
+          "reason": "not-advertised",
+          "note": "No session modes offered"
+        }
+      ]
+    },
+    {
+      "key": "set_config",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "set_config",
+          "status": "pass",
+          "note": "Accepted current value of model",
+          "advertised": true,
+          "latencyMs": 1
+        }
+      ]
+    },
+    {
+      "key": "cancel",
+      "scope": "core",
+      "status": "na",
+      "items": [
+        {
+          "method": "cancel",
+          "status": "na",
+          "reason": "no-active-turn",
+          "note": "No cancellable turn established"
+        }
+      ]
+    },
+    {
+      "key": "logout",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "logout",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "message*",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:message",
+          "status": "pass",
+          "note": "5 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "tool_call*",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "update:tool_call",
+          "status": "na",
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "usage",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "update:usage",
+          "status": "na",
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "permission",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "request_permission",
+          "status": "na",
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
+        }
+      ]
+    },
+    {
+      "key": "plan",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "update:plan",
+          "status": "na",
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "slash_cmds",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:commands",
+          "status": "pass",
+          "note": "1 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "fs/*",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "fs/read_text_file",
+          "status": "na",
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
+        },
+        {
+          "method": "fs/write_text_file",
+          "status": "na",
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
+        }
+      ]
+    },
+    {
+      "key": "terminal/*",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "terminal/*",
+          "status": "na",
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
+        }
+      ]
+    },
+    {
+      "key": "elicitation",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "elicitation",
+          "status": "na",
+          "reason": "not-run",
+          "note": "No controlled elicitation scenario configured"
+        }
+      ]
+    },
+    {
+      "key": "providers",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "providers/list",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "providers/set",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        },
+        {
+          "method": "providers/disable",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        }
+      ]
+    },
+    {
+      "key": "nes",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "nes/start",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "nes/suggest",
+          "status": "na",
+          "reason": "not-run",
+          "note": "No controlled scenario exercised this check"
+        }
+      ]
+    },
+    {
+      "key": "mcp",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "mcp:stdio",
+          "status": "na",
+          "reason": "timeout",
+          "note": "session/new timed out after 15000ms; 0/1 configured scenarios received a fixture call. See each scenario."
+        },
+        {
+          "method": "mcp:http",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "mcp:sse",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    }
+  ],
+  "notes": {
+    "initialize": "initialize: Protocol 1 · crow-cli",
+    "authenticate": "authenticate: Advertised: none; login not attempted in unattended discovery",
+    "session/new": "session/new: Created a session without additional MCP dependencies",
+    "session/load": "session/load: pass",
+    "session/prompt": "session/prompt: 4 prompt responses received; content and tool choice are observed separately",
+    "prompt:content": "prompt:image: No distinct session for the content scenario · prompt:embedded-context: No distinct session for the content scenario",
+    "sessions/*": "session/list: Not advertised; optional method not invoked · session/resume: Not advertised; optional method not invoked · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
+    "fork": "session/fork: Not advertised; optional method not invoked",
+    "load:replay": "load:replay: No conversation text observed during either of two load attempts",
+    "set_mode": "set_mode: No session modes offered",
+    "set_config": "set_config: Accepted current value of model",
+    "cancel": "cancel: No cancellable turn established",
+    "logout": "logout: Not advertised; optional method not invoked",
+    "message*": "update:message: 5 notification(s) observed",
+    "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
+    "usage": "update:usage: No matching notifications observed; see scenario stimuli",
+    "permission": "request_permission: No client request observed; internal tools and policy choices are permitted",
+    "plan": "update:plan: No matching notifications observed; see scenario stimuli",
+    "slash_cmds": "update:commands: 1 notification(s) observed",
+    "fs/*": "fs/read_text_file: No client request observed; internal tools and policy choices are permitted · fs/write_text_file: No client request observed; internal tools and policy choices are permitted",
+    "terminal/*": "terminal/*: No client request observed; internal tools and policy choices are permitted",
+    "elicitation": "elicitation: No controlled elicitation scenario configured",
+    "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
+    "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
+    "mcp": "mcp:stdio: session/new timed out after 15000ms; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
+  },
+  "methods": {
+    "initialize": {
+      "status": "pass",
+      "note": "Protocol 1 · crow-cli",
+      "latencyMs": 1708
+    },
+    "session/new": {
+      "status": "pass",
+      "note": "Created a session without additional MCP dependencies",
+      "latencyMs": 6150
+    },
+    "set_mode": {
+      "status": "na",
+      "reason": "not-advertised",
+      "note": "No session modes offered"
+    },
+    "set_config": {
+      "status": "pass",
+      "note": "Accepted current value of model",
+      "advertised": true,
+      "latencyMs": 1
+    },
+    "session/prompt": {
+      "status": "pass",
+      "note": "4 prompt responses received; content and tool choice are observed separately"
+    },
+    "cancel": {
+      "status": "na",
+      "reason": "no-active-turn",
+      "note": "No cancellable turn established"
+    },
+    "session/load": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 3
+    },
+    "load:replay": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No conversation text observed during either of two load attempts"
+    },
+    "session/fork": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "prompt:image": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No distinct session for the content scenario"
+    },
+    "prompt:embedded-context": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No distinct session for the content scenario"
+    },
+    "providers/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/set": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "providers/disable": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "nes/start": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/resume": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/close": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/delete": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "mcp:stdio": {
+      "status": "na",
+      "reason": "timeout",
+      "note": "session/new timed out after 15000ms; 0/1 configured scenarios received a fixture call. See each scenario."
+    },
+    "mcp:http": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "mcp:sse": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "fs/read_text_file": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "fs/write_text_file": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "terminal/*": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "request_permission": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "elicitation": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled elicitation scenario configured"
+    },
+    "update:message": {
+      "status": "pass",
+      "note": "5 notification(s) observed"
+    },
+    "update:tool_call": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:plan": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:commands": {
+      "status": "pass",
+      "note": "1 notification(s) observed"
+    },
+    "update:usage": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "lody": {
+      "status": "observed",
+      "note": "_lody/* answered: rate_limits/get, subagents/list, session/history/read — but no _meta.lody capabilities advertised"
+    },
+    "authenticate": {
+      "status": "blocked",
+      "advertised": true,
+      "reason": "interactive-auth",
+      "note": "Advertised: none; login not attempted in unattended discovery"
+    },
+    "logout": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "nes/suggest": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled scenario exercised this check"
+    }
+  },
+  "claimMismatches": [],
+  "violations": [],
+  "attempts": [
+    {
+      "method": "initialize",
+      "scenario": "initialize",
+      "at": "2026-10-04T03:05:54.886Z",
+      "outcome": "success",
+      "latencyMs": 1708
+    },
+    {
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-10-04T03:05:56.594Z",
+      "outcome": "success",
+      "latencyMs": 6150
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-10-04T03:06:02.744Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:exec",
+      "at": "2026-10-04T03:06:02.745Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:read",
+      "at": "2026-10-04T03:06:02.746Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:write",
+      "at": "2026-10-04T03:06:02.747Z",
+      "outcome": "success",
+      "latencyMs": 0
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:plan",
+      "at": "2026-10-04T03:06:02.747Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "cancel",
+      "at": "2026-10-04T03:06:02.748Z",
+      "outcome": "success",
+      "latencyMs": 0
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-10-04T03:06:03.150Z",
+      "outcome": "success",
+      "latencyMs": 6
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:2",
+      "at": "2026-10-04T03:06:03.156Z",
+      "outcome": "success",
+      "latencyMs": 3
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-04T03:06:03.160Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 15008
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-04T03:06:18.168Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 15007
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-10-04T03:06:33.176Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 15004
+    },
+    {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-10-04T03:06:48.181Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-04T03:06:48.182Z",
+      "outcome": "success",
+      "latencyMs": 0
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-10-04T03:06:48.182Z",
+      "outcome": "success",
+      "latencyMs": 1
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "default:exec",
+      "profile": "default",
+      "sessionId": "satisfied-analytic-guan-of-perspective",
+      "configuration": {
+        "model": ""
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:read",
+      "profile": "default",
+      "sessionId": "satisfied-analytic-guan-of-perspective",
+      "configuration": {
+        "model": ""
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:write",
+      "profile": "default",
+      "sessionId": "satisfied-analytic-guan-of-perspective",
+      "configuration": {
+        "model": ""
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:plan",
+      "profile": "default",
+      "sessionId": "satisfied-analytic-guan-of-perspective",
+      "configuration": {
+        "model": ""
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "mcp:stdio:default",
+      "profile": "default",
+      "result": {
+        "status": "na",
+        "reason": "timeout",
+        "note": "session/new timed out after 15000ms"
+      },
+      "callbacks": {},
+      "notifications": [],
+      "tools": []
+    }
+  ],
+  "uncertaintyReasons": {
+    "interactive-auth": 1,
+    "prerequisite": 2,
+    "not-advertised": 11,
+    "not-triggered": 4,
+    "no-active-turn": 1,
+    "no-client-callback": 4,
+    "not-run": 4,
+    "timeout": 1
+  },
+  "lody": {
+    "advertised": {},
+    "answered": [
+      "_lody/rate_limits/get",
+      "_lody/subagents/list",
+      "_lody/session/history/read"
+    ],
+    "missing": [],
+    "observed": []
+  },
+  "ext": {
+    "advertised": [
+      "auth:terminal-auth"
+    ],
+    "observed": []
+  },
+  "transport": {
+    "mitm": {
+      "port": 34337,
+      "impersonated": [],
+      "impersonations": 0,
+      "relayed": 60,
+      "drops": 0
+    }
+  }
+}

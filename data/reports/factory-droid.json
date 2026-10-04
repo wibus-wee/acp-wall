@@ -1,0 +1,1126 @@
+{
+  "reportVersion": 2,
+  "methodologyVersion": "2.1.0",
+  "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
+  "harness": "factory-droid",
+  "agentName": "@factory/cli",
+  "agentVersion": "0.233.0",
+  "specVersion": 1,
+  "advertised": {
+    "capabilities": {
+      "loadSession": true,
+      "sessionCapabilities": {
+        "list": {},
+        "resume": {}
+      },
+      "promptCapabilities": {
+        "image": true,
+        "embeddedContext": true
+      },
+      "_meta": {
+        "terminal_output": true,
+        "terminal-auth": true
+      }
+    },
+    "authMethods": [
+      {
+        "id": "device-pairing",
+        "name": "Login",
+        "description": "Authenticate with Factory using a device pairing code in your browser."
+      },
+      {
+        "id": "factory-api-key",
+        "name": "Factory API Key",
+        "description": "Authenticate using a Factory API key set in the FACTORY_API_KEY environment variable."
+      }
+    ]
+  },
+  "probedAt": "2026-10-04T03:06:45.296Z",
+  "state": "issues",
+  "summary": {
+    "pass": 15,
+    "observed": 1,
+    "blocked": 1,
+    "unsupported": 0,
+    "fail": 0,
+    "partial": 1,
+    "error": 0,
+    "na": 17,
+    "mixed": 0,
+    "legacy": 0,
+    "total": 35
+  },
+  "setup": {
+    "status": "not-configured"
+  },
+  "environment": {
+    "profile": "mock",
+    "client": "simulated",
+    "platform": "linux-x64",
+    "node": "v24.21.0",
+    "command": "npx -y droid@0.233.0 exec --output-format acp-daemon",
+    "discovery": false,
+    "authenticationAttempted": false,
+    "recipeSha256": "992aa99d035bbe17b66ae8f08088d7dc7106ab111aa695d889491dde51f9a1b7",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173012349",
+    "revision": "2ec771bcbbc98784d4718b16dfe13f1846dea343",
+    "sourceDirty": false,
+    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
+    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "mcpSdkVersion": "1.32.0",
+    "mockRequests": 13,
+    "modelEvidence": {
+      "seenTools": [
+        "Read",
+        "LS",
+        "Execute",
+        "Edit",
+        "Grep",
+        "Glob",
+        "Create",
+        "ExitSpecMode",
+        "TodoWrite",
+        "TaskOutput",
+        "TaskStop",
+        "ToolSearch",
+        "Skill",
+        "GenerateImage",
+        "Task"
+      ],
+      "issuedTools": [
+        "Read",
+        "TodoWrite",
+        "TodoWrite"
+      ],
+      "skippedCalls": [
+        "Execute: could not construct valid arguments (summary)",
+        "exec: no matching tool offered"
+      ]
+    }
+  },
+  "cells": [
+    {
+      "key": "initialize",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "initialize",
+          "status": "pass",
+          "note": "Protocol 1 · @factory/cli",
+          "latencyMs": 6141
+        }
+      ]
+    },
+    {
+      "key": "authenticate",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "authenticate",
+          "status": "blocked",
+          "advertised": true,
+          "reason": "interactive-auth",
+          "note": "Advertised: device-pairing, factory-api-key; login not attempted in unattended discovery"
+        }
+      ]
+    },
+    {
+      "key": "session/new",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/new",
+          "status": "pass",
+          "note": "Created a session without additional MCP dependencies",
+          "latencyMs": 1260
+        }
+      ]
+    },
+    {
+      "key": "session/load",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/load",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 13
+        }
+      ]
+    },
+    {
+      "key": "session/prompt",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/prompt",
+          "status": "pass",
+          "note": "4 prompt responses received; content and tool choice are observed separately"
+        }
+      ]
+    },
+    {
+      "key": "prompt:content",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "prompt:image",
+          "status": "pass",
+          "advertised": true,
+          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+        },
+        {
+          "method": "prompt:embedded-context",
+          "status": "pass",
+          "advertised": true,
+          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+        }
+      ]
+    },
+    {
+      "key": "sessions/*",
+      "scope": "optional",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "session/list",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 8
+        },
+        {
+          "method": "session/resume",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 19
+        },
+        {
+          "method": "session/close",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "session/delete",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "fork",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "session/fork",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "load:replay",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "load:replay",
+          "status": "pass",
+          "note": "Prior conversation text replayed for the same session"
+        }
+      ]
+    },
+    {
+      "key": "set_mode",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "set_mode",
+          "status": "pass",
+          "note": "Accepted offered mode normal; policy semantics not inferred from its name",
+          "advertised": true,
+          "latencyMs": 5
+        }
+      ]
+    },
+    {
+      "key": "set_config",
+      "scope": "optional",
+      "status": "partial",
+      "items": [
+        {
+          "method": "set_config",
+          "status": "partial",
+          "note": "Accepted current value of autonomy_level · response: configOptions required property missing",
+          "advertised": true,
+          "latencyMs": 20,
+          "reason": "agent-schema"
+        }
+      ]
+    },
+    {
+      "key": "cancel",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "cancel",
+          "status": "pass",
+          "note": "In-flight prompt returned cancelled after 534ms"
+        }
+      ]
+    },
+    {
+      "key": "logout",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "logout",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "message*",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:message",
+          "status": "pass",
+          "note": "10 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "tool_call*",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:tool_call",
+          "status": "pass",
+          "note": "6 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "usage",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "update:usage",
+          "status": "na",
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "permission",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "request_permission",
+          "status": "na",
+          "reason": "stimulus-unavailable",
+          "note": "No valid matching model tool stimulus could be issued"
+        }
+      ]
+    },
+    {
+      "key": "plan",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:plan",
+          "status": "pass",
+          "note": "4 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "slash_cmds",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:commands",
+          "status": "pass",
+          "note": "6 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "fs/*",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "fs/read_text_file",
+          "status": "na",
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
+        },
+        {
+          "method": "fs/write_text_file",
+          "status": "na",
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
+        }
+      ]
+    },
+    {
+      "key": "terminal/*",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "terminal/*",
+          "status": "na",
+          "reason": "stimulus-unavailable",
+          "note": "No valid matching model tool stimulus could be issued"
+        }
+      ]
+    },
+    {
+      "key": "elicitation",
+      "scope": "observation",
+      "status": "na",
+      "items": [
+        {
+          "method": "elicitation",
+          "status": "na",
+          "reason": "not-run",
+          "note": "No controlled elicitation scenario configured"
+        }
+      ]
+    },
+    {
+      "key": "providers",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "providers/list",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "providers/set",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        },
+        {
+          "method": "providers/disable",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        }
+      ]
+    },
+    {
+      "key": "nes",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "nes/start",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "nes/suggest",
+          "status": "na",
+          "reason": "not-run",
+          "note": "No controlled scenario exercised this check"
+        }
+      ]
+    },
+    {
+      "key": "mcp",
+      "scope": "observation",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "mcp:stdio",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error — Droid process exited unexpectedly (exit code 1); 0/1 configured scenarios received a fixture call. See each scenario."
+        },
+        {
+          "method": "mcp:http",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "mcp:sse",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    }
+  ],
+  "notes": {
+    "initialize": "initialize: Protocol 1 · @factory/cli",
+    "authenticate": "authenticate: Advertised: device-pairing, factory-api-key; login not attempted in unattended discovery",
+    "session/new": "session/new: Created a session without additional MCP dependencies",
+    "session/load": "session/load: pass",
+    "session/prompt": "session/prompt: 4 prompt responses received; content and tool choice are observed separately",
+    "prompt:content": "prompt:image: Typed prompt accepted and answered; model understanding and content preservation are not established · prompt:embedded-context: Typed prompt accepted and answered; model understanding and content preservation are not established",
+    "sessions/*": "session/list: pass · session/resume: pass · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
+    "fork": "session/fork: Not advertised; optional method not invoked",
+    "load:replay": "load:replay: Prior conversation text replayed for the same session",
+    "set_mode": "set_mode: Accepted offered mode normal; policy semantics not inferred from its name",
+    "set_config": "set_config: Accepted current value of autonomy_level · response: configOptions required property missing",
+    "cancel": "cancel: In-flight prompt returned cancelled after 534ms",
+    "logout": "logout: Not advertised; optional method not invoked",
+    "message*": "update:message: 10 notification(s) observed",
+    "tool_call*": "update:tool_call: 6 notification(s) observed",
+    "usage": "update:usage: No matching notifications observed; see scenario stimuli",
+    "permission": "request_permission: No valid matching model tool stimulus could be issued",
+    "plan": "update:plan: 4 notification(s) observed",
+    "slash_cmds": "update:commands: 6 notification(s) observed",
+    "fs/*": "fs/read_text_file: No client request observed; internal tools and policy choices are permitted · fs/write_text_file: No client request observed; internal tools and policy choices are permitted",
+    "terminal/*": "terminal/*: No valid matching model tool stimulus could be issued",
+    "elicitation": "elicitation: No controlled elicitation scenario configured",
+    "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
+    "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
+    "mcp": "mcp:stdio: Internal error — Droid process exited unexpectedly (exit code 1); 0/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
+  },
+  "methods": {
+    "initialize": {
+      "status": "pass",
+      "note": "Protocol 1 · @factory/cli",
+      "latencyMs": 6141
+    },
+    "session/new": {
+      "status": "pass",
+      "note": "Created a session without additional MCP dependencies",
+      "latencyMs": 1260
+    },
+    "set_mode": {
+      "status": "pass",
+      "note": "Accepted offered mode normal; policy semantics not inferred from its name",
+      "advertised": true,
+      "latencyMs": 5
+    },
+    "set_config": {
+      "status": "partial",
+      "note": "Accepted current value of autonomy_level · response: configOptions required property missing",
+      "advertised": true,
+      "latencyMs": 20,
+      "reason": "agent-schema"
+    },
+    "session/prompt": {
+      "status": "pass",
+      "note": "4 prompt responses received; content and tool choice are observed separately"
+    },
+    "cancel": {
+      "status": "pass",
+      "note": "In-flight prompt returned cancelled after 534ms"
+    },
+    "session/load": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 13
+    },
+    "load:replay": {
+      "status": "pass",
+      "note": "Prior conversation text replayed for the same session"
+    },
+    "session/fork": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "prompt:image": {
+      "status": "pass",
+      "advertised": true,
+      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+    },
+    "prompt:embedded-context": {
+      "status": "pass",
+      "advertised": true,
+      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+    },
+    "providers/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/set": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "providers/disable": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "nes/start": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/list": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 8
+    },
+    "session/resume": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 19
+    },
+    "session/close": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/delete": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "mcp:stdio": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error — Droid process exited unexpectedly (exit code 1); 0/1 configured scenarios received a fixture call. See each scenario."
+    },
+    "mcp:http": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "mcp:sse": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "fs/read_text_file": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "fs/write_text_file": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "terminal/*": {
+      "status": "na",
+      "reason": "stimulus-unavailable",
+      "note": "No valid matching model tool stimulus could be issued"
+    },
+    "request_permission": {
+      "status": "na",
+      "reason": "stimulus-unavailable",
+      "note": "No valid matching model tool stimulus could be issued"
+    },
+    "elicitation": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled elicitation scenario configured"
+    },
+    "update:message": {
+      "status": "pass",
+      "note": "10 notification(s) observed"
+    },
+    "update:tool_call": {
+      "status": "pass",
+      "note": "6 notification(s) observed"
+    },
+    "update:plan": {
+      "status": "pass",
+      "note": "4 notification(s) observed"
+    },
+    "update:commands": {
+      "status": "pass",
+      "note": "6 notification(s) observed"
+    },
+    "update:usage": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "lody": {
+      "status": "na",
+      "note": "no _meta.lody capabilities; _lody/* unanswered",
+      "definitive": true
+    },
+    "authenticate": {
+      "status": "blocked",
+      "advertised": true,
+      "reason": "interactive-auth",
+      "note": "Advertised: device-pairing, factory-api-key; login not attempted in unattended discovery"
+    },
+    "logout": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "nes/suggest": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled scenario exercised this check"
+    }
+  },
+  "claimMismatches": [],
+  "violations": [
+    {
+      "where": "response",
+      "method": "session/set_config_option",
+      "resultKey": "set_config",
+      "path": "configOptions",
+      "msg": "required property missing"
+    }
+  ],
+  "attempts": [
+    {
+      "method": "initialize",
+      "scenario": "initialize",
+      "at": "2026-10-04T03:06:32.954Z",
+      "outcome": "success",
+      "latencyMs": 6141
+    },
+    {
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-10-04T03:06:39.096Z",
+      "outcome": "success",
+      "latencyMs": 1260
+    },
+    {
+      "method": "session/set_mode",
+      "scenario": "set_mode",
+      "at": "2026-10-04T03:06:40.357Z",
+      "outcome": "success",
+      "latencyMs": 5
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-10-04T03:06:40.363Z",
+      "outcome": "success",
+      "latencyMs": 20
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:exec",
+      "at": "2026-10-04T03:06:40.384Z",
+      "outcome": "success",
+      "latencyMs": 148
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:read",
+      "at": "2026-10-04T03:06:40.533Z",
+      "outcome": "success",
+      "latencyMs": 98
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:write",
+      "at": "2026-10-04T03:06:40.632Z",
+      "outcome": "success",
+      "latencyMs": 99
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:plan",
+      "at": "2026-10-04T03:06:40.731Z",
+      "outcome": "success",
+      "latencyMs": 85
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "cancel",
+      "at": "2026-10-04T03:06:40.817Z",
+      "outcome": "success",
+      "latencyMs": 534
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-10-04T03:06:41.351Z",
+      "outcome": "success",
+      "latencyMs": 13
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-04T03:06:41.365Z",
+      "outcome": "success",
+      "latencyMs": 1017
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:image",
+      "at": "2026-10-04T03:06:42.382Z",
+      "outcome": "success",
+      "latencyMs": 138
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-04T03:06:42.520Z",
+      "outcome": "success",
+      "latencyMs": 820
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:embedded-context",
+      "at": "2026-10-04T03:06:43.341Z",
+      "outcome": "success",
+      "latencyMs": 575
+    },
+    {
+      "method": "session/list",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:06:43.916Z",
+      "outcome": "success",
+      "latencyMs": 8
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:06:43.925Z",
+      "outcome": "success",
+      "latencyMs": 1281
+    },
+    {
+      "method": "session/resume",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:06:45.207Z",
+      "outcome": "success",
+      "latencyMs": 19
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-10-04T03:06:45.228Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 65
+    },
+    {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-10-04T03:06:45.294Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-04T03:06:45.294Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-10-04T03:06:45.295Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "default:exec",
+      "profile": "default",
+      "sessionId": "fe5ede1e-3601-4d3c-bfc7-d88bfdb48805",
+      "configuration": {
+        "autonomy_level": "normal",
+        "model": "custom:Probe-0",
+        "reasoning_effort": "none"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "config_option_update",
+        "current_mode_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "Execute: could not construct valid arguments (summary)"
+        ]
+      }
+    },
+    {
+      "id": "default:read",
+      "profile": "default",
+      "sessionId": "fe5ede1e-3601-4d3c-bfc7-d88bfdb48805",
+      "configuration": {
+        "autonomy_level": "normal",
+        "model": "custom:Probe-0",
+        "reasoning_effort": "none"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "current_mode_update",
+        "config_option_update",
+        "tool_call",
+        "tool_call_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "call_probe_1",
+          "name": "Read ./PROBE_CANARY.txt",
+          "status": "failed",
+          "detail": "{\"text\":\"Error: File path must be absolute\"}"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "Read"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:write",
+      "profile": "default",
+      "sessionId": "fe5ede1e-3601-4d3c-bfc7-d88bfdb48805",
+      "configuration": {
+        "autonomy_level": "normal",
+        "model": "custom:Probe-0",
+        "reasoning_effort": "none"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "current_mode_update",
+        "config_option_update",
+        "plan",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [
+          "TodoWrite"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:plan",
+      "profile": "default",
+      "sessionId": "fe5ede1e-3601-4d3c-bfc7-d88bfdb48805",
+      "configuration": {
+        "autonomy_level": "normal",
+        "model": "custom:Probe-0",
+        "reasoning_effort": "none"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "current_mode_update",
+        "config_option_update",
+        "plan",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [
+          "TodoWrite"
+        ],
+        "skippedCalls": [
+          "exec: no matching tool offered"
+        ]
+      }
+    },
+    {
+      "id": "prompt:image",
+      "profile": "default",
+      "sessionId": "a611f2af-7b62-4b51-b282-04ab3a901f52",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "current_mode_update",
+        "config_option_update",
+        "available_commands_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "prompt:embedded-context",
+      "profile": "default",
+      "sessionId": "0d6a43c8-7f92-470f-bdcb-1138f363078d",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "current_mode_update",
+        "config_option_update",
+        "available_commands_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "mcp:stdio:default",
+      "profile": "default",
+      "result": {
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "Internal error — Droid process exited unexpectedly (exit code 1)"
+      },
+      "callbacks": {},
+      "notifications": [],
+      "tools": []
+    }
+  ],
+  "uncertaintyReasons": {
+    "interactive-auth": 1,
+    "not-advertised": 8,
+    "not-triggered": 1,
+    "stimulus-unavailable": 2,
+    "no-client-callback": 2,
+    "not-run": 4
+  },
+  "lody": {
+    "advertised": {},
+    "answered": [],
+    "missing": [
+      "_lody/rate_limits/get",
+      "_lody/subagents/list",
+      "_lody/session/history/read"
+    ],
+    "observed": []
+  },
+  "ext": {
+    "advertised": [
+      "terminal-auth",
+      "terminal_output"
+    ],
+    "observed": []
+  },
+  "transport": {
+    "mitm": {
+      "port": 43043,
+      "impersonated": [],
+      "impersonations": 0,
+      "relayed": 55,
+      "drops": 0
+    }
+  }
+}

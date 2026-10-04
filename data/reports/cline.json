@@ -1,0 +1,820 @@
+{
+  "reportVersion": 2,
+  "methodologyVersion": "2.1.0",
+  "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
+  "harness": "cline",
+  "agentName": "cline",
+  "agentVersion": "3.0.62",
+  "specVersion": 1,
+  "advertised": {
+    "capabilities": {
+      "loadSession": true,
+      "promptCapabilities": {
+        "image": true,
+        "audio": false,
+        "embeddedContext": false
+      }
+    },
+    "authMethods": [
+      {
+        "id": "cline",
+        "name": "Sign in with Cline"
+      },
+      {
+        "id": "cline-pass",
+        "name": "Sign in with ClinePass"
+      },
+      {
+        "id": "openai-codex",
+        "name": "Sign in with ChatGPT Subscription"
+      }
+    ]
+  },
+  "probedAt": "2026-10-04T03:05:50.909Z",
+  "state": "issues",
+  "summary": {
+    "pass": 1,
+    "observed": 0,
+    "blocked": 21,
+    "unsupported": 0,
+    "fail": 0,
+    "partial": 0,
+    "error": 0,
+    "na": 13,
+    "mixed": 0,
+    "legacy": 0,
+    "total": 35
+  },
+  "setup": {
+    "status": "not-configured"
+  },
+  "environment": {
+    "profile": "mock",
+    "client": "simulated",
+    "platform": "linux-x64",
+    "node": "v24.21.0",
+    "command": "npx -y cline@3.0.62 auth -p openai -k probe-mock-key -b ${MOCK_LLM_URL} -m probe-model && npx -y cline@3.0.62 --acp",
+    "discovery": false,
+    "authenticationAttempted": false,
+    "recipeSha256": "82e3e7c499a0e386991aac902c582510a2bf68411fd913c8a1fb89d565b9ded2",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173012349",
+    "revision": "2ec771bcbbc98784d4718b16dfe13f1846dea343",
+    "sourceDirty": false,
+    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
+    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "mcpSdkVersion": "1.32.0",
+    "mockRequests": 0,
+    "modelEvidence": {
+      "seenTools": [],
+      "issuedTools": [],
+      "skippedCalls": []
+    }
+  },
+  "cells": [
+    {
+      "key": "initialize",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "initialize",
+          "status": "pass",
+          "note": "Protocol 1 · cline",
+          "latencyMs": 29433
+        }
+      ]
+    },
+    {
+      "key": "authenticate",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "authenticate",
+          "status": "blocked",
+          "advertised": true,
+          "reason": "interactive-auth",
+          "note": "Advertised: cline, cline-pass, openai-codex; login not attempted in unattended discovery"
+        }
+      ]
+    },
+    {
+      "key": "session/new",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "session/new",
+          "status": "blocked",
+          "reason": "authentication",
+          "errorCode": -32000,
+          "note": "Authentication required: Call authenticate before starting a session",
+          "latencyMs": 2
+        }
+      ]
+    },
+    {
+      "key": "session/load",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "session/load",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "Not exercised; prerequisite session/new unavailable"
+        }
+      ]
+    },
+    {
+      "key": "session/prompt",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "session/prompt",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
+        }
+      ]
+    },
+    {
+      "key": "prompt:content",
+      "scope": "optional",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "prompt:image",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
+        },
+        {
+          "method": "prompt:embedded-context",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "sessions/*",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "session/list",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "session/resume",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "session/close",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "session/delete",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "fork",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "session/fork",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "load:replay",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "load:replay",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
+        }
+      ]
+    },
+    {
+      "key": "set_mode",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "set_mode",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
+        }
+      ]
+    },
+    {
+      "key": "set_config",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "set_config",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
+        }
+      ]
+    },
+    {
+      "key": "cancel",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "cancel",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
+        }
+      ]
+    },
+    {
+      "key": "logout",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "logout",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "message*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:message",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "tool_call*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:tool_call",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "usage",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:usage",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "permission",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "request_permission",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "Not observed; prerequisite session/new unavailable"
+        }
+      ]
+    },
+    {
+      "key": "plan",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:plan",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "slash_cmds",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:commands",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "fs/*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "fs/read_text_file",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "Not observed; prerequisite session/new unavailable"
+        },
+        {
+          "method": "fs/write_text_file",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "Not observed; prerequisite session/new unavailable"
+        }
+      ]
+    },
+    {
+      "key": "terminal/*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "terminal/*",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "Not observed; prerequisite session/new unavailable"
+        }
+      ]
+    },
+    {
+      "key": "elicitation",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "elicitation",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "Not observed; prerequisite session/new unavailable"
+        }
+      ]
+    },
+    {
+      "key": "providers",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "providers/list",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "providers/set",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        },
+        {
+          "method": "providers/disable",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        }
+      ]
+    },
+    {
+      "key": "nes",
+      "scope": "experimental",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "nes/start",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "nes/suggest",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "Not exercised; prerequisite session/new unavailable"
+        }
+      ]
+    },
+    {
+      "key": "mcp",
+      "scope": "observation",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "mcp:stdio",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
+        },
+        {
+          "method": "mcp:http",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "mcp:sse",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    }
+  ],
+  "notes": {
+    "initialize": "initialize: Protocol 1 · cline",
+    "authenticate": "authenticate: Advertised: cline, cline-pass, openai-codex; login not attempted in unattended discovery",
+    "session/new": "session/new: Authentication required: Call authenticate before starting a session",
+    "session/load": "session/load: Not exercised; prerequisite session/new unavailable",
+    "session/prompt": "session/prompt: No usable session; see session/new",
+    "prompt:content": "prompt:image: No usable session; see session/new · prompt:embedded-context: Not advertised; optional method not invoked",
+    "sessions/*": "session/list: Not advertised; optional method not invoked · session/resume: Not advertised; optional method not invoked · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
+    "fork": "session/fork: Not advertised; optional method not invoked",
+    "load:replay": "load:replay: No usable session; see session/new",
+    "set_mode": "set_mode: No usable session; see session/new",
+    "set_config": "set_config: No usable session; see session/new",
+    "cancel": "cancel: No usable session; see session/new",
+    "logout": "logout: Not advertised; optional method not invoked",
+    "message*": "update:message: No matching notifications observed; see scenario stimuli",
+    "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
+    "usage": "update:usage: No matching notifications observed; see scenario stimuli",
+    "permission": "request_permission: Not observed; prerequisite session/new unavailable",
+    "plan": "update:plan: No matching notifications observed; see scenario stimuli",
+    "slash_cmds": "update:commands: No matching notifications observed; see scenario stimuli",
+    "fs/*": "fs/read_text_file: Not observed; prerequisite session/new unavailable · fs/write_text_file: Not observed; prerequisite session/new unavailable",
+    "terminal/*": "terminal/*: Not observed; prerequisite session/new unavailable",
+    "elicitation": "elicitation: Not observed; prerequisite session/new unavailable",
+    "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
+    "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: Not exercised; prerequisite session/new unavailable",
+    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
+  },
+  "methods": {
+    "initialize": {
+      "status": "pass",
+      "note": "Protocol 1 · cline",
+      "latencyMs": 29433
+    },
+    "session/new": {
+      "status": "blocked",
+      "reason": "authentication",
+      "errorCode": -32000,
+      "note": "Authentication required: Call authenticate before starting a session",
+      "latencyMs": 2
+    },
+    "set_mode": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
+    },
+    "set_config": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
+    },
+    "session/prompt": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
+    },
+    "cancel": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
+    },
+    "load:replay": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
+    },
+    "session/fork": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "prompt:image": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
+    },
+    "prompt:embedded-context": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/set": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "providers/disable": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "nes/start": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/resume": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/close": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/delete": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "mcp:stdio": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
+    },
+    "mcp:http": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "mcp:sse": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "fs/read_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not observed; prerequisite session/new unavailable"
+    },
+    "fs/write_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not observed; prerequisite session/new unavailable"
+    },
+    "terminal/*": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not observed; prerequisite session/new unavailable"
+    },
+    "request_permission": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not observed; prerequisite session/new unavailable"
+    },
+    "elicitation": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not observed; prerequisite session/new unavailable"
+    },
+    "update:message": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:tool_call": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:plan": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:commands": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:usage": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "lody": {
+      "status": "na",
+      "note": "no _meta.lody capabilities; _lody/* unanswered",
+      "definitive": true
+    },
+    "authenticate": {
+      "status": "blocked",
+      "advertised": true,
+      "reason": "interactive-auth",
+      "note": "Advertised: cline, cline-pass, openai-codex; login not attempted in unattended discovery"
+    },
+    "logout": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/load": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not exercised; prerequisite session/new unavailable"
+    },
+    "nes/suggest": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not exercised; prerequisite session/new unavailable"
+    }
+  },
+  "claimMismatches": [],
+  "violations": [
+    {
+      "where": "envelope",
+      "method": "-",
+      "path": "",
+      "msg": "non-JSON line: \u001b[32mProvider configured:\u001b[0m \u001b[36mopenai-compatible\u001b[0m (probe-model)"
+    }
+  ],
+  "attempts": [
+    {
+      "method": "initialize",
+      "scenario": "initialize",
+      "at": "2026-10-04T03:05:21.467Z",
+      "outcome": "success",
+      "latencyMs": 29433
+    },
+    {
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-10-04T03:05:50.901Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 2
+    },
+    {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-10-04T03:05:50.907Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-04T03:05:50.907Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-10-04T03:05:50.908Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
+    }
+  ],
+  "scenarios": [],
+  "uncertaintyReasons": {
+    "interactive-auth": 1,
+    "authentication": 1,
+    "prerequisite": 19,
+    "not-advertised": 11,
+    "not-run": 2
+  },
+  "lody": {
+    "advertised": {},
+    "answered": [],
+    "missing": [
+      "_lody/rate_limits/get",
+      "_lody/subagents/list",
+      "_lody/session/history/read"
+    ],
+    "observed": []
+  },
+  "ext": {
+    "advertised": [],
+    "observed": []
+  },
+  "transport": {
+    "mitm": {
+      "port": 38431,
+      "impersonated": [],
+      "impersonations": 0,
+      "relayed": 18,
+      "drops": 0
+    }
+  }
+}

@@ -1,0 +1,744 @@
+{
+  "reportVersion": 2,
+  "methodologyVersion": "2.1.0",
+  "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
+  "harness": "fast-agent",
+  "specVersion": 1,
+  "advertised": {
+    "capabilities": {},
+    "authMethods": []
+  },
+  "probedAt": "2026-10-04T03:06:34.446Z",
+  "state": "blocked",
+  "summary": {
+    "pass": 0,
+    "observed": 0,
+    "blocked": 34,
+    "unsupported": 0,
+    "fail": 0,
+    "partial": 0,
+    "error": 0,
+    "na": 1,
+    "mixed": 0,
+    "legacy": 0,
+    "total": 35
+  },
+  "setup": {
+    "status": "not-configured"
+  },
+  "environment": {
+    "profile": "mock",
+    "client": "simulated",
+    "platform": "linux-x64",
+    "node": "v24.21.0",
+    "command": "uvx fast-agent-acp==0.10.1 -x",
+    "discovery": false,
+    "authenticationAttempted": false,
+    "recipeSha256": "3eacb1973460b3441b6e0a2e5da4fab5ad9439a318754a5dacc37062e4f49d70",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173012349",
+    "revision": "2ec771bcbbc98784d4718b16dfe13f1846dea343",
+    "sourceDirty": false,
+    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
+    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "mcpSdkVersion": "1.32.0",
+    "mockRequests": 0,
+    "modelEvidence": {
+      "seenTools": [],
+      "issuedTools": [],
+      "skippedCalls": []
+    }
+  },
+  "cells": [
+    {
+      "key": "initialize",
+      "scope": "core",
+      "status": "na",
+      "items": [
+        {
+          "method": "initialize",
+          "status": "na",
+          "reason": "transport",
+          "note": "agent exited (code 2)",
+          "latencyMs": 57
+        }
+      ]
+    },
+    {
+      "key": "authenticate",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "authenticate",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "session/new",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "session/new",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "session/load",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "session/load",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "session/prompt",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "session/prompt",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "prompt:content",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "prompt:image",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        },
+        {
+          "method": "prompt:embedded-context",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "sessions/*",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "session/list",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        },
+        {
+          "method": "session/resume",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        },
+        {
+          "method": "session/close",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        },
+        {
+          "method": "session/delete",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "fork",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "session/fork",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "load:replay",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "load:replay",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "set_mode",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "set_mode",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "set_config",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "set_config",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "cancel",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "cancel",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "logout",
+      "scope": "optional",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "logout",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "message*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:message",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "tool_call*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:tool_call",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "usage",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:usage",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "permission",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "request_permission",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "plan",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:plan",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "slash_cmds",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:commands",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "fs/*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "fs/read_text_file",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        },
+        {
+          "method": "fs/write_text_file",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "terminal/*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "terminal/*",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "elicitation",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "elicitation",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "providers",
+      "scope": "experimental",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "providers/list",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        },
+        {
+          "method": "providers/set",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        },
+        {
+          "method": "providers/disable",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "nes",
+      "scope": "experimental",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "nes/start",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        },
+        {
+          "method": "nes/suggest",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    },
+    {
+      "key": "mcp",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "mcp:stdio",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        },
+        {
+          "method": "mcp:http",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        },
+        {
+          "method": "mcp:sse",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "initialize",
+          "note": "Not exercised; prerequisite initialize unavailable"
+        }
+      ]
+    }
+  ],
+  "notes": {
+    "initialize": "initialize: agent exited (code 2)",
+    "authenticate": "authenticate: Not exercised; prerequisite initialize unavailable",
+    "session/new": "session/new: Not exercised; prerequisite initialize unavailable",
+    "session/load": "session/load: Not exercised; prerequisite initialize unavailable",
+    "session/prompt": "session/prompt: Not exercised; prerequisite initialize unavailable",
+    "prompt:content": "prompt:image: Not exercised; prerequisite initialize unavailable · prompt:embedded-context: Not exercised; prerequisite initialize unavailable",
+    "sessions/*": "session/list: Not exercised; prerequisite initialize unavailable · session/resume: Not exercised; prerequisite initialize unavailable · session/close: Not exercised; prerequisite initialize unavailable · session/delete: Not exercised; prerequisite initialize unavailable",
+    "fork": "session/fork: Not exercised; prerequisite initialize unavailable",
+    "load:replay": "load:replay: Not exercised; prerequisite initialize unavailable",
+    "set_mode": "set_mode: Not exercised; prerequisite initialize unavailable",
+    "set_config": "set_config: Not exercised; prerequisite initialize unavailable",
+    "cancel": "cancel: Not exercised; prerequisite initialize unavailable",
+    "logout": "logout: Not exercised; prerequisite initialize unavailable",
+    "message*": "update:message: Not exercised; prerequisite initialize unavailable",
+    "tool_call*": "update:tool_call: Not exercised; prerequisite initialize unavailable",
+    "usage": "update:usage: Not exercised; prerequisite initialize unavailable",
+    "permission": "request_permission: Not exercised; prerequisite initialize unavailable",
+    "plan": "update:plan: Not exercised; prerequisite initialize unavailable",
+    "slash_cmds": "update:commands: Not exercised; prerequisite initialize unavailable",
+    "fs/*": "fs/read_text_file: Not exercised; prerequisite initialize unavailable · fs/write_text_file: Not exercised; prerequisite initialize unavailable",
+    "terminal/*": "terminal/*: Not exercised; prerequisite initialize unavailable",
+    "elicitation": "elicitation: Not exercised; prerequisite initialize unavailable",
+    "providers": "providers/list: Not exercised; prerequisite initialize unavailable · providers/set: Not exercised; prerequisite initialize unavailable · providers/disable: Not exercised; prerequisite initialize unavailable",
+    "nes": "nes/start: Not exercised; prerequisite initialize unavailable · nes/suggest: Not exercised; prerequisite initialize unavailable",
+    "mcp": "mcp:stdio: Not exercised; prerequisite initialize unavailable · mcp:http: Not exercised; prerequisite initialize unavailable · mcp:sse: Not exercised; prerequisite initialize unavailable"
+  },
+  "methods": {
+    "initialize": {
+      "status": "na",
+      "reason": "transport",
+      "note": "agent exited (code 2)",
+      "latencyMs": 57
+    },
+    "authenticate": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "session/new": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "session/load": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "session/prompt": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "prompt:image": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "prompt:embedded-context": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "session/list": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "session/resume": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "session/close": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "session/delete": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "session/fork": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "load:replay": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "set_mode": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "set_config": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "cancel": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "logout": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "update:message": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "update:tool_call": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "update:usage": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "request_permission": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "update:plan": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "update:commands": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "fs/read_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "fs/write_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "terminal/*": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "elicitation": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "providers/list": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "providers/set": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "providers/disable": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "nes/start": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "nes/suggest": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "mcp:stdio": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "mcp:http": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    },
+    "mcp:sse": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "initialize",
+      "note": "Not exercised; prerequisite initialize unavailable"
+    }
+  },
+  "claimMismatches": [],
+  "violations": [],
+  "attempts": [
+    {
+      "method": "initialize",
+      "scenario": "initialize",
+      "at": "2026-10-04T03:06:34.281Z",
+      "outcome": "error",
+      "latencyMs": 103
+    },
+    {
+      "method": "initialize",
+      "scenario": "initialize",
+      "at": "2026-10-04T03:06:34.388Z",
+      "outcome": "error",
+      "latencyMs": 57
+    }
+  ],
+  "scenarios": [],
+  "uncertaintyReasons": {
+    "transport": 1,
+    "prerequisite": 34
+  },
+  "transport": {
+    "mitm": {
+      "port": 32843,
+      "impersonated": [],
+      "impersonations": 0,
+      "relayed": 2,
+      "drops": 0
+    }
+  }
+}

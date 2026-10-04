@@ -1,0 +1,1090 @@
+{
+  "reportVersion": 2,
+  "methodologyVersion": "2.1.0",
+  "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
+  "harness": "dirac",
+  "agentName": "dirac",
+  "agentVersion": "0.5.17",
+  "specVersion": 1,
+  "advertised": {
+    "capabilities": {
+      "_meta": {
+        "dev.dirac/session.close": true,
+        "dev.dirac/session.delete": true,
+        "dev.dirac/auth.logout": true,
+        "dev.dirac/seq": true,
+        "dev.dirac/permissions.list": true,
+        "dev.dirac/permissions.delete": true,
+        "dev.dirac/whisper": true,
+        "dev.dirac/steering_status": true,
+        "dev.dirac/client_annotation": true,
+        "dev.dirac/checkpoints.list": true,
+        "dev.dirac/checkpoints.restore": true,
+        "dev.dirac/messages.pin": true,
+        "dev.dirac/messages.unpin": true,
+        "dev.dirac/messages.pinned": true,
+        "dev.dirac/pinned_messages_update": true,
+        "dev.dirac/permission.effect_previews": true,
+        "dev.dirac/worktree.provision": {
+          "requestMetaKey": "dev.dirac/worktree",
+          "requestShape": "true | { baseBranch?: string }"
+        },
+        "dev.dirac/worktree.integrate": true
+      },
+      "loadSession": true,
+      "auth": {
+        "logout": {}
+      },
+      "providers": {},
+      "sessionCapabilities": {
+        "resume": {},
+        "close": {},
+        "delete": {}
+      },
+      "promptCapabilities": {
+        "image": true,
+        "audio": false,
+        "embeddedContext": true
+      }
+    },
+    "authMethods": []
+  },
+  "probedAt": "2026-10-04T03:08:05.222Z",
+  "state": "issues",
+  "summary": {
+    "pass": 12,
+    "observed": 0,
+    "blocked": 8,
+    "unsupported": 0,
+    "fail": 1,
+    "partial": 0,
+    "error": 0,
+    "na": 14,
+    "mixed": 0,
+    "legacy": 0,
+    "total": 35
+  },
+  "setup": {
+    "status": "not-configured"
+  },
+  "environment": {
+    "profile": "mock",
+    "client": "simulated",
+    "platform": "linux-x64",
+    "node": "v24.21.0",
+    "command": "npx -y dirac-cli@0.5.17 --acp",
+    "discovery": false,
+    "authenticationAttempted": false,
+    "recipeSha256": "2dfee00f4b9783c1d7ce17751c2b289ad24f0d4b58cc9fe9a308e3a8058e7747",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173012349",
+    "revision": "2ec771bcbbc98784d4718b16dfe13f1846dea343",
+    "sourceDirty": false,
+    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
+    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "mcpSdkVersion": "1.32.0",
+    "mockRequests": 5,
+    "modelEvidence": {
+      "seenTools": [
+        "browser_action",
+        "condense",
+        "diagnostics_scan",
+        "edit_ast",
+        "edit_file",
+        "execute_command",
+        "inspect_ast",
+        "list_files",
+        "list_skills",
+        "new_task",
+        "read_file",
+        "respond",
+        "search_files",
+        "use_skill",
+        "write_to_file"
+      ],
+      "issuedTools": [
+        "execute_command"
+      ],
+      "skippedCalls": []
+    }
+  },
+  "cells": [
+    {
+      "key": "initialize",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "initialize",
+          "status": "pass",
+          "note": "Protocol 1 · dirac",
+          "latencyMs": 9720
+        }
+      ]
+    },
+    {
+      "key": "authenticate",
+      "scope": "core",
+      "status": "na",
+      "items": [
+        {
+          "method": "authenticate",
+          "status": "na",
+          "reason": "not-advertised",
+          "note": "No protocol authentication method advertised"
+        }
+      ]
+    },
+    {
+      "key": "session/new",
+      "scope": "core",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/new",
+          "status": "pass",
+          "note": "Created a session without additional MCP dependencies",
+          "latencyMs": 53
+        }
+      ]
+    },
+    {
+      "key": "session/load",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "session/load",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 34
+        }
+      ]
+    },
+    {
+      "key": "session/prompt",
+      "scope": "core",
+      "status": "na",
+      "items": [
+        {
+          "method": "session/prompt",
+          "status": "na",
+          "reason": "timeout",
+          "note": "1 earlier turn(s) succeeded; subsequent attempt: session/prompt timed out after 30000ms",
+          "latencyMs": 30002
+        }
+      ]
+    },
+    {
+      "key": "prompt:content",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "prompt:image",
+          "status": "na",
+          "reason": "timeout",
+          "note": "session/prompt timed out after 30000ms",
+          "advertised": true
+        },
+        {
+          "method": "prompt:embedded-context",
+          "status": "na",
+          "reason": "timeout",
+          "note": "session/prompt timed out after 30000ms",
+          "advertised": true
+        }
+      ]
+    },
+    {
+      "key": "sessions/*",
+      "scope": "optional",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "session/list",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "session/resume",
+          "status": "fail",
+          "reason": "method-not-found",
+          "errorCode": -32601,
+          "definitive": true,
+          "note": "\"Method not found\": session/resume — {\"method\":\"session/resume\"}",
+          "advertised": true,
+          "latencyMs": 7
+        },
+        {
+          "method": "session/close",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 271
+        },
+        {
+          "method": "session/delete",
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 291
+        }
+      ]
+    },
+    {
+      "key": "fork",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "session/fork",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    },
+    {
+      "key": "load:replay",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "load:replay",
+          "status": "pass",
+          "note": "Prior conversation text replayed for the same session"
+        }
+      ]
+    },
+    {
+      "key": "set_mode",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "set_mode",
+          "status": "pass",
+          "note": "Accepted offered mode act; policy semantics not inferred from its name",
+          "advertised": true,
+          "latencyMs": 133
+        }
+      ]
+    },
+    {
+      "key": "set_config",
+      "scope": "optional",
+      "status": "pass",
+      "items": [
+        {
+          "method": "set_config",
+          "status": "pass",
+          "note": "Accepted current value of mode",
+          "advertised": true,
+          "latencyMs": 58
+        }
+      ]
+    },
+    {
+      "key": "cancel",
+      "scope": "core",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "cancel",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No successful prompt to establish cancellation conditions"
+        }
+      ]
+    },
+    {
+      "key": "logout",
+      "scope": "optional",
+      "status": "na",
+      "items": [
+        {
+          "method": "logout",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": true,
+          "note": "No authentication established by this run; shared account state is not changed"
+        }
+      ]
+    },
+    {
+      "key": "message*",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:message",
+          "status": "pass",
+          "note": "8 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "tool_call*",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:tool_call",
+          "status": "pass",
+          "note": "2 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "usage",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:usage",
+          "status": "pass",
+          "note": "56 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "permission",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "request_permission",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "plan",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "update:plan",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
+        }
+      ]
+    },
+    {
+      "key": "slash_cmds",
+      "scope": "observation",
+      "status": "pass",
+      "items": [
+        {
+          "method": "update:commands",
+          "status": "pass",
+          "note": "11 notification(s) observed"
+        }
+      ]
+    },
+    {
+      "key": "fs/*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "fs/read_text_file",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        },
+        {
+          "method": "fs/write_text_file",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "terminal/*",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "terminal/*",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "elicitation",
+      "scope": "observation",
+      "status": "blocked",
+      "items": [
+        {
+          "method": "elicitation",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
+        }
+      ]
+    },
+    {
+      "key": "providers",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "providers/list",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "providers/set",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        },
+        {
+          "method": "providers/disable",
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
+        }
+      ]
+    },
+    {
+      "key": "nes",
+      "scope": "experimental",
+      "status": "na",
+      "items": [
+        {
+          "method": "nes/start",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "nes/suggest",
+          "status": "na",
+          "reason": "not-run",
+          "note": "No controlled scenario exercised this check"
+        }
+      ]
+    },
+    {
+      "key": "mcp",
+      "scope": "observation",
+      "status": "mixed",
+      "items": [
+        {
+          "method": "mcp:stdio",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
+        },
+        {
+          "method": "mcp:http",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        },
+        {
+          "method": "mcp:sse",
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
+        }
+      ]
+    }
+  ],
+  "notes": {
+    "initialize": "initialize: Protocol 1 · dirac",
+    "authenticate": "authenticate: No protocol authentication method advertised",
+    "session/new": "session/new: Created a session without additional MCP dependencies",
+    "session/load": "session/load: pass",
+    "session/prompt": "session/prompt: 1 earlier turn(s) succeeded; subsequent attempt: session/prompt timed out after 30000ms",
+    "prompt:content": "prompt:image: session/prompt timed out after 30000ms · prompt:embedded-context: session/prompt timed out after 30000ms",
+    "sessions/*": "session/list: Not advertised; optional method not invoked · session/resume: \"Method not found\": session/resume — {\"method\":\"session/resume\"} · session/close: pass · session/delete: pass",
+    "fork": "session/fork: Not advertised; optional method not invoked",
+    "load:replay": "load:replay: Prior conversation text replayed for the same session",
+    "set_mode": "set_mode: Accepted offered mode act; policy semantics not inferred from its name",
+    "set_config": "set_config: Accepted current value of mode",
+    "cancel": "cancel: No successful prompt to establish cancellation conditions",
+    "logout": "logout: No authentication established by this run; shared account state is not changed",
+    "message*": "update:message: 8 notification(s) observed",
+    "tool_call*": "update:tool_call: 2 notification(s) observed",
+    "usage": "update:usage: 56 notification(s) observed",
+    "permission": "request_permission: Not observed; prerequisite session/prompt unavailable",
+    "plan": "update:plan: No matching notifications observed; see scenario stimuli",
+    "slash_cmds": "update:commands: 11 notification(s) observed",
+    "fs/*": "fs/read_text_file: Not observed; prerequisite session/prompt unavailable · fs/write_text_file: Not observed; prerequisite session/prompt unavailable",
+    "terminal/*": "terminal/*: Not observed; prerequisite session/prompt unavailable",
+    "elicitation": "elicitation: Not observed; prerequisite session/prompt unavailable",
+    "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
+    "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
+    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
+  },
+  "methods": {
+    "initialize": {
+      "status": "pass",
+      "note": "Protocol 1 · dirac",
+      "latencyMs": 9720
+    },
+    "session/new": {
+      "status": "pass",
+      "note": "Created a session without additional MCP dependencies",
+      "latencyMs": 53
+    },
+    "set_mode": {
+      "status": "pass",
+      "note": "Accepted offered mode act; policy semantics not inferred from its name",
+      "advertised": true,
+      "latencyMs": 133
+    },
+    "set_config": {
+      "status": "pass",
+      "note": "Accepted current value of mode",
+      "advertised": true,
+      "latencyMs": 58
+    },
+    "session/prompt": {
+      "status": "na",
+      "reason": "timeout",
+      "note": "1 earlier turn(s) succeeded; subsequent attempt: session/prompt timed out after 30000ms",
+      "latencyMs": 30002
+    },
+    "cancel": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No successful prompt to establish cancellation conditions"
+    },
+    "session/load": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 34
+    },
+    "load:replay": {
+      "status": "pass",
+      "note": "Prior conversation text replayed for the same session"
+    },
+    "session/fork": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "prompt:image": {
+      "status": "na",
+      "reason": "timeout",
+      "note": "session/prompt timed out after 30000ms",
+      "advertised": true
+    },
+    "prompt:embedded-context": {
+      "status": "na",
+      "reason": "timeout",
+      "note": "session/prompt timed out after 30000ms",
+      "advertised": true
+    },
+    "providers/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/set": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "providers/disable": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "nes/start": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/resume": {
+      "status": "fail",
+      "reason": "method-not-found",
+      "errorCode": -32601,
+      "definitive": true,
+      "note": "\"Method not found\": session/resume — {\"method\":\"session/resume\"}",
+      "advertised": true,
+      "latencyMs": 7
+    },
+    "session/close": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 271
+    },
+    "session/delete": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 291
+    },
+    "mcp:stdio": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
+    },
+    "mcp:http": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "mcp:sse": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "fs/read_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "fs/write_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "terminal/*": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "request_permission": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "elicitation": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
+    },
+    "update:message": {
+      "status": "pass",
+      "note": "8 notification(s) observed"
+    },
+    "update:tool_call": {
+      "status": "pass",
+      "note": "2 notification(s) observed"
+    },
+    "update:plan": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:commands": {
+      "status": "pass",
+      "note": "11 notification(s) observed"
+    },
+    "update:usage": {
+      "status": "pass",
+      "note": "56 notification(s) observed"
+    },
+    "lody": {
+      "status": "observed",
+      "note": "_lody/* answered: rate_limits/get — but no _meta.lody capabilities advertised"
+    },
+    "authenticate": {
+      "status": "na",
+      "reason": "not-advertised",
+      "note": "No protocol authentication method advertised"
+    },
+    "logout": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": true,
+      "note": "No authentication established by this run; shared account state is not changed"
+    },
+    "nes/suggest": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled scenario exercised this check"
+    }
+  },
+  "claimMismatches": [
+    {
+      "claim": "session/resume",
+      "detail": "Advertised method returned method_not_found"
+    }
+  ],
+  "violations": [],
+  "attempts": [
+    {
+      "method": "initialize",
+      "scenario": "initialize",
+      "at": "2026-10-04T03:06:22.852Z",
+      "outcome": "success",
+      "latencyMs": 9720
+    },
+    {
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-10-04T03:06:32.573Z",
+      "outcome": "success",
+      "latencyMs": 53
+    },
+    {
+      "method": "session/set_mode",
+      "scenario": "set_mode",
+      "at": "2026-10-04T03:06:32.627Z",
+      "outcome": "success",
+      "latencyMs": 133
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-10-04T03:06:32.760Z",
+      "outcome": "success",
+      "latencyMs": 58
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:exec",
+      "at": "2026-10-04T03:06:32.819Z",
+      "outcome": "success",
+      "latencyMs": 1577
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:read",
+      "at": "2026-10-04T03:06:34.397Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 30002
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-10-04T03:07:04.400Z",
+      "outcome": "success",
+      "latencyMs": 34
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-04T03:07:04.435Z",
+      "outcome": "success",
+      "latencyMs": 33
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:image",
+      "at": "2026-10-04T03:07:04.469Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 30008
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-04T03:07:34.477Z",
+      "outcome": "success",
+      "latencyMs": 41
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:embedded-context",
+      "at": "2026-10-04T03:07:34.518Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 30006
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:08:04.524Z",
+      "outcome": "success",
+      "latencyMs": 30
+    },
+    {
+      "method": "session/resume",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:08:04.555Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 7
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:08:04.562Z",
+      "outcome": "success",
+      "latencyMs": 50
+    },
+    {
+      "method": "session/close",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:08:04.613Z",
+      "outcome": "success",
+      "latencyMs": 271
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:08:04.884Z",
+      "outcome": "success",
+      "latencyMs": 40
+    },
+    {
+      "method": "session/delete",
+      "scenario": "session-mgmt",
+      "at": "2026-10-04T03:08:04.924Z",
+      "outcome": "success",
+      "latencyMs": 291
+    },
+    {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-10-04T03:08:05.218Z",
+      "outcome": "error",
+      "errorCode": -32602,
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-04T03:08:05.219Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-10-04T03:08:05.219Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "default:exec",
+      "profile": "default",
+      "sessionId": "6d8f76c1-e285-4058-8312-f6b87c5993c9",
+      "configuration": {
+        "mode": "act",
+        "auto_approve": false,
+        "yolo": false,
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "medium"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "available_commands_update",
+        "config_option_update",
+        "session_info_update",
+        "usage_update",
+        "agent_message_chunk",
+        "tool_call"
+      ],
+      "tools": [
+        {
+          "id": "1791083194394-3",
+          "name": "Mistake Limit Reached",
+          "status": "pending"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "execute_command"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:read",
+      "profile": "default",
+      "sessionId": "6d8f76c1-e285-4058-8312-f6b87c5993c9",
+      "configuration": {
+        "mode": "act",
+        "auto_approve": false,
+        "yolo": false,
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "medium"
+      },
+      "result": {
+        "status": "na",
+        "reason": "timeout",
+        "note": "session/prompt timed out after 30000ms"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "available_commands_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "prompt:image",
+      "profile": "default",
+      "sessionId": "e4b8d706-e0f5-45f9-8223-3434594cd761",
+      "configuration": {},
+      "result": {
+        "status": "na",
+        "reason": "timeout",
+        "note": "session/prompt timed out after 30000ms"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "available_commands_update",
+        "config_option_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "prompt:embedded-context",
+      "profile": "default",
+      "sessionId": "db66e1e3-53d1-42b3-b105-07977529fae5",
+      "configuration": {},
+      "result": {
+        "status": "na",
+        "reason": "timeout",
+        "note": "session/prompt timed out after 30000ms"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "available_commands_update",
+        "config_option_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    }
+  ],
+  "uncertaintyReasons": {
+    "not-advertised": 7,
+    "timeout": 3,
+    "prerequisite": 8,
+    "not-run": 4
+  },
+  "lody": {
+    "advertised": {},
+    "answered": [
+      "_lody/rate_limits/get"
+    ],
+    "missing": [
+      "_lody/subagents/list",
+      "_lody/session/history/read"
+    ],
+    "observed": []
+  },
+  "ext": {
+    "advertised": [
+      "dev.dirac/auth.logout",
+      "dev.dirac/checkpoints.list",
+      "dev.dirac/checkpoints.restore",
+      "dev.dirac/client_annotation",
+      "dev.dirac/messages.pin",
+      "dev.dirac/messages.pinned",
+      "dev.dirac/messages.unpin",
+      "dev.dirac/permission.effect_previews",
+      "dev.dirac/permissions.delete",
+      "dev.dirac/permissions.list",
+      "dev.dirac/pinned_messages_update",
+      "dev.dirac/seq",
+      "dev.dirac/session.close",
+      "dev.dirac/session.delete",
+      "dev.dirac/steering_status",
+      "dev.dirac/whisper",
+      "dev.dirac/worktree.integrate",
+      "dev.dirac/worktree.provision"
+    ],
+    "observed": [
+      "dev.dirac/seq"
+    ]
+  },
+  "transport": {
+    "mitm": {
+      "port": 45511,
+      "impersonated": [
+        "api.deepseek.com"
+      ],
+      "impersonations": 1,
+      "relayed": 17,
+      "drops": 0
+    }
+  }
+}
