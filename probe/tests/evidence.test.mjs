@@ -115,8 +115,8 @@ test('aggregation preserves historical uncertainty and does not overwrite a newe
     writeFileSync(out,'window.__ACP_WALL__ = '+JSON.stringify({harnesses:[{id:'a',n:'Agent A',probedAt:'2026-10-03T00:00:00Z',score:100,cells:[1],notes:{initialize:'old'}}]})+';');
     const r=buildReport({...options({initialize:{status:'pass'}}),harness:'a'});r.probedAt='2026-10-01T00:00:00Z';writeFileSync(join(reports,'a.report.json'),JSON.stringify(r));
     const aggregate=()=>{execFileSync(process.execPath,['tools/aggregate.mjs','--registry',reg,'--reports',reports,'--out',out],{cwd:root,stdio:'pipe'});const s=readFileSync(out,'utf8');return JSON.parse(s.slice(s.indexOf('=')+1).trim().replace(/;$/,''));};
-    let data=aggregate();assert.equal(data.harnesses[0].state,'legacy');assert.equal(data.harnesses[0].cells[0].status,'legacy');
-    r.probedAt='2026-10-04T00:00:00Z';writeFileSync(join(reports,'a.report.json'),JSON.stringify(r));data=aggregate();assert.equal(data.harnesses[0].state,'measured');assert.equal(data.harnesses[0].score,undefined);assert.ok(existsSync(join(dir,'reports','a.json')));
+    let data=aggregate();assert.equal(data.harnesses[0].state,'legacy');assert.equal(data.harnesses[0].cells[0],1);assert.equal(data.harnesses[0].score,100);
+    r.probedAt='2026-10-04T00:00:00Z';writeFileSync(join(reports,'a.report.json'),JSON.stringify(r));data=aggregate();assert.equal(data.harnesses[0].state,'measured');assert.equal(data.harnesses[0].score,4);assert.ok(existsSync(join(dir,'reports','a.json')));
   }finally{rmSync(dir,{recursive:true,force:true});}
 });
 test('complete CLI fixtures retain useful evidence without grading absent features',()=>{

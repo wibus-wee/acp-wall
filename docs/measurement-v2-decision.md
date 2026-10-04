@@ -1,4 +1,4 @@
-# Decision: separate evidence from capability grades
+# Decision: improve probe evidence while preserving the league table
 
 Date: 2026-10-04. Status: implemented in methodology 2.1.0.
 
@@ -24,21 +24,25 @@ agent results.
 
 ## Decision
 
-Use typed method evidence and causal prerequisites, remove aggregate compatibility
-grades, preserve declarations separately, and publish run provenance. Normal
+Use typed method evidence and causal prerequisites, preserve declarations
+separately, and publish run provenance. Keep the existing UI, ranking, score and
+tiers; measurement improvements do not authorize redesigning that presentation. Normal
 probing respects negotiated capabilities. Diagnostic discovery is explicit.
 Retain schema checks on actual traffic and distinguish the responsible side.
 
-The matrix shows each grouped method rather than selecting a worst result.
-Optional absence, blocked execution and uncertain observations remain separate.
-Historical reports require re-probing under the new method; no scores are
-mechanically translated into fresh validation.
+Detailed reports retain every grouped method. The original 24-column table uses
+partial evidence when a group has both verified and unverified methods, so an
+untested sibling cannot erase successful observations. Historical rankings stay
+visible with their original timestamps; new probe evidence replaces them after
+an actual run.
 
 ## Alternatives rejected
 
-- **Exclude unknowns from a percentage:** two successful observations could
-  appear as 100% compatibility. A separate coverage percentage would still
-  invite comparisons across unlike scenarios.
+- **Remove ranks or redesign the UI:** exceeds the measurement task. The original
+  page and ranked tiers are restored; richer evidence belongs in reports and
+  existing case-file notes.
+- **Exclude unknowns from the ranking denominator:** two successful observations
+  could appear as 100% compatibility. The original denominator remains 24.
 - **Treat all structured errors as passes:** this proves only rejection and
   can count a missing method as implemented.
 - **Require real accounts for every run:** unnecessarily prevents useful

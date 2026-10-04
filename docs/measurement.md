@@ -25,18 +25,36 @@ is [evidence.js](../probe/src/evidence.js); the probe implementation is
 underlying method results remain intact. `legacy` identifies older methodology;
 old numeric grades are never converted into current evidence.
 
-Counts include the 35 individual checks behind the 25 displayed surfaces. They
-are inventory counts, without weights, denominator-based scores or thresholds
-for certification. An overall run label describes observed issues, blockers,
+Detailed reports count 35 individual checks across 25 evidence groups. These
+counts are distinct from the public league table, which retains its original
+24 columns and ranking denominator. An overall run label describes observed issues, blockers,
 probe errors or completed measurements. A `measured` run can have many unobserved
 features; it does not mean all capabilities were tested. Schema diagnostics
 outside a matrix column remain visible at run level.
 
 Missing evidence also has a `reason`: undeclared methods, omitted scenarios,
 unavailable stimuli, policy rejection, missing callbacks, unmet prerequisites,
-timeouts and transport uncertainty remain distinct. Reports and the detail view
-summarize these causes without adding a new score. Raw status alone cannot tell
+timeouts and transport uncertainty remain distinct. Reports summarize these causes, and the original case-file notes retain them. Raw status alone cannot tell
 whether a scenario was attempted.
+
+## League-table ranking
+
+The public UI and its 24-column score, ranks and tiers remain unchanged in
+structure. [ranking.mjs](../tools/ranking.mjs) projects detailed observations into
+that existing data contract. A fully verified column earns one point; a partially
+verified group or schema-partial result earns half a point. Explicit failure or
+unsupported methods display as missing; unobserved, blocked, diagnostic-only and
+probe-error results remain unexercised and earn no points. A group with a verified
+submethod and unverified peers is partial, preserving the successful observation
+without claiming complete group support.
+
+The score is the rounded point total divided by 24, multiplied by 100. Existing
+60/25 tier thresholds and claim-mismatch downgrades are retained. Image and
+embedded-context observations remain in detailed reports without expanding the
+ranking denominator. Historical scores retain their original methodology and
+timestamps. This is a measured-coverage ranking: unknowns lower its coverage,
+not proof that the agent lacks the corresponding capabilities. Improving a
+blocked setup or exercising more suitable scenarios can increase coverage.
 
 ## Protocol and environment boundaries
 

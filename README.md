@@ -3,16 +3,17 @@
 The Wall is an independent evidence ledger for Agent Client Protocol (ACP)
 implementations. It records observed operations, capability declarations,
 authentication blockers and test failures with their version and environment.
-It does not assign an overall compatibility score or certify agents.
+The original league table, rank, score and tier remain the public presentation.
+Detailed observations explain what each measurement did and did not establish.
 
 | Area | Location | Responsibility |
 | --- | --- | --- |
 | Measurement contract | [Methodology](docs/measurement.md) | Defines evidence states, test conditions and interpretation limits. |
 | Probe | [probe/src](probe/src) | Runs ACP scenarios over stdio, validates messages and records attempts. |
-| Shared vocabulary | [evidence.js](probe/src/evidence.js) | Owns matrix columns, status labels and counts used by reports and the site. |
+| Evidence and ranking | [evidence.js](probe/src/evidence.js), [ranking.mjs](tools/ranking.mjs) | Defines detailed evidence and projects it onto the original 24-column ranking. |
 | Agent catalog | [registry](registry) | Mirrors the official registry; overrides configure controlled test environments. |
 | Publication | [aggregate.mjs](tools/aggregate.mjs) | Publishes reports, preserves newer records and labels historical measurements. |
-| Website | [index.html](index.html), [assets](assets) | Searchable evidence matrix, comparison, method details and report downloads. |
+| Website | [index.html](index.html) | Original league table, ranked tiers, expandable case files and command palette. |
 | Verification | [probe/tests](probe/tests), [CI workflows](.github/workflows) | Regression tests, complete fixtures and daily agent measurements. |
 
 ## Read a result
@@ -23,19 +24,14 @@ a prerequisite was unavailable. Unobserved means the run produced insufficient
 evidence; it does not mean unsupported. An unsupported optional method is not a
 protocol violation. Grouped cells preserve each method's result.
 
-Open a matrix cell to see its method outcomes, dependencies, schema diagnostics,
-agent version, measurement time, source revision and environment. Missing
-evidence is grouped by cause. Scenario records retain default and configured
-permissions, failed tools, callbacks, MCP events and request attempts. Use the
-scenario profile filter to inspect a specific configuration. Filter the matrix by
-agent, outcome or surface; select up to four agents to compare. Filters and
-record links are shareable through the URL. `Cmd/Ctrl+K` focuses search.
+Click an agent name to open its existing case file, including per-method notes
+and schema diagnostics. The league table retains its rank, score, tier sections,
+Lody toggle, search palette and original visual design. Full scenario conditions
+and uncertainty reasons are available in `data/reports/<agent-id>.json`.
 
-Records from the old scoring method retain their historical notes and timestamps
-but display **Needs re-probe**. They are not relabeled as freshly verified.
-The assembly timestamp is distinct from each agent's probe timestamp. Records
-older than seven days are marked stale. See the [measurement contract](docs/measurement.md)
-for the complete interpretation rules.
+Historical rows retain their scores, notes and original measurement timestamps;
+they are not relabeled as freshly measured. See the
+[measurement contract](docs/measurement.md) for ranking and evidence semantics.
 
 ## Run locally
 
