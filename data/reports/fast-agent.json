@@ -8,7 +8,7 @@
     "capabilities": {},
     "authMethods": []
   },
-  "probedAt": "2026-10-04T03:21:09.611Z",
+  "probedAt": "2026-10-04T10:38:01.117Z",
   "state": "blocked",
   "summary": {
     "pass": 0,
@@ -35,8 +35,8 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "3eacb1973460b3441b6e0a2e5da4fab5ad9439a318754a5dacc37062e4f49d70",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173726675",
-    "revision": "70fe6c77bb08cd3fb9c127e41c957fa5ae75ada0",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37195904716",
+    "revision": "cb847cc133ea843f4f650f6bd24e54d8d5897c82",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -715,14 +715,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-04T03:21:09.451Z",
+      "at": "2026-10-04T10:38:00.949Z",
       "outcome": "error",
-      "latencyMs": 101
+      "latencyMs": 108
     },
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-04T03:21:09.555Z",
+      "at": "2026-10-04T10:38:01.060Z",
       "outcome": "error",
       "latencyMs": 55
     }
@@ -734,7 +734,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 40969,
+      "port": 37265,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 2,

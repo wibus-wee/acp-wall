@@ -34,7 +34,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-04T03:19:45.600Z",
+  "probedAt": "2026-10-04T10:36:52.147Z",
   "state": "blocked",
   "summary": {
     "pass": 4,
@@ -61,8 +61,8 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "62c877e93b7fec7771dfb1b499120dc7fd36830e17ed7dfeb53a18ef1b00d618",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173726675",
-    "revision": "70fe6c77bb08cd3fb9c127e41c957fa5ae75ada0",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37195904716",
+    "revision": "cb847cc133ea843f4f650f6bd24e54d8d5897c82",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -84,7 +84,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · amp-acp",
-          "latencyMs": 84
+          "latencyMs": 66
         }
       ]
     },
@@ -140,7 +140,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required",
-          "latencyMs": 995
+          "latencyMs": 921
         }
       ]
     },
@@ -523,7 +523,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · amp-acp",
-      "latencyMs": 84
+      "latencyMs": 66
     },
     "session/new": {
       "status": "pass",
@@ -546,7 +546,7 @@
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required",
-      "latencyMs": 995
+      "latencyMs": 921
     },
     "cancel": {
       "status": "blocked",
@@ -738,74 +738,74 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-04T03:19:42.832Z",
+      "at": "2026-10-04T10:36:49.329Z",
       "outcome": "success",
-      "latencyMs": 84
+      "latencyMs": 66
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-04T03:19:42.917Z",
+      "at": "2026-10-04T10:36:49.396Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-04T03:19:42.919Z",
+      "at": "2026-10-04T10:36:49.397Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-04T03:19:42.921Z",
+      "at": "2026-10-04T10:36:49.400Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 995
+      "latencyMs": 921
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-04T03:19:43.917Z",
+      "at": "2026-10-04T10:36:50.322Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-10-04T03:19:43.918Z",
+      "at": "2026-10-04T10:36:50.323Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 817
+      "latencyMs": 929
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-04T03:19:44.736Z",
+      "at": "2026-10-04T10:36:51.252Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-10-04T03:19:44.737Z",
+      "at": "2026-10-04T10:36:51.253Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 858
+      "latencyMs": 890
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-04T03:19:45.597Z",
+      "at": "2026-10-04T10:36:52.145Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-04T03:19:45.598Z",
+      "at": "2026-10-04T10:36:52.145Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -813,7 +813,7 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-04T03:19:45.599Z",
+      "at": "2026-10-04T10:36:52.146Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -823,7 +823,7 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "S-mut95q2u-vpgmxe",
+      "sessionId": "S-mutoruk5-mdcofl",
       "configuration": {
         "permission": "default",
         "amp-mode": "medium"
@@ -851,7 +851,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "S-mut95qul-zwxztg",
+      "sessionId": "S-mutorv9u-o3q5rd",
       "configuration": {},
       "result": {
         "status": "blocked",
@@ -878,7 +878,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "S-mut95rhc-0826de",
+      "sessionId": "S-mutorvzp-y61q5s",
       "configuration": {},
       "result": {
         "status": "blocked",
@@ -928,7 +928,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 38845,
+      "port": 38095,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 3,

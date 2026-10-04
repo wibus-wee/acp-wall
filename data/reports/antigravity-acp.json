@@ -49,7 +49,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-04T03:19:53.170Z",
+  "probedAt": "2026-10-04T10:37:11.302Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -76,8 +76,8 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "12b18bcbf6be43abd0496d4460b53c1a10d46b49e763f077fdf2e1685fecdaa4",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37173726675",
-    "revision": "70fe6c77bb08cd3fb9c127e41c957fa5ae75ada0",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37195904716",
+    "revision": "cb847cc133ea843f4f650f6bd24e54d8d5897c82",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -99,7 +99,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · antigravity-acp",
-          "latencyMs": 1821
+          "latencyMs": 1904
         }
       ]
     },
@@ -128,7 +128,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — {\"message\":\"No authentication method selected. Either call the `authenticate` method (supports oauth-personal, gemini-ap…",
-          "latencyMs": 1
+          "latencyMs": 0
         }
       ]
     },
@@ -541,14 +541,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · antigravity-acp",
-      "latencyMs": 1821
+      "latencyMs": 1904
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — {\"message\":\"No authentication method selected. Either call the `authenticate` method (supports oauth-personal, gemini-ap…",
-      "latencyMs": 1
+      "latencyMs": 0
     },
     "set_mode": {
       "status": "blocked",
@@ -758,45 +758,45 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-04T03:19:51.341Z",
+      "at": "2026-10-04T10:37:09.390Z",
       "outcome": "success",
-      "latencyMs": 1821
+      "latencyMs": 1904
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-04T03:19:53.163Z",
+      "at": "2026-10-04T10:37:11.295Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-04T03:19:53.166Z",
+      "at": "2026-10-04T10:37:11.297Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-04T03:19:53.168Z",
+      "at": "2026-10-04T10:37:11.300Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-04T03:19:53.168Z",
+      "at": "2026-10-04T10:37:11.300Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-04T03:19:53.169Z",
+      "at": "2026-10-04T10:37:11.300Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -823,7 +823,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 39909,
+      "port": 44571,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
