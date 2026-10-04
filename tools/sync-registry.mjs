@@ -13,6 +13,7 @@ import { join, resolve, dirname } from "node:path";
 
 const root = resolve(dirname(new URL(import.meta.url).pathname), "..");
 const arg = (f, d) => { const i = process.argv.indexOf(f); return i >= 0 ? process.argv[i + 1] : d; };
+const only = arg("--only", "");
 const SRC = arg("--registry-json", "https://cdn.agentclientprotocol.com/registry/v1/latest/registry.json");
 const agentsDir = join(root, "registry", "agents");
 const overridesDir = join(root, "registry", "overrides");
@@ -62,13 +63,15 @@ function recipe(id, dist) {
     };
   }
   if (d.binary) {
-    const platKey = `${{ darwin: "darwin", linux: "linux", win32: "windows" }[process.platform]}-${{ arm64: "aarch64", x64: "x86_64" }[process.arch]}`;
-    const spec = d.binary[platKey] ?? Object.values(d.binary)[0];
-    const cmd = spec?.cmd ?? `./${id}`;
+    // args come from the linux-x86_64 spec — that is the wall's probe host —
+    // because per-platform arg lists can diverge (antigravity passes --uid=
+    // on linux but not darwin). The binary itself resolves per-platform via
+    // the "agent" shim install-dist drops next to it.
+    const spec = d.binary["linux-x86_64"] ?? Object.values(d.binary)[0];
     const args = spec?.args ?? [];
     return {
       install: `node tools/install-dist.mjs registry/agents/${id}.json`,
-      run: [`\${REPO_ROOT}/.cache/agents/${id}/${cmd.replace(/^\.\//, "")}`, ...args].join(" "),
+      run: [`\${REPO_ROOT}/.cache/agents/${id}/agent`, ...args].join(" "),
       dist: { type: "binary", per_platform: d.binary },
     };
   }
@@ -76,10 +79,11 @@ function recipe(id, dist) {
 }
 
 mkdirSync(agentsDir, { recursive: true });
-for (const f of readdirSync(agentsDir).filter((f) => f.endsWith(".json"))) rmSync(join(agentsDir, f));
+for (const f of readdirSync(agentsDir).filter((f) => f.endsWith(".json") && (!only || f === `${only}.json`))) rmSync(join(agentsDir, f));
 
 let n = 0, skipped = [];
 for (const a of src.agents ?? []) {
+  if (only && a.id !== only) continue;
   const r = recipe(a.id, a.distribution);
   const ov = overrides[a.id] ?? {};
   if (!r.run && !ov.run) { skipped.push(a.id); continue; }
@@ -95,6 +99,8 @@ for (const a of src.agents ?? []) {
     license: a.license ?? null,
     install: "install" in ov ? ov.install : ov.run ? null : r.install,
     run: ov.run ?? r.run,
+    setup: ov.setup ?? [],
+    probeProfiles: ov.probeProfiles ?? [],
     env: ov.env ?? {},
     sessionFiles: ov.sessionFiles ?? null,
     dist: r.dist,
@@ -114,6 +120,7 @@ if (skipped.length) console.log(`skipped (no launch recipe): ${skipped.join(", "
 // them. fixture-* and _schema stay out.
 let hand = 0;
 for (const f of readdirSync(join(root, "registry")).filter((f) => f.endsWith(".json") && !f.startsWith("fixture-") && !f.startsWith("_"))) {
+  if (only && f !== `${only}.json`) continue;
   const e = JSON.parse(readFileSync(join(root, "registry", f), "utf8"));
   writeFileSync(join(agentsDir, f), JSON.stringify({ ...e, _synced: `hand-written · ${new Date().toISOString().slice(0, 10)}` }, null, 2) + "\n");
   hand++;

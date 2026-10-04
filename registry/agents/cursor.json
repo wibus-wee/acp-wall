@@ -9,7 +9,9 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/cursor.svg",
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/cursor.json",
-  "run": "${REPO_ROOT}/.cache/agents/cursor/dist-package/cursor-agent acp",
+  "run": "${REPO_ROOT}/.cache/agents/cursor/agent acp",
+  "setup": [],
+  "probeProfiles": [],
   "env": {
     "CURSOR_API_KEY": "probe-mock-key"
   },
@@ -64,5 +66,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "cursor-agent authenticates against Cursor's backend with a server-validated API key; placeholder key reaches the auth rejection. No documented custom-endpoint/BYOK path.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-03"
+  "_synced": "acp-registry 1.0.0 · 2026-10-04"
 }

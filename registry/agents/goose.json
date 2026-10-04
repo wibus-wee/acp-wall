@@ -9,7 +9,9 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/goose.svg",
   "license": "Apache-2.0",
   "install": "node tools/install-dist.mjs registry/agents/goose.json",
-  "run": "${REPO_ROOT}/.cache/agents/goose/goose acp",
+  "run": "${REPO_ROOT}/.cache/agents/goose/agent acp",
+  "setup": [],
+  "probeProfiles": [],
   "env": {
     "GOOSE_PROVIDER": "openai",
     "GOOSE_PROVIDER__TYPE": "openai",
@@ -68,5 +70,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Highest-precedence env wiring: GOOSE_PROVIDER=openai selects the OpenAI-compatible provider; OPENAI_HOST (mock /v1 root) + OPENAI_BASE_PATH=chat/completions lands requests on the mock's /v1/chat/completions. No goose account or interactive configure needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-03"
+  "_synced": "acp-registry 1.0.0 · 2026-10-04"
 }

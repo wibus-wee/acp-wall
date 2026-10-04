@@ -43,23 +43,23 @@ jobs:
           OVERRIDES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- 'registry/overrides/' | sed 's|registry/overrides/|registry/agents/|' || true)
           CHANGED="$CHANGED $OVERRIDES"
           # Fallback for probe/tools changes: probe the fixtures only
-          if [ -z "$(echo $CHANGED | tr -d ' ')" ]; then
+          if [ -z "$(echo "$CHANGED" | tr -d ' ')" ]; then
             CHANGED="registry/fixture-good.json registry/fixture-liar.json registry/fixture-mini.json"
           fi
           # filenames flow into an unquoted for-loop below — only allow boring
           # paths so a crafted filename cannot inject shell
           CHANGED=$(echo "$CHANGED" | tr ' ' '\n' | grep -E '^registry/[a-zA-Z0-9._/-]+\.json$' | grep -v '\.\.' || true)
-          if [ -z "$(echo $CHANGED | tr -d ' ')" ]; then
+          if [ -z "$(echo "$CHANGED" | tr -d ' ')" ]; then
             CHANGED="registry/fixture-good.json registry/fixture-liar.json registry/fixture-mini.json"
           fi
-          echo "entries=$(echo $CHANGED | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+          echo "entries=$(echo "$CHANGED" | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
           echo "will probe: $CHANGED"
 
       - name: Build probe
         working-directory: probe
         run: |
-          npm ci || npm install
-          npm run build
+          npm ci
+          npm test
 
       - name: Install + probe each entry
         env:
@@ -74,17 +74,24 @@ jobs:
             install=$(node -e "console.log(JSON.parse(require('fs').readFileSync('$entry','utf8')).install||'')")
             if [ -n "$install" ]; then
               echo "install: $install"
-              timeout 600 sh -c "$install" || echo "install failed — probe will report what it found"
+              status=0
+              timeout 600 sh -c "$install" || status=$?
+              if [ "$status" != "0" ]; then
+                node tools/record-failure.mjs "$entry" "probe/reports/$name.report.json" "Distribution installation failed" "$status"
+                continue
+              fi
             fi
+            status=0
             timeout 600 node probe/dist/src/cli.js --entry "$entry" \
-              --out "probe/reports/$name.report.json" --transcript || true
+              --out "probe/reports/$name.report.json" --transcript || status=$?
+            node tools/record-failure.mjs "$entry" "probe/reports/$name.report.json" "Probe did not complete" "$status"
           done
 
       - name: Upload reports
         uses: actions/upload-artifact@v7
         with:
           name: probe-reports
-          path: probe/reports/*.report.json
+          path: probe/reports/*.report.json*
 
       - name: Comment results on PR
         if: github.event_name == 'pull_request'
@@ -95,14 +102,14 @@ jobs:
             echo "<!-- acp-probe -->"
             echo "## acp-probe results"
             echo ""
-            echo "| harness | score | tier | dishonesty |"
-            echo "|---|---|---|---|"
+            echo "| harness | outcome | verified observations | blocked | issues |"
+            echo "|---|---|---|---|---|"
             for r in probe/reports/*.report.json; do
               [ -f "$r" ] || continue
               node -e "
                 const r=require('./$r');
-                const d=(r.dishonesty||[]).map(x=>x.claim).join(', ')||'—';
-                console.log(\`|\${r.harness}|\${r.score}/100|\${r.tier.toUpperCase()}|\${d}|\`);
+                const s=r.summary||{};
+                console.log(\`|\${r.harness}|\${r.state}|\${s.pass||0}|\${s.blocked||0}|\${(s.fail||0)+(s.partial||0)}|\`);
               "
             done
             echo ""

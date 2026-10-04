@@ -1,5 +1,5 @@
 /**
- * good-agent — a fully conformant stub ACP agent.
+ * good-agent — ACP fixture for controlled protocol interactions.
  * Exercises: initialize, session/new, session/load, session/prompt
  * (with message/tool_call/plan updates + fs/permission reverse calls),
  * cancellable prompts via session/cancel, and the full MCP stdio chain
@@ -10,6 +10,7 @@ import { createInterface } from "node:readline";
 import { RpcPeer } from "../src/rpc.js";
 
 const peer = RpcPeer.stdio();
+let sessionSequence = 0;
 let releaseSlow: (() => void) | null = null;
 
 /** Minimal MCP stdio client — enough to prove the full tool chain. */
@@ -42,7 +43,7 @@ function mcpConnect(server: any) {
   return { request, notify };
 }
 
-const mcpClients: Array<ReturnType<typeof mcpConnect>> = [];
+const mcpClients = new Map<string, Array<ReturnType<typeof mcpConnect>>>();
 
 peer.onRequest = async (method, params: any) => {
   switch (method) {
@@ -52,7 +53,7 @@ peer.onRequest = async (method, params: any) => {
         agentCapabilities: {
           loadSession: true,
           promptCapabilities: { image: false, audio: false, embeddedContext: true },
-          mcpCapabilities: { http: true, sse: false },
+          mcpCapabilities: { http: false, sse: false },
           // acp-extension-core: Lody contracts ride _meta.lody on the standard
           // capability map, each feature independently versioned.
           _meta: {
@@ -73,6 +74,8 @@ peer.onRequest = async (method, params: any) => {
         authMethods: [],
       };
     case "session/new": {
+      const sessionId = `sess-good-${++sessionSequence}`;
+      const clients: Array<ReturnType<typeof mcpConnect>> = [];
       // connect every configured stdio MCP server: handshake + discovery
       for (const s of params?.mcpServers ?? []) {
         if (!s?.command) continue;
@@ -84,9 +87,10 @@ peer.onRequest = async (method, params: any) => {
         });
         c.notify("notifications/initialized");
         await c.request("tools/list", {});
-        mcpClients.push(c);
+        clients.push(c);
       }
-      return { sessionId: "sess-good-1" };
+      mcpClients.set(sessionId, clients);
+      return { sessionId };
     }
     case "session/load": {
       const sid = params?.sessionId;
@@ -116,7 +120,7 @@ peer.onRequest = async (method, params: any) => {
         update: { sessionUpdate: "agent_message_chunk", content: { type: "text", text: "reading your file…" } },
       });
       // exercise connected MCP servers end to end
-      for (const c of mcpClients) {
+      for (const c of mcpClients.get(sid) ?? []) {
         await c.request("tools/call", { name: "probe_noop", arguments: {} });
       }
       const file = (await peer.request("fs/read_text_file", { sessionId: sid, path: "/etc/hostname" })) as any;

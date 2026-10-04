@@ -4,6 +4,11 @@ probe/reports/
 reports/
 .DS_Store
 .cache/
+.tmp/
 
 # Stakpak session files
 .stakpak/session*
+
+# Public compact evidence is versioned; raw transcripts stay in ignored report dirs.
+!data/reports/
+!data/reports/*.json

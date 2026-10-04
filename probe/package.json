@@ -1,17 +1,23 @@
 {
   "name": "acp-probe",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "ACP (Agent Client Protocol) conformance probe — feeds the wall",
   "type": "module",
   "private": true,
-  "bin": { "acp-probe": "dist/src/cli.js" },
+  "bin": {
+    "acp-probe": "dist/src/cli.js"
+  },
   "scripts": {
     "build": "node node_modules/typescript/bin/tsc -p tsconfig.json",
     "probe": "node dist/src/cli.js",
-    "selftest": "npm run build && cd .. && for e in fixture-good fixture-liar fixture-mini; do node probe/dist/src/cli.js --entry registry/$e.json --out probe/reports/$e.report.json; done"
+    "selftest": "npm run build && cd .. && for e in fixture-good fixture-liar fixture-mini; do node probe/dist/src/cli.js --entry registry/$e.json --out probe/reports/$e.report.json; done",
+    "test": "npm run build && node --test tests/*.test.mjs"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.0"
   }
 }

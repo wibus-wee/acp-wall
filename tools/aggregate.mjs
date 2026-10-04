@@ -1,187 +1,87 @@
 #!/usr/bin/env node
-// aggregate.mjs — merge probe/reports/*.report.json + registry/*.json into
-// data/conformance.js (a classic script that sets window.__ACP_WALL__), so the
-// static demos can consume real probe results over file:// without fetch/CORS.
-//
-// usage: node tools/aggregate.mjs [--reports probe/reports] [--registry registry] [--out data/conformance.js]
+// Publish current evidence and explicitly identified historical records.
+import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { join, dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { COLUMNS, METHODOLOGY_VERSION, cellsFromMethods, summarize, runState, STATUS } from '../probe/src/evidence.js';
 
-import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
-import { join, dirname, resolve } from "node:path";
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const arg = (flag, fallback) => { const i = process.argv.indexOf(flag); return i >= 0 ? process.argv[i + 1] : fallback; };
+const reportsDir = resolve(root, arg('--reports', 'probe/reports'));
+const registryDir = resolve(root, arg('--registry', 'registry'));
+const out = resolve(root, arg('--out', 'data/conformance.js'));
+const previous = resolve(root, arg('--previous', out));
+const publicDir = join(dirname(out), 'reports');
+const read = p => JSON.parse(readFileSync(p, 'utf8'));
+const registry = new Map();
+const overrides = new Map();
+for (const dir of [registryDir, join(registryDir, 'agents')]) {
+  if (!existsSync(dir)) continue;
+  for (const f of readdirSync(dir).filter(f => f.endsWith('.json') && !f.startsWith('_'))) {
+    const entry = read(join(dir, f));
+    if (entry.name) registry.set(entry.name, entry);
+  }
+}
+const ovDir = join(registryDir, 'overrides');
+if (existsSync(ovDir)) for (const f of readdirSync(ovDir).filter(f => f.endsWith('.json'))) overrides.set(f.slice(0, -5), read(join(ovDir, f)));
 
-const root = resolve(dirname(new URL(import.meta.url).pathname), "..");
-const arg = (f, d) => { const i = process.argv.indexOf(f); return i >= 0 ? process.argv[i + 1] : d; };
-const reportsDir = resolve(root, arg("--reports", "probe/reports"));
-const registryDir = resolve(root, arg("--registry", "registry"));
-const out = resolve(root, arg("--out", "data/conformance.js"));
-
-const CAPS = ["initialize", "authenticate", "session/new", "session/load", "session/prompt",
-  "sessions/*", "fork", "load:replay", "set_mode", "set_config", "cancel", "logout",
-  "message*", "tool_call*", "usage", "permission", "plan", "slash_cmds",
-  "fs/*", "terminal/*", "elicitation", "providers", "nes", "mcp"];
-
-// Reports also carry a positional cells array, but positions shift whenever
-// columns are added — rebuild cells from the keyed methods map so reports from
-// any probe version align with the current columns.
-const CELL_MAP = {
-  "initialize": ["initialize"],
-  "authenticate": ["authenticate"],
-  "session/new": ["session/new"],
-  "session/load": ["session/load"],
-  "session/prompt": ["session/prompt"],
-  "sessions/*": ["session/list", "session/resume", "session/close", "session/delete"],
-  "fork": ["session/fork"],
-  "load:replay": ["load:replay"],
-  "set_mode": ["set_mode"],
-  "set_config": ["set_config"],
-  "cancel": ["cancel"],
-  "logout": ["logout"],
-  "message*": ["update:message"],
-  "tool_call*": ["update:tool_call"],
-  "usage": ["update:usage"],
-  "permission": ["request_permission"],
-  "plan": ["update:plan"],
-  "slash_cmds": ["update:commands"],
-  "fs/*": ["fs/read_text_file", "fs/write_text_file"],
-  "terminal/*": ["terminal/*"],
-  "elicitation": ["elicitation"],
-  "providers": ["providers"],
-  "nes": ["nes"],
-  "mcp": ["mcp"],
-};
-const RANK = { pass: 3, partial: 2, na: 1, fail: 0 };
-function cellsFromMethods(methods) {
-  return CAPS.map((col) => {
-    let w = null;
-    for (const k of CELL_MAP[col] ?? []) {
-      const r = methods?.[k];
-      if (!r) continue;
-      if (w === null || RANK[r.status] < RANK[w.status]) w = r;
-    }
-    if (!w) return -1;
-    return w.status === "pass" ? 1 : w.status === "partial" ? 2 : w.status === "fail" ? 0 : -1;
+const rows = new Map();
+function historical(row) {
+  if (row.reportVersion === 2 && row.methodologyVersion === METHODOLOGY_VERSION) return row;
+  return {
+    id: row.id, n: row.n, v: registry.get(row.id)?.vendor ?? row.v, desc: row.desc, icon: row.icon, url: row.url, repo: row.repo,
+    version: row.version, probedAt: row.probedAt, lodyAdapter: row.lodyAdapter, lody: row.lody, ext: row.ext,
+    state: 'legacy', reportVersion: row.reportVersion ?? 1, methodologyVersion: row.methodologyVersion ?? '1 (historical)',
+    historicalNotes: row.historicalNotes ?? row.notes ?? {},
+    cells: COLUMNS.map(([key, , scope]) => ({ key, scope, status: 'legacy', items: [] })),
+    summary: null,
+  };
+}
+if (existsSync(previous)) {
+  const src = readFileSync(previous, 'utf8');
+  const data = JSON.parse(src.slice(src.indexOf('=') + 1).trim().replace(/;$/, ''));
+  for (const row of data.harnesses ?? []) {
+    const id = row.id ?? [...registry].find(([, e]) => (e.display ?? e.name) === row.n)?.[0];
+    if (id && registry.has(id) && !registry.get(id).selftest) rows.set(id, historical({ ...row, id }));
+  }
+}
+mkdirSync(publicDir, { recursive: true });
+if (existsSync(reportsDir)) for (const file of readdirSync(reportsDir).filter(f => f.endsWith('.report.json'))) {
+  const r = read(join(reportsDir, file));
+  const reg = registry.get(r.harness);
+  if (!reg || reg.selftest) continue;
+  if (!/^[a-zA-Z0-9._-]+$/.test(r.harness)) throw new Error(`Invalid report id in ${file}`);
+  const prior = rows.get(r.harness);
+  if (prior?.probedAt && Date.parse(prior.probedAt) > Date.parse(r.probedAt)) continue;
+  const base = {
+    id: r.harness, n: reg.display ?? reg.name, v: reg.vendor, desc: reg.description,
+    icon: reg.icon, url: reg.website ?? (reg.repo ? `https://github.com/${reg.repo}` : null), repo: reg.repo,
+    version: r.agentVersion, probedAt: r.probedAt,
+    lody: r.lody, ext: r.ext, lodyAdapter: overrides.get(r.harness)?.lodyAdapter ?? reg.lodyAdapter ?? null,
+  };
+  if (r.reportVersion !== 2 || r.methodologyVersion !== METHODOLOGY_VERSION) {
+    rows.set(r.harness, historical({ ...base, notes: r.notes })); continue;
+  }
+  for (const [key, result] of Object.entries(r.methods ?? {})) if (!STATUS[result.status]) throw new Error(`Unknown evidence status: ${file}:${key}`);
+  const summary = summarize(r.methods);
+  const state = runState(summary, r.setup, r.violations, r.methods);
+  const { transcript, ...publicReport } = r;
+  // Full wire transcripts remain in the CI artifact. The public report carries
+  // method outcomes, timestamped attempts, schema diagnostics and provenance.
+  writeFileSync(join(publicDir, `${r.harness}.json`), JSON.stringify(publicReport, null, 2) + '\n');
+  rows.set(r.harness, {
+    ...base, reportVersion: 2, methodologyVersion: r.methodologyVersion, schemaSha256: r.schemaSha256,
+    state, summary, cells: cellsFromMethods(r.methods), methods: r.methods,
+    setup: r.setup, environment: r.environment, transport: r.transport, advertised: r.advertised,
+    violations: r.violations ?? [], claimMismatches: r.claimMismatches ?? [],
+    scenarios: r.scenarios ?? [], uncertaintyReasons: r.uncertaintyReasons ?? {}, attempts: r.attempts ?? [],
+    reportUrl: `data/reports/${r.harness}.json`,
   });
 }
-
-// registry: name → entry. Sources: registry/*.json (hand-written, incl.
-// selftest fixtures) and registry/agents/*.json (synced from the official
-// ACP registry). selftest entries are probed in CI but never published.
-const registry = {};
-function loadRegistryDir(dir) {
-  if (!existsSync(dir)) return;
-  for (const f of readdirSync(dir).filter((f) => f.endsWith(".json") && !f.startsWith("_"))) {
-    try {
-      const e = JSON.parse(readFileSync(join(dir, f), "utf8"));
-      if (e.name) registry[e.name] = e;
-    } catch (e) {
-      console.warn(`skip ${dir}/${f}: ${e.message}`);
-    }
-  }
-}
-loadRegistryDir(registryDir);
-loadRegistryDir(join(registryDir, "agents"));
-
-// registry/overrides/<id>.json — human-authored probe config AND wall
-// annotations (e.g. lodyAdapter). Keyed by filename = agent id, which synced
-// entries carry as their `name`.
-const overridesById = {};
-const ovDir = join(registryDir, "overrides");
-if (existsSync(ovDir)) {
-  for (const f of readdirSync(ovDir).filter((f) => f.endsWith(".json") && !f.startsWith("_"))) {
-    try {
-      overridesById[f.replace(/\.json$/, "")] = JSON.parse(readFileSync(join(ovDir, f), "utf8"));
-    } catch (e) {
-      console.warn(`skip overrides/${f}: ${e.message}`);
-    }
-  }
-}
-
-const harnesses = [];
-if (existsSync(reportsDir)) {
-  for (const f of readdirSync(reportsDir).filter((f) => f.endsWith(".report.json"))) {
-    let r;
-    try {
-      r = JSON.parse(readFileSync(join(reportsDir, f), "utf8"));
-    } catch (e) {
-      console.warn(`skip ${f}: ${e.message}`);
-      continue;
-    }
-    const reg = registry[r.harness] ?? {};
-    if (reg.selftest) {
-      console.log(`  (selftest, not published: ${r.harness})`);
-      continue;
-    }
-    harnesses.push({
-      id: r.harness,
-      n: reg.display ?? reg.name ?? r.harness,
-      v: [reg.vendor, r.agentVersion ? `v${r.agentVersion}` : null].filter(Boolean).join(" — "),
-      desc: reg.description ?? null,
-      icon: reg.icon ?? null,
-      url: reg.website ?? (reg.repo ? `https://github.com/${reg.repo}` : null),
-      tier: r.tier,
-      cells: r.methods ? cellsFromMethods(r.methods) : r.cells,
-      notes: r.notes ?? {},
-      score: r.score,
-      version: r.agentVersion,
-      probedAt: r.probedAt,
-      run: reg.run ?? null,
-      repo: reg.repo ?? null,
-      dishonesty: r.dishonesty ?? [],
-      violations: r.violations ?? [],
-      // acp-extension-core side-channel: _meta.lody capabilities advertised,
-      // _lody/* endpoints answered, _meta.lody.* keys seen on the wire.
-      // Absent on reports from before the extension probe existed.
-      lody: r.lody ?? null,
-      // generic extension surface: _meta namespaces advertised + seen on wire
-      ext: r.ext ?? null,
-      // Lody ships a provider adapter for this harness → ◆ lody mark
-      // (acp-extension-<slug>, e.g. claude/codex/grok/dsh/kimi/pi).
-      lodyAdapter: overridesById[r.harness]?.lodyAdapter ?? reg.lodyAdapter ?? null,
-      // disclosure: model endpoints the probe TLS-impersonated (transport
-      // layer), vs documented-config wiring — honesty about the measurement
-      mitm: r.transport?.mitm?.impersonated?.length ? r.transport.mitm.impersonated : null,
-      star: r.tier === "verified" && r.score === 100 ? 1 : 0,
-      _file: f,
-    });
-  }
-}
-
-// Carry forward rows for harnesses that weren't reprobed in this run: the
-// artifact download only sees THIS run's reports, so a partial matrix (a
-// single-harness dispatch, or one failed upload) would otherwise erase
-// everyone else. Carried rows keep their original probedAt, so staleness
-// stays visible. A row whose registry entry disappeared is dropped —
-// registry is the source of truth for who belongs on the wall.
-const fresh = new Set(harnesses.map((h) => h.id));
-const displayToId = {};
-for (const [name, e] of Object.entries(registry)) displayToId[e.display ?? name] = name;
-let prev = null;
-try {
-  const src = readFileSync(out, "utf8");
-  prev = JSON.parse(src.slice(src.indexOf("=") + 1).trim().replace(/;$/, ""));
-} catch { /* no prior file — first aggregate */ }
-let carried = 0;
-for (const old of prev?.harnesses ?? []) {
-  const oid = old.id ?? displayToId[old.n];
-  const reg = oid ? registry[oid] : null;
-  if (!reg || reg.selftest || fresh.has(oid)) continue;
-  harnesses.push(old);
-  carried++;
-}
-if (carried) console.log(`carried ${carried} harness(es) not reprobed this run`);
-
-harnesses.sort((a, b) => b.score - a.score);
-
 const payload = {
-  generatedAt: new Date().toISOString(),
-  caps: CAPS,
-  harnesses: harnesses.map(({ _file, ...h }) => h),
+  formatVersion: 2, methodologyVersion: METHODOLOGY_VERSION, generatedAt: new Date().toISOString(),
+  caps: COLUMNS.map(([key]) => key), harnesses: [...rows.values()].sort((a, b) => a.n.localeCompare(b.n)),
 };
-
 mkdirSync(dirname(out), { recursive: true });
-writeFileSync(
-  out,
-  `// generated by tools/aggregate.mjs — do not edit\n` +
-    `window.__ACP_WALL__ = ${JSON.stringify(payload, null, 2)};\n`
-);
-console.log(`aggregated ${harnesses.length} report(s) → ${out}`);
-for (const h of harnesses) console.log(`  ${h.tier.padEnd(8)} ${String(h.score).padStart(3)}  ${h.n}`);
+writeFileSync(out, `// Generated by tools/aggregate.mjs. See docs/measurement.md.\nwindow.__ACP_WALL__ = ${JSON.stringify(payload, null, 2)};\n`);
+console.log(`Published ${rows.size} records (${[...rows.values()].filter(r => r.state === 'legacy').length} need re-probing) → ${out}`);

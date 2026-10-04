@@ -9,7 +9,9 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/devin.svg",
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/devin.json",
-  "run": "${REPO_ROOT}/.cache/agents/devin/bin/devin acp",
+  "run": "${REPO_ROOT}/.cache/agents/devin/agent acp",
+  "setup": [],
+  "probeProfiles": [],
   "env": {
     "DEVIN_API_KEY": "probe-mock-key"
   },
@@ -63,6 +65,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": "Devin CLI requires a real Cognition account API key — server-validated, no self-hosted/BYOK option.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-03"
+  "notes": "Devin CLI requires a real Cognition account API key — server-validated, no self-hosted/BYOK option. Agent defect worth knowing: authenticate (devin-browser PKCE) never answers headless-with-browser and wedges the serialized dispatch queue — on a credentialed desktop host the whole suite times out. The probe authenticates last so the wedge can't swallow the suite; credentialed score ~58 vs 40 here.",
+  "_synced": "acp-registry 1.0.0 · 2026-10-04"
 }

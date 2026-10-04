@@ -1,7 +1,27 @@
 {
-  "run": "npx -y dimcode@0.5.6 provider add probe --base-url ${MOCK_LLM_URL} --model probe-model --api-key probe-mock-key ; npx -y dimcode@0.5.6 provider switch probe ; npx -y dimcode@0.5.6 acp",
+  "run": "npx -y dimcode@0.5.6 acp",
   "env": {
-    "HOME": "${WORK_DIR}"
+    "DIMCODE_HOME": "${WORK_DIR}/dimcode",
+    "DIMCODE_DISABLE_AUTOUPDATE": "1",
+    "DIMCODE_AUTOUPDATE": "0"
   },
-  "notes": "Documented CLI path: `dim provider add <id> --base-url --model --api-key` registers a custom OpenAI-compatible provider against the mock LLM, `provider switch` activates it; HOME=${WORK_DIR} confines ~/.dimcode state to the probe workspace."
+  "notes": "Pinned CLI custom provider with the openai adapter. Setup must succeed before ACP launches. DIMCODE_HOME isolates credentials and provider state in the probe workspace.",
+  "setup": [
+    "npx -y dimcode@0.5.6 provider add probe --adapter openai --base-url ${MOCK_LLM_URL} --model probe-model --api-key probe-mock-key",
+    "npx -y dimcode@0.5.6 provider switch probe --model probe-model"
+  ],
+  "probeProfiles": [
+    {
+      "id": "workspace-write",
+      "configId": "permission",
+      "value": "workspace-write",
+      "description": "DimCode offered option: workspace reads/writes, git commands, and approval for other process/network access."
+    },
+    {
+      "id": "full-access",
+      "configId": "permission",
+      "value": "full-access",
+      "description": "DimCode offered option: tool access without approval prompts. Only controlled no-op/read/write stimuli in the temporary probe workspace."
+    }
+  ]
 }

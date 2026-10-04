@@ -112,13 +112,16 @@ jobs:
       - name: Build probe
         working-directory: probe
         run: |
-          npm ci || npm install
-          npm run build
+          npm ci
+          npm test
 
       - name: Install harness distribution
+        id: install
         run: |
           install=$(node -p "JSON.parse(require('fs').readFileSync('${{ matrix.entry }}','utf8')).install||''")
-          [ -n "$install" ] && timeout 600 sh -c "$install" || true
+          status=0
+          if [ -n "$install" ]; then timeout 600 sh -c "$install" || status=$?; fi
+          echo "status=$status" >> "$GITHUB_OUTPUT"
 
       - name: Probe
         env:
@@ -128,16 +131,22 @@ jobs:
           ACP_MITM: "1"
         run: |
           mkdir -p probe/reports
-          # generous ceiling: cold npx/binary downloads happen inside the run
-          timeout 600 node probe/dist/src/cli.js --entry "${{ matrix.entry }}" \
-            --out "probe/reports/${{ steps.h.outputs.name }}.report.json" --transcript || true
+          entry="${{ matrix.entry }}"
+          out="probe/reports/${{ steps.h.outputs.name }}.report.json"
+          if [ "${{ steps.install.outputs.status }}" != "0" ]; then
+            node tools/record-failure.mjs "$entry" "$out" "Distribution installation failed" "${{ steps.install.outputs.status }}"
+          else
+            status=0
+            timeout 600 node probe/dist/src/cli.js --entry "$entry" --out "$out" --transcript || status=$?
+            node tools/record-failure.mjs "$entry" "$out" "Probe did not complete" "$status"
+          fi
 
       - name: Upload report
         uses: actions/upload-artifact@v7
         with:
           # artifact names may not contain '/' — use the resolved name, not the path
           name: report-${{ steps.h.outputs.name }}
-          path: probe/reports/*.report.json
+          path: probe/reports/*.report.json*
           # a probe that died before writing a report is a data point, not a red job
           if-no-files-found: warn
           include-hidden-files: true
@@ -174,7 +183,7 @@ jobs:
         run: |
           git config user.name "acp-wall-bot"
           git config user.email "bot@acp-wall"
-          git add data/conformance.js
+          git add data/conformance.js data/reports
           git diff --cached --quiet || git commit -m "wall: conformance update $(date -u +%Y-%m-%d)"
           git pull --rebase origin main || true
           git push origin HEAD:main

@@ -3,17 +3,20 @@ import { writeFileSync, mkdirSync, readFileSync, mkdtempSync, chmodSync } from "
 import { dirname, join } from "node:path";
 import { tmpdir, platform } from "node:os";
 import { spawn, execFileSync, type ChildProcess } from "node:child_process";
+import { createHash } from "node:crypto";
+import { runSetup } from "./setup.js";
 import { fileURLToPath } from "node:url";
-import { RpcPeer } from "./rpc.js";
+import { RpcPeer, type TranscriptEntry } from "./rpc.js";
 import { makeClientStubs, type ClientCalls } from "./stubs.js";
 import {
   probeInitialize, probeAuthenticate, probeSessionNew, probeSessionLoad,
   probeSessionMgmt, probeSetMode, probeSetConfig, probeSessionPrompt,
   probeCancel, probeClientCalls, probeUpdateShapes, probeMcp, probeLogout,
   probeSessionFork, probeLoadReplay, probeProviders, probeNes, probeLody,
+  probePermissionProfiles, probePromptContent,
   checkAgentRequest, checkNotification, checkClientResponse, applyViolations,
   recordEnvelopeViolation,
-  type ProbeContext,
+  type ProbeContext, type ProbeProfile,
 } from "./probes.js";
 import { buildReport, type Report } from "./report.js";
 import { startMockLlm } from "./mock-llm.js";
@@ -35,8 +38,10 @@ const entry = entryPath
   ? (JSON.parse(readFileSync(entryPath, "utf8")) as {
       name?: string;
       run?: string;
+      setup?: string[];
       env?: Record<string, string>;
       sessionFiles?: Record<string, unknown>;
+      probeProfiles?: ProbeProfile[];
     })
   : undefined;
 if (entry) {
@@ -48,7 +53,7 @@ if (entry) {
 const useMitm = has("--mitm") || process.env.ACP_MITM === "1";
 const needsMock =
   has("--llm") || useMitm ||
-  (entry !== undefined && JSON.stringify({ env: entry.env, sessionFiles: entry.sessionFiles }).includes("${MOCK_LLM_URL}"));
+  (entry !== undefined && JSON.stringify({ run: entry.run, setup: entry.setup, env: entry.env, sessionFiles: entry.sessionFiles }).includes("${MOCK_LLM_URL}"));
 
 const cmd = arg("--cmd") ?? "";
 if (!cmd || has("--help")) {
@@ -64,6 +69,8 @@ options:
   --name NAME      harness name for the report (default: derived from cmd)
   --out FILE       report path (default: reports/<name>.json)
   --env K=V        extra env for the agent (repeatable)
+  --authenticate   attempt an advertised non-terminal login flow
+  --discover       also probe optional methods not advertised (diagnostic mode)
   --llm            start mock LLM; sets OPENAI_BASE_URL + ANTHROPIC_BASE_URL
   --mitm           (linux) transparent SNI proxy: model domains → mock, rest relayed
   --mitm-domains   extra impersonated hosts, comma-separated
@@ -184,7 +191,7 @@ function teardownMitm(m: MitmHandle | null) {
 
 async function main() {
   let llm: Awaited<ReturnType<typeof startMockLlm>> | null = null;
-  if (needsMock) {
+  if (needsMock && !arg("--mock-llm")) {
     llm = await startMockLlm();
     env.OPENAI_BASE_URL = llm.url;
     env.ANTHROPIC_BASE_URL = llm.url.replace(/\/v1$/, "");
@@ -228,7 +235,36 @@ async function main() {
   }
   console.log(`acp-probe · ${name}\n$ ${runCmd}\n  workspace: ${workDir}\n`);
 
-  const rpc = RpcPeer.launch(runCmd, env, workDir);
+  const setup = await runSetup((entry?.setup ?? []).map(subst), env, workDir);
+  let environment: Report["environment"] = {
+    profile: mockUrl ? "mock" : "external-provider", client: "simulated", platform: `${process.platform}-${process.arch}`, node: process.version,
+    command: cmd, discovery: has("--discover"), authenticationAttempted: has("--authenticate"),
+    recipeSha256: createHash("sha256").update(JSON.stringify(entry ?? { command: cmd })).digest("hex"),
+    ciUrl: process.env.GITHUB_RUN_ID ? `https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}` : undefined,
+  };
+  try {
+    environment.revision = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
+    environment.sourceDirty = !!execFileSync("git", ["status", "--porcelain", "--", "probe", "tools", "registry/overrides"], { encoding: "utf8" }).trim();
+    const here = dirname(fileURLToPath(import.meta.url));
+    const digest = createHash("sha256");
+    for (const f of ["cli.js", "probes.js", "report.js", "evidence.js", "rpc.js", "mock-llm.js", "schema.js", "stubs.js", "setup.js", "mcp-fixture.js", "../fixtures/mcp-server.js"]) digest.update(readFileSync(join(here, f)));
+    environment.sourceHash = digest.digest("hex");
+    environment.dependencySha256 = createHash("sha256").update(readFileSync(join(REPO_ROOT, "probe", "package-lock.json"))).digest("hex");
+    environment.mcpSdkVersion = JSON.parse(readFileSync(join(REPO_ROOT, "probe", "node_modules", "@modelcontextprotocol", "sdk", "package.json"), "utf8")).version;
+  } catch { /* source revision is unavailable outside a checkout */ }
+  const save = (report: Report) => {
+    mkdirSync(dirname(out), { recursive: true });
+    writeFileSync(out, JSON.stringify(report, null, 2) + "\n");
+    if (has("--transcript")) writeFileSync(out + ".transcript.jsonl", report.transcript.map(t => JSON.stringify(t)).join("\n"));
+    console.log(`\n  ${report.state} · ${report.summary.pass} verified · ${report.summary.blocked} blocked · ${report.summary.na} unobserved`);
+    console.log(`  → ${out}`);
+  };
+  if (setup.status === "error") {
+    save(buildReport({ harness: name, initResult: null, results: {}, dishonesty: [], violations: [], transcript: [], setup, environment: { ...environment, profile: "not-started" } }));
+    llm?.close(); teardownMitm(mitm); process.exit(0);
+  }
+  let rpc = RpcPeer.launch(runCmd, env, workDir);
+  process.on("exit", () => rpc.close());
   const calls: ClientCalls = {
     fsReads: [], fsWrites: [], terminalCreates: [], terminalCalls: [],
     permissionRequests: [], elicitations: [], mcpRelayCalls: [], elicitationCompletes: [],
@@ -238,7 +274,9 @@ async function main() {
     rpc, calls, updates: [], results: {}, violations: [], dishonesty: [],
     initResult: null,
     sessionCwd: workDir,
-    askPolicy: Object.keys(entry?.sessionFiles ?? {}).length > 0,
+    askPolicy: false,
+    probeProfiles: entry?.probeProfiles ?? [],
+    authenticate: has("--authenticate"), discover: has("--discover"),
     mcpServer: {
       name: "acp-probe-mcp",
       command: process.execPath,
@@ -250,48 +288,75 @@ async function main() {
   };
 
   const stubs = makeClientStubs(calls);
-  rpc.onRequest = async (method, params) => {
-    checkAgentRequest(ctx, method, params);
-    const result = await stubs(method, params);
-    checkClientResponse(ctx, method, result);
-    return result;
+  // transcripts of peers that died before the suite finished — kept so the
+  // report still shows the failed first launch.
+  const deadTranscript: TranscriptEntry[] = [];
+  const wirePeer = (p: RpcPeer) => {
+    p.onRequest = async (method, params) => {
+      checkAgentRequest(ctx, method, params);
+      const result = await stubs(method, params);
+      checkClientResponse(ctx, method, result);
+      return result;
+    };
+    p.onNotify = (method, params) => {
+      ctx.updates.push({ method, params });
+      checkNotification(ctx, method, params);
+    };
+    p.onEnvelopeViolation = (msg) => recordEnvelopeViolation(ctx, msg);
+    p.onExit = (code) => console.log(`  [agent exited: ${code}]`);
   };
-  rpc.onNotify = (method, params) => {
-    ctx.updates.push({ method, params });
-    checkNotification(ctx, method, params);
-  };
-  rpc.onEnvelopeViolation = (msg) => recordEnvelopeViolation(ctx, msg);
-  rpc.onExit = (code) => console.log(`  [agent exited: ${code}]`);
+  wirePeer(rpc);
 
   const step = async (label: string, fn: () => unknown | Promise<unknown>) => {
+    ctx.scenario = label;
     try {
       await fn();
     } catch (e) {
-      console.log(`  [${label} crashed: ${String(e).slice(0, 100)} — continuing]`);
+      ctx.results[label] = { status: "error", reason: "probe-exception", note: String(e).slice(0, 300) };
+      console.log(`  [${label} probe error: ${String(e).slice(0, 100)}]`);
     }
   };
 
   await step("initialize", () => probeInitialize(ctx));
-  const alive = ctx.results["initialize"] != null && ctx.results["initialize"].status !== "fail";
+  // Cold launches flake: uvx/npx first-resolves and fresh binaries can die
+  // before answering initialize. A closed stdio means the agent is already
+  // gone — relaunch once. A live-but-silent agent is a real hang, not retried.
+  if (!ctx.initResult && rpc.isClosed) {
+    console.log("  [initialize: agent died before answering — relaunching once]");
+    deadTranscript.push(...rpc.transcript);
+    rpc.close();
+    rpc = RpcPeer.launch(runCmd, env, workDir);
+    ctx.rpc = rpc;
+    wirePeer(rpc);
+    await step("initialize", () => probeInitialize(ctx));
+  }
+  const alive = ctx.initResult != null;
   if (alive) {
-    await step("authenticate", () => probeAuthenticate(ctx));
+    if (ctx.authenticate) await step("authenticate", () => probeAuthenticate(ctx));
     await step("session/new", () => probeSessionNew(ctx));
-    await step("session/load", () => probeSessionLoad(ctx));
-    await step("session-mgmt", () => probeSessionMgmt(ctx));
     await step("set_mode", () => probeSetMode(ctx));
     await step("set_config", () => probeSetConfig(ctx));
     await step("session/prompt", () => probeSessionPrompt(ctx));
     await step("cancel", () => probeCancel(ctx));
-    await step("session/fork", () => probeSessionFork(ctx));
     await step("load:replay", () => probeLoadReplay(ctx));
-    await step("client-calls", () => probeClientCalls(ctx));
-    await step("update-shapes", () => probeUpdateShapes(ctx));
+    await step("session/fork", () => probeSessionFork(ctx));
+    await step("permission-profiles", () => probePermissionProfiles(ctx));
+    await step("prompt-content", () => probePromptContent(ctx));
     await step("providers", () => probeProviders(ctx));
     await step("nes", () => probeNes(ctx));
+    if (!ctx.initResult?.agentCapabilities?.loadSession) await step("session/load", () => probeSessionLoad(ctx));
+    await step("session-mgmt", () => probeSessionMgmt(ctx));
     await step("mcp", () => probeMcp(ctx));
+    await step("client-calls", () => probeClientCalls(ctx));
+    await step("update-shapes", () => probeUpdateShapes(ctx));
     // lody ext last but before logout — it also inspects the wire traffic the
     // suite has accumulated, so it runs after every other probe has spoken.
     await step("lody", () => probeLody(ctx));
+    // authenticate late — interactive flows (browser OAuth) can park a request
+    // on the agent's serialized dispatch loop forever; probed last, the wedge
+    // can't swallow the rest of the suite. Still before logout, which may
+    // terminate the peer outright.
+    if (!ctx.authenticate) await step("authenticate", () => probeAuthenticate(ctx));
     // logout last — it may terminate the agent/session
     await step("logout", () => probeLogout(ctx));
   }
@@ -325,29 +390,21 @@ async function main() {
     results: ctx.results,
     dishonesty: ctx.dishonesty,
     violations: ctx.violations,
-    transcript: rpc.transcript,
+    transcript: [...deadTranscript, ...rpc.transcript],
     lody: ctx.lody,
     ext: ctx.ext,
     transport,
+    setup, environment: { ...environment, mockRequests: llm?.evidence.requests, modelEvidence: llm ? {
+      seenTools: [...llm.evidence.seenTools], issuedTools: llm.evidence.issuedCalls.map(c => c.name), skippedCalls: llm.evidence.skippedCalls,
+    } : undefined },
+    attempts: ctx.attempts,
+    scenarios: ctx.scenarios,
   });
 
-  mkdirSync(dirname(out), { recursive: true });
-  writeFileSync(out, JSON.stringify(report, null, 2));
-  if (has("--transcript")) {
-    writeFileSync(out + ".transcript.jsonl", rpc.transcript.map((t) => JSON.stringify(t)).join("\n"));
-  }
+  save(report);
   rpc.close();
   llm?.close();
   teardownMitm(mitm);
-
-  console.log(`\n  score ${report.score}/100 · tier ${report.tier.toUpperCase()}`);
-  if (report.dishonesty.length) {
-    console.log(`  ⚠ dishonesty: ${report.dishonesty.map((d) => d.claim).join(", ")}`);
-  }
-  if (report.violations.length) {
-    console.log(`  ⚠ schema violations: ${report.violations.length}`);
-  }
-  console.log(`  → ${out}`);
   process.exit(0);
 }
 

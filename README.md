@@ -1,154 +1,149 @@
 # The Wall
 
-A public ledger of ACP (Agent Client Protocol) compatibility. Every harness
-claims "ACP support" — this repo asks a ruder question: *which methods, exactly?*
+The Wall is an independent evidence ledger for Agent Client Protocol (ACP)
+implementations. It records observed operations, capability declarations,
+authentication blockers and test failures with their version and environment.
+It does not assign an overall compatibility score or certify agents.
 
-- **已验证 Verified** — probed methods exercise cleanly against the schema.
-- **部分兼容 Partially compatible** — real support, with gaps.
-- **兼容性有限 Limited** — most exercised methods missing or failing.
+| Area | Location | Responsibility |
+| --- | --- | --- |
+| Measurement contract | [Methodology](docs/measurement.md) | Defines evidence states, test conditions and interpretation limits. |
+| Probe | [probe/src](probe/src) | Runs ACP scenarios over stdio, validates messages and records attempts. |
+| Shared vocabulary | [evidence.js](probe/src/evidence.js) | Owns matrix columns, status labels and counts used by reports and the site. |
+| Agent catalog | [registry](registry) | Mirrors the official registry; overrides configure controlled test environments. |
+| Publication | [aggregate.mjs](tools/aggregate.mjs) | Publishes reports, preserves newer records and labels historical measurements. |
+| Website | [index.html](index.html), [assets](assets) | Searchable evidence matrix, comparison, method details and report downloads. |
+| Verification | [probe/tests](probe/tests), [CI workflows](.github/workflows) | Regression tests, complete fixtures and daily agent measurements. |
 
-Compatibility is separate from honesty: a harness that advertises a method and
-then answers `method_not_found` carries a `dishonesty` flag whatever its tier.
+## Read a result
 
-The site is a static page (`index.html` at the repo root — serve the repo or
-open it directly). The data behind it is real: produced by `acp-probe`, a
-schema-driven conformance probe that launches each harness as a child process,
-exercises the protocol over stdio, and validates every message against the
-official ACP JSON Schema.
+A verified cell means the observed operation succeeded under the recorded
+conditions and passed the applicable pinned schema checks. A blocked cell means
+a prerequisite was unavailable. Unobserved means the run produced insufficient
+evidence; it does not mean unsupported. An unsupported optional method is not a
+protocol violation. Grouped cells preserve each method's result.
 
-## Layout
+Open a matrix cell to see its method outcomes, dependencies, schema diagnostics,
+agent version, measurement time, source revision and environment. Missing
+evidence is grouped by cause. Scenario records retain default and configured
+permissions, failed tools, callbacks, MCP events and request attempts. Use the
+scenario profile filter to inspect a specific configuration. Filter the matrix by
+agent, outcome or surface; select up to four agents to compare. Filters and
+record links are shareable through the URL. `Cmd/Ctrl+K` focuses search.
 
-```
-probe/              acp-probe — TypeScript, zero runtime deps
-  schema/acp-schema.json   vendored official ACP JSON Schema (170 defs)
-  src/schema.ts     JSON-Schema validator + x-method binding index
-  src/rpc.ts        NDJSON JSON-RPC peer over child-process stdio
-  src/stubs.ts      client-side handlers (fs/*, terminal/*, permission, elicitation)
-  src/probes.ts     the probe suite — every call schema-checked both ways
-  src/report.ts     cells → score → tier, dishonesty + violation detection
-  src/mock-llm.ts   OpenAI-compatible scripted LLM endpoint
-  src/cli.ts        `node dist/src/cli.js --cmd "..." | --entry registry/x.json`
-  fixtures/         good / liar / mini agents used to self-test the probe
-registry/
-  agents/           GENERATED — synced from the official ACP registry
-  overrides/        per-agent probe config (env wiring, run overrides, notes)
-  fixture-*.json    selftest entries (probed in CI, never published)
-tools/
-  sync-registry.mjs official registry → registry/agents/*.json
-  install-dist.mjs  fetch binary dists (per-platform, sha256-verified)
-  aggregate.mjs     reports → data/conformance.js (consumed by the site)
-data/conformance.js generated wall data — do not edit by hand
-.github/workflows/  probe.yml (PR gate) + wall.yml (daily full matrix → aggregate → commit)
-index.html          THE WALL — the production page
-```
+Records from the old scoring method retain their historical notes and timestamps
+but display **Needs re-probe**. They are not relabeled as freshly verified.
+The assembly timestamp is distinct from each agent's probe timestamp. Records
+older than seven days are marked stale. See the [measurement contract](docs/measurement.md)
+for the complete interpretation rules.
 
-## Where the catalog comes from
+## Run locally
 
-The harness list is **not hand-maintained** — `tools/sync-registry.mjs` pulls the
-official ACP registry (`cdn.agentclientprotocol.com/registry/v1/latest/registry.json`,
-currently 41 agents) and turns each agent's `distribution` field into a launch
-recipe: `npx` packages run as-is, `binary` dists are downloaded per-platform and
-sha256-verified, `uvx` via uv. To get on the wall, a harness registers upstream
-at agentclientprotocol.com — the wall mirrors and measures.
-
-`registry/overrides/<id>.json` holds only *probe* config (e.g. which env var
-points the agent at the mock LLM) — it never changes what the harness is.
-
-## How the probe works
-
-The probe is **schema-driven**, not vibes: every agent response is validated
-against its bound `*Response` def, every `session/update` against
-`SessionNotification`, every agent→client request against its `*Request` def —
-and the probe validates *its own* outbound params too, so probe bugs surface as
-`client-request` violations rather than false negatives.
-
-Per-method probes cover the full protocol surface (18 columns): lifecycle
-(`initialize`, `authenticate` — actually invoked, `session/new`, `session/load`,
-`session/prompt`), session management (`session/list`, `resume`, `close`,
-`delete` — gated by `sessionCapabilities`, destructive ops on disposable
-sessions), config (`set_mode`, `set_config`), `cancel`, streaming
-(`message*`, `tool_call*`, `plan`, `slash_cmds`), reverse calls
-(`fs/*`, `terminal/*`, `permission`, `elicitation`), and `mcp`.
-
-The `mcp` column grades an evidence ladder, not a boolean — the stdio fixture
-marks every protocol step it observes: `tools/call` (full chain) or
-`tools/list` (connect + discovery) → `+`; handshake-only, spawned-but-stuck,
-or relay-only → `±`; never touched → `·` (lazy connect is spec-legal, so
-"didn't" can't be told from "can't"). Model-side evidence sharpens it further:
-the mock LLM logs which tools the agent exposed, so "the model called the
-fixture tool but the call never reached the server" and "tools discovered but
-never exposed to the model" are distinct `±` rungs — not silent `+`s.
-
-## Lody extension (side-channel)
-
-Alongside the standard surface the probe also records Lody extension evidence
-([acp-extension-core](https://github.com/LodyAI/acp-extension-core)): which
-features an agent advertises under `agentCapabilities._meta.lody`, which
-read-only `_lody/*` endpoints answer (`rate_limits/get`, `subagents/list`,
-`session/history/read`, `session/goal`), and which `_meta.lody.*` keys show up
-on wire traffic. It lands in `report.lody` and the wall's trailing `lody`
-column — annex data, never part of cells, score, or tier.
-
-A `◆ lody` mark on a harness means Lody ships a provider adapter for it
-(`acp-extension-{claude,codex,grok,dsh,kimi,pi}`) — marked via `lodyAdapter`
-in `registry/overrides/<id>.json`. The page's LODY EXT toggle strikes all lody
-surface from the record.
-
-## Cell semantics
-
-| cell | meaning |
-|---|---|
-| `+` pass | method works and response validates against the schema |
-| `±` partial | works but schema violations, or works-but-not-advertised, or the endpoint exists but rejected the call |
-| `−` fail | missing, errors, or claims support but fails when exercised |
-| `·` n/a | reverse-direction capability the agent never exercised — client-side methods are only testable when the agent calls them |
-
-No unverifiable cells: every agent-side method is always invoked (capability
-flags only drive dishonesty checks, never skip calls). An endpoint that
-answers `method_not_found` is absent; an endpoint that answers anything else —
-including an auth error — exists. Client-side methods (`fs/*`, `terminal/*`,
-`request_permission`, `elicitation`) can only be proven when the agent calls
-them, so "never called" is a factual `·`, never a silent `−`.
-
-Three distinct failure flavors, kept separate on purpose:
-
-- **absent** — `method_not_found` → `−` (core methods) or `·` (optional ones)
-- **claimed-but-absent** — advertised in `initialize` but `method_not_found`
-  when exercised → `report.dishonesty`; dishonest harnesses cannot be marked
-  verified
-- **auth-blocked** — the endpoint exists but demands proprietary credentials
-  (e.g. `kimi acp` requires Moonshot OAuth — issue #1330) → `−`/`±` cells with
-  the auth error as note. Requiring a vendor account is itself a wall-worthy
-  fact: the probe is CI-driven and holds no accounts
-
-Score = average over exercised cells (pass=1, partial=0.5); `·` cells don't
-count. Tier: `≥90` **and** ≥60% cells exercised → verified · `≥50` → partial ·
-else limited — then dishonesty adjustments.
-
-## Running locally
+Use Node.js 24 or later. MCP fixtures use the pinned official TypeScript SDK.
+Install the locked dependencies before building or running the probe.
 
 ```sh
-cd probe && npm run build        # vendored typescript, zero other deps
-# probe any command that speaks ACP on stdio (run from repo root):
-node probe/dist/src/cli.js --cmd "opencode acp" --name opencode --llm
-# or via a registry entry (paths are repo-root relative):
-node tools/sync-registry.mjs      # refresh registry/agents/ from upstream
-node probe/dist/src/cli.js --entry registry/agents/opencode.json --llm
-# self-test against the three fixtures:
-for e in good liar mini; do
-  node probe/dist/src/cli.js --entry registry/fixture-$e.json --out probe/reports/fixture-$e.report.json
-done
-# regenerate wall data:
+npm ci --prefix probe
+npm test --prefix probe
+node probe/dist/src/cli.js --entry registry/agents/dimcode.json \
+  --out probe/reports/dimcode.report.json --transcript
 node tools/aggregate.mjs
-# then open index.html — it loads data/conformance.js live
+python3 -m http.server 8771 --bind 127.0.0.1
 ```
 
-Expected self-test results: `fixture-good` → 100/verified · `fixture-mini` →
-partial · `fixture-liar` → limited with `dishonesty: loadSession`.
+Open `http://127.0.0.1:8771`. The site uses ES modules and requires HTTP serving.
+To exercise all three synthetic agents:
 
-## Appealing a result
+```sh
+npm run selftest --prefix probe
+```
 
-Reports ship with the full NDJSON transcript (`--transcript`) plus the exact
-schema violations (`report.violations`). If a harness thinks a cell is wrong:
-open an issue referencing the report + transcript, or PR a probe fix.
-`workflow_dispatch` on `wall.yml` re-runs a single agent.
+The good and minimal fixtures should both produce `measured` runs with no
+protocol issues. The declaration-mismatch fixture should produce `issues`,
+with `session/load` returning `method_not_found` despite being advertised.
+The test suite asserts these outcomes through the actual CLI.
+
+A direct command is also supported:
+
+```sh
+node probe/dist/src/cli.js --cmd "opencode acp" --name opencode --llm
+```
+
+`--llm` starts a scripted model endpoint; an agent must be configured to use it.
+The report records actual mock requests and issued tools, so starting a mock
+alone is not evidence that it was used. `--mock-llm URL` uses an external mock.
+`--discover` additionally invokes otherwise unadvertised optional methods for
+diagnostic exploration. `--authenticate` attempts an advertised non-terminal
+login method; unattended runs normally leave interactive login unexercised.
+
+Client file, terminal and permission services are simulated. A terminal callback
+proves protocol interaction with that simulated client, not successful execution
+of a real shell command. For agents using internal tools, operations run in the
+probe's temporary workspace.
+
+## Configure an agent
+
+`tools/sync-registry.mjs` mirrors the
+[official ACP registry](https://cdn.agentclientprotocol.com/registry/v1/latest/registry.json).
+Human-owned preparation and environment settings live in
+`registry/overrides/<id>.json`; generated entries live in `registry/agents`.
+
+| Entry field | Meaning |
+| --- | --- |
+| `run` | Command that launches ACP over stdio. |
+| `setup` | Ordered shell commands completed before ACP starts; any failure prevents launch. |
+| `probeProfiles` | Explicit session configuration profiles; each must match an offered option and runs in a distinct session. |
+| `env` | Environment passed to preparation and the agent. |
+| `sessionFiles` | Configuration files written into the temporary workspace. |
+| `install` | Distribution installation performed by CI before probing. |
+| `notes` | Human context about configuration and limitations. |
+
+`${WORK_DIR}`, `${REPO_ROOT}` and `${MOCK_LLM_URL}` are substituted in `run`,
+`setup`, `env` and `sessionFiles`. Any mock URL reference starts the mock
+unless `--mock-llm` supplies one. Keep preparation separate from `run`:
+semicolon-separated preparation can hide failures and contaminate ACP stdout.
+Setup steps have a two-minute timeout and report the failing step.
+
+DimCode's override demonstrates a custom provider with the `openai` adapter,
+mock-only credentials and isolated `DIMCODE_HOME`. It needs no vendor account
+for this scenario. Its `probeProfiles` exercise the offered `permission` option
+with `workspace-write` and `full-access` values, alongside the unchanged default
+profile. Names alone never establish policy behavior. Real-provider runs must identify their environment separately;
+passing a mock run does not establish production authentication or availability.
+
+Refresh one entry without rewriting the rest of the catalog:
+
+```sh
+node tools/sync-registry.mjs --registry-json data/acp-registry.json --only dimcode
+```
+
+Use the same command without `--registry-json` to fetch upstream, or without
+`--only` to refresh all entries. Binary distributions are resolved and
+checksum-verified by `tools/install-dist.mjs`.
+
+## Reports and publication
+
+A report contains methodology and schema identifiers, individual method
+outcomes, uncertainty causes, scenario conditions and tool outcomes, capability
+declarations, timestamped attempts, diagnostics and the
+wire transcript. `--transcript` also writes a standalone NDJSON file.
+
+The daily workflow installs distributions, runs regression tests, probes the
+matrix, uploads reports and transcripts, then updates the static dataset.
+Installation failures and unfinished probe processes produce visible failure
+records. Public `data/reports/*.json` retain method evidence and provenance;
+full wire transcripts remain in the CI artifact. No transcript is silently
+advertised as available when only the compact public report exists.
+
+`aggregate.mjs` preserves newer reports and carries forward agents absent from
+a partial run, keeping their original timestamps. `--reports`, `--registry`,
+`--previous` and `--out` support isolated aggregation and migrations.
+
+Lody and other extension namespaces are recorded separately. Advertised features,
+endpoint replies and observed wire keys are different evidence. A catalog
+`lodyAdapter` annotation means an adapter is available; the recorded command
+identifies the implementation actually tested.
+
+To appeal a result, provide the agent version, report, timestamp and relevant
+transcript excerpt in a repository issue. The design rationale and findings from
+the measurement redesign are preserved in [the decision record](docs/measurement-v2-decision.md).

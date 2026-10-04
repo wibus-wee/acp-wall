@@ -10,8 +10,8 @@ export interface ClientCalls {
   fsWrites: Array<{ path: string; content: string; sessionId?: string }>;
   terminalCreates: Array<{ command: string; sessionId?: string }>;
   terminalCalls: Array<{ method: string; terminalId?: string }>;
-  permissionRequests: Array<{ options: unknown[]; toolCall?: unknown }>;
-  elicitations: Array<{ message?: string }>;
+  permissionRequests: Array<{ options: unknown[]; toolCall?: unknown; sessionId?: string }>;
+  elicitations: Array<{ message?: string; sessionId?: string }>;
   /** agent→client MCP-over-ACP relay calls (mcp/connect|message|disconnect)
    *  and elicitation/complete notifications. */
   mcpRelayCalls: Array<{ method: string; params?: unknown }>;
@@ -27,15 +27,15 @@ export function makeClientStubs(calls: ClientCalls) {
   return async (method: string, params: any): Promise<unknown> => {
     switch (method) {
       case "fs/read_text_file": {
-        calls.fsReads.push({ path: params?.path, sessionId: params?.sessionId });
         if (typeof params?.path !== "string" || !params.path.startsWith("/"))
           throw { code: -32602, message: "path must be absolute" };
+        calls.fsReads.push({ path: params.path, sessionId: params.sessionId });
         return { content: STUB_FILE_CONTENT };
       }
       case "fs/write_text_file": {
-        calls.fsWrites.push({ path: params?.path, content: params?.content, sessionId: params?.sessionId });
         if (typeof params?.path !== "string" || !params.path.startsWith("/"))
           throw { code: -32602, message: "path must be absolute" };
+        calls.fsWrites.push({ path: params.path, content: params.content, sessionId: params.sessionId });
         return {};
       }
       case "terminal/create": {
@@ -65,12 +65,12 @@ export function makeClientStubs(calls: ClientCalls) {
       }
       case "session/request_permission": {
         const options = params?.options ?? [];
-        calls.permissionRequests.push({ options, toolCall: params?.toolCall });
-        const pick = options.find((o: any) => o?.kind === "allow_once") ?? options[0];
-        return { outcome: { outcome: "selected", optionId: pick?.optionId } };
+        calls.permissionRequests.push({ options, toolCall: params?.toolCall, sessionId: params?.sessionId });
+        const pick = options.find((o: any) => o?.kind === "allow_once");
+        return pick ? { outcome: { outcome: "selected", optionId: pick.optionId } } : { outcome: { outcome: "cancelled" } };
       }
       case "elicitation/create": {
-        calls.elicitations.push({ message: params?.message });
+        calls.elicitations.push({ message: params?.message, sessionId: params?.sessionId });
         return { action: "accept", content: { probe: "accepted" } };
       }
       case "elicitation/complete": {

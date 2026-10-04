@@ -1,52 +1,28 @@
-import type { ExtSurface, LodyProbeInfo, MethodResult, Status, ViolationRec } from "./probes.js";
+import type { Attempt, ExtSurface, LodyProbeInfo, MethodResult, ViolationRec, ScenarioEvidence } from "./probes.js";
 import type { TranscriptEntry } from "./rpc.js";
 
-/** Cell order matches the wall's CAPS columns (24 methods/features). */
-export const CELL_ORDER = [
-  "initialize", "authenticate", "session/new", "session/load", "session/prompt",
-  "sessions/*", "fork", "load:replay", "set_mode", "set_config", "cancel", "logout",
-  "message*", "tool_call*", "usage", "permission", "plan", "slash_cmds",
-  "fs/*", "terminal/*", "elicitation", "providers", "nes", "mcp",
-] as const;
+import { COLUMNS, METHODOLOGY_VERSION, cellsFromMethods, summarize, runState, uncertaintyReasons } from "./evidence.js";
+import { schema } from "./schema.js";
 
-/** Map probe-result keys onto the wall's columns. */
-const CELL_MAP: Record<string, string[]> = {
-  "initialize": ["initialize"],
-  "authenticate": ["authenticate"],
-  "session/new": ["session/new"],
-  "session/load": ["session/load"],
-  "session/prompt": ["session/prompt"],
-  "sessions/*": ["session/list", "session/resume", "session/close", "session/delete"],
-  "fork": ["session/fork"],
-  "load:replay": ["load:replay"],
-  "set_mode": ["set_mode"],
-  "set_config": ["set_config"],
-  "cancel": ["cancel"],
-  "logout": ["logout"],
-  "message*": ["update:message"],
-  "tool_call*": ["update:tool_call"],
-  "usage": ["update:usage"],
-  "permission": ["request_permission"],
-  "plan": ["update:plan"],
-  "slash_cmds": ["update:commands"],
-  "fs/*": ["fs/read_text_file", "fs/write_text_file"],
-  "terminal/*": ["terminal/*"],
-  "elicitation": ["elicitation"],
-  "providers": ["providers"],
-  "nes": ["nes"],
-  "mcp": ["mcp"],
-};
-
-const RANK: Record<Status, number> = { pass: 3, partial: 2, na: 1, fail: 0 };
-
-function worst(results: Record<string, MethodResult>, keys: string[]): MethodResult | null {
-  let w: MethodResult | null = null;
-  for (const k of keys) {
-    const r = results[k];
-    if (!r) continue;
-    if (w === null || RANK[r.status] < RANK[w.status]) w = r;
-  }
-  return w;
+export const CELL_ORDER = COLUMNS.map(([key]) => key);
+export interface SetupResult { status: "pass" | "error" | "not-configured"; step?: number; note?: string; phase?: "preparation" | "installation" | "execution" }
+export interface RunEnvironment {
+  profile: "mock" | "external-provider" | "not-started";
+  discovery?: boolean;
+  authenticationAttempted?: boolean;
+  recipeSha256?: string;
+  platform: string;
+  node: string;
+  revision?: string;
+  sourceDirty?: boolean;
+  sourceHash?: string;
+  dependencySha256?: string;
+  mcpSdkVersion?: string;
+  ciUrl?: string;
+  command?: string;
+  mockRequests?: number;
+  client: "simulated";
+  modelEvidence?: { seenTools: string[]; issuedTools: string[]; skippedCalls: string[] };
 }
 
 export interface Report {
@@ -55,17 +31,26 @@ export interface Report {
   agentVersion?: string;
   specVersion: number;
   probedAt: string;
-  score: number;
-  tier: "verified" | "partial" | "limited";
-  cells: number[]; // 1 pass · 2 partial · 0 fail · -1 n/a
-  notes: Record<string, string>; // column → detail of the worst probe behind it
+  reportVersion: 2;
+  methodologyVersion: string;
+  schemaSha256: string;
+  state: string;
+  summary: Record<string, number>;
+  cells: ReturnType<typeof cellsFromMethods>;
+  setup: SetupResult;
+  environment?: RunEnvironment;
+  advertised: any;
+  notes: Record<string, string>;
   methods: Record<string, MethodResult>;
-  dishonesty: Array<{ claim: string; detail: string }>;
+  claimMismatches: Array<{ claim: string; detail: string }>;
   violations: ViolationRec[];
   transcript: TranscriptEntry[];
+  attempts?: Attempt[];
+  scenarios?: ScenarioEvidence[];
+  uncertaintyReasons: Record<string, number>;
   /** Lody extension evidence (acp-extension-core) — `_meta.lody` capabilities
    * advertised, `_lody/*` endpoints that answered, `_meta.lody.*` keys seen on
-   * wire traffic. Side-channel stat: never part of cells/score/tier. */
+   * wire traffic. Kept separate from standard protocol evidence. */
   lody?: LodyProbeInfo;
   /** Generic extension surface — every `_meta` namespace advertised (caps,
    * top-level, authMethods) and every `_meta.<ns>.<key>` pair seen on wire.
@@ -91,49 +76,40 @@ export function buildReport(opts: {
   dishonesty: Array<{ claim: string; detail: string }>;
   violations: ViolationRec[];
   transcript: TranscriptEntry[];
+  attempts?: Attempt[];
+  scenarios?: ScenarioEvidence[];
+  setup?: SetupResult;
+  environment?: RunEnvironment;
   lody?: LodyProbeInfo;
   ext?: ExtSurface;
   transport?: Report["transport"];
 }): Report {
-  const notes: Record<string, string> = {};
-  const cells = CELL_ORDER.map((col) => {
-    const keys = CELL_MAP[col] ?? [];
-    const w = worst(opts.results, keys);
-    if (w === null) return -1;
-    if (w.note) notes[col] = w.note;
-    return w.status === "pass" ? 1 : w.status === "partial" ? 2 : w.status === "fail" ? 0 : -1;
-  });
-  // The score is a completeness index over the WHOLE rubric: "not
-  // implemented" and "couldn't verify" both earn zero credit. Dividing only
-  // by exercised cells let a 9-of-24 harness print 100.
-  const score = Math.round(
-    (cells.reduce((a: number, c) => a + (c === 1 ? 1 : c === 2 ? 0.5 : 0), 0) / CELL_ORDER.length) * 100
-  );
-  // Coverage is already inside the score — verified means most of the ACP
-  // surface demonstrably works, not merely "whatever it answered was clean".
-  let tier: Report["tier"] =
-    score >= 60
-      ? "verified"
-      : score >= 25
-        ? "partial"
-        : "limited";
-  // Claimed-but-absent is worse than absent: liars can't be marked verified.
-  if (opts.dishonesty.length > 0 && tier === "verified") tier = "partial";
-  if (opts.dishonesty.length > 0 && score < 70) tier = "limited";
+  const cells = cellsFromMethods(opts.results);
+  const summary = summarize(opts.results);
+  const setup = opts.setup ?? { status: "not-configured" as const };
   return {
+    reportVersion: 2,
+    methodologyVersion: METHODOLOGY_VERSION,
+    schemaSha256: schema.sha256,
     harness: opts.harness,
     agentName: opts.initResult?.agentInfo?.name,
     agentVersion: opts.initResult?.agentInfo?.version,
     specVersion: opts.initResult?.protocolVersion ?? 1,
+    advertised: { capabilities: opts.initResult?.agentCapabilities ?? {}, authMethods: opts.initResult?.authMethods ?? [] },
     probedAt: new Date().toISOString(),
-    score,
-    tier,
+    state: runState(summary, setup, opts.violations, opts.results),
+    summary,
+    setup,
+    environment: opts.environment,
     cells,
-    notes,
+    notes: Object.fromEntries(cells.map(c => [c.key, c.items.map(i => `${i.method}: ${i.note ?? i.status}`).join(" · ")])),
     methods: opts.results,
-    dishonesty: opts.dishonesty,
+    claimMismatches: opts.dishonesty,
     violations: opts.violations,
     transcript: opts.transcript,
+    attempts: opts.attempts ?? [],
+    scenarios: opts.scenarios ?? [],
+    uncertaintyReasons: uncertaintyReasons(opts.results),
     lody: opts.lody,
     ext: opts.ext,
     transport: opts.transport,

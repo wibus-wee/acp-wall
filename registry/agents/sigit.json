@@ -9,7 +9,9 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/sigit.svg",
   "license": "Apache-2.0",
   "install": null,
-  "run": "npx -y @smbcloud/sigit@1.5.12",
+  "run": "npx -y @smbcloud/sigit@1.5.10 --acp",
+  "setup": [],
+  "probeProfiles": [],
   "env": {},
   "sessionFiles": null,
   "dist": {
@@ -19,6 +21,6 @@
   },
   "disabled": false,
   "selftest": false,
-  "notes": "sigit is a local-inference agent (Onde Inference, 'no API keys, no cloud round-trips') — nothing to wire; probed as-is. Whether its bundled model runs in CI is itself a data point.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-03"
+  "notes": "sigit is a local-inference agent (Onde Inference, 'no API keys, no cloud round-trips') — nothing to wire; probed as-is. Whether its bundled model runs in CI is itself a data point. --acp is explicit ACP mode (it also auto-detects non-TTY stdio). Agent defect worth knowing: an unanswered authenticate (browser OAuth) head-of-line blocks its serialized dispatch loop — the probe authenticates last so the wedge can't swallow the suite.",
+  "_synced": "acp-registry 1.0.0 · 2026-10-04"
 }

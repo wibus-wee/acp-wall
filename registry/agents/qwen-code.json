@@ -10,6 +10,8 @@
   "license": "Apache-2.0",
   "install": null,
   "run": "npx -y @qwen-code/qwen-code@0.24.7 --acp --experimental-skills",
+  "setup": [],
+  "probeProfiles": [],
   "env": {
     "OPENAI_API_KEY": "probe-mock-key",
     "OPENAI_BASE_URL": "${MOCK_LLM_URL}",
@@ -38,5 +40,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "OpenAI-compatible provider selected via project .qwen/settings.json (searched upward from the session cwd) plus OPENAI_* env — every model call routes to the probe's mock LLM. No qwen OAuth account needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-03"
+  "_synced": "acp-registry 1.0.0 · 2026-10-04"
 }

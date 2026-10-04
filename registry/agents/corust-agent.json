@@ -9,7 +9,9 @@
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/corust-agent.svg",
   "license": "GPL-3.0-or-later",
   "install": "node tools/install-dist.mjs registry/agents/corust-agent.json",
-  "run": "${REPO_ROOT}/.cache/agents/corust-agent/corust-agent-acp",
+  "run": "${REPO_ROOT}/.cache/agents/corust-agent/agent",
+  "setup": [],
+  "probeProfiles": [],
   "env": {},
   "sessionFiles": null,
   "dist": {
@@ -36,5 +38,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "corust-agent publishes no documented env/config for provider endpoints; binary distribution only. Probed as-is.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-03"
+  "_synced": "acp-registry 1.0.0 · 2026-10-04"
 }

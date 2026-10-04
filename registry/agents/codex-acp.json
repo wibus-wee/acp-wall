@@ -10,6 +10,8 @@
   "license": "Apache-2.0",
   "install": "node tools/lody-adapters.mjs codex",
   "run": "node ${REPO_ROOT}/.cache/adapters/codex/dist/index.js",
+  "setup": [],
+  "probeProfiles": [],
   "env": {
     "CODEX_HOME": "${WORK_DIR}/codex-home",
     "OPENAI_API_KEY": "probe-mock-key"
@@ -29,5 +31,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "CODEX_HOME relocates codex's state dir into the probe workspace; a probe-issued apikey auth.json satisfies the auth gate and a custom model_provider routes every call to the mock LLM (Responses API).",
-  "_synced": "acp-registry 1.0.0 · 2026-10-03"
+  "_synced": "acp-registry 1.0.0 · 2026-10-04"
 }

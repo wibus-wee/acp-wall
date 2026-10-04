@@ -6,7 +6,7 @@
 //
 // usage: node tools/install-dist.mjs registry/agents/<id>.json
 
-import { readFileSync, existsSync, mkdirSync, chmodSync, writeFileSync } from "node:fs";
+import { readFileSync, existsSync, mkdirSync, chmodSync, writeFileSync, rmSync, symlinkSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { join, resolve, dirname } from "node:path";
@@ -36,7 +36,21 @@ const spec = dist.per_platform[platformKey()];
 if (!spec) throw new Error(`no binary for ${platformKey()}`);
 
 const binPath = join(cacheDir, spec.cmd.replace(/^\.\//, ""));
+// stable per-platform launcher — archive layouts differ between platforms
+// (e.g. junie ships Applications/junie.app/ on darwin, junie-app/ on linux),
+// so registry run commands invoke this shim instead of the embedded path.
+function ensureShim() {
+  const shimPath = join(cacheDir, "agent");
+  try {
+    rmSync(shimPath, { force: true });
+    symlinkSync(binPath, shimPath);
+  } catch {
+    writeFileSync(shimPath, `#!/bin/sh\nexec "${binPath}" "$@"\n`);
+    chmodSync(shimPath, 0o755);
+  }
+}
 if (existsSync(binPath)) {
+  ensureShim();
   console.error(`cached: ${binPath}`);
   console.log(entry.run);
   process.exit(0);
@@ -56,11 +70,15 @@ if (spec.sha256) {
 if (spec.archive.endsWith(".zip")) {
   execFileSync("unzip", ["-o", "-q", archivePath, "-d", cacheDir], { stdio: "inherit" });
 } else {
-  execFileSync("tar", ["-xzf", archivePath, "-C", cacheDir], { stdio: "inherit" });
+  // -xf without a format letter: let tar auto-detect (gz, bz2, xz). Hardcoding
+  // z broke goose — the only .tar.bz2 dist — on GNU tar (CI), while bsdtar
+  // masked the bug on macOS.
+  execFileSync("tar", ["-xf", archivePath, "-C", cacheDir], { stdio: "inherit" });
 }
 try {
   chmodSync(binPath, 0o755);
 } catch {}
+ensureShim();
 writeFileSync(join(cacheDir, "SOURCE"), `${spec.archive}\n${spec.sha256 ?? ""}\n`);
 console.error(`installed → ${binPath}`);
 console.log(entry.run);

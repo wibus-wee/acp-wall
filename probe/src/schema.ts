@@ -4,6 +4,7 @@
 // additionalProperties (bool or schema), items, enum, const, minimum,
 // min/maxItems, pattern. `format`/annotations are ignored.
 
+import { createHash } from "node:crypto";
 import { readFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -19,6 +20,7 @@ export interface MethodBinding {
 }
 
 export class SchemaIndex {
+  readonly sha256: string;
   private root: any;
   private defs: Record<string, any>;
   /** method → {request,response} def names, split by side */
@@ -36,7 +38,9 @@ export class SchemaIndex {
     ].filter(Boolean) as string[];
     const p = candidates.find((c) => existsSync(c));
     if (!p) throw new Error(`acp-schema.json not found (tried ${candidates.join(", ")})`);
-    this.root = JSON.parse(readFileSync(p, "utf8"));
+    const source = readFileSync(p, "utf8");
+    this.sha256 = createHash("sha256").update(source).digest("hex");
+    this.root = JSON.parse(source);
     this.defs = this.root.$defs ?? this.root.definitions ?? {};
     for (const [name, def] of Object.entries<any>(this.defs)) {
       const side = def["x-side"] as "agent" | "client" | undefined;

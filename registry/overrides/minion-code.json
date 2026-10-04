@@ -1,0 +1,4 @@
+{
+  "run": "uvx --with agent-client-protocol==0.8.1 minion-code@0.1.44 acp",
+  "notes": "Upstream packaging bug: minion-code declares agent-client-protocol>=0.7.0 unbounded, but acp 0.9.0 removed AuthMethod — the acp subcommand dies on ImportError under latest. Pin the last compatible release (0.8.1) until femto/minion-code fixes the bound."
+}

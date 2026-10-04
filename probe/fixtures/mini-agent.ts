@@ -10,6 +10,7 @@ import { createInterface } from "node:readline";
 import { RpcPeer } from "../src/rpc.js";
 
 const peer = RpcPeer.stdio();
+let sessionSequence = 0;
 
 peer.onRequest = async (method, params: any) => {
   switch (method) {
@@ -42,7 +43,7 @@ peer.onRequest = async (method, params: any) => {
           params: { protocolVersion: "2025-03-26", capabilities: {}, clientInfo: { name: "mini-agent", version: "0.0.1" } },
         }) + "\n");
       }
-      return { sessionId: "sess-mini-1" };
+      return { sessionId: `sess-mini-${++sessionSequence}` };
     }
     case "session/prompt": {
       const sid = params.sessionId;

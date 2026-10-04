@@ -1,7 +1,9 @@
 {
+  "install": "node tools/install-dist.mjs registry/agents/amp-acp.json && npm i --prefix .cache/agents/amp-acp/cli @sourcegraph/amp@0.0.1789214504-g32aed6",
   "env": {
     "AMP_API_KEY": "probe-mock-key",
-    "HOME": "${WORK_DIR}"
+    "HOME": "${WORK_DIR}",
+    "AMP_CLI_PATH": "${REPO_ROOT}/.cache/agents/amp-acp/cli/node_modules/.bin/amp"
   },
-  "notes": "Sourcegraph Amp requires a real Amp account API key (server-validated). Placeholder included so the probe reaches the genuine auth rejection."
+  "notes": "amp-acp is a third-party wrapper (tao12345666333/amp-acp) that delegates to the real Amp CLI at session/prompt — without it the spawn throws ENOENT and the whole process dies (fork/logout/providers/nes then fail as collateral). install fetches @sourcegraph/amp alongside; AMP_CLI_PATH is the wrapper's documented override. A real Amp account key is still server-validated, so the prompt turn stays honestly account-gated."
 }

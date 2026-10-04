@@ -6,9 +6,10 @@
     "outDir": "dist",
     "rootDir": ".",
     "strict": true,
+    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "declaration": false
   },
-  "include": ["src/**/*.ts", "fixtures/**/*.ts"]
+  "include": ["src/**/*.ts", "src/**/*.js", "fixtures/**/*.ts"]
 }

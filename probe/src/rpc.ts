@@ -35,9 +35,15 @@ export class RpcPeer {
    *  in one object, orphan response ids, missing jsonrpc:"2.0"). */
   onEnvelopeViolation: (msg: string) => void = () => {};
   private nextId = 1;
-  private pending = new Map<number, { resolve: (v: unknown) => void; reject: (e: unknown) => void; timer: NodeJS.Timeout }>();
+  private expired = new Set<number>();
+  private pending = new Map<number, { method: string; resolve: (v: unknown) => void; reject: (e: unknown) => void; timer: NodeJS.Timeout }>();
   private closed = false;
   private out: Writable;
+
+  /** true once the peer's stdin died or the process exited. */
+  get isClosed() {
+    return this.closed;
+  }
 
   private constructor(input: Readable, output: Writable, proc?: ChildProcess) {
     this.out = output;
@@ -47,7 +53,7 @@ export class RpcPeer {
     if (proc) {
       proc.stderr?.on("data", (d) => {
         const s = String(d).trim();
-        if (s) this.log("in", "err", undefined, `[stderr] ${s.slice(0, 200)}`);
+        if (s) this.log("in", "err", undefined, `[stderr] ${s.slice(0, 200)}`, { text: s.slice(0, 4096) });
       });
       proc.on("exit", (code) => {
         this.closed = true;
@@ -75,6 +81,7 @@ export class RpcPeer {
   static launch(cmdline: string, env: NodeJS.ProcessEnv = {}, cwd?: string): RpcPeer {
     const proc = spawn(cmdline, {
       shell: true,
+      detached: process.platform !== "win32",
       env: { ...process.env, ...env },
       cwd,
       stdio: ["pipe", "pipe", "pipe"],
@@ -108,6 +115,9 @@ export class RpcPeer {
       this.onEnvelopeViolation(`non-JSON line: ${t.slice(0, 80)}`);
       return;
     }
+    if (msg === null || typeof msg !== "object" || Array.isArray(msg)) {
+      this.onEnvelopeViolation("JSON-RPC envelope must be an object"); return;
+    }
     if (msg?.jsonrpc !== "2.0") {
       this.onEnvelopeViolation(`missing/invalid jsonrpc field: ${t.slice(0, 80)}`);
     }
@@ -123,16 +133,17 @@ export class RpcPeer {
     }
     if (msg.id !== undefined && (msg.result !== undefined || msg.error !== undefined)) {
       const p = this.pending.get(msg.id);
-      if (!p) this.onEnvelopeViolation(`response for unknown id ${msg.id}`);
+      if (!p && !this.expired.has(msg.id)) this.onEnvelopeViolation(`response for unknown id ${msg.id}`);
+      if (!p && this.expired.delete(msg.id)) this.log("in", "res", undefined, "Late response after probe timeout", msg);
       if (p) {
         this.pending.delete(msg.id);
         clearTimeout(p.timer);
         if (msg.error) {
           const detail = msg.error.data !== undefined ? ` — ${sum(msg.error.data?.details ?? msg.error.data, 120)}` : "";
-          this.log("in", "res", undefined, `error ${msg.error.code}: ${sum(msg.error.message)}${detail}`, msg);
+          this.log("in", "res", p.method, `error ${msg.error.code}: ${sum(msg.error.message)}${detail}`, msg);
           p.reject(Object.assign(new Error((msg.error.message ?? "rpc error") + detail), { code: msg.error.code, data: msg.error.data }));
         } else {
-          this.log("in", "res", undefined, `result ${sum(msg.result, 90)}`, msg);
+          this.log("in", "res", p.method, `result ${sum(msg.result, 90)}`, msg);
           p.resolve(msg.result);
         }
       }
@@ -143,14 +154,16 @@ export class RpcPeer {
       Promise.resolve()
         .then(() => this.onRequest(msg.method, msg.params))
         .then((result) => {
-          this.log("out", "res", msg.method, `→ result ${sum(result, 90)}`);
-          this.write({ jsonrpc: "2.0", id: msg.id, result: result ?? null });
+          const reply = { jsonrpc: "2.0", id: msg.id, result: result ?? null };
+          this.log("out", "res", msg.method, `→ result ${sum(result, 90)}`, reply);
+          this.write(reply);
         })
         .catch((e: any) => {
           const code = typeof e?.code === "number" ? e.code : -32603;
           const message = e?.message ?? String(e);
-          this.log("out", "res", msg.method, `→ error ${code}: ${message}`);
-          this.write({ jsonrpc: "2.0", id: msg.id, error: { code, message } });
+          const reply = { jsonrpc: "2.0", id: msg.id, error: { code, message } };
+          this.log("out", "res", msg.method, `→ error ${code}: ${message}`, reply);
+          this.write(reply);
         });
       return;
     }
@@ -164,32 +177,36 @@ export class RpcPeer {
   request<T = any>(method: string, params?: unknown, timeoutMs = 15_000): Promise<T> {
     if (this.closed) return Promise.reject(new Error("peer is closed"));
     const id = this.nextId++;
-    this.log("out", "req", method, `→ ${method} ${sum(params, 80)}`);
+    this.log("out", "req", method, `→ ${method} ${sum(params, 80)}`, { jsonrpc: "2.0", id, method, params: params ?? {} });
     this.write({ jsonrpc: "2.0", id, method, params: params ?? {} });
     return new Promise<T>((resolve, reject) => {
       const timer = setTimeout(() => {
         this.pending.delete(id);
+        this.expired.add(id);
         reject(Object.assign(new Error(`${method} timed out after ${timeoutMs}ms`), { code: -32000, timeout: true }));
       }, timeoutMs);
-      this.pending.set(id, { resolve: resolve as any, reject, timer });
+      this.pending.set(id, { method, resolve: resolve as any, reject, timer });
     });
   }
 
   notify(method: string, params?: unknown) {
-    this.log("out", "notif", method, `→ ${method} ${sum(params, 80)}`);
-    this.write({ jsonrpc: "2.0", method, params: params ?? {} });
+    const message = { jsonrpc: "2.0", method, params: params ?? {} };
+    this.log("out", "notif", method, `→ ${method} ${sum(params, 80)}`, message);
+    this.write(message);
   }
 
   close() {
     this.closed = true;
+    for (const p of this.pending.values()) { clearTimeout(p.timer); p.reject(new Error("peer closed by probe")); }
+    this.pending.clear();
     const proc = this.proc;
     if (proc) {
       try {
-        proc.kill("SIGTERM");
+        if (process.platform !== "win32" && proc.pid) process.kill(-proc.pid, "SIGTERM"); else proc.kill("SIGTERM");
       } catch {}
       setTimeout(() => {
         try {
-          proc.kill("SIGKILL");
+          if (process.platform !== "win32" && proc.pid) process.kill(-proc.pid, "SIGKILL"); else proc.kill("SIGKILL");
         } catch {}
       }, 1500).unref();
     }
