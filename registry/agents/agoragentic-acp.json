@@ -24,5 +24,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Bumped from the registry's stale 1.3.0 — 1.3.6 adds real session/new + session/prompt (the 1.3.0 --acp loop only implements initialize/tools/*/shutdown and advertises a malformed authMethods entry). Caveat: upstream's own acp/agent.json declares the npm launch path a disabled legacy relay pending host enforcement — this entry measures what the registry currently prescribes.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-04"
+  "_synced": "acp-registry 1.0.0 · 2026-10-05"
 }
