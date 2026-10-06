@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "factory-droid",
   "agentName": "@factory/cli",
-  "agentVersion": "0.233.0",
+  "agentVersion": "0.234.0",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -35,7 +35,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-05T11:35:08.298Z",
+  "probedAt": "2026-10-06T11:20:47.280Z",
   "state": "issues",
   "summary": {
     "pass": 15,
@@ -58,17 +58,17 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.21.0",
-    "command": "npx -y droid@0.233.0 exec --output-format acp-daemon",
+    "command": "npx -y droid@0.234.0 exec --output-format acp-daemon",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "dfdf198102ad5b8683f4d014bedd4565ae53262b27a14370459dc94d32f47ef1",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37303677382",
-    "revision": "c59bd0a682ab50a8f1130642fd43a1829379fc13",
+    "recipeSha256": "a9b61dc223c43e74e7717d99bf02cb6a9896beacd50d28d278fafa448c835665",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37455562046",
+    "revision": "eef71f523eb0b9e4750734fd18aae016189770e1",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
     "mcpSdkVersion": "1.32.0",
-    "mockRequests": 13,
+    "mockRequests": 15,
     "modelEvidence": {
       "seenTools": [
         "Read",
@@ -94,7 +94,9 @@
       ],
       "skippedCalls": [
         "Execute: could not construct valid arguments (summary)",
-        "exec: no matching tool offered"
+        "exec: no matching tool offered",
+        "mcp: no matching tool offered",
+        "mcp: no matching tool offered"
       ]
     }
   },
@@ -108,7 +110,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · @factory/cli",
-          "latencyMs": 6690
+          "latencyMs": 6808
         }
       ]
     },
@@ -135,7 +137,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 1471
+          "latencyMs": 1408
         }
       ]
     },
@@ -148,7 +150,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 17
+          "latencyMs": 15
         }
       ]
     },
@@ -192,13 +194,13 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 8
+          "latencyMs": 10
         },
         {
           "method": "session/resume",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 26
+          "latencyMs": 28
         },
         {
           "method": "session/close",
@@ -252,7 +254,7 @@
           "status": "pass",
           "note": "Accepted offered mode normal; policy semantics not inferred from its name",
           "advertised": true,
-          "latencyMs": 10
+          "latencyMs": 7
         }
       ]
     },
@@ -266,7 +268,7 @@
           "status": "partial",
           "note": "Accepted current value of autonomy_level · response: configOptions required property missing",
           "advertised": true,
-          "latencyMs": 26,
+          "latencyMs": 27,
           "reason": "agent-schema"
         }
       ]
@@ -279,7 +281,7 @@
         {
           "method": "cancel",
           "status": "pass",
-          "note": "In-flight prompt returned cancelled after 416ms"
+          "note": "In-flight prompt returned cancelled after 412ms"
         }
       ]
     },
@@ -305,7 +307,7 @@
         {
           "method": "update:message",
           "status": "pass",
-          "note": "10 notification(s) observed"
+          "note": "11 notification(s) observed"
         }
       ]
     },
@@ -367,7 +369,7 @@
         {
           "method": "update:commands",
           "status": "pass",
-          "note": "6 notification(s) observed"
+          "note": "7 notification(s) observed"
         }
       ]
     },
@@ -472,9 +474,8 @@
         {
           "method": "mcp:stdio",
           "status": "observed",
-          "reason": "request-rejected",
-          "errorCode": -32603,
-          "note": "Internal error — Droid process exited unexpectedly (exit code 1); 0/1 configured scenarios received a fixture call. See each scenario."
+          "reason": "tool-not-called",
+          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
         },
         {
           "method": "mcp:http",
@@ -505,43 +506,43 @@
     "load:replay": "load:replay: Prior conversation text replayed for the same session",
     "set_mode": "set_mode: Accepted offered mode normal; policy semantics not inferred from its name",
     "set_config": "set_config: Accepted current value of autonomy_level · response: configOptions required property missing",
-    "cancel": "cancel: In-flight prompt returned cancelled after 416ms",
+    "cancel": "cancel: In-flight prompt returned cancelled after 412ms",
     "logout": "logout: Not advertised; optional method not invoked",
-    "message*": "update:message: 10 notification(s) observed",
+    "message*": "update:message: 11 notification(s) observed",
     "tool_call*": "update:tool_call: 6 notification(s) observed",
     "usage": "update:usage: No matching notifications observed; see scenario stimuli",
     "permission": "request_permission: No valid matching model tool stimulus could be issued",
     "plan": "update:plan: 4 notification(s) observed",
-    "slash_cmds": "update:commands: 6 notification(s) observed",
+    "slash_cmds": "update:commands: 7 notification(s) observed",
     "fs/*": "fs/read_text_file: No client request observed; internal tools and policy choices are permitted · fs/write_text_file: No client request observed; internal tools and policy choices are permitted",
     "terminal/*": "terminal/*: No valid matching model tool stimulus could be issued",
     "elicitation": "elicitation: No controlled elicitation scenario configured",
     "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
     "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
-    "mcp": "mcp:stdio: Internal error — Droid process exited unexpectedly (exit code 1); 0/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
+    "mcp": "mcp:stdio: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
   },
   "methods": {
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · @factory/cli",
-      "latencyMs": 6690
+      "latencyMs": 6808
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 1471
+      "latencyMs": 1408
     },
     "set_mode": {
       "status": "pass",
       "note": "Accepted offered mode normal; policy semantics not inferred from its name",
       "advertised": true,
-      "latencyMs": 10
+      "latencyMs": 7
     },
     "set_config": {
       "status": "partial",
       "note": "Accepted current value of autonomy_level · response: configOptions required property missing",
       "advertised": true,
-      "latencyMs": 26,
+      "latencyMs": 27,
       "reason": "agent-schema"
     },
     "session/prompt": {
@@ -550,12 +551,12 @@
     },
     "cancel": {
       "status": "pass",
-      "note": "In-flight prompt returned cancelled after 416ms"
+      "note": "In-flight prompt returned cancelled after 412ms"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 17
+      "latencyMs": 15
     },
     "load:replay": {
       "status": "pass",
@@ -604,12 +605,12 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 8
+      "latencyMs": 10
     },
     "session/resume": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 26
+      "latencyMs": 28
     },
     "session/close": {
       "status": "na",
@@ -625,9 +626,8 @@
     },
     "mcp:stdio": {
       "status": "observed",
-      "reason": "request-rejected",
-      "errorCode": -32603,
-      "note": "Internal error — Droid process exited unexpectedly (exit code 1); 0/1 configured scenarios received a fixture call. See each scenario."
+      "reason": "tool-not-called",
+      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
     },
     "mcp:http": {
       "status": "na",
@@ -668,7 +668,7 @@
     },
     "update:message": {
       "status": "pass",
-      "note": "10 notification(s) observed"
+      "note": "11 notification(s) observed"
     },
     "update:tool_call": {
       "status": "pass",
@@ -680,7 +680,7 @@
     },
     "update:commands": {
       "status": "pass",
-      "note": "6 notification(s) observed"
+      "note": "7 notification(s) observed"
     },
     "update:usage": {
       "status": "na",
@@ -724,160 +724,166 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-05T11:34:55.701Z",
+      "at": "2026-10-06T11:20:32.615Z",
       "outcome": "success",
-      "latencyMs": 6690
+      "latencyMs": 6808
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-05T11:35:02.391Z",
+      "at": "2026-10-06T11:20:39.424Z",
       "outcome": "success",
-      "latencyMs": 1471
+      "latencyMs": 1408
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-10-05T11:35:03.864Z",
+      "at": "2026-10-06T11:20:40.834Z",
       "outcome": "success",
-      "latencyMs": 10
+      "latencyMs": 7
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-05T11:35:03.874Z",
+      "at": "2026-10-06T11:20:40.841Z",
       "outcome": "success",
-      "latencyMs": 26
+      "latencyMs": 27
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-05T11:35:03.901Z",
+      "at": "2026-10-06T11:20:40.869Z",
       "outcome": "success",
-      "latencyMs": 222
+      "latencyMs": 183
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-10-05T11:35:04.124Z",
+      "at": "2026-10-06T11:20:41.053Z",
       "outcome": "success",
-      "latencyMs": 131
+      "latencyMs": 117
     },
     {
       "method": "session/prompt",
       "scenario": "default:write",
-      "at": "2026-10-05T11:35:04.255Z",
+      "at": "2026-10-06T11:20:41.170Z",
       "outcome": "success",
-      "latencyMs": 126
+      "latencyMs": 103
     },
     {
       "method": "session/prompt",
       "scenario": "default:plan",
-      "at": "2026-10-05T11:35:04.381Z",
+      "at": "2026-10-06T11:20:41.274Z",
       "outcome": "success",
-      "latencyMs": 121
+      "latencyMs": 101
     },
     {
       "method": "session/prompt",
       "scenario": "cancel",
-      "at": "2026-10-05T11:35:04.503Z",
+      "at": "2026-10-06T11:20:41.375Z",
       "outcome": "success",
-      "latencyMs": 416
+      "latencyMs": 412
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-10-05T11:35:04.920Z",
+      "at": "2026-10-06T11:20:41.787Z",
       "outcome": "success",
-      "latencyMs": 17
+      "latencyMs": 15
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-05T11:35:04.938Z",
+      "at": "2026-10-06T11:20:41.803Z",
       "outcome": "success",
-      "latencyMs": 1049
+      "latencyMs": 1103
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-10-05T11:35:05.988Z",
+      "at": "2026-10-06T11:20:42.907Z",
       "outcome": "success",
-      "latencyMs": 162
+      "latencyMs": 173
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-05T11:35:06.150Z",
+      "at": "2026-10-06T11:20:43.081Z",
       "outcome": "success",
-      "latencyMs": 979
+      "latencyMs": 1132
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-10-05T11:35:07.130Z",
+      "at": "2026-10-06T11:20:44.214Z",
       "outcome": "success",
-      "latencyMs": 152
+      "latencyMs": 174
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-05T11:35:07.282Z",
+      "at": "2026-10-06T11:20:44.389Z",
       "outcome": "success",
-      "latencyMs": 8
+      "latencyMs": 10
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-05T11:35:07.290Z",
+      "at": "2026-10-06T11:20:44.399Z",
       "outcome": "success",
-      "latencyMs": 896
+      "latencyMs": 1094
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-10-05T11:35:08.186Z",
+      "at": "2026-10-06T11:20:45.493Z",
       "outcome": "success",
-      "latencyMs": 26
+      "latencyMs": 28
     },
     {
       "method": "session/new",
       "scenario": "mcp:stdio:default",
-      "at": "2026-10-05T11:35:08.214Z",
-      "outcome": "error",
-      "errorCode": -32603,
-      "latencyMs": 79
+      "at": "2026-10-06T11:20:45.524Z",
+      "outcome": "success",
+      "latencyMs": 1059
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-10-06T11:20:46.584Z",
+      "outcome": "success",
+      "latencyMs": 189
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-05T11:35:08.295Z",
+      "at": "2026-10-06T11:20:47.275Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 2
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-06T11:20:47.278Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
     },
     {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-05T11:35:08.295Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 1
-    },
-    {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-05T11:35:08.296Z",
+      "at": "2026-10-06T11:20:47.278Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "21a1ee69-bfd9-4304-b2f7-740bdbc02ea8",
+      "sessionId": "e1887262-61de-460c-9085-d435ebf9acc2",
       "configuration": {
         "autonomy_level": "normal",
         "model": "custom:Probe-0",
@@ -895,8 +901,8 @@
         "elicitation": 0
       },
       "notifications": [
-        "config_option_update",
         "current_mode_update",
+        "config_option_update",
         "agent_message_chunk"
       ],
       "tools": [],
@@ -910,7 +916,7 @@
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "21a1ee69-bfd9-4304-b2f7-740bdbc02ea8",
+      "sessionId": "e1887262-61de-460c-9085-d435ebf9acc2",
       "configuration": {
         "autonomy_level": "normal",
         "model": "custom:Probe-0",
@@ -946,15 +952,13 @@
         "issuedTools": [
           "Read"
         ],
-        "skippedCalls": [
-          "exec: no matching tool offered"
-        ]
+        "skippedCalls": []
       }
     },
     {
       "id": "default:write",
       "profile": "default",
-      "sessionId": "21a1ee69-bfd9-4304-b2f7-740bdbc02ea8",
+      "sessionId": "e1887262-61de-460c-9085-d435ebf9acc2",
       "configuration": {
         "autonomy_level": "normal",
         "model": "custom:Probe-0",
@@ -988,7 +992,7 @@
     {
       "id": "default:plan",
       "profile": "default",
-      "sessionId": "21a1ee69-bfd9-4304-b2f7-740bdbc02ea8",
+      "sessionId": "e1887262-61de-460c-9085-d435ebf9acc2",
       "configuration": {
         "autonomy_level": "normal",
         "model": "custom:Probe-0",
@@ -1016,13 +1020,15 @@
         "issuedTools": [
           "TodoWrite"
         ],
-        "skippedCalls": []
+        "skippedCalls": [
+          "exec: no matching tool offered"
+        ]
       }
     },
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "70b34b78-bf04-4017-a895-cfdc1100c352",
+      "sessionId": "9a94ad91-7d7a-46ad-b392-1b24b52dd93c",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1050,7 +1056,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "7ef2d66c-10af-43a5-8d21-71d211aa9b7e",
+      "sessionId": "68d3b1c8-f6ca-4332-a721-08c5cf5fef82",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1078,15 +1084,52 @@
     {
       "id": "mcp:stdio:default",
       "profile": "default",
+      "sessionId": "7cec7420-f024-4a49-a7cf-0f54927dbabe",
+      "configuration": {
+        "autonomy_level": "normal",
+        "model": "custom:Probe-0",
+        "reasoning_effort": "none"
+      },
       "result": {
         "status": "observed",
-        "reason": "request-rejected",
-        "errorCode": -32603,
-        "note": "Internal error — Droid process exited unexpectedly (exit code 1)"
+        "reason": "tool-not-called",
+        "note": "Fixture tool discovery completed; no fixture call received"
       },
-      "callbacks": {},
-      "notifications": [],
-      "tools": []
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "current_mode_update",
+        "config_option_update",
+        "available_commands_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "mcp: no matching tool offered"
+        ]
+      },
+      "diagnostics": [],
+      "mcpEvents": [
+        {
+          "event": "spawned",
+          "ts": 1791285646842
+        },
+        {
+          "event": "initialized",
+          "ts": 1791285646867
+        },
+        {
+          "event": "tools/list",
+          "ts": 1791285646867
+        }
+      ]
     }
   ],
   "uncertaintyReasons": {
@@ -1116,10 +1159,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 41381,
+      "port": 34323,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 46,
+      "relayed": 61,
       "drops": 0
     }
   }

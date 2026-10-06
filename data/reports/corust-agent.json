@@ -28,7 +28,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-05T11:34:13.907Z",
+  "probedAt": "2026-10-06T11:19:51.322Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -54,9 +54,9 @@
     "command": "${REPO_ROOT}/.cache/agents/corust-agent/agent",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "da5bdfc1f0b76d912b2e2167e56ad26d866f7520d2fc6e35dab73440df86d19e",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37303677382",
-    "revision": "c59bd0a682ab50a8f1130642fd43a1829379fc13",
+    "recipeSha256": "34b557fa5b347793fd3ace6d61bcf3e5fc3bf19d2a4693694ef54f309161759b",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37455562046",
+    "revision": "eef71f523eb0b9e4750734fd18aae016189770e1",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -739,14 +739,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-05T11:34:13.899Z",
+      "at": "2026-10-06T11:19:51.314Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-05T11:34:13.902Z",
+      "at": "2026-10-06T11:19:51.316Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 0
@@ -754,21 +754,21 @@
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-05T11:34:13.905Z",
+      "at": "2026-10-06T11:19:51.320Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-05T11:34:13.906Z",
+      "at": "2026-10-06T11:19:51.321Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-05T11:34:13.906Z",
+      "at": "2026-10-06T11:19:51.321Z",
       "outcome": "success",
       "latencyMs": 0
     }
@@ -797,7 +797,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 46703,
+      "port": 37129,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
