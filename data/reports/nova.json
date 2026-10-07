@@ -43,7 +43,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-06T11:22:18.308Z",
+  "probedAt": "2026-10-07T11:10:28.356Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -69,9 +69,9 @@
     "command": "npx -y @compass-ai/nova@1.1.43 models register --name probe --api openai --base-url ${MOCK_LLM_URL} --api-key probe-mock-key --model probe-model --default ; npx -y @compass-ai/nova@1.1.43 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "fbed20f77f6ebfa096cd2cb283211a32f195b723d313903eb368d9260277a9e1",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37455562046",
-    "revision": "eef71f523eb0b9e4750734fd18aae016189770e1",
+    "recipeSha256": "156b1af8953c0cad4cfb8b24a9c73363ca25d6a50681ff31858c97dc55dd8a1a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37611896581",
+    "revision": "4584a43c3ecf77706c03cc9efd0df9e9d7506263",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -93,7 +93,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · kore-cli",
-          "latencyMs": 19528
+          "latencyMs": 20029
         }
       ]
     },
@@ -122,7 +122,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Click Nova Setup to configure your API keys — {\"authMethods\":[{\"id\":\"kore-terminal-auth\",\"type\":\"terminal\",\"name\":\"Nova Setup\",\"description\":\"Complete interactive set…",
-          "latencyMs": 302
+          "latencyMs": 305
         }
       ]
     },
@@ -184,7 +184,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 3
+          "latencyMs": 2
         },
         {
           "method": "session/resume",
@@ -535,14 +535,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · kore-cli",
-      "latencyMs": 19528
+      "latencyMs": 20029
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Click Nova Setup to configure your API keys — {\"authMethods\":[{\"id\":\"kore-terminal-auth\",\"type\":\"terminal\",\"name\":\"Nova Setup\",\"description\":\"Complete interactive set…",
-      "latencyMs": 302
+      "latencyMs": 305
     },
     "set_mode": {
       "status": "blocked",
@@ -619,7 +619,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 3
+      "latencyMs": 2
     },
     "session/resume": {
       "status": "blocked",
@@ -753,29 +753,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-06T11:21:58.466Z",
+      "at": "2026-10-07T11:10:08.012Z",
       "outcome": "success",
-      "latencyMs": 19528
+      "latencyMs": 20029
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-06T11:22:17.996Z",
+      "at": "2026-10-07T11:10:28.041Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 302
+      "latencyMs": 305
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-06T11:22:18.301Z",
+      "at": "2026-10-07T11:10:28.349Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-06T11:22:18.305Z",
+      "at": "2026-10-07T11:10:28.353Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -783,18 +783,18 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-06T11:22:18.306Z",
+      "at": "2026-10-07T11:10:28.354Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-06T11:22:18.307Z",
+      "at": "2026-10-07T11:10:28.354Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -821,7 +821,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 35047,
+      "port": 46721,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 20,

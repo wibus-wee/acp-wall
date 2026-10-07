@@ -8,7 +8,7 @@
     "capabilities": {},
     "authMethods": []
   },
-  "probedAt": "2026-10-06T11:21:51.392Z",
+  "probedAt": "2026-10-07T11:09:58.466Z",
   "state": "blocked",
   "summary": {
     "pass": 0,
@@ -34,9 +34,9 @@
     "command": "uvx --with agent-client-protocol==0.8.1 minion-code@0.1.44 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "2dff9d5cdfa4d0d33ecfe9517dbe946896144fe94e076fbe12b1e339ce79362b",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37455562046",
-    "revision": "eef71f523eb0b9e4750734fd18aae016189770e1",
+    "recipeSha256": "8d9832dcd8ba3200b7b6858963279993897ef3f0900f486447591e38bac78fcb",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37611896581",
+    "revision": "4584a43c3ecf77706c03cc9efd0df9e9d7506263",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -59,7 +59,7 @@
           "status": "na",
           "reason": "transport",
           "note": "agent exited (code 2)",
-          "latencyMs": 89
+          "latencyMs": 55
         }
       ]
     },
@@ -502,7 +502,7 @@
       "status": "na",
       "reason": "transport",
       "note": "agent exited (code 2)",
-      "latencyMs": 89
+      "latencyMs": 55
     },
     "authenticate": {
       "status": "blocked",
@@ -715,16 +715,16 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-06T11:21:51.162Z",
+      "at": "2026-10-07T11:09:58.305Z",
       "outcome": "error",
-      "latencyMs": 137
+      "latencyMs": 102
     },
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-06T11:21:51.302Z",
+      "at": "2026-10-07T11:09:58.410Z",
       "outcome": "error",
-      "latencyMs": 89
+      "latencyMs": 55
     }
   ],
   "scenarios": [],
@@ -734,7 +734,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 42219,
+      "port": 44461,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 4,
