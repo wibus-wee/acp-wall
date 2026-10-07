@@ -51,5 +51,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "amp-acp is a third-party wrapper (tao12345666333/amp-acp) that delegates to the real Amp CLI at session/prompt — without it the spawn throws ENOENT and the whole process dies (fork/logout/providers/nes then fail as collateral). install fetches @sourcegraph/amp alongside; AMP_CLI_PATH is the wrapper's documented override. A real Amp account key is still server-validated, so the prompt turn stays honestly account-gated.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-06"
+  "_synced": "acp-registry 1.0.0 · 2026-10-07"
 }

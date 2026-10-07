@@ -2,14 +2,14 @@
   "name": "gemini",
   "display": "Gemini CLI",
   "vendor": "Google",
-  "version": "0.62.0",
+  "version": "0.63.0",
   "description": "Google's official CLI for Gemini",
   "repo": "google-gemini/gemini-cli",
   "website": "https://geminicli.com",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/gemini.svg",
   "license": "Apache-2.0",
   "install": null,
-  "run": "npx -y @google/gemini-cli@0.62.0 --acp",
+  "run": "npx -y @google/gemini-cli@0.63.0 --acp",
   "setup": [],
   "probeProfiles": [],
   "env": {
@@ -20,7 +20,7 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@google/gemini-cli@0.62.0",
+    "package": "@google/gemini-cli@0.63.0",
     "args": [
       "--acp"
     ]
@@ -28,5 +28,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "GEMINI_API_KEY + GOOGLE_GEMINI_BASE_URL select GATEWAY auth against the mock. GEMINI_MODEL pins a concrete model — without it the session's auto router pre-flights every prompt with a JSON-mode classifier call (responseJsonSchema) that a naive mock can't satisfy, and the turn dies retrying inside the router.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-06"
+  "_synced": "acp-registry 1.0.0 · 2026-10-07"
 }
