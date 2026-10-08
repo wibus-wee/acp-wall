@@ -2,7 +2,7 @@
   "name": "sigit",
   "display": "siGit Code",
   "vendor": "smbCloud",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "Local-first coding agent. Runs entirely on your machine with optional on-device LLM inference via Onde.",
   "repo": "getsigit/sigit",
   "website": "https://github.com/getsigit/sigit",
@@ -16,11 +16,11 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@smbcloud/sigit@1.6.3",
+    "package": "@smbcloud/sigit@1.6.4",
     "args": []
   },
   "disabled": false,
   "selftest": false,
   "notes": "sigit is a local-inference agent (Onde Inference, 'no API keys, no cloud round-trips') — nothing to wire; probed as-is. Whether its bundled model runs in CI is itself a data point. --acp is explicit ACP mode (it also auto-detects non-TTY stdio). Agent defect worth knowing: an unanswered authenticate (browser OAuth) head-of-line blocks its serialized dispatch loop — the probe authenticates last so the wedge can't swallow the suite.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-07"
+  "_synced": "acp-registry 1.0.0 · 2026-10-08"
 }

@@ -2,14 +2,14 @@
   "name": "github-copilot-cli",
   "display": "GitHub Copilot",
   "vendor": "GitHub",
-  "version": "1.0.92",
+  "version": "1.0.93",
   "description": "GitHub's AI pair programmer",
   "repo": "github/copilot-cli",
   "website": "https://github.com/features/copilot/cli/",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/github-copilot-cli.svg",
   "license": "proprietary",
   "install": null,
-  "run": "npx -y @github/copilot@1.0.92 --acp",
+  "run": "npx -y @github/copilot@1.0.93 --acp",
   "setup": [],
   "probeProfiles": [],
   "env": {
@@ -20,7 +20,7 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@github/copilot@1.0.92",
+    "package": "@github/copilot@1.0.93",
     "args": [
       "--acp"
     ]
@@ -28,5 +28,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "GitHub Copilot CLI validates the token against GitHub's Copilot entitlement endpoint — a placeholder cannot pass. Honest result: harness requires a real Copilot subscription; no documented BYOK/custom-endpoint path exists.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-07"
+  "_synced": "acp-registry 1.0.0 · 2026-10-08"
 }

@@ -66,5 +66,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Devin CLI requires a real Cognition account API key — server-validated, no self-hosted/BYOK option. Agent defect worth knowing: authenticate (devin-browser PKCE) never answers headless-with-browser and wedges the serialized dispatch queue — on a credentialed desktop host the whole suite times out. The probe authenticates last so the wedge can't swallow the suite; credentialed score ~58 vs 40 here.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-07"
+  "_synced": "acp-registry 1.0.0 · 2026-10-08"
 }

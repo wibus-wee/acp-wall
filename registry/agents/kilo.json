@@ -2,14 +2,14 @@
   "name": "kilo",
   "display": "Kilo",
   "vendor": "Kilo Code",
-  "version": "7.8.3",
+  "version": "7.8.8",
   "description": "The open source coding agent",
   "repo": "Kilo-Org/kilocode",
   "website": "https://kilo.ai/",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/kilo.svg",
   "license": "MIT",
   "install": null,
-  "run": "npx -y @kilocode/cli@7.8.3 acp",
+  "run": "npx -y @kilocode/cli@7.8.8 acp",
   "setup": [],
   "probeProfiles": [],
   "env": {
@@ -45,7 +45,7 @@
   },
   "dist": {
     "type": "npx",
-    "package": "@kilocode/cli@7.8.3",
+    "package": "@kilocode/cli@7.8.8",
     "args": [
       "acp"
     ]
@@ -53,5 +53,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Kilo CLI is an OpenCode fork reading ./kilo.json[c] from cwd — mirrors the verified opencode wiring: openai-compatible provider → mock LLM, permission=ask to deterministically exercise session/request_permission.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-07"
+  "_synced": "acp-registry 1.0.0 · 2026-10-08"
 }
