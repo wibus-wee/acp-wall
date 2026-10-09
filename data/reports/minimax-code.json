@@ -27,7 +27,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-10-08T11:27:31.091Z",
+  "probedAt": "2026-10-09T11:24:18.580Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -53,9 +53,9 @@
     "command": "npx -y @minimax-ai/code@0.2.7 provider add --name probe --base-url ${MOCK_LLM_URL} --model probe-model --api-key probe-mock-key --yes ; npx -y @minimax-ai/code@0.2.7 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "0ab59f6da5405efef44761fc51139b9be03a76d90028f79d8570165dcd31d74f",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37769841692",
-    "revision": "19e7c7846d62f3dc8658b7bf0536f858b38f20c0",
+    "recipeSha256": "b3ff9b6d8c2a66aad3d551fed91169d3a7a718c42688c6900b065f82c57b954a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37923225557",
+    "revision": "8cf7ab840f1fdcc722ecc4064be2a2e4e9c89564",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -77,7 +77,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · minimax-code",
-          "latencyMs": 5447
+          "latencyMs": 5559
         }
       ]
     },
@@ -105,7 +105,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Run `mcode login` and try again.",
-          "latencyMs": 4
+          "latencyMs": 5
         }
       ]
     },
@@ -170,7 +170,7 @@
           "errorCode": -32000,
           "note": "Authentication required: Run `mcode login` and try again.",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -521,14 +521,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · minimax-code",
-      "latencyMs": 5447
+      "latencyMs": 5559
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Run `mcode login` and try again.",
-      "latencyMs": 4
+      "latencyMs": 5
     },
     "set_mode": {
       "status": "blocked",
@@ -608,7 +608,7 @@
       "errorCode": -32000,
       "note": "Authentication required: Run `mcode login` and try again.",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "blocked",
@@ -741,38 +741,38 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-08T11:27:25.633Z",
+      "at": "2026-10-09T11:24:13.008Z",
       "outcome": "success",
-      "latencyMs": 5447
+      "latencyMs": 5559
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-08T11:27:31.081Z",
+      "at": "2026-10-09T11:24:18.568Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 4
+      "latencyMs": 5
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-08T11:27:31.086Z",
+      "at": "2026-10-09T11:24:18.575Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-08T11:27:31.089Z",
+      "at": "2026-10-09T11:24:18.577Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-08T11:27:31.089Z",
+      "at": "2026-10-09T11:24:18.578Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -780,7 +780,7 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-08T11:27:31.090Z",
+      "at": "2026-10-09T11:24:18.579Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -811,7 +811,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 37383,
+      "port": 40869,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 18,

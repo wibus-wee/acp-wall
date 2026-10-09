@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "github-copilot-cli",
   "agentName": "Copilot",
-  "agentVersion": "1.0.93",
+  "agentVersion": "1.0.94",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -30,7 +30,7 @@
         "description": "Run `copilot login` in the terminal",
         "_meta": {
           "terminal-auth": {
-            "command": "/home/runner/.npm/_npx/eafb2bc873fced17/node_modules/@github/copilot-linux-x64/copilot",
+            "command": "/home/runner/.npm/_npx/b6c8a22be34229db/node_modules/@github/copilot-linux-x64/copilot",
             "args": [
               "login"
             ],
@@ -40,7 +40,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-08T11:26:56.517Z",
+  "probedAt": "2026-10-09T11:23:33.472Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -63,12 +63,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.21.0",
-    "command": "npx -y @github/copilot@1.0.93 --acp",
+    "command": "npx -y @github/copilot@1.0.94 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "78c0cadc504f678b57a27e2dd55e4ba3a1f417c9fa4b4eb45019f65e32110599",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37769841692",
-    "revision": "19e7c7846d62f3dc8658b7bf0536f858b38f20c0",
+    "recipeSha256": "cb5fefbec9068ae972ff8f457c8bd945808b7fdabc9ce1bdb1c2de38bcace642",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37923225557",
+    "revision": "8cf7ab840f1fdcc722ecc4064be2a2e4e9c89564",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -90,7 +90,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · Copilot",
-          "latencyMs": 4917
+          "latencyMs": 3912
         }
       ]
     },
@@ -119,7 +119,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required",
-          "latencyMs": 235
+          "latencyMs": 573
         }
       ]
     },
@@ -532,14 +532,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · Copilot",
-      "latencyMs": 4917
+      "latencyMs": 3912
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required",
-      "latencyMs": 235
+      "latencyMs": 573
     },
     "set_mode": {
       "status": "blocked",
@@ -750,37 +750,37 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-08T11:26:51.358Z",
+      "at": "2026-10-09T11:23:28.981Z",
       "outcome": "success",
-      "latencyMs": 4917
+      "latencyMs": 3912
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-08T11:26:56.275Z",
+      "at": "2026-10-09T11:23:32.894Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 235
+      "latencyMs": 573
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-08T11:26:56.512Z",
+      "at": "2026-10-09T11:23:33.469Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-08T11:26:56.515Z",
+      "at": "2026-10-09T11:23:33.470Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-08T11:26:56.515Z",
+      "at": "2026-10-09T11:23:33.471Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -788,10 +788,10 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-08T11:26:56.515Z",
+      "at": "2026-10-09T11:23:33.471Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -820,10 +820,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 36537,
+      "port": 33087,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 9,
+      "relayed": 10,
       "drops": 0
     }
   }
