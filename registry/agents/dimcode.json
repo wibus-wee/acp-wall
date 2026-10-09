@@ -44,5 +44,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Pinned CLI custom provider with the openai adapter. Setup must succeed before ACP launches. DIMCODE_HOME isolates credentials and provider state in the probe workspace.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-08"
+  "_synced": "acp-registry 1.0.0 · 2026-10-09"
 }

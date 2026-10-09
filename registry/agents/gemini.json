@@ -28,5 +28,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "GEMINI_API_KEY + GOOGLE_GEMINI_BASE_URL select GATEWAY auth against the mock. GEMINI_MODEL pins a concrete model — without it the session's auto router pre-flights every prompt with a JSON-mode classifier call (responseJsonSchema) that a naive mock can't satisfy, and the turn dies retrying inside the router.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-08"
+  "_synced": "acp-registry 1.0.0 · 2026-10-09"
 }
