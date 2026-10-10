@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "harn",
   "agentName": "harn",
-  "agentVersion": "0.10.157",
+  "agentVersion": "0.10.160",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -74,6 +74,11 @@
               "description": "Return the normalized provider/model catalog used by this runtime.",
               "schema": "https://harnlang.com/schemas/provider-catalog.v12.json",
               "schemaVersion": 12
+            },
+            "harn.session_history.boundaries": {
+              "description": "Acknowledge canonical history positions after the owning transcript journal flushes.",
+              "schema": "harn.canonical_history_boundaries.v1",
+              "schemaVersion": 1
             },
             "harn.session_view.query": {
               "description": "Return the harn.session_view.v1 projection for a live or persisted session.",
@@ -158,6 +163,7 @@
             "executionDurationMs",
             "executor",
             "health",
+            "intent",
             "mutationStatus",
             "parsing",
             "rawInputPartial"
@@ -235,7 +241,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-09T11:23:49.847Z",
+  "probedAt": "2026-10-10T10:40:57.041Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -261,9 +267,9 @@
     "command": "${REPO_ROOT}/.cache/agents/harn/agent serve acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "b68312059e8700091941338a1020908616ed2e44655eef111bc3215bef4f1417",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37923225557",
-    "revision": "8cf7ab840f1fdcc722ecc4064be2a2e4e9c89564",
+    "recipeSha256": "87f2dc140955acf7e36c17972042b86a418f9f673b0aad633c723b440dfa7afb",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38045613582",
+    "revision": "04077707e0024427df169295b6fd1d8ad239c019",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -313,8 +319,8 @@
           "status": "observed",
           "reason": "request-rejected",
           "errorCode": -32602,
-          "note": "[environment_policy.missing] session/new requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends on this server's",
-          "latencyMs": 0
+          "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
+          "latencyMs": 1
         }
       ]
     },
@@ -699,7 +705,7 @@
   "notes": {
     "initialize": "initialize: Protocol 1 · harn",
     "authenticate": "authenticate: Advertised: none; login not attempted in unattended discovery",
-    "session/new": "session/new: [environment_policy.missing] session/new requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends on this server's",
+    "session/new": "session/new: [environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
     "session/load": "session/load: Not exercised; prerequisite session/new unavailable",
     "session/prompt": "session/prompt: No usable session; see session/new",
     "prompt:content": "prompt:image: No usable session; see session/new · prompt:embedded-context: Not advertised; optional method not invoked",
@@ -733,8 +739,8 @@
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32602,
-      "note": "[environment_policy.missing] session/new requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends on this server's",
-      "latencyMs": 0
+      "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -945,29 +951,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-09T11:23:49.790Z",
+      "at": "2026-10-10T10:40:56.983Z",
       "outcome": "success",
       "latencyMs": 50
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-09T11:23:49.841Z",
+      "at": "2026-10-10T10:40:57.034Z",
       "outcome": "error",
       "errorCode": -32602,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-09T11:23:49.844Z",
+      "at": "2026-10-10T10:40:57.037Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-09T11:23:49.846Z",
+      "at": "2026-10-10T10:40:57.039Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -975,7 +981,7 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-09T11:23:49.846Z",
+      "at": "2026-10-10T10:40:57.039Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -983,10 +989,10 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-09T11:23:49.846Z",
+      "at": "2026-10-10T10:40:57.039Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -1015,7 +1021,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 46143,
+      "port": 46561,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

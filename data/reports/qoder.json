@@ -41,7 +41,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-09T11:24:57.519Z",
+  "probedAt": "2026-10-10T10:41:53.511Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -67,9 +67,9 @@
     "command": "npx -y @qoder-ai/qodercli@0.2.14 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "331a95282b892255474500a46d75e84de473b9cf5481ebe87be8462e9564a182",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37923225557",
-    "revision": "8cf7ab840f1fdcc722ecc4064be2a2e4e9c89564",
+    "recipeSha256": "d5aa069285fa3232395589fced797810b8a7d3a9667b253ef024f0907955e9a3",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38045613582",
+    "revision": "04077707e0024427df169295b6fd1d8ad239c019",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -91,7 +91,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · qoder-cli",
-          "latencyMs": 7444
+          "latencyMs": 8693
         }
       ]
     },
@@ -120,7 +120,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Authentication is required.",
-          "latencyMs": 3
+          "latencyMs": 4
         }
       ]
     },
@@ -182,7 +182,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 1
+          "latencyMs": 2
         },
         {
           "method": "session/resume",
@@ -533,14 +533,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · qoder-cli",
-      "latencyMs": 7444
+      "latencyMs": 8693
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Authentication is required.",
-      "latencyMs": 3
+      "latencyMs": 4
     },
     "set_mode": {
       "status": "blocked",
@@ -617,7 +617,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 1
+      "latencyMs": 2
     },
     "session/resume": {
       "status": "na",
@@ -751,45 +751,45 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-09T11:24:50.065Z",
+      "at": "2026-10-10T10:41:44.802Z",
       "outcome": "success",
-      "latencyMs": 7444
+      "latencyMs": 8693
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-09T11:24:57.510Z",
+      "at": "2026-10-10T10:41:53.497Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 3
+      "latencyMs": 4
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-09T11:24:57.514Z",
+      "at": "2026-10-10T10:41:53.503Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-09T11:24:57.516Z",
+      "at": "2026-10-10T10:41:53.506Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 2
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-10T10:41:53.508Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
     },
     {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-09T11:24:57.517Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 0
-    },
-    {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-09T11:24:57.517Z",
+      "at": "2026-10-10T10:41:53.509Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -819,7 +819,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 38435,
+      "port": 32825,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 5,

@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "factory-droid",
   "agentName": "@factory/cli",
-  "agentVersion": "0.237.0",
+  "agentVersion": "0.238.0",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -34,7 +34,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-09T11:23:15.229Z",
+  "probedAt": "2026-10-10T10:40:21.972Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -57,12 +57,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.21.0",
-    "command": "npx -y droid@0.237.0 exec --output-format acp-daemon",
+    "command": "npx -y droid@0.238.0 exec --output-format acp-daemon",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "16a77eb23d5c10500d58dfa856cbceb3c9acf4a949e6ab12d570397b281ee2c6",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/37923225557",
-    "revision": "8cf7ab840f1fdcc722ecc4064be2a2e4e9c89564",
+    "recipeSha256": "dcab2253fdf8596ed4c687c224544e4d3b784910a2abbd700eb85f5e31d030ce",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38045613582",
+    "revision": "04077707e0024427df169295b6fd1d8ad239c019",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -84,7 +84,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · @factory/cli",
-          "latencyMs": 6345
+          "latencyMs": 5310
         }
       ]
     },
@@ -113,7 +113,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Authentication failed. Please log in using /login or set a valid FACTORY_API_KEY environment variable.",
-          "latencyMs": 238
+          "latencyMs": 279
         }
       ]
     },
@@ -175,7 +175,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 426
+          "latencyMs": 465
         },
         {
           "method": "session/resume",
@@ -526,14 +526,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · @factory/cli",
-      "latencyMs": 6345
+      "latencyMs": 5310
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Authentication failed. Please log in using /login or set a valid FACTORY_API_KEY environment variable.",
-      "latencyMs": 238
+      "latencyMs": 279
     },
     "set_mode": {
       "status": "blocked",
@@ -610,7 +610,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 426
+      "latencyMs": 465
     },
     "session/resume": {
       "status": "blocked",
@@ -744,37 +744,37 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-09T11:23:08.213Z",
+      "at": "2026-10-10T10:40:15.913Z",
       "outcome": "success",
-      "latencyMs": 6345
+      "latencyMs": 5310
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-09T11:23:14.558Z",
+      "at": "2026-10-10T10:40:21.224Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 238
+      "latencyMs": 279
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-09T11:23:14.798Z",
+      "at": "2026-10-10T10:40:21.504Z",
       "outcome": "success",
-      "latencyMs": 426
+      "latencyMs": 465
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-09T11:23:15.226Z",
+      "at": "2026-10-10T10:40:21.971Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-09T11:23:15.227Z",
+      "at": "2026-10-10T10:40:21.971Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -782,7 +782,7 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-09T11:23:15.227Z",
+      "at": "2026-10-10T10:40:21.971Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -814,7 +814,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 38309,
+      "port": 42957,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 7,
