@@ -47,7 +47,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-12T09:08:07.242Z",
+  "probedAt": "2026-10-12T12:04:51.137Z",
   "state": "blocked",
   "summary": {
     "pass": 5,
@@ -74,8 +74,8 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "ca015445898676f87fb0bcf049c11448c4260f18b3dd83150d173b3d336dbe32",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38227839076",
-    "revision": "1a58499a19eb026b0fa0a638655c488c2a440e3a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38246707057",
+    "revision": "740726974e7f7acaa08710579ed260e5d7498795",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -97,7 +97,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · amp-acp",
-          "latencyMs": 75
+          "latencyMs": 53
         }
       ]
     },
@@ -124,7 +124,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 734
+          "latencyMs": 640
         }
       ]
     },
@@ -137,7 +137,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -152,7 +152,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required",
-          "latencyMs": 1405
+          "latencyMs": 943
         }
       ]
     },
@@ -196,9 +196,9 @@
           "status": "observed",
           "reason": "request-rejected",
           "errorCode": -32602,
-          "note": "Invalid params: No durable Amp thread mapping for ACP session S-mv514ksc-heo2jw",
+          "note": "Invalid params: No durable Amp thread mapping for ACP session S-mv57fuso-vv207v",
           "advertised": true,
-          "latencyMs": 3
+          "latencyMs": 2
         },
         {
           "method": "session/close",
@@ -266,7 +266,7 @@
           "status": "pass",
           "note": "Accepted current value of execution-environment",
           "advertised": true,
-          "latencyMs": 3
+          "latencyMs": 1
         }
       ]
     },
@@ -513,7 +513,7 @@
     "session/load": "session/load: pass",
     "session/prompt": "session/prompt: Authentication required",
     "prompt:content": "prompt:image: Authentication required · prompt:embedded-context: Authentication required",
-    "sessions/*": "session/list: Not advertised; optional method not invoked · session/resume: Invalid params: No durable Amp thread mapping for ACP session S-mv514ksc-heo2jw · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
+    "sessions/*": "session/list: Not advertised; optional method not invoked · session/resume: Invalid params: No durable Amp thread mapping for ACP session S-mv57fuso-vv207v · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
     "fork": "session/fork: Not advertised; optional method not invoked",
     "load:replay": "load:replay: No conversation text observed during either of two load attempts",
     "set_mode": "set_mode: No session modes offered",
@@ -537,12 +537,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · amp-acp",
-      "latencyMs": 75
+      "latencyMs": 53
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 734
+      "latencyMs": 640
     },
     "set_mode": {
       "status": "na",
@@ -553,14 +553,14 @@
       "status": "pass",
       "note": "Accepted current value of execution-environment",
       "advertised": true,
-      "latencyMs": 3
+      "latencyMs": 1
     },
     "session/prompt": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required",
-      "latencyMs": 1405
+      "latencyMs": 943
     },
     "cancel": {
       "status": "blocked",
@@ -571,7 +571,7 @@
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "load:replay": {
       "status": "na",
@@ -632,9 +632,9 @@
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32602,
-      "note": "Invalid params: No durable Amp thread mapping for ACP session S-mv514ksc-heo2jw",
+      "note": "Invalid params: No durable Amp thread mapping for ACP session S-mv57fuso-vv207v",
       "advertised": true,
-      "latencyMs": 3
+      "latencyMs": 2
     },
     "session/close": {
       "status": "na",
@@ -753,95 +753,95 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-12T09:08:01.269Z",
+      "at": "2026-10-12T12:04:45.970Z",
       "outcome": "success",
-      "latencyMs": 75
+      "latencyMs": 53
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-12T09:08:01.344Z",
+      "at": "2026-10-12T12:04:46.023Z",
       "outcome": "success",
-      "latencyMs": 734
+      "latencyMs": 640
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-12T09:08:02.079Z",
+      "at": "2026-10-12T12:04:46.664Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-12T09:08:02.083Z",
+      "at": "2026-10-12T12:04:46.666Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 1405
+      "latencyMs": 943
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-10-12T09:08:03.489Z",
+      "at": "2026-10-12T12:04:47.610Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/load",
       "scenario": "load:replay:2",
-      "at": "2026-10-12T09:08:03.490Z",
+      "at": "2026-10-12T12:04:47.611Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-12T09:08:03.491Z",
+      "at": "2026-10-12T12:04:47.612Z",
       "outcome": "success",
-      "latencyMs": 643
+      "latencyMs": 646
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-10-12T09:08:04.134Z",
+      "at": "2026-10-12T12:04:48.258Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 930
+      "latencyMs": 911
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-12T09:08:05.064Z",
+      "at": "2026-10-12T12:04:49.169Z",
       "outcome": "success",
-      "latencyMs": 590
+      "latencyMs": 497
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-10-12T09:08:05.654Z",
+      "at": "2026-10-12T12:04:49.666Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 933
+      "latencyMs": 805
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-12T09:08:06.588Z",
+      "at": "2026-10-12T12:04:50.471Z",
       "outcome": "success",
-      "latencyMs": 647
+      "latencyMs": 662
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-10-12T09:08:07.235Z",
+      "at": "2026-10-12T12:04:51.133Z",
       "outcome": "error",
       "errorCode": -32602,
-      "latencyMs": 3
+      "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-12T09:08:07.240Z",
+      "at": "2026-10-12T12:04:51.136Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -849,7 +849,7 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-12T09:08:07.240Z",
+      "at": "2026-10-12T12:04:51.136Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -857,7 +857,7 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-12T09:08:07.241Z",
+      "at": "2026-10-12T12:04:51.137Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -867,7 +867,7 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "S-mv514gqp-ytdsfu",
+      "sessionId": "S-mv57frd4-ngfsi0",
       "configuration": {
         "execution-environment": "local",
         "permission": "default",
@@ -896,7 +896,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "S-mv514ieb-31odc9",
+      "sessionId": "S-mv57fsl8-mct7zh",
       "configuration": {},
       "result": {
         "status": "blocked",
@@ -923,7 +923,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "S-mv514jm1-y3h924",
+      "sessionId": "S-mv57ftsi-o68rom",
       "configuration": {},
       "result": {
         "status": "blocked",
@@ -975,7 +975,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 43007,
+      "port": 34361,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 7,
