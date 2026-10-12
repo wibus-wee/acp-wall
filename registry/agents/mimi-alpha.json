@@ -1,0 +1,23 @@
+{
+  "name": "mimi-alpha",
+  "display": "Mimi Alpha",
+  "vendor": "Unknown",
+  "version": "0.0.0",
+  "description": "An anonymous ACP",
+  "repo": "anonymous/acp-extension-mimi-alpha",
+  "website": "https://github.com/anonymous/acp-extension-mimi-alpha",
+  "icon": null,
+  "install": "npx -y @sorbetai/acp@latest",
+  "run": "npx -y @sorbetai/acp@latest",
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@sorbetai/acp@latest",
+    "args": []
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": "Bridge only.",
+  "_synced": "hand-written · 2026-10-12"
+}
