@@ -34,7 +34,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-11T10:53:22.943Z",
+  "probedAt": "2026-10-12T09:09:18.322Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -60,9 +60,9 @@
     "command": "npx -y droid@0.238.0 exec --output-format acp-daemon",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "7c8804187ccf4ce1e6596f2109030b806949b2d48672a460c1d903a201fdae12",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38133449393",
-    "revision": "57d882175cd4f06f80cb446c6e901b21997b62fe",
+    "recipeSha256": "5be68deb50eb8c3a3395c7812ccfb7cc1bba501265fcdba7bfb25cd924f846d7",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38227839076",
+    "revision": "1a58499a19eb026b0fa0a638655c488c2a440e3a",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -84,7 +84,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · @factory/cli",
-          "latencyMs": 5812
+          "latencyMs": 6312
         }
       ]
     },
@@ -113,7 +113,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Authentication failed. Please log in using /login or set a valid FACTORY_API_KEY environment variable.",
-          "latencyMs": 151
+          "latencyMs": 299
         }
       ]
     },
@@ -175,7 +175,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 423
+          "latencyMs": 1242
         },
         {
           "method": "session/resume",
@@ -526,14 +526,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · @factory/cli",
-      "latencyMs": 5812
+      "latencyMs": 6312
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Authentication failed. Please log in using /login or set a valid FACTORY_API_KEY environment variable.",
-      "latencyMs": 151
+      "latencyMs": 299
     },
     "set_mode": {
       "status": "blocked",
@@ -610,7 +610,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 423
+      "latencyMs": 1242
     },
     "session/resume": {
       "status": "blocked",
@@ -744,29 +744,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-11T10:53:16.551Z",
+      "at": "2026-10-12T09:09:10.462Z",
       "outcome": "success",
-      "latencyMs": 5812
+      "latencyMs": 6312
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-11T10:53:22.363Z",
+      "at": "2026-10-12T09:09:16.775Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 151
+      "latencyMs": 299
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-11T10:53:22.516Z",
+      "at": "2026-10-12T09:09:17.076Z",
       "outcome": "success",
-      "latencyMs": 423
+      "latencyMs": 1242
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-11T10:53:22.940Z",
+      "at": "2026-10-12T09:09:18.319Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -774,7 +774,7 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-11T10:53:22.941Z",
+      "at": "2026-10-12T09:09:18.320Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -782,7 +782,7 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-11T10:53:22.941Z",
+      "at": "2026-10-12T09:09:18.320Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -814,7 +814,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 42833,
+      "port": 33459,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 7,

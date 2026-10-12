@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "harn",
   "agentName": "harn",
-  "agentVersion": "0.10.163",
+  "agentVersion": "0.10.165",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -72,8 +72,8 @@
             },
             "_harn/providerCatalog": {
               "description": "Return the normalized provider/model catalog used by this runtime.",
-              "schema": "https://harnlang.com/schemas/provider-catalog.v12.json",
-              "schemaVersion": 12
+              "schema": "https://harnlang.com/schemas/provider-catalog.v13.json",
+              "schemaVersion": 13
             },
             "harn.session_history.boundaries": {
               "description": "Acknowledge canonical history positions after the owning transcript journal flushes.",
@@ -241,7 +241,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-11T10:54:02.059Z",
+  "probedAt": "2026-10-12T09:09:51.627Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -267,9 +267,9 @@
     "command": "${REPO_ROOT}/.cache/agents/harn/agent serve acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "8603b2eede81aa6c6003bbbe20f71eda8ebd9c73ce244ef7b98310a3aba22a45",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38133449393",
-    "revision": "57d882175cd4f06f80cb446c6e901b21997b62fe",
+    "recipeSha256": "8279522eb42cf1ffa54b9e579648b7bb3ac83ebc5aefc27068b4e7e42926c49b",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38227839076",
+    "revision": "1a58499a19eb026b0fa0a638655c488c2a440e3a",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -291,7 +291,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · harn",
-          "latencyMs": 48
+          "latencyMs": 39
         }
       ]
     },
@@ -382,7 +382,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 0
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -733,7 +733,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · harn",
-      "latencyMs": 48
+      "latencyMs": 39
     },
     "session/new": {
       "status": "observed",
@@ -817,7 +817,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "blocked",
@@ -951,14 +951,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-11T10:54:02.002Z",
+      "at": "2026-10-12T09:09:51.580Z",
       "outcome": "success",
-      "latencyMs": 48
+      "latencyMs": 39
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-11T10:54:02.052Z",
+      "at": "2026-10-12T09:09:51.621Z",
       "outcome": "error",
       "errorCode": -32602,
       "latencyMs": 0
@@ -966,33 +966,33 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-11T10:54:02.055Z",
+      "at": "2026-10-12T09:09:51.623Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-11T10:54:02.056Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 1
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-11T10:54:02.057Z",
+      "at": "2026-10-12T09:09:51.625Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
     },
     {
-      "method": "_lody/session/history/read",
+      "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-11T10:54:02.057Z",
+      "at": "2026-10-12T09:09:51.625Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-10-12T09:09:51.626Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -1021,7 +1021,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 42951,
+      "port": 44963,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

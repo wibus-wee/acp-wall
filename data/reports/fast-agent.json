@@ -8,7 +8,7 @@
     "capabilities": {},
     "authMethods": []
   },
-  "probedAt": "2026-10-11T10:53:18.818Z",
+  "probedAt": "2026-10-12T09:09:07.101Z",
   "state": "blocked",
   "summary": {
     "pass": 0,
@@ -34,9 +34,9 @@
     "command": "uvx fast-agent-acp==0.10.1 -x",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "6deb7bc4fbd3cbeb4d0a3adcb8fc1f0f78890a3cf0be4f7e971269b6833288ad",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38133449393",
-    "revision": "57d882175cd4f06f80cb446c6e901b21997b62fe",
+    "recipeSha256": "2a302ca9b3f2b0f2d85f40a6d7a60e7305c62b3e78b06672743f18de0078ebcc",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38227839076",
+    "revision": "1a58499a19eb026b0fa0a638655c488c2a440e3a",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -59,7 +59,7 @@
           "status": "na",
           "reason": "transport",
           "note": "agent exited (code 2)",
-          "latencyMs": 62
+          "latencyMs": 58
         }
       ]
     },
@@ -502,7 +502,7 @@
       "status": "na",
       "reason": "transport",
       "note": "agent exited (code 2)",
-      "latencyMs": 62
+      "latencyMs": 58
     },
     "authenticate": {
       "status": "blocked",
@@ -715,16 +715,16 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-11T10:53:18.642Z",
+      "at": "2026-10-12T09:09:06.933Z",
       "outcome": "error",
-      "latencyMs": 110
+      "latencyMs": 107
     },
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-11T10:53:18.755Z",
+      "at": "2026-10-12T09:09:07.042Z",
       "outcome": "error",
-      "latencyMs": 62
+      "latencyMs": 58
     }
   ],
   "scenarios": [],
@@ -734,7 +734,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 41083,
+      "port": 37879,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 2,
