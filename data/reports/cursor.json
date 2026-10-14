@@ -28,7 +28,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-13T11:52:59.527Z",
+  "probedAt": "2026-10-14T09:34:48.244Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -54,9 +54,9 @@
     "command": "${REPO_ROOT}/.cache/agents/cursor/agent acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "7e9b31113b00b3ffb58cd75eeac2811ecfaa81c862c698d35a6282d599d62418",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38393127238",
-    "revision": "4e5dbde4786068cd6c9d78509d65e9eb04e6bd4a",
+    "recipeSha256": "5671fce4d57e71167b9e446be8c0fda72c8b4df2efbf090b170a396ad99bcacb",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38543207137",
+    "revision": "d4fa7ab4778b537b6b7a10c807b300265f7a5665",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -78,7 +78,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · unnamed agent",
-          "latencyMs": 783
+          "latencyMs": 759
         }
       ]
     },
@@ -107,7 +107,7 @@
           "reason": "request-rejected",
           "errorCode": -32603,
           "note": "Internal error — {\"message\":\"Failed to initialize session services\"}",
-          "latencyMs": 562
+          "latencyMs": 551
         }
       ]
     },
@@ -520,14 +520,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · unnamed agent",
-      "latencyMs": 783
+      "latencyMs": 759
     },
     "session/new": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32603,
       "note": "Internal error — {\"message\":\"Failed to initialize session services\"}",
-      "latencyMs": 562
+      "latencyMs": 551
     },
     "set_mode": {
       "status": "blocked",
@@ -738,29 +738,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-13T11:52:58.174Z",
+      "at": "2026-10-14T09:34:46.924Z",
       "outcome": "success",
-      "latencyMs": 783
+      "latencyMs": 759
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-13T11:52:58.957Z",
+      "at": "2026-10-14T09:34:47.684Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 562
+      "latencyMs": 551
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-13T11:52:59.521Z",
+      "at": "2026-10-14T09:34:48.238Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-13T11:52:59.524Z",
+      "at": "2026-10-14T09:34:48.241Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -768,7 +768,7 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-13T11:52:59.524Z",
+      "at": "2026-10-14T09:34:48.241Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -776,7 +776,7 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-13T11:52:59.525Z",
+      "at": "2026-10-14T09:34:48.242Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -805,10 +805,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 35677,
+      "port": 33605,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 6,
+      "relayed": 5,
       "drops": 0
     }
   }

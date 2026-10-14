@@ -8,7 +8,7 @@
     "capabilities": {},
     "authMethods": []
   },
-  "probedAt": "2026-10-13T11:54:31.931Z",
+  "probedAt": "2026-10-14T09:36:27.664Z",
   "state": "blocked",
   "summary": {
     "pass": 0,
@@ -34,9 +34,9 @@
     "command": "uvx --with agent-client-protocol==0.8.1 minion-code@0.1.44 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "29dda4d62b4754dcaf9834d47c8dfc4dac5394e3d25501a8f8d53dbb0359a1e8",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38393127238",
-    "revision": "4e5dbde4786068cd6c9d78509d65e9eb04e6bd4a",
+    "recipeSha256": "4b37d10af65edfce0527cc5fd7de35ab54c977f2c5da17b9d2098ed3b625c32b",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38543207137",
+    "revision": "d4fa7ab4778b537b6b7a10c807b300265f7a5665",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -715,14 +715,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-13T11:54:31.764Z",
+      "at": "2026-10-14T09:36:27.499Z",
       "outcome": "error",
-      "latencyMs": 106
+      "latencyMs": 103
     },
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-13T11:54:31.873Z",
+      "at": "2026-10-14T09:36:27.605Z",
       "outcome": "error",
       "latencyMs": 57
     }
@@ -734,10 +734,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 33945,
+      "port": 44913,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 4,
+      "relayed": 3,
       "drops": 0
     }
   }

@@ -32,7 +32,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-13T11:56:18.647Z",
+  "probedAt": "2026-10-14T09:38:05.310Z",
   "state": "blocked",
   "summary": {
     "pass": 5,
@@ -58,9 +58,9 @@
     "command": "npx -y @smbcloud/sigit@1.5.10 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "e618e86606f918d8d2d63dd7c32d753395b02390c0e84eb87f468eda0badbd46",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38393127238",
-    "revision": "4e5dbde4786068cd6c9d78509d65e9eb04e6bd4a",
+    "recipeSha256": "28e19d504110b74140c5b30177723aaa29c5a973052608083472712b84e59684",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38543207137",
+    "revision": "d4fa7ab4778b537b6b7a10c807b300265f7a5665",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -82,7 +82,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · sigit",
-          "latencyMs": 3536
+          "latencyMs": 3575
         }
       ]
     },
@@ -250,7 +250,7 @@
           "status": "pass",
           "note": "Accepted current value of sigit-model",
           "advertised": true,
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -304,7 +304,7 @@
         {
           "method": "update:tool_call",
           "status": "pass",
-          "note": "36 notification(s) observed"
+          "note": "32 notification(s) observed"
         }
       ]
     },
@@ -503,7 +503,7 @@
     "cancel": "cancel: No successful prompt to establish cancellation conditions",
     "logout": "logout: Not advertised; optional method not invoked",
     "message*": "update:message: No matching notifications observed; see scenario stimuli",
-    "tool_call*": "update:tool_call: 36 notification(s) observed",
+    "tool_call*": "update:tool_call: 32 notification(s) observed",
     "usage": "update:usage: No matching notifications observed; see scenario stimuli",
     "permission": "request_permission: Not observed; prerequisite session/prompt unavailable",
     "plan": "update:plan: No matching notifications observed; see scenario stimuli",
@@ -519,7 +519,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · sigit",
-      "latencyMs": 3536
+      "latencyMs": 3575
     },
     "session/new": {
       "status": "pass",
@@ -535,7 +535,7 @@
       "status": "pass",
       "note": "Accepted current value of sigit-model",
       "advertised": true,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "session/prompt": {
       "status": "na",
@@ -685,7 +685,7 @@
     },
     "update:tool_call": {
       "status": "pass",
-      "note": "36 notification(s) observed"
+      "note": "32 notification(s) observed"
     },
     "update:plan": {
       "status": "blocked",
@@ -732,28 +732,28 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-13T11:55:15.091Z",
+      "at": "2026-10-14T09:37:01.715Z",
       "outcome": "success",
-      "latencyMs": 3536
+      "latencyMs": 3575
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-13T11:55:18.628Z",
+      "at": "2026-10-14T09:37:05.291Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-13T11:55:18.630Z",
+      "at": "2026-10-14T09:37:05.293Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-13T11:55:18.631Z",
+      "at": "2026-10-14T09:37:05.295Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 30001
@@ -761,7 +761,7 @@
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-10-13T11:55:48.633Z",
+      "at": "2026-10-14T09:37:35.298Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 15001
@@ -769,7 +769,7 @@
     {
       "method": "session/fork",
       "scenario": "session/fork",
-      "at": "2026-10-13T11:56:03.634Z",
+      "at": "2026-10-14T09:37:50.299Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 15005
@@ -777,15 +777,15 @@
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-13T11:56:18.641Z",
+      "at": "2026-10-14T09:38:05.307Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-13T11:56:18.642Z",
+      "at": "2026-10-14T09:38:05.307Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -793,17 +793,17 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-13T11:56:18.643Z",
+      "at": "2026-10-14T09:38:05.308Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 2
+      "latencyMs": 0
     }
   ],
   "scenarios": [
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "4dac049d-3cf2-4b89-b87a-5fe4afe6a6d7",
+      "sessionId": "827f5cca-34cf-46c6-b9d0-7cb41dae9e5c",
       "configuration": {
         "sigit-model": "bartowski/Qwen2.5-3B-Instruct-GGUF",
         "sigit-local-inference": "local-inference-on",
@@ -827,7 +827,7 @@
       ],
       "tools": [
         {
-          "id": "startup-load-92ce2935-2f26-421b-9d7c-88efc123efda",
+          "id": "startup-load-5a7067ad-0494-488a-bee2-31063c3ad742",
           "name": "⠏ Downloading Qwen 2.5 3B (~1.80 GB) (99%)",
           "status": "in_progress"
         }
@@ -863,10 +863,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 45253,
+      "port": 44753,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 9,
+      "relayed": 10,
       "drops": 0
     }
   }
