@@ -1,0 +1,28 @@
+{
+  "name": "bob",
+  "display": "Bob",
+  "vendor": "IBM",
+  "version": "2.0.7",
+  "description": "IBM Bob is your AI-Powered Development Partner",
+  "repo": null,
+  "website": "https://bob.ibm.com",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/bob.svg",
+  "license": "proprietary",
+  "install": null,
+  "run": "npx -y @ibm/bob@2.0.7 acp",
+  "setup": [],
+  "probeProfiles": [],
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@ibm/bob@2.0.7",
+    "args": [
+      "acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-10-14"
+}
