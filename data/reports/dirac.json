@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "dirac",
   "agentName": "dirac",
-  "agentVersion": "0.5.20",
+  "agentVersion": "0.5.21",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -49,7 +49,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-10-14T09:35:22.279Z",
+  "probedAt": "2026-10-15T09:12:45.534Z",
   "state": "issues",
   "summary": {
     "pass": 19,
@@ -72,12 +72,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.21.0",
-    "command": "npx -y dirac-cli@0.5.20 --acp",
+    "command": "npx -y dirac-cli@0.5.21 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "cee424532af4e454aea2b1dbae96e63dd9e68923c9edf059e99b695586a8b37c",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38543207137",
-    "revision": "d4fa7ab4778b537b6b7a10c807b300265f7a5665",
+    "recipeSha256": "3f9b9e59cd925d9213c17e33046a18d657742ecb7814a24d56514c065129dd2e",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38711040021",
+    "revision": "8b15fae71261c2491ed11daa0ed089795ccbbd9f",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -120,7 +120,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · dirac",
-          "latencyMs": 11044
+          "latencyMs": 8000
         }
       ]
     },
@@ -146,7 +146,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 57
+          "latencyMs": 38
         }
       ]
     },
@@ -159,7 +159,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 39
+          "latencyMs": 20
         }
       ]
     },
@@ -214,19 +214,19 @@
           "definitive": true,
           "note": "\"Method not found\": session/resume — {\"method\":\"session/resume\"}",
           "advertised": true,
-          "latencyMs": 15
+          "latencyMs": 16
         },
         {
           "method": "session/close",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 477
+          "latencyMs": 286
         },
         {
           "method": "session/delete",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 556
+          "latencyMs": 471
         }
       ]
     },
@@ -266,7 +266,7 @@
           "status": "pass",
           "note": "Accepted offered mode act; policy semantics not inferred from its name",
           "advertised": true,
-          "latencyMs": 91
+          "latencyMs": 151
         }
       ]
     },
@@ -280,7 +280,7 @@
           "status": "pass",
           "note": "Accepted current value of mode",
           "advertised": true,
-          "latencyMs": 198
+          "latencyMs": 34
         }
       ]
     },
@@ -292,7 +292,7 @@
         {
           "method": "cancel",
           "status": "pass",
-          "note": "In-flight prompt returned cancelled after 457ms"
+          "note": "In-flight prompt returned cancelled after 440ms"
         }
       ]
     },
@@ -514,7 +514,7 @@
     "load:replay": "load:replay: Prior conversation text replayed for the same session",
     "set_mode": "set_mode: Accepted offered mode act; policy semantics not inferred from its name",
     "set_config": "set_config: Accepted current value of mode",
-    "cancel": "cancel: In-flight prompt returned cancelled after 457ms",
+    "cancel": "cancel: In-flight prompt returned cancelled after 440ms",
     "logout": "logout: No authentication established by this run; shared account state is not changed",
     "message*": "update:message: 33 notification(s) observed",
     "tool_call*": "update:tool_call: 39 notification(s) observed",
@@ -533,24 +533,24 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · dirac",
-      "latencyMs": 11044
+      "latencyMs": 8000
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 57
+      "latencyMs": 38
     },
     "set_mode": {
       "status": "pass",
       "note": "Accepted offered mode act; policy semantics not inferred from its name",
       "advertised": true,
-      "latencyMs": 91
+      "latencyMs": 151
     },
     "set_config": {
       "status": "pass",
       "note": "Accepted current value of mode",
       "advertised": true,
-      "latencyMs": 198
+      "latencyMs": 34
     },
     "session/prompt": {
       "status": "pass",
@@ -558,12 +558,12 @@
     },
     "cancel": {
       "status": "pass",
-      "note": "In-flight prompt returned cancelled after 457ms"
+      "note": "In-flight prompt returned cancelled after 440ms"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 39
+      "latencyMs": 20
     },
     "load:replay": {
       "status": "pass",
@@ -622,17 +622,17 @@
       "definitive": true,
       "note": "\"Method not found\": session/resume — {\"method\":\"session/resume\"}",
       "advertised": true,
-      "latencyMs": 15
+      "latencyMs": 16
     },
     "session/close": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 477
+      "latencyMs": 286
     },
     "session/delete": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 556
+      "latencyMs": 471
     },
     "mcp:stdio": {
       "status": "na",
@@ -726,188 +726,188 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-14T09:35:02.590Z",
+      "at": "2026-10-15T09:12:29.858Z",
       "outcome": "success",
-      "latencyMs": 11044
+      "latencyMs": 8000
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-14T09:35:13.634Z",
+      "at": "2026-10-15T09:12:37.859Z",
       "outcome": "success",
-      "latencyMs": 57
+      "latencyMs": 38
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-10-14T09:35:13.693Z",
+      "at": "2026-10-15T09:12:37.899Z",
       "outcome": "success",
-      "latencyMs": 91
+      "latencyMs": 151
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-14T09:35:13.784Z",
+      "at": "2026-10-15T09:12:38.052Z",
       "outcome": "success",
-      "latencyMs": 198
+      "latencyMs": 34
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-14T09:35:13.983Z",
+      "at": "2026-10-15T09:12:38.087Z",
       "outcome": "success",
-      "latencyMs": 1538
+      "latencyMs": 1489
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-10-14T09:35:15.521Z",
+      "at": "2026-10-15T09:12:39.577Z",
       "outcome": "success",
-      "latencyMs": 24
+      "latencyMs": 19
     },
     {
       "method": "session/prompt",
       "scenario": "default:write",
-      "at": "2026-10-14T09:35:15.545Z",
+      "at": "2026-10-15T09:12:39.596Z",
       "outcome": "success",
-      "latencyMs": 1033
+      "latencyMs": 1042
     },
     {
       "method": "session/prompt",
       "scenario": "default:plan",
-      "at": "2026-10-14T09:35:16.578Z",
+      "at": "2026-10-15T09:12:40.638Z",
       "outcome": "success",
-      "latencyMs": 16
+      "latencyMs": 18
     },
     {
       "method": "session/prompt",
       "scenario": "cancel",
-      "at": "2026-10-14T09:35:16.595Z",
+      "at": "2026-10-15T09:12:40.656Z",
       "outcome": "success",
-      "latencyMs": 457
+      "latencyMs": 440
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-10-14T09:35:17.052Z",
+      "at": "2026-10-15T09:12:41.097Z",
       "outcome": "success",
-      "latencyMs": 39
+      "latencyMs": 20
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-14T09:35:17.092Z",
+      "at": "2026-10-15T09:12:41.117Z",
       "outcome": "success",
-      "latencyMs": 52
+      "latencyMs": 29
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-10-14T09:35:17.145Z",
+      "at": "2026-10-15T09:12:41.147Z",
       "outcome": "success",
-      "latencyMs": 880
+      "latencyMs": 849
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-14T09:35:18.025Z",
+      "at": "2026-10-15T09:12:41.997Z",
       "outcome": "success",
-      "latencyMs": 47
+      "latencyMs": 21
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-10-14T09:35:18.072Z",
+      "at": "2026-10-15T09:12:42.018Z",
       "outcome": "success",
-      "latencyMs": 1012
+      "latencyMs": 878
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-14T09:35:19.085Z",
+      "at": "2026-10-15T09:12:42.897Z",
       "outcome": "success",
-      "latencyMs": 44
+      "latencyMs": 23
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-10-14T09:35:19.130Z",
+      "at": "2026-10-15T09:12:42.921Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 15
+      "latencyMs": 16
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-14T09:35:19.145Z",
+      "at": "2026-10-15T09:12:42.937Z",
       "outcome": "success",
-      "latencyMs": 96
+      "latencyMs": 37
     },
     {
       "method": "session/close",
       "scenario": "session-mgmt",
-      "at": "2026-10-14T09:35:19.242Z",
+      "at": "2026-10-15T09:12:42.974Z",
       "outcome": "success",
-      "latencyMs": 477
+      "latencyMs": 286
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-14T09:35:19.720Z",
+      "at": "2026-10-15T09:12:43.260Z",
       "outcome": "success",
-      "latencyMs": 56
+      "latencyMs": 32
     },
     {
       "method": "session/delete",
       "scenario": "session-mgmt",
-      "at": "2026-10-14T09:35:19.777Z",
+      "at": "2026-10-15T09:12:43.293Z",
       "outcome": "success",
-      "latencyMs": 556
+      "latencyMs": 471
     },
     {
       "method": "session/new",
       "scenario": "mcp:stdio:default",
-      "at": "2026-10-14T09:35:20.334Z",
+      "at": "2026-10-15T09:12:43.765Z",
       "outcome": "success",
-      "latencyMs": 98
+      "latencyMs": 86
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:stdio:default",
-      "at": "2026-10-14T09:35:20.433Z",
+      "at": "2026-10-15T09:12:43.851Z",
       "outcome": "success",
-      "latencyMs": 1341
+      "latencyMs": 1179
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-14T09:35:22.276Z",
+      "at": "2026-10-15T09:12:45.532Z",
       "outcome": "error",
       "errorCode": -32602,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-14T09:35:22.277Z",
+      "at": "2026-10-15T09:12:45.532Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-14T09:35:22.277Z",
+      "at": "2026-10-15T09:12:45.533Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "7c7d5422-e8cc-473c-9b22-137b0a2ef473",
+      "sessionId": "775f02b4-dea8-4839-9b36-21fe1d5b0a01",
       "configuration": {
         "mode": "act",
         "auto_approve": false,
@@ -937,7 +937,7 @@
       ],
       "tools": [
         {
-          "id": "1791970515518-3",
+          "id": "1792055559574-3",
           "name": "Mistake Limit Reached",
           "status": "pending"
         }
@@ -952,7 +952,7 @@
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "7c7d5422-e8cc-473c-9b22-137b0a2ef473",
+      "sessionId": "775f02b4-dea8-4839-9b36-21fe1d5b0a01",
       "configuration": {
         "mode": "act",
         "auto_approve": false,
@@ -978,7 +978,7 @@
       ],
       "tools": [
         {
-          "id": "1791970515518-3",
+          "id": "1792055559574-3",
           "name": "Mistake Limit Reached",
           "status": "pending"
         }
@@ -991,7 +991,7 @@
     {
       "id": "default:write",
       "profile": "default",
-      "sessionId": "7c7d5422-e8cc-473c-9b22-137b0a2ef473",
+      "sessionId": "775f02b4-dea8-4839-9b36-21fe1d5b0a01",
       "configuration": {
         "mode": "act",
         "auto_approve": false,
@@ -1020,17 +1020,17 @@
       ],
       "tools": [
         {
-          "id": "1791970515893-2",
+          "id": "1792055559967-2",
           "name": "Wrote ./probe-out.txt",
           "status": "completed"
         },
         {
-          "id": "1791970515897-3",
+          "id": "1792055559970-3",
           "name": "Permission Request",
           "status": "completed"
         },
         {
-          "id": "1791970516577-5",
+          "id": "1792055560637-5",
           "name": "Mistake Limit Reached",
           "status": "pending"
         }
@@ -1045,7 +1045,7 @@
     {
       "id": "default:plan",
       "profile": "default",
-      "sessionId": "7c7d5422-e8cc-473c-9b22-137b0a2ef473",
+      "sessionId": "775f02b4-dea8-4839-9b36-21fe1d5b0a01",
       "configuration": {
         "mode": "act",
         "auto_approve": false,
@@ -1071,7 +1071,7 @@
       ],
       "tools": [
         {
-          "id": "1791970516577-5",
+          "id": "1792055560637-5",
           "name": "Mistake Limit Reached",
           "status": "pending"
         }
@@ -1084,7 +1084,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "c45f49fb-cdcc-434d-ae93-4fb647d84b0f",
+      "sessionId": "d002064f-a45d-4701-9c5a-8741e4cf581f",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1107,7 +1107,7 @@
       ],
       "tools": [
         {
-          "id": "1791970518024-3",
+          "id": "1792055561996-3",
           "name": "Mistake Limit Reached",
           "status": "pending"
         }
@@ -1120,7 +1120,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "70c596e2-fca7-42eb-b695-ae6fa6948533",
+      "sessionId": "09f86b1e-6553-4510-b90b-15e1c798b4f5",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1143,7 +1143,7 @@
       ],
       "tools": [
         {
-          "id": "1791970519083-3",
+          "id": "1792055562827-3",
           "name": "Mistake Limit Reached",
           "status": "pending"
         }
@@ -1156,7 +1156,7 @@
     {
       "id": "mcp:stdio:default",
       "profile": "default",
-      "sessionId": "bb5fd515-7fbc-478d-a001-904bae2f5de4",
+      "sessionId": "76fcfe76-f884-4f02-a6bf-2ed3612e3838",
       "configuration": {
         "mode": "act",
         "auto_approve": false,
@@ -1187,7 +1187,7 @@
       ],
       "tools": [
         {
-          "id": "1791970521773-3",
+          "id": "1792055565029-3",
           "name": "Mistake Limit Reached",
           "status": "pending"
         }
@@ -1247,12 +1247,12 @@
   },
   "transport": {
     "mitm": {
-      "port": 40409,
+      "port": 35077,
       "impersonated": [
         "api.deepseek.com"
       ],
       "impersonations": 2,
-      "relayed": 16,
+      "relayed": 15,
       "drops": 0
     }
   }

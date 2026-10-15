@@ -36,7 +36,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-14T09:34:04.723Z",
+  "probedAt": "2026-10-15T09:11:32.076Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -62,9 +62,9 @@
     "command": "npx -y @ibm/bob@2.0.7 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "a34130fd0f4773885479d0a3751275cf0b275903865493906ca15f01fcccb330",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38543207137",
-    "revision": "d4fa7ab4778b537b6b7a10c807b300265f7a5665",
+    "recipeSha256": "93fb50c5a23b05d90ab446bc0714832519d3000e9b62740363e5726ce5bd79ad",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38711040021",
+    "revision": "8b15fae71261c2491ed11daa0ed089795ccbbd9f",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -86,7 +86,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · bob-shell",
-          "latencyMs": 3748
+          "latencyMs": 4050
         }
       ]
     },
@@ -114,8 +114,8 @@
           "status": "observed",
           "reason": "request-rejected",
           "errorCode": -32600,
-          "note": "Invalid request: Workspace \"/tmp/acp-probe-logNTb\" is not trusted. Pass --trust to trust each workspace opened by this ACP server, or run Bob Shell interactively in this folder and choose a trust level, then reopen the ACP session.",
-          "latencyMs": 751
+          "note": "Invalid request: Workspace \"/tmp/acp-probe-Eo5NJo\" is not trusted. Pass --trust to trust each workspace opened by this ACP server, or run Bob Shell interactively in this folder and choose a trust level, then reopen the ACP session.",
+          "latencyMs": 537
         }
       ]
     },
@@ -500,7 +500,7 @@
   "notes": {
     "initialize": "initialize: Protocol 1 · bob-shell",
     "authenticate": "authenticate: Advertised: sso; login not attempted in unattended discovery",
-    "session/new": "session/new: Invalid request: Workspace \"/tmp/acp-probe-logNTb\" is not trusted. Pass --trust to trust each workspace opened by this ACP server, or run Bob Shell interactively in this folder and choose a trust level, then reopen the ACP session.",
+    "session/new": "session/new: Invalid request: Workspace \"/tmp/acp-probe-Eo5NJo\" is not trusted. Pass --trust to trust each workspace opened by this ACP server, or run Bob Shell interactively in this folder and choose a trust level, then reopen the ACP session.",
     "session/load": "session/load: Not exercised; prerequisite session/new unavailable",
     "session/prompt": "session/prompt: No usable session; see session/new",
     "prompt:content": "prompt:image: No usable session; see session/new · prompt:embedded-context: No usable session; see session/new",
@@ -528,14 +528,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · bob-shell",
-      "latencyMs": 3748
+      "latencyMs": 4050
     },
     "session/new": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32600,
-      "note": "Invalid request: Workspace \"/tmp/acp-probe-logNTb\" is not trusted. Pass --trust to trust each workspace opened by this ACP server, or run Bob Shell interactively in this folder and choose a trust level, then reopen the ACP session.",
-      "latencyMs": 751
+      "note": "Invalid request: Workspace \"/tmp/acp-probe-Eo5NJo\" is not trusted. Pass --trust to trust each workspace opened by this ACP server, or run Bob Shell interactively in this folder and choose a trust level, then reopen the ACP session.",
+      "latencyMs": 537
     },
     "set_mode": {
       "status": "blocked",
@@ -746,29 +746,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-14T09:34:00.216Z",
+      "at": "2026-10-15T09:11:27.478Z",
       "outcome": "success",
-      "latencyMs": 3748
+      "latencyMs": 4050
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-14T09:34:03.965Z",
+      "at": "2026-10-15T09:11:31.528Z",
       "outcome": "error",
       "errorCode": -32600,
-      "latencyMs": 751
+      "latencyMs": 537
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-14T09:34:04.717Z",
+      "at": "2026-10-15T09:11:32.068Z",
       "outcome": "success",
       "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-14T09:34:04.721Z",
+      "at": "2026-10-15T09:11:32.073Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -776,7 +776,7 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-14T09:34:04.722Z",
+      "at": "2026-10-15T09:11:32.074Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -784,10 +784,10 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-14T09:34:04.722Z",
+      "at": "2026-10-15T09:11:32.074Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -815,10 +815,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 43965,
+      "port": 36371,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 13,
+      "relayed": 12,
       "drops": 0
     }
   }
