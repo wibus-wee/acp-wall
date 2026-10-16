@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "bob",
   "agentName": "bob-shell",
-  "agentVersion": "2.0.7",
+  "agentVersion": "2.0.8",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -36,12 +36,12 @@
       }
     ]
   },
-  "probedAt": "2026-10-15T09:11:32.076Z",
+  "probedAt": "2026-10-16T09:04:34.076Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
-    "observed": 1,
-    "blocked": 25,
+    "observed": 0,
+    "blocked": 26,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
@@ -59,12 +59,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.21.0",
-    "command": "npx -y @ibm/bob@2.0.7 acp",
+    "command": "npx -y @ibm/bob@2.0.8 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "93fb50c5a23b05d90ab446bc0714832519d3000e9b62740363e5726ce5bd79ad",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38711040021",
-    "revision": "8b15fae71261c2491ed11daa0ed089795ccbbd9f",
+    "recipeSha256": "bfaeb83f88e016aceb644f15e52a77aa018b4958dc6002cb045049641603a1a0",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38877879108",
+    "revision": "30d7fafe6205333fb342d607be8ef4ea5fa35f39",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -86,7 +86,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · bob-shell",
-          "latencyMs": 4050
+          "latencyMs": 4395
         }
       ]
     },
@@ -107,15 +107,15 @@
     {
       "key": "session/new",
       "scope": "core",
-      "status": "observed",
+      "status": "blocked",
       "items": [
         {
           "method": "session/new",
-          "status": "observed",
-          "reason": "request-rejected",
-          "errorCode": -32600,
-          "note": "Invalid request: Workspace \"/tmp/acp-probe-Eo5NJo\" is not trusted. Pass --trust to trust each workspace opened by this ACP server, or run Bob Shell interactively in this folder and choose a trust level, then reopen the ACP session.",
-          "latencyMs": 537
+          "status": "blocked",
+          "reason": "authentication",
+          "errorCode": -32000,
+          "note": "Authentication required",
+          "latencyMs": 795
         }
       ]
     },
@@ -177,7 +177,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 3
+          "latencyMs": 4
         },
         {
           "method": "session/resume",
@@ -500,7 +500,7 @@
   "notes": {
     "initialize": "initialize: Protocol 1 · bob-shell",
     "authenticate": "authenticate: Advertised: sso; login not attempted in unattended discovery",
-    "session/new": "session/new: Invalid request: Workspace \"/tmp/acp-probe-Eo5NJo\" is not trusted. Pass --trust to trust each workspace opened by this ACP server, or run Bob Shell interactively in this folder and choose a trust level, then reopen the ACP session.",
+    "session/new": "session/new: Authentication required",
     "session/load": "session/load: Not exercised; prerequisite session/new unavailable",
     "session/prompt": "session/prompt: No usable session; see session/new",
     "prompt:content": "prompt:image: No usable session; see session/new · prompt:embedded-context: No usable session; see session/new",
@@ -528,14 +528,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · bob-shell",
-      "latencyMs": 4050
+      "latencyMs": 4395
     },
     "session/new": {
-      "status": "observed",
-      "reason": "request-rejected",
-      "errorCode": -32600,
-      "note": "Invalid request: Workspace \"/tmp/acp-probe-Eo5NJo\" is not trusted. Pass --trust to trust each workspace opened by this ACP server, or run Bob Shell interactively in this folder and choose a trust level, then reopen the ACP session.",
-      "latencyMs": 537
+      "status": "blocked",
+      "reason": "authentication",
+      "errorCode": -32000,
+      "note": "Authentication required",
+      "latencyMs": 795
     },
     "set_mode": {
       "status": "blocked",
@@ -612,7 +612,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 3
+      "latencyMs": 4
     },
     "session/resume": {
       "status": "blocked",
@@ -746,53 +746,54 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-15T09:11:27.478Z",
+      "at": "2026-10-16T09:04:28.874Z",
       "outcome": "success",
-      "latencyMs": 4050
+      "latencyMs": 4395
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-15T09:11:31.528Z",
+      "at": "2026-10-16T09:04:33.271Z",
       "outcome": "error",
-      "errorCode": -32600,
-      "latencyMs": 537
+      "errorCode": -32000,
+      "latencyMs": 795
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-15T09:11:32.068Z",
+      "at": "2026-10-16T09:04:34.068Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 4
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-15T09:11:32.073Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 1
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-15T09:11:32.074Z",
+      "at": "2026-10-16T09:04:34.074Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
     },
     {
-      "method": "_lody/session/history/read",
+      "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-15T09:11:32.074Z",
+      "at": "2026-10-16T09:04:34.074Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-10-16T09:04:34.075Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
   "uncertaintyReasons": {
     "interactive-auth": 1,
+    "authentication": 1,
     "prerequisite": 24,
     "not-advertised": 5,
     "not-run": 2
@@ -815,10 +816,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 36371,
+      "port": 36381,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 12,
+      "relayed": 13,
       "drops": 0
     }
   }
