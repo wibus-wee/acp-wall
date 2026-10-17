@@ -28,7 +28,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-16T09:05:01.289Z",
+  "probedAt": "2026-10-17T08:37:31.625Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -54,9 +54,9 @@
     "command": "${REPO_ROOT}/.cache/agents/corust-agent/agent",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "acbc529ca2fad6632c3aafbaa68bb48af3ddd37ff61c7cbdfe47c5d104b70422",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/38877879108",
-    "revision": "30d7fafe6205333fb342d607be8ef4ea5fa35f39",
+    "recipeSha256": "605f7d08fa6f4a3634a6bd5237ce1f53966d865f9bc826d43d1607aa892e8275",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39018001561",
+    "revision": "ee3b64eaa6992b3a283d2e15d65160b6c2479394",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -739,14 +739,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-16T09:05:01.281Z",
+      "at": "2026-10-17T08:37:31.617Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-16T09:05:01.283Z",
+      "at": "2026-10-17T08:37:31.619Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 0
@@ -754,21 +754,21 @@
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-16T09:05:01.286Z",
-      "outcome": "success",
-      "latencyMs": 0
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-16T09:05:01.286Z",
+      "at": "2026-10-17T08:37:31.622Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-17T08:37:31.623Z",
+      "outcome": "success",
+      "latencyMs": 0
+    },
+    {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-16T09:05:01.287Z",
+      "at": "2026-10-17T08:37:31.623Z",
       "outcome": "success",
       "latencyMs": 0
     }
@@ -797,7 +797,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 41501,
+      "port": 33631,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
