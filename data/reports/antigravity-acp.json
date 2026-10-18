@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "antigravity-acp",
   "agentName": "antigravity-acp",
-  "agentVersion": "1.4.0",
+  "agentVersion": "1.4.1",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -57,7 +57,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-17T08:37:12.018Z",
+  "probedAt": "2026-10-18T08:53:41.465Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -83,9 +83,9 @@
     "command": "${REPO_ROOT}/.cache/agents/antigravity-acp/agent --uid=",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "3a9656f052f602e8a3c58e2f712841b1993b25e72761ba4fc4b04f7baadd9323",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39018001561",
-    "revision": "ee3b64eaa6992b3a283d2e15d65160b6c2479394",
+    "recipeSha256": "9d948ed247cf402f9292642f5eb107bb9e553485abf7787692e6e59326d3c004",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39113164535",
+    "revision": "07e4084e7dd3045b590e80b34c89f172f9270291",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -107,7 +107,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · antigravity-acp",
-          "latencyMs": 1934
+          "latencyMs": 1862
         }
       ]
     },
@@ -136,7 +136,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — {\"message\":\"No authentication method selected. Either call the `authenticate` method (supports oauth-personal, gemini-ap…",
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -198,7 +198,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 0
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -549,14 +549,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · antigravity-acp",
-      "latencyMs": 1934
+      "latencyMs": 1862
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — {\"message\":\"No authentication method selected. Either call the `authenticate` method (supports oauth-personal, gemini-ap…",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -633,7 +633,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "blocked",
@@ -766,43 +766,43 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-17T08:37:10.076Z",
+      "at": "2026-10-18T08:53:39.595Z",
       "outcome": "success",
-      "latencyMs": 1934
+      "latencyMs": 1862
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-17T08:37:12.011Z",
+      "at": "2026-10-18T08:53:41.458Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-17T08:37:12.014Z",
-      "outcome": "success",
-      "latencyMs": 0
-    },
-    {
-      "method": "_lody/rate_limits/get",
-      "scenario": "lody",
-      "at": "2026-10-17T08:37:12.016Z",
-      "outcome": "success",
-      "latencyMs": 0
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-17T08:37:12.016Z",
+      "at": "2026-10-18T08:53:41.461Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-10-18T08:53:41.463Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-18T08:53:41.464Z",
+      "outcome": "success",
+      "latencyMs": 0
+    },
+    {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-17T08:37:12.017Z",
+      "at": "2026-10-18T08:53:41.464Z",
       "outcome": "success",
       "latencyMs": 0
     }
@@ -833,7 +833,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 38565,
+      "port": 36851,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 1,
