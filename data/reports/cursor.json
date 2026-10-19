@@ -28,7 +28,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-18T08:54:17.662Z",
+  "probedAt": "2026-10-19T09:59:07.386Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -54,9 +54,9 @@
     "command": "${REPO_ROOT}/.cache/agents/cursor/agent acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "7bc0018804f799803185c15294134d129eb29aea27d830682d187d6840fa4523",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39113164535",
-    "revision": "07e4084e7dd3045b590e80b34c89f172f9270291",
+    "recipeSha256": "36738d4c8cbcb547bd36084bd44c10f66a731689ecb5553f20fe3d27fd775107",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39233955145",
+    "revision": "f8011ba9bb429b7a38d4568f80786feaceaa0998",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -78,7 +78,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · unnamed agent",
-          "latencyMs": 833
+          "latencyMs": 816
         }
       ]
     },
@@ -107,7 +107,7 @@
           "reason": "request-rejected",
           "errorCode": -32603,
           "note": "Internal error — {\"message\":\"Failed to initialize session services\"}",
-          "latencyMs": 263
+          "latencyMs": 200
         }
       ]
     },
@@ -169,7 +169,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -520,14 +520,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · unnamed agent",
-      "latencyMs": 833
+      "latencyMs": 816
     },
     "session/new": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32603,
       "note": "Internal error — {\"message\":\"Failed to initialize session services\"}",
-      "latencyMs": 263
+      "latencyMs": 200
     },
     "set_mode": {
       "status": "blocked",
@@ -604,7 +604,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "na",
@@ -738,29 +738,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-18T08:54:16.555Z",
+      "at": "2026-10-19T09:59:06.361Z",
       "outcome": "success",
-      "latencyMs": 833
+      "latencyMs": 816
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-18T08:54:17.390Z",
+      "at": "2026-10-19T09:59:07.178Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 263
+      "latencyMs": 200
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-18T08:54:17.655Z",
+      "at": "2026-10-19T09:59:07.381Z",
       "outcome": "success",
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-18T08:54:17.659Z",
+      "at": "2026-10-19T09:59:07.383Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -768,18 +768,18 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-18T08:54:17.660Z",
+      "at": "2026-10-19T09:59:07.384Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-18T08:54:17.660Z",
+      "at": "2026-10-19T09:59:07.385Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -805,7 +805,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 39945,
+      "port": 45779,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 5,
