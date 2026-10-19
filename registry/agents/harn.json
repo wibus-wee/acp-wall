@@ -2,7 +2,7 @@
   "name": "harn",
   "display": "Harn",
   "vendor": "Burin Labs",
-  "version": "0.10.169",
+  "version": "0.10.171",
   "description": "Harn runs .harn agent pipelines as a native ACP coding agent over stdio.",
   "repo": "burin-labs/harn",
   "website": "https://harnlang.com",
@@ -23,54 +23,54 @@
     "type": "binary",
     "per_platform": {
       "darwin-aarch64": {
-        "archive": "https://github.com/burin-labs/harn/releases/download/v0.10.169/harn-aarch64-apple-darwin.tar.gz",
+        "archive": "https://github.com/burin-labs/harn/releases/download/v0.10.171/harn-aarch64-apple-darwin.tar.gz",
         "cmd": "./harn",
         "args": [
           "serve",
           "acp"
         ],
-        "sha256": "1fe5a2f0b0b25e8d449a76b300e78b7127ebdb02aefa095007b4d2b636c57d25"
+        "sha256": "ff2c73544ab2229fea65789c792fb51e0fd5c72ce45e37e65877e00a55532d63"
       },
       "darwin-x86_64": {
-        "archive": "https://github.com/burin-labs/harn/releases/download/v0.10.169/harn-x86_64-apple-darwin.tar.gz",
+        "archive": "https://github.com/burin-labs/harn/releases/download/v0.10.171/harn-x86_64-apple-darwin.tar.gz",
         "cmd": "./harn",
         "args": [
           "serve",
           "acp"
         ],
-        "sha256": "cb1cca2fa70187dc17e1fdc7d16f0ae401fe9dacb2585a262fc444dfbaa522e3"
+        "sha256": "40e479b40a7f8e92712639b9c675f31d064b2969fdaf1812e5a01beec4cff9b3"
       },
       "linux-aarch64": {
-        "archive": "https://github.com/burin-labs/harn/releases/download/v0.10.169/harn-aarch64-unknown-linux-gnu.tar.gz",
+        "archive": "https://github.com/burin-labs/harn/releases/download/v0.10.171/harn-aarch64-unknown-linux-gnu.tar.gz",
         "cmd": "./harn",
         "args": [
           "serve",
           "acp"
         ],
-        "sha256": "66a4bd1b9a622cf09defce76a916d98de83ed7bc30b1dd4f90f4eeda6471d72a"
+        "sha256": "5bc90425f25e254184dd755985280f0e549ba68396936958a9ba9b7b41511c0d"
       },
       "linux-x86_64": {
-        "archive": "https://github.com/burin-labs/harn/releases/download/v0.10.169/harn-x86_64-unknown-linux-gnu.tar.gz",
+        "archive": "https://github.com/burin-labs/harn/releases/download/v0.10.171/harn-x86_64-unknown-linux-gnu.tar.gz",
         "cmd": "./harn",
         "args": [
           "serve",
           "acp"
         ],
-        "sha256": "d008a67c60a39d1db4f9bd5fad5afa8278987be4b8e02da05e7117319d6a2cdf"
+        "sha256": "91c31a84a917eda813bc87391077ebcca28677d4f103362af34cfd0e3a5ba449"
       },
       "windows-x86_64": {
-        "archive": "https://github.com/burin-labs/harn/releases/download/v0.10.169/harn-x86_64-pc-windows-msvc.zip",
+        "archive": "https://github.com/burin-labs/harn/releases/download/v0.10.171/harn-x86_64-pc-windows-msvc.zip",
         "cmd": "harn.exe",
         "args": [
           "serve",
           "acp"
         ],
-        "sha256": "e5335187f18d946dd21e24906caa03053701a009442fa3163f4dc549a4d52d1b"
+        "sha256": "06e142ef2198f932fc64936c5495e28020533d2b56793ad85d6354a8592a25d9"
       }
     }
   },
   "disabled": false,
   "selftest": false,
   "notes": "harn serve acp resolves its LLM provider via HARN_LLM_PROVIDER; 'local' + LOCAL_LLM_BASE_URL is the documented self-hosted endpoint path — routes model calls to the mock LLM. OPENAI_* covers the openai fallback.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-18"
+  "_synced": "acp-registry 1.0.0 · 2026-10-19"
 }
