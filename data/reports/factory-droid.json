@@ -4,18 +4,26 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "factory-droid",
   "agentName": "@factory/cli",
-  "agentVersion": "0.244.0",
+  "agentVersion": "0.245.0",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
       "loadSession": true,
       "sessionCapabilities": {
         "list": {},
-        "resume": {}
+        "resume": {},
+        "close": {}
       },
       "promptCapabilities": {
         "image": true,
         "embeddedContext": true
+      },
+      "mcpCapabilities": {
+        "http": true,
+        "sse": true
+      },
+      "auth": {
+        "logout": {}
       },
       "_meta": {
         "terminal-auth": true
@@ -34,17 +42,17 @@
       }
     ]
   },
-  "probedAt": "2026-10-19T09:59:36.164Z",
+  "probedAt": "2026-10-20T09:29:53.172Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
     "observed": 0,
-    "blocked": 23,
+    "blocked": 26,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 10,
+    "na": 7,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -57,12 +65,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.21.0",
-    "command": "npx -y droid@0.244.0 exec --output-format acp-daemon",
+    "command": "npx -y droid@0.245.0 exec --output-format acp-daemon",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "c66d8cb4203ef48698e02fd00e5312b2e0764fa49625e896e2108ec9b6a912d0",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39233955145",
-    "revision": "f8011ba9bb429b7a38d4568f80786feaceaa0998",
+    "recipeSha256": "c83ba93d6e6fdae5b2356767e8dbd29de829fd560f34b4ac5b8236165e6561f8",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39400866153",
+    "revision": "3ea7abafd1e8cf773ac71daa1bed3052d313f6c1",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -84,7 +92,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · @factory/cli",
-          "latencyMs": 6146
+          "latencyMs": 7622
         }
       ]
     },
@@ -113,7 +121,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Authentication failed. Please log in using /login or set a valid FACTORY_API_KEY environment variable.",
-          "latencyMs": 129
+          "latencyMs": 388
         }
       ]
     },
@@ -175,7 +183,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 488
+          "latencyMs": 622
         },
         {
           "method": "session/resume",
@@ -186,10 +194,10 @@
         },
         {
           "method": "session/close",
-          "status": "na",
-          "advertised": false,
-          "reason": "not-advertised",
-          "note": "Not advertised; optional method not invoked"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
         },
         {
           "method": "session/delete",
@@ -278,9 +286,9 @@
         {
           "method": "logout",
           "status": "na",
-          "advertised": false,
-          "reason": "not-advertised",
-          "note": "Not advertised; optional method not invoked"
+          "reason": "not-run",
+          "advertised": true,
+          "note": "No authentication established by this run; shared account state is not changed"
         }
       ]
     },
@@ -469,7 +477,7 @@
     {
       "key": "mcp",
       "scope": "observation",
-      "status": "mixed",
+      "status": "blocked",
       "items": [
         {
           "method": "mcp:stdio",
@@ -480,17 +488,17 @@
         },
         {
           "method": "mcp:http",
-          "status": "na",
-          "advertised": false,
-          "reason": "not-advertised",
-          "note": "Not advertised; optional method not invoked"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
         },
         {
           "method": "mcp:sse",
-          "status": "na",
-          "advertised": false,
-          "reason": "not-advertised",
-          "note": "Not advertised; optional method not invoked"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
         }
       ]
     }
@@ -502,13 +510,13 @@
     "session/load": "session/load: Not exercised; prerequisite session/new unavailable",
     "session/prompt": "session/prompt: No usable session; see session/new",
     "prompt:content": "prompt:image: No usable session; see session/new · prompt:embedded-context: No usable session; see session/new",
-    "sessions/*": "session/list: pass · session/resume: No usable session; see session/new · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
+    "sessions/*": "session/list: pass · session/resume: No usable session; see session/new · session/close: No usable session; see session/new · session/delete: Not advertised; optional method not invoked",
     "fork": "session/fork: Not advertised; optional method not invoked",
     "load:replay": "load:replay: No usable session; see session/new",
     "set_mode": "set_mode: No usable session; see session/new",
     "set_config": "set_config: No usable session; see session/new",
     "cancel": "cancel: No usable session; see session/new",
-    "logout": "logout: Not advertised; optional method not invoked",
+    "logout": "logout: No authentication established by this run; shared account state is not changed",
     "message*": "update:message: No matching notifications observed; see scenario stimuli",
     "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
     "usage": "update:usage: No matching notifications observed; see scenario stimuli",
@@ -520,20 +528,20 @@
     "elicitation": "elicitation: Not observed; prerequisite session/new unavailable",
     "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
     "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: Not exercised; prerequisite session/new unavailable",
-    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
+    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: MCP scenario prerequisites unavailable · mcp:sse: MCP scenario prerequisites unavailable"
   },
   "methods": {
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · @factory/cli",
-      "latencyMs": 6146
+      "latencyMs": 7622
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Authentication failed. Please log in using /login or set a valid FACTORY_API_KEY environment variable.",
-      "latencyMs": 129
+      "latencyMs": 388
     },
     "set_mode": {
       "status": "blocked",
@@ -610,7 +618,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 488
+      "latencyMs": 622
     },
     "session/resume": {
       "status": "blocked",
@@ -619,10 +627,10 @@
       "note": "No usable session; see session/new"
     },
     "session/close": {
-      "status": "na",
-      "advertised": false,
-      "reason": "not-advertised",
-      "note": "Not advertised; optional method not invoked"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
     },
     "session/delete": {
       "status": "na",
@@ -637,16 +645,16 @@
       "note": "MCP scenario prerequisites unavailable"
     },
     "mcp:http": {
-      "status": "na",
-      "advertised": false,
-      "reason": "not-advertised",
-      "note": "Not advertised; optional method not invoked"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
     },
     "mcp:sse": {
-      "status": "na",
-      "advertised": false,
-      "reason": "not-advertised",
-      "note": "Not advertised; optional method not invoked"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
     },
     "fs/read_text_file": {
       "status": "blocked",
@@ -721,9 +729,9 @@
     },
     "logout": {
       "status": "na",
-      "advertised": false,
-      "reason": "not-advertised",
-      "note": "Not advertised; optional method not invoked"
+      "reason": "not-run",
+      "advertised": true,
+      "note": "No authentication established by this run; shared account state is not changed"
     },
     "session/load": {
       "status": "blocked",
@@ -744,57 +752,57 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-19T09:59:29.390Z",
+      "at": "2026-10-20T09:29:44.529Z",
       "outcome": "success",
-      "latencyMs": 6146
+      "latencyMs": 7622
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-19T09:59:35.536Z",
+      "at": "2026-10-20T09:29:52.152Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 129
+      "latencyMs": 388
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-19T09:59:35.667Z",
+      "at": "2026-10-20T09:29:52.543Z",
       "outcome": "success",
-      "latencyMs": 488
+      "latencyMs": 622
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-19T09:59:36.156Z",
+      "at": "2026-10-20T09:29:53.166Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 6
+      "latencyMs": 3
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-19T09:59:36.162Z",
+      "at": "2026-10-20T09:29:53.169Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-19T09:59:36.163Z",
+      "at": "2026-10-20T09:29:53.169Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
   "uncertaintyReasons": {
     "interactive-auth": 1,
     "authentication": 1,
-    "prerequisite": 21,
-    "not-advertised": 8,
-    "not-run": 2
+    "prerequisite": 24,
+    "not-advertised": 4,
+    "not-run": 3
   },
   "lody": {
     "advertised": {},
@@ -814,7 +822,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 36205,
+      "port": 37651,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 7,

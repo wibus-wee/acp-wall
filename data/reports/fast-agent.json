@@ -8,7 +8,7 @@
     "capabilities": {},
     "authMethods": []
   },
-  "probedAt": "2026-10-19T09:59:28.545Z",
+  "probedAt": "2026-10-20T09:29:41.691Z",
   "state": "blocked",
   "summary": {
     "pass": 0,
@@ -30,13 +30,13 @@
     "profile": "mock",
     "client": "simulated",
     "platform": "linux-x64",
-    "node": "v24.21.0",
+    "node": "v24.22.0",
     "command": "uvx fast-agent-acp==0.10.1 -x",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "f09de4590c1e07bc6be706d04fea8d33645f5bf84e474a20bd751e5a662fe886",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39233955145",
-    "revision": "f8011ba9bb429b7a38d4568f80786feaceaa0998",
+    "recipeSha256": "ea962bed0633686b7f7a6a65c8351200b5708f4c27b68d3149cf56fd2eb9b057",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39400866153",
+    "revision": "3ea7abafd1e8cf773ac71daa1bed3052d313f6c1",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -59,7 +59,7 @@
           "status": "na",
           "reason": "transport",
           "note": "agent exited (code 2)",
-          "latencyMs": 58
+          "latencyMs": 59
         }
       ]
     },
@@ -502,7 +502,7 @@
       "status": "na",
       "reason": "transport",
       "note": "agent exited (code 2)",
-      "latencyMs": 58
+      "latencyMs": 59
     },
     "authenticate": {
       "status": "blocked",
@@ -715,16 +715,16 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-19T09:59:28.379Z",
+      "at": "2026-10-20T09:29:41.563Z",
       "outcome": "error",
-      "latencyMs": 104
+      "latencyMs": 65
     },
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-19T09:59:28.486Z",
+      "at": "2026-10-20T09:29:41.631Z",
       "outcome": "error",
-      "latencyMs": 58
+      "latencyMs": 59
     }
   ],
   "scenarios": [],
@@ -734,7 +734,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 43113,
+      "port": 44309,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 2,
