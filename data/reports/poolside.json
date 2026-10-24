@@ -39,7 +39,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-10-23T09:26:21.760Z",
+  "probedAt": "2026-10-24T08:58:07.520Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -65,9 +65,9 @@
     "command": "${REPO_ROOT}/.cache/agents/poolside/agent acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "2fc2a8d5ce13eed66256752b76b6e7c8deb7f60af72ddde132604608f3c96e66",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39931458395",
-    "revision": "594826d816d9cbd97451a571365571da4518b088",
+    "recipeSha256": "c25fa68198b1e5e12b6ff383bcf2af7934cbe04dc621568617fd2c646a82912b",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40079878345",
+    "revision": "9b27b65fcfda815b1f12830459112785829990f5",
     "sourceDirty": false,
     "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
     "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
@@ -89,7 +89,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · pool-acp",
-          "latencyMs": 14
+          "latencyMs": 24
         }
       ]
     },
@@ -117,7 +117,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — {\"message\":\"Run `pool login` in a terminal to authenticate to Poolside.\"}",
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -179,7 +179,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 0
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -530,14 +530,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · pool-acp",
-      "latencyMs": 14
+      "latencyMs": 24
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — {\"message\":\"Run `pool login` in a terminal to authenticate to Poolside.\"}",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -614,7 +614,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "na",
@@ -747,29 +747,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-23T09:26:21.742Z",
+      "at": "2026-10-24T08:58:07.489Z",
       "outcome": "success",
-      "latencyMs": 14
+      "latencyMs": 24
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-23T09:26:21.757Z",
+      "at": "2026-10-24T08:58:07.513Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-23T09:26:21.758Z",
+      "at": "2026-10-24T08:58:07.516Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-23T09:26:21.759Z",
+      "at": "2026-10-24T08:58:07.518Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -777,18 +777,18 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-23T09:26:21.759Z",
+      "at": "2026-10-24T08:58:07.518Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-23T09:26:21.759Z",
+      "at": "2026-10-24T08:58:07.519Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -824,7 +824,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 41139,
+      "port": 38747,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

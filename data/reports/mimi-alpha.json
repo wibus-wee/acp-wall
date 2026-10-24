@@ -8,7 +8,7 @@
     "capabilities": {},
     "authMethods": []
   },
-  "probedAt": "2026-10-23T09:26:01.114Z",
+  "probedAt": "2026-10-24T08:57:45.922Z",
   "state": "probe-error",
   "summary": {
     "pass": 0,
@@ -33,8 +33,8 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.21.0",
-    "revision": "5afa6f57cb5e10d84f13eac39cdcb802f4686c84",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/39931458395"
+    "revision": "886a2317e92da7ca0b95d3d6f75b55a75880cb9c",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40079878345"
   },
   "cells": [
     {
