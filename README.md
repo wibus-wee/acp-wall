@@ -3,7 +3,7 @@
 The Wall is an independent evidence ledger for Agent Client Protocol (ACP)
 implementations. It records observed operations, capability declarations,
 authentication blockers and test failures with their version and environment.
-The league table retains measured coverage ranks; environment/authentication-blocked runs are shown separately without a rank.
+All agents share the same descending measured-coverage ranking. Authentication, environment and incomplete-probe diagnostics stay in the expanded case file.
 Detailed observations explain what each measurement did and did not establish.
 
 | Area | Location | Responsibility |
