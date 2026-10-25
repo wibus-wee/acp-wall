@@ -232,7 +232,7 @@
   <div class="nameplate">
     <div class="gl">✦ ❦ ✦</div>
     <h1>The Wall</h1>
-    <div class="sub-t">已验证 · 部分兼容 · 已测覆盖有限 · A PUBLIC LEDGER OF ACP COMPATIBILITY</div>
+    <div class="sub-t">已验证 · 部分兼容 · 兼容性有限 · A PUBLIC LEDGER OF ACP COMPATIBILITY</div>
   </div>
   <div class="dateline">
     <span id="dateline-day">—</span>
@@ -269,7 +269,7 @@
 <div class="page wide">
   <section class="sec" id="league">
     <div class="sec-h"><span class="t">The League Table</span><span class="zh">合规矩阵</span><span class="n" id="league-count">READ ACROSS</span><label class="lody-tog" title="include the Lody extension (acp-extension-core) column and case-file stats"><input type="checkbox" id="lody-tog" checked>LODY EXT</label></div>
-    <p class="lg-note">As printed after each probe run. <span class="mono" style="font-size:10.5px">+ verified observation / ± mixed evidence / − explicit absence or failure / · unobserved.</span> The trailing <span class="mono" style="font-size:10.5px">lody</span> column counts advertised <span class="mono" style="font-size:10.5px">_meta.lody</span> extension features — it is annex evidence, not part of the score; the toggle strikes it from the record. A name may be clicked to subpoena its case file.</p>
+    <p class="lg-note">As printed after each probe run. <span class="mono" style="font-size:10.5px">+ implemented / ± partial / − missing / · not exercised.</span> The trailing <span class="mono" style="font-size:10.5px">lody</span> column counts advertised <span class="mono" style="font-size:10.5px">_meta.lody</span> extension features — it is annex evidence, not part of the score; the toggle strikes it from the record. A name may be clicked to subpoena its case file.</p>
     <div class="lg-wrap"><table class="lg-t"><thead><tr id="lg-head"><th>HARNESS</th></tr></thead><tbody id="lg-body"></tbody></table></div>
   </section>
 </div>
@@ -285,12 +285,8 @@
     <div id="list-partial"></div>
   </section>
 
-  <section class="sec unmeasured">
-    <div class="sec-h"><span class="t">Measurement Incomplete</span><span class="zh">测量未完成 · 不参与排名</span><span class="n" id="cnt-unmeasured"></span></div>
-    <div id="list-unmeasured"></div>
-  </section>
   <section class="sec limited">
-    <div class="sec-h"><span class="t">Limited Measured Coverage</span><span class="zh">已测覆盖有限</span><span class="n" id="cnt-limited"></span></div>
+    <div class="sec-h"><span class="t">Limited Compatibility</span><span class="zh">兼容性有限</span><span class="n" id="cnt-limited"></span></div>
     <div id="list-limited"></div>
   </section>
 
@@ -411,9 +407,8 @@ function score(h){if(typeof h.score==="number")return h.score;let p=0;h.cells.fo
 const CELL={1:"+",2:"±",0:"−","-1":"·"};
 const PCLS={1:"ok",2:"part",0:"miss","-1":"na"};
 const MCLS={1:"ok",2:"pr",0:"no","-1":"un"};
-const assessment=AcpEvidenceView.assessment;
-const all=H.slice().sort((a,b)=>Number(assessment(b).rankable)-Number(assessment(a).rankable)||score(b)-score(a));
-let rank=0;all.forEach(h=>h._rk=assessment(h).rankable?++rank:null);
+const all=H.slice().sort((a,b)=>score(b)-score(a));
+all.forEach((h,i)=>h._rk=i+1);
 
 /* lody ext: advertised feature names are agent-supplied — escape before
  * they reach innerHTML. */
@@ -423,15 +418,16 @@ const lodyChip=h=>h.lodyAdapter
   ?`<a class="ldy lody-only" href="https://github.com/LodyAI/acp-extension-${esc(h.lodyAdapter)}" target="_blank" rel="noopener" title="Lody extension adapter: acp-extension-${esc(h.lodyAdapter)}">◆ lody</a>`
   :'';
 const lodyMark=AcpEvidenceView.extensionMark;
+const assessment=AcpEvidenceView.assessment;
 
 /* ---------- ledger entries ---------- */
 function entry(h){
-  const s=score(h),done=!assessment(h).rankable;
+  const s=score(h),done=h.cells.every(c=>c===-1);
   const el=document.createElement('div');el.className='entry';
   el.innerHTML=`<div class="e-row">
-      <span class="e-rk mono">${h._rk===null?'—':String(h._rk).padStart(2,'0')}</span>
-      <span class="e-nm">${h.n}${h.star?' <span class="star">✦</span>':''}${lodyChip(h)}<span class="ven">${esc(h.v||'')} · ${assessment(h).label}</span></span>
-      <span class="e-sc"><b class="mono">${done?'—':s}</b><span class="ms">${done?h.cells.filter(c=>c===1).length+'/'+CAPS.length:'/100'}</span><span class="chev">➤</span></span>
+      <span class="e-rk mono">${String(h._rk).padStart(2,'0')}</span>
+      <span class="e-nm">${h.n}${h.star?' <span class="star">✦</span>':''}${lodyChip(h)}<span class="ven">${esc(h.v||'')}</span></span>
+      <span class="e-sc"><b class="mono">${done?'—':s}</b><span class="ms">${done?'0/'+CAPS.length:'/100'}</span><span class="chev">➤</span></span>
     </div>`;
   const xp=document.createElement('div');xp.className='e-x xp';xp.setAttribute('hidden','until-found');
   xp.innerHTML=detailHTML(h);wireCopy(xp,h);
@@ -439,8 +435,8 @@ function entry(h){
   el.querySelector('.e-row').addEventListener('click',()=>toggleXP(xp));
   return el;
 }
-const byTier=t=>all.filter(h=>t==='unmeasured'?!assessment(h).rankable:assessment(h).rankable&&h.tier===t);
-['verified','partial','limited','unmeasured'].forEach(t=>{
+const byTier=t=>all.filter(h=>h.tier===t);
+['verified','partial','limited'].forEach(t=>{
   const list=byTier(t);
   const box=document.getElementById('list-'+t);
   if(list.length)box.append(...list.map(entry));
@@ -448,12 +444,11 @@ const byTier=t=>all.filter(h=>t==='unmeasured'?!assessment(h).rankable:assessmen
 });
 document.getElementById('cnt-verified').textContent=`${byTier('verified').length} ENTRIES`;
 document.getElementById('cnt-partial').textContent=`${byTier('partial').length} ENTRIES`;
-document.getElementById('cnt-unmeasured').textContent=`${byTier('unmeasured').length} ENTRIES`;
 document.getElementById('cnt-limited').textContent=`${byTier('limited').length} ENTRIES`;
 
 /* №1 plaque: minted for the top-scoring verified entry, if any */
 (function(){
-  const top=all.find(h=>h.tier==='verified'&&assessment(h).rankable);
+  const top=all.find(h=>h.tier==='verified');
   if(!top)return;
   const passed=top.cells.filter(c=>c===1).length;
   const pl=document.getElementById('plaque');pl.style.display='';
@@ -470,16 +465,16 @@ document.getElementById('cnt-limited').textContent=`${byTier('limited').length} 
   document.getElementById('league-count').textContent=`${CAPS.length} METHODS · READ ACROSS`;
   CAPS.forEach(c=>{const th=document.createElement('th');th.textContent=c;thead.appendChild(th)});
   {const th=document.createElement('th');th.textContent='lody';th.className='lody-col';thead.appendChild(th)}
-  {const th=document.createElement('th');th.textContent='COVERAGE';th.style.paddingRight='14px';thead.appendChild(th)}
+  {const th=document.createElement('th');th.textContent='SCORE';th.style.paddingRight='14px';thead.appendChild(th)}
   const tb=document.getElementById('lg-body');
   if(!all.length){
     tb.innerHTML=`<tr><td colspan="${CAPS.length+2}"><div class="lg-empty">No probe reports on file yet — see README to submit a harness.</div></td></tr>`;
     return;
   }
   all.forEach(h=>{
-    const s=score(h),done=!assessment(h).rankable;
+    const s=score(h),done=h.cells.every(c=>c===-1);
     const tr=document.createElement('tr');tr.className='rowhead t-'+h.tier;
-    let h2=`<th>${h.n}${lodyChip(h)}<small>${esc((h.v||'').split('—')[0].trim())} · ${assessment(h).label}</small></th>`;
+    let h2=`<th>${h.n}${lodyChip(h)}<small>${esc((h.v||'').split('—')[0].trim())}</small></th>`;
     h.cells.forEach(c=>{h2+=`<td><span class="mc ${MCLS[c]}">${CELL[c]}</span></td>`});
     h2+=`<td class="lody-col"><span class="mc ${lodyMark(h).cls}" title="${lodyMark(h).tip}">${lodyMark(h).txt}</span></td>`;
     h2+=`<td class="lg-sc">${done?'—':s}</td>`;
@@ -498,7 +493,7 @@ document.getElementById('cnt-limited').textContent=`${byTier('limited').length} 
   const items=all.length?all.map(h=>{
     const s=score(h);
     const cls=h.tier==='verified'?'b':'u';
-    return `<span>${h.n.toUpperCase().replace(/[\s()]/g,'_')} <${cls}>${!assessment(h).rankable?'——':s}</${cls}></span>`;
+    return `<span>${h.n.toUpperCase().replace(/[\s()]/g,'_')} <${cls}>${h.cells.every(c=>c===-1)?'——':s}</${cls}></span>`;
   }).join('&nbsp;&nbsp;·&nbsp;&nbsp;'):'<span>THE LEDGER AWAITS ITS FIRST PRINTING</span>';
   document.getElementById('tape').innerHTML=(items+'&nbsp;&nbsp;·&nbsp;&nbsp;<span class="u">ACP COMPATIBILITY — PROBED DAILY</span>&nbsp;&nbsp;·&nbsp;&nbsp;').repeat(2);
 })();
@@ -516,7 +511,7 @@ function transcript(h){
   }).join('\n');
 }
 function detailHTML(h){
-  const s=score(h),done=!assessment(h).rankable;
+  const s=score(h),done=h.cells.every(c=>c===-1);
   const liars=(h.dishonesty&&h.dishonesty.length)
     ?`<div class="liar"><b>⚠ CLAIMED BUT ABSENT</b>${h.dishonesty.map(d=>`<div>${d.claim} — ${d.detail}</div>`).join('')}</div>`:'';
   const viols=(h.violations&&h.violations.length)
@@ -536,8 +531,8 @@ function detailHTML(h){
     </div>`:'';
   return `<div class="lg-x-in">
     <div class="bx">
-      <div class="sh-lab"><span>Evidence · ${assessment(h).label}</span><span class="mono">${h.cells.filter(c=>c===1).length}/${CAPS.length} · score ${done?'—':s}</span></div>
-      <div class="probed">Coverage ${s}% · checked ${assessment(h).checked} · passed ${assessment(h).passed} · pass rate ${assessment(h).passRate ?? '—'}% · explicit issues ${assessment(h).issues}</div>
+      <div class="sh-lab"><span>Capabilities</span><span class="mono">${h.cells.filter(c=>c===1).length}/${CAPS.length} · score ${done?'—':s}</span></div>
+      <div class="probed">${assessment(h).label} · coverage ${s}% · checked ${assessment(h).checked} · passed ${assessment(h).passed} · explicit issues ${assessment(h).issues}</div>
       <div class="probed">${esc(h.setup?.note ?? '')}</div>
       ${liars}${viols}
       <div class="pills">${CAPS.map((c,j)=>`<span class="${PCLS[h.cells[j]]}">${CELL[h.cells[j]]} ${c}</span>`).join('')}</div>
@@ -553,8 +548,8 @@ function wireCopy(root,h){
   const b=root.querySelector('[data-copy]');if(!b)return;
   b.onclick=e=>{
     e.stopPropagation();
-    const done=!assessment(h).rankable;
-    const txt=`${h.n} — ACP measured coverage ${done?'measurement incomplete':score(h)+'/100'} (${h.tier}) — The Wall`;
+    const done=h.cells.every(c=>c===-1);
+    const txt=`${h.n} — ACP compatibility ${done?'no cells exercised':score(h)+'/100'} (${h.tier}) — The Wall`;
     (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).catch(()=>{});
     b.textContent='✓ copied';setTimeout(()=>b.textContent='copy report',1400);
   };
@@ -630,16 +625,16 @@ function openPal(){pal.classList.add('open');pscrim.classList.add('open');pin.va
 function closePal(){pal.classList.remove('open');pscrim.classList.remove('open')}
 function renderPal(q){
   let list=all;
-  const m=q.match(/^tier:(verified|partial|limited|unmeasured)$/);
-  if(m)list=byTier(m[1]);
+  const m=q.match(/^tier:(verified|partial|limited)$/);
+  if(m)list=list.filter(h=>h.tier===m[1]);
   else if(/^ext:lody$/.test(q))list=list.filter(h=>lodyFeats(h).length>0||h.lodyAdapter);
   else if(q)list=list.filter(h=>h.n.toLowerCase().includes(q.toLowerCase())||(h.v||'').toLowerCase().includes(q.toLowerCase()));
   palItems=list;palIdx=0;
   plist.innerHTML=list.map((h,i)=>`
     <div class="pal-item ${i===0?'sel':''}" data-i="${i}">
       <span class="mk">${h.n[0]}</span>${h.n}${h.lodyAdapter?'<span class="ldy lody-only" title="Lody extension adapter: acp-extension-'+esc(h.lodyAdapter)+'">◆</span>':''}
-      <span class="tt ${h.tier}">${assessment(h).rankable?h.tier.toUpperCase():'UNMEASURED'}</span>
-      <span class="tr">${h._rk===null?'unranked':'№'+h._rk} · ${assessment(h).rankable?score(h):'—'}</span>
+      <span class="tt ${h.tier}">${h.tier.toUpperCase()}</span>
+      <span class="tr">№${h._rk} · ${score(h)||'—'}</span>
     </div>`).join('')||'<div style="padding:16px;color:var(--faint);font-size:12px;font-style:italic">no such harness on file.</div>';
 }
 addEventListener('keydown',e=>{

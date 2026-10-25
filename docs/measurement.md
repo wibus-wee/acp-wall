@@ -39,9 +39,9 @@ whether a scenario was attempted.
 
 ## League-table ranking
 
-The 24-column coverage denominator and visual table are retained. Only runs
-with verified initialize, session/new and session/prompt, and no probe defect,
-participate in ranks. Other runs remain visible in Measurement Incomplete. [ranking.mjs](../tools/ranking.mjs) projects detailed observations into
+The 24-column coverage denominator and visual table are retained. All agents
+are sorted together by the same coverage score; incomplete runs are not split
+into a separate unranked group. Blocker diagnostics remain in the expanded case file. [ranking.mjs](../tools/ranking.mjs) projects detailed observations into
 that existing data contract. A fully verified column earns one point; a partially
 verified group or schema-partial result earns half a point. Explicit failure or
 unsupported methods display as missing; unobserved, blocked, diagnostic-only and
@@ -209,7 +209,7 @@ stale. It cannot infer whether an untested newer release behaves identically.
 - An explicit `toolMappings` recipe may specify scenario → exact offered tool and schema-valid arguments. Missing or invalid mapped stimuli are recorded; no fuzzy fallback silently substitutes another tool.
 - Mode/config checks change an offered alternative and restore the original. Unconfirmed restoration blocks baseline prompts. A no-op is not counted as a transition.
 - A terminal create callback alone does not verify the terminal group. Full group evidence requires output, wait, kill and release for the same session/handle; simulated handles reject unknown, cross-session and released references.
-- Lody declarations display as D; wire keys as ◐. Bare null/error/unvalidated endpoint replies never imply extension implementation. Session-scoped extension requests require an actual session.
-- The page shows coverage, executed-check pass rate and explicit issues separately. An authentication/environment barrier does not put an Agent at the bottom of the compatibility ranking. Historical values keep their timestamps and are not retroactively claimed as newly tested.
+- Lody declarations display as +N (the number of advertised features); observed wire keys without declarations display as ±. The declaration count takes precedence and is not part of the ACP score. Bare null/error/unvalidated endpoint replies never imply extension implementation. Session-scoped extension requests require an actual session.
+- The page ranks all agents together by measured coverage and retains partial scores. Authentication/environment barriers describe test conditions, not product incompatibility; these diagnostics appear only in the case file. An offered interactive login alone is not classified as the cause of a blocked run. Historical values keep their timestamps and are not retroactively claimed as newly tested.
 
 Mimi selects `@sorbetai/acp@alpha` as requested. Local alpha.3 inspection found that its stdio entry initializes the workspace-write sandbox before serving ACP, and Linux startup still requires socat. After approving and supplying socat, alpha.3 completed initialize and controlled mock-provider scenarios. The Wall does not disable the sandbox. Registry recipes should be revalidated when the alpha tag changes.

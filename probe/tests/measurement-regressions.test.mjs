@@ -50,3 +50,13 @@ test('process diagnostics distinguish environmental blockers from unknown exits'
   }
   assert.equal(classifyError({processExit:true,stderr:'unknown crash',message:'exit 2'}).status,'na');
 });
+
+test('Lody column restores +N declarations ahead of observations', () => {
+  assert.equal(AcpEvidenceView.extensionMark({lody:{advertised:{usage:{},goal:{}},observed:['goal']}}).txt,'+2');
+  assert.equal(AcpEvidenceView.extensionMark({lody:{advertised:{usage:{}},observed:[]}}).txt,'+1');
+  assert.equal(AcpEvidenceView.extensionMark({lody:{advertised:{},observed:['goal']}}).txt,'±');
+});
+test('offering interactive authentication is not the cause of every incomplete run', () => {
+  const methods={initialize:{status:'pass'},authenticate:{status:'blocked',reason:'interactive-auth'},'session/new':{status:'observed',reason:'request-rejected'}};
+  assert.equal(AcpEvidenceView.assessment({methods}).label,'Measurement incomplete');
+});
