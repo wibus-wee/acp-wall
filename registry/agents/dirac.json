@@ -8,7 +8,7 @@
   "website": "https://dirac.run",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/dirac.svg",
   "license": "Apache-2.0",
-  "install": null,
+  "install": "node tools/install-dist.mjs registry/agents/dirac.json",
   "run": "npx -y dirac-cli@0.5.24 --acp",
   "setup": [],
   "probeProfiles": [],

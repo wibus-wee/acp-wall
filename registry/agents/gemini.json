@@ -8,7 +8,7 @@
   "website": "https://geminicli.com",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/gemini.svg",
   "license": "Apache-2.0",
-  "install": null,
+  "install": "node tools/install-dist.mjs registry/agents/gemini.json",
   "run": "npx -y @google/gemini-cli@0.65.0 --acp",
   "setup": [],
   "probeProfiles": [],

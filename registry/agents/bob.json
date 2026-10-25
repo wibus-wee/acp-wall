@@ -8,7 +8,7 @@
   "website": "https://bob.ibm.com",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/bob.svg",
   "license": "proprietary",
-  "install": null,
+  "install": "node tools/install-dist.mjs registry/agents/bob.json",
   "run": "npx -y @ibm/bob@2.0.9 acp",
   "setup": [],
   "probeProfiles": [],

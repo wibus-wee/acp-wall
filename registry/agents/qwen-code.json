@@ -8,7 +8,7 @@
   "website": "https://qwenlm.github.io/qwen-code-docs/en/users/overview",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/qwen-code.svg",
   "license": "Apache-2.0",
-  "install": null,
+  "install": "node tools/install-dist.mjs registry/agents/qwen-code.json",
   "run": "npx -y @qwen-code/qwen-code@0.26.1 --acp --experimental-skills",
   "setup": [],
   "probeProfiles": [],

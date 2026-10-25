@@ -8,7 +8,7 @@
   "website": "https://github.com/features/copilot/cli/",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/github-copilot-cli.svg",
   "license": "proprietary",
-  "install": null,
+  "install": "node tools/install-dist.mjs registry/agents/github-copilot-cli.json",
   "run": "npx -y @github/copilot@1.0.103 --acp",
   "setup": [],
   "probeProfiles": [],

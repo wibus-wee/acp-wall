@@ -8,7 +8,7 @@
   "website": "https://factory.ai/product/cli",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/factory-droid.svg",
   "license": "proprietary",
-  "install": null,
+  "install": "node tools/install-dist.mjs registry/agents/factory-droid.json",
   "run": "npx -y droid@0.249.0 exec --output-format acp-daemon",
   "setup": [],
   "probeProfiles": [],

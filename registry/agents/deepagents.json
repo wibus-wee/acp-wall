@@ -8,7 +8,7 @@
   "website": "https://docs.langchain.com/oss/javascript/deepagents/overview",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/deepagents.svg",
   "license": "MIT",
-  "install": null,
+  "install": "node tools/install-dist.mjs registry/agents/deepagents.json",
   "run": "npx -y deepagents-acp@0.1.7",
   "setup": [],
   "probeProfiles": [],
