@@ -50,7 +50,7 @@ function recipe(id, dist) {
   const d = dist || {};
   if (d.npx?.package) {
     return {
-      install: null,
+      install: `node tools/install-dist.mjs registry/agents/${id}.json`,
       run: ["npx", "-y", d.npx.package, ...(d.npx.args ?? [])].join(" "),
       dist: { type: "npx", package: d.npx.package, args: d.npx.args ?? [] },
     };
@@ -101,6 +101,7 @@ for (const a of src.agents ?? []) {
     run: ov.run ?? r.run,
     setup: ov.setup ?? [],
     probeProfiles: ov.probeProfiles ?? [],
+    ...(ov.toolMappings ? { toolMappings: ov.toolMappings } : {}),
     env: ov.env ?? {},
     sessionFiles: ov.sessionFiles ?? null,
     dist: r.dist,

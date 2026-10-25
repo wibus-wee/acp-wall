@@ -51,6 +51,7 @@ export interface LodyProbeInfo {
   answered: string[];
   missing: string[];
   observed: string[];
+  endpoints?: Array<{ method: string; outcome: string; errorCode?: number }>;
 }
 export interface ExtSurface { advertised: string[]; observed: string[] }
 export interface ProbeContext {
@@ -101,6 +102,13 @@ function put(ctx: ProbeContext, key: string, r: MethodResult) {
 /** A response error is evidence of rejection, never successful execution. */
 export function classifyError(e: any, advertised = false, required = false): MethodResult {
   const note = String(e?.message ?? e).slice(0, 240);
+  if (e?.processExit) {
+    const diagnostics = String(e.stderr ?? "");
+    const reason = /UnknownIssuer|CERTIFICATE_VERIFY_FAILED|unable to get local issuer/i.test(diagnostics) ? "environment-tls"
+      : /sandbox_unavailable|Sandbox dependencies are unavailable/i.test(diagnostics) ? "runtime-prerequisite"
+      : /No solution found|npm error (E404|ETARGET)|No matching distribution/i.test(diagnostics) ? "package-resolution" : "transport";
+    return { status: reason === "transport" ? "na" : "blocked", reason, note: String(e.message).slice(-1500) };
+  }
   if (e?.probeInvalid) return { status: "error", reason: "invalid-probe-request", note };
   if (isMissing(e)) return { status: advertised || required ? "fail" : "unsupported", reason: "method-not-found", errorCode: code(e), definitive: true, note };
   if (e?.timeout) return { status: "na", reason: "timeout", note };
@@ -258,16 +266,36 @@ export async function probeSetMode(ctx: ProbeContext) {
   if (!sessionReady(ctx, "set_mode")) return;
   const modes = ctx.sessionModes?.availableModes;
   if (!Array.isArray(modes) || !modes.length) { put(ctx, "set_mode", { status: "na", reason: "not-advertised", note: "No session modes offered" }); return; }
-  const target = modes.find((m: any) => m.id === ctx.sessionModes.currentModeId) ?? modes[0];
-  verdict(ctx, "set_mode", await callAgent(ctx, "session/set_mode", { sessionId: ctx.sessionId, modeId: target.id }), true, false, `Accepted offered mode ${target.id}; policy semantics not inferred from its name`);
+  const original = ctx.sessionModes.currentModeId;
+  const target = modes.find((m: any) => m.id !== original);
+  if (!target || !modes.some((m: any) => m.id === original)) { put(ctx, "set_mode", { status: "na", reason: "no-alternative", note: "No safe alternative and restoration mode offered" }); return; }
+  const before = ctx.updates.length;
+  const r = await callAgent(ctx, "session/set_mode", { sessionId: ctx.sessionId, modeId: target.id });
+  verdict(ctx, "set_mode", r, true, false, `Accepted transition ${original} → ${target.id}`);
+  if (!r.ok) return;
+  const confirmed = ctx.updates.slice(before).some(u => u.params?.sessionId === ctx.sessionId && u.params?.update?.sessionUpdate === "current_mode_update" && u.params.update.currentModeId === target.id);
+  if (!confirmed) put(ctx, "set_mode", { status: "observed", advertised: true, reason: "configuration-unconfirmed", note: "Mode change accepted but no matching current_mode_update observed" });
+  const restore = await callAgent(ctx, "session/set_mode", { sessionId: ctx.sessionId, modeId: original });
+  if (!restore.ok) { ctx.promptBlocked = true; put(ctx, "set_mode", { ...classifyError(restore.err, true), note: `Mode restoration failed: ${String(restore.err?.message ?? restore.err)}` }); }
 }
 export async function probeSetConfig(ctx: ProbeContext) {
   if (!sessionReady(ctx, "set_config")) return;
-  const opt = ctx.sessionConfigOptions?.[0];
-  if (!opt) { put(ctx, "set_config", { status: "na", reason: "not-advertised", note: "No config options offered" }); return; }
-  const params: any = { sessionId: ctx.sessionId, configId: opt.id, value: opt.currentValue };
-  if (opt.type === "boolean") params.type = "boolean";
-  verdict(ctx, "set_config", await callAgent(ctx, "session/set_config_option", params), true, false, `Accepted current value of ${opt.id}`);
+  const candidates = ctx.sessionConfigOptions ?? [];
+  const option = candidates.find((o: any) => o.type !== "boolean" && (o.options ?? []).flatMap((v: any) => v.options ?? [v]).some((v: any) => v.value !== o.currentValue));
+  if (!option) { put(ctx, "set_config", { status: "na", reason: "no-alternative", note: "No offered alternative select value; boolean capability is not negotiated" }); return; }
+  const values = option.options.flatMap((v: any) => v.options ?? [v]);
+  if (!values.some((v: any) => v.value === option.currentValue)) { put(ctx, "set_config", { status: "na", reason: "no-alternative", note: "Original value not offered; cannot safely restore" }); return; }
+  const target = values.find((v: any) => v.value !== option.currentValue).value;
+  const params = { sessionId: ctx.sessionId, configId: option.id, value: target };
+  const r = await callAgent(ctx, "session/set_config_option", params);
+  verdict(ctx, "set_config", r, true, false, `Changed ${option.id} to another offered value`);
+  if (!r.ok) return;
+  if (!r.value?.configOptions?.some((o: any) => o.id === option.id && o.currentValue === target)) put(ctx, "set_config", { status: "observed", reason: "configuration-unconfirmed", note: "Response did not confirm changed value" });
+  const restore = await callAgent(ctx, "session/set_config_option", { ...params, value: option.currentValue });
+  if (!restore.ok || !restore.value?.configOptions?.some((o: any) => o.id === option.id && o.currentValue === option.currentValue)) {
+    ctx.promptBlocked = true;
+    put(ctx, "set_config", { status: "observed", reason: "restoration-unconfirmed", note: "Original configuration could not be confirmed; baseline prompts skipped" });
+  }
 }
 const PROMPTS = [
   "__probe_exec__ Run a shell command to read PROBE_CANARY.txt.",
@@ -315,6 +343,7 @@ export async function runPromptScenario(ctx: ProbeContext, id: string, sessionId
 }
 export async function probeSessionPrompt(ctx: ProbeContext) {
   if (!sessionReady(ctx, "session/prompt")) return;
+  if (ctx.promptBlocked) { put(ctx, "session/prompt", { status: "blocked", reason: "configuration-unconfirmed", note: "Configuration restoration unavailable" }); return; }
   let completed = 0;
   for (const text of PROMPTS) {
     const id = text.match(/__probe_(\w+)__/)![1];
@@ -379,12 +408,19 @@ export async function probeCancel(ctx: ProbeContext) {
   if (!sessionReady(ctx, "cancel")) return;
   if (ctx.promptBlocked) { put(ctx, "cancel", { status: "blocked", reason: "prerequisite", blockedBy: "session/prompt", note: "No successful prompt to establish cancellation conditions" }); return; }
   let settled = false;
+  const slowBefore = ctx.mcpLlmEvidence?.slowRequests ?? 0;
   const p = callAgent(ctx, "session/prompt", { sessionId: ctx.sessionId, prompt: [{ type: "text", text: "__probe_slow__ hold this turn open" }] }, 25_000).then(r => { settled = true; return r; });
-  await wait(400);
+  if (ctx.mcpLlmEvidence) {
+    const deadline = Date.now() + 10_000;
+    while (!settled && ctx.mcpLlmEvidence.slowRequests === slowBefore && Date.now() < deadline) await wait(25);
+  } else await wait(400); // external-provider/fixture evidence remains explicitly weaker
+  const modelBarrier = ctx.mcpLlmEvidence ? ctx.mcpLlmEvidence.slowRequests > slowBefore && ctx.mcpLlmEvidence.slowPending > 0 : undefined;
   const pendingAtCancel = !settled;
+
   if (pendingAtCancel && checkRequestParams(ctx, "session/cancel", { sessionId: ctx.sessionId })) ctx.rpc.notify("session/cancel", { sessionId: ctx.sessionId });
   const r = await p;
   if (!r.ok || !pendingAtCancel) { put(ctx, "cancel", { status: "na", reason: "no-active-turn", note: "No cancellable turn established" }); return; }
+  if (modelBarrier === false) { put(ctx, "cancel", { status: "na", reason: "stimulus-unavailable", note: "No controlled in-flight model barrier established; cleanup cancel is not scored" }); return; }
   put(ctx, "cancel", r.value?.stopReason === "cancelled"
     ? { status: "pass", note: `In-flight prompt returned cancelled after ${r.latencyMs}ms` }
     : { status: "observed", note: `Cancel sent while pending; prompt ended with ${r.value?.stopReason}. Completion race remains possible` });
@@ -397,7 +433,8 @@ export function probeClientCalls(ctx: ProbeContext) {
     const policyDenied = relevant.length > 0 && relevant.every(s => s.tools.some(t => t.status === "failed" && /source: capability_rule|permission denied|policy denied/i.test(t.detail ?? "")));
     const noTool = relevant.length > 0 && relevant.every(s => s.model && !s.model.issuedTools.length && s.model.skippedCalls.length);
     const reason = cause ? "prerequisite" : key === "elicitation" ? "not-run" : policyDenied ? "policy-rejected" : noTool ? "stimulus-unavailable" : "no-client-callback";
-    put(ctx, key, count ? { status: "pass", note: `${count} client request(s) observed with simulated client replies; see scenarios for conditions` }
+    const terminalComplete = key !== "terminal/*" || ctx.calls.terminalCreates.some(created => created.terminalId && ["terminal/output", "terminal/wait_for_exit", "terminal/kill", "terminal/release"].every(method => ctx.calls.terminalCalls.some(c => c.method === method && c.terminalId === created.terminalId && c.sessionId === created.sessionId)));
+    put(ctx, key, count ? { status: terminalComplete ? "pass" : "observed", note: `${count} client request(s) observed with simulated client replies; see scenarios for conditions` }
       : { status: cause ? "blocked" : "na", reason, blockedBy: cause, note: cause ? `Not observed; prerequisite ${cause} unavailable` : reason === "policy-rejected" ? "Tool attempts were explicitly denied by policy; no corresponding client callback observed" : reason === "not-run" ? "No controlled elicitation scenario configured" : reason === "stimulus-unavailable" ? "No valid matching model tool stimulus could be issued" : "No client request observed; internal tools and policy choices are permitted" });
   }
 }
@@ -537,7 +574,7 @@ export async function probeLody(ctx: ProbeContext) {
   const advertised =
     (ctx.initResult?.agentCapabilities?._meta?.lody as Record<string, any> | undefined) ?? {};
   const feats = Object.keys(advertised);
-  const info: LodyProbeInfo = { advertised, answered: [], missing: [], observed: [] };
+  const info: LodyProbeInfo = { advertised, answered: [], missing: [], observed: [], endpoints: [] };
   ctx.lody = info;
 
   // Generic extension surface — every _meta namespace, not only lody.
@@ -551,16 +588,18 @@ export async function probeLody(ctx: ProbeContext) {
     observed: [],
   };
 
-  const sid = ctx.sessionId ?? "probe-session";
+  const sid = ctx.sessionId;
   const calls: Array<[string, any]> = [
     ["_lody/rate_limits/get", {}],
     ["_lody/subagents/list", { sessionId: sid }],
     ["_lody/session/history/read", { sessionId: sid }],
   ];
   for (const [method, params] of calls) {
+    if (params.sessionId === undefined && method !== "_lody/rate_limits/get") continue;
     // callAgent's schema checks no-op on unbound methods — extension traffic
     // is contract-checked by acp-extension-core, not the ACP schema.
     const r = await callAgent(ctx, method, params, 8_000);
+    info.endpoints!.push({ method, outcome: r.ok ? (r.value === null ? "null-result" : "unvalidated-result") : isMissing(r.err) ? "method-not-found" : isStructured(r.err) ? "rejected" : "inconclusive", errorCode: code(r.err) });
     if (r.ok) info.answered.push(method);
     else if (isMissing(r.err)) info.missing.push(method);
     else if (isStructured(r.err)) info.answered.push(method); // rejection is a reply, not successful operation

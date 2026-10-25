@@ -49,3 +49,17 @@ test('plan stimulus builds a nonempty schema-valid todo list with declared enums
 test('an offered MCP tool with required arguments is validated before issuing it',async()=>{
   const s=await startMockLlm();try{const r=await post(s,'/chat/completions',{tools:[{type:'function',function:{name:'probe_noop',parameters:{type:'object',properties:{mode:{const:'probe'}},required:['mode']}}}],messages:[{role:'user',content:'__probe_mcp__'}]});assert.deepEqual(JSON.parse(r.choices[0].message.tool_calls[0].function.arguments),{mode:'probe'});}finally{s.close();}
 });
+test('explicit tool recipes override fuzzy matches but require offered valid schemas',async()=>{
+  const s=await startMockLlm();
+  try {
+    s.evidence.toolMappings={read:{tool:'read_file',args:{path:'/controlled/canary'}}};
+    const r=await post(s,'/chat/completions',{tools,messages:[{role:'user',content:'__probe_read__'}]});
+    assert.deepEqual(JSON.parse(r.choices[0].message.tool_calls[0].function.arguments),{path:'/controlled/canary'});
+    s.evidence.toolMappings.read={tool:'missing',args:{}};
+    const rejected=await post(s,'/chat/completions',{tools,messages:[{role:'user',content:'__probe_read__'}]});
+    assert.equal(rejected.choices[0].finish_reason,'stop');assert.match(s.evidence.skippedCalls.at(-1),/not offered/);
+    s.evidence.toolMappings.read={tool:'read_file',args:{path:1}};
+    await post(s,'/chat/completions',{tools,messages:[{role:'user',content:'__probe_read__'}]});
+    assert.match(s.evidence.skippedCalls.at(-1),/arguments rejected/);
+  }finally{s.close();}
+});

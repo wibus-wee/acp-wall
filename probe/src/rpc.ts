@@ -51,15 +51,17 @@ export class RpcPeer {
     const rl = createInterface({ input });
     rl.on("line", (line) => this.handleLine(line));
     if (proc) {
+      let stderr = "";
       proc.stderr?.on("data", (d) => {
         const s = String(d).trim();
+        stderr = (stderr + s + "\n").slice(-8000);
         if (s) this.log("in", "err", undefined, `[stderr] ${s.slice(0, 200)}`, { text: s.slice(0, 4096) });
       });
-      proc.on("exit", (code) => {
+      proc.on("close", (code) => {
         this.closed = true;
         for (const p of this.pending.values()) {
           clearTimeout(p.timer);
-          p.reject(new Error(`agent exited (code ${code})`));
+          p.reject(Object.assign(new Error(`agent exited (code ${code}): ${stderr.trim().slice(-1500)}`), { processExit: true, stderr, exitCode: code }));
         }
         this.pending.clear();
         this.onExit(code);

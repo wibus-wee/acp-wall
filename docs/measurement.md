@@ -39,8 +39,9 @@ whether a scenario was attempted.
 
 ## League-table ranking
 
-The public UI and its 24-column score, ranks and tiers remain unchanged in
-structure. [ranking.mjs](../tools/ranking.mjs) projects detailed observations into
+The 24-column coverage denominator and visual table are retained. Only runs
+with verified initialize, session/new and session/prompt, and no probe defect,
+participate in ranks. Other runs remain visible in Measurement Incomplete. [ranking.mjs](../tools/ranking.mjs) projects detailed observations into
 that existing data contract. A fully verified column earns one point; a partially
 verified group or schema-partial result earns half a point. Explicit failure or
 unsupported methods display as missing; unobserved, blocked, diagnostic-only and
@@ -48,7 +49,7 @@ probe-error results remain unexercised and earn no points. A group with a verifi
 submethod and unverified peers is partial, preserving the successful observation
 without claiming complete group support.
 
-The score is the rounded point total divided by 24, multiplied by 100. Existing
+The coverage score is the rounded point total divided by 24, multiplied by 100. Existing
 60/25 tier thresholds and claim-mismatch downgrades are retained. Image and
 embedded-context observations remain in detailed reports without expanding the
 ranking denominator. Historical scores retain their original methodology and
@@ -63,9 +64,9 @@ SHA-256, and the report includes methodology version, executed probe source
 hash, dependency lock hash, MCP SDK version, repository revision/dirty status,
 agent version, platform and Node version.
 A hash identifies the checked snapshot; it is not a claim that the snapshot is
-the latest upstream specification. The local validator implements the schema
-constructs described in [schema.ts](../probe/src/schema.ts) and ignores format
-annotations. A schema pass is limited to those checks.
+the latest upstream specification. The validator uses pinned Ajv Draft 2020-12 with all errors, no coercion,
+no default insertion and no property removal. Format annotations are not
+assertions. Unresolved references and schema compilation errors fail closed.
 
 Surfaces are separated into core lifecycle, capability-gated optional methods,
 observed client interactions and experimental methods. Capability negotiation
@@ -96,7 +97,10 @@ tools are allowed and their absence from client callbacks is not an issue.
 3. Submit independent exec, read, write and plan scenarios. The scripted model targets
    the current user turn; earlier tool results do not suppress later stimuli.
    Every issued tool call has a unique ID and schema-checked arguments.
-4. Observe cancellation while a prompt is pending. A cancellation result proves
+4. For a local mock, wait for its slow-request barrier before cancellation;
+   without a reached barrier, cleanup cancellation is not verified evidence.
+   For an external provider/fixture, record pending-request observations separately.
+   Observe cancellation while a prompt is pending. A cancellation result proves
    that interaction; other completions remain inconclusive because of races.
 5. Probe declared session and configuration operations. Destructive lifecycle
    operations use separate sessions and never fall back to the working session.
@@ -194,3 +198,18 @@ stale. It cannot infer whether an untested newer release behaves identically.
   remains in Git and CI artifacts; a dedicated history store is future work.
 - Credentialed testing needs dedicated accounts and explicit environment
   provenance. Unauthenticated discovery cannot answer credential-dependent questions.
+
+
+## Environment and recipe corrections (2026-10-25)
+
+- Package preparation must not execute the Agent entry point: `npm exec --package=… -- node -e ""` and `uvx --from … python -c "pass"` warm package environments. Actual npx startup belongs to initialization. Preparation failure logs are preserved independently from ACP stdout.
+- Configuring a model provider and authenticating an ACP client are separate prerequisites. Default discovery never fabricates authentication or runs an interactive login. Cline uses its environment-key gate with a mock key, while genuine vendor account requirements stay blocked.
+- Each probe creates an isolated HOME and XDG directories, sharing only explicitly configured package caches. The fixture never imports a user's saved Agent credentials.
+- `SSL_CERT_FILE` and other replacement CA variables receive public roots plus inherited custom roots and the temporary test CA. They do not receive only the test CA. TLS verification is never disabled.
+- An explicit `toolMappings` recipe may specify scenario → exact offered tool and schema-valid arguments. Missing or invalid mapped stimuli are recorded; no fuzzy fallback silently substitutes another tool.
+- Mode/config checks change an offered alternative and restore the original. Unconfirmed restoration blocks baseline prompts. A no-op is not counted as a transition.
+- A terminal create callback alone does not verify the terminal group. Full group evidence requires output, wait, kill and release for the same session/handle; simulated handles reject unknown, cross-session and released references.
+- Lody declarations display as D; wire keys as ◐. Bare null/error/unvalidated endpoint replies never imply extension implementation. Session-scoped extension requests require an actual session.
+- The page shows coverage, executed-check pass rate and explicit issues separately. An authentication/environment barrier does not put an Agent at the bottom of the compatibility ranking. Historical values keep their timestamps and are not retroactively claimed as newly tested.
+
+Mimi selects `@sorbetai/acp@alpha` as requested. Local alpha.3 inspection found that its stdio entry initializes the workspace-write sandbox before serving ACP, and Linux startup still requires socat. After approving and supplying socat, alpha.3 completed initialize and controlled mock-provider scenarios. The Wall does not disable the sandbox. Registry recipes should be revalidated when the alpha tag changes.

@@ -21,6 +21,7 @@ import {
 import { buildReport, type Report } from "./report.js";
 import { startMockLlm } from "./mock-llm.js";
 import { ensureCa } from "./mitm.js";
+import { writeCombinedCaBundle } from "./ca-trust.js";
 
 const args = process.argv.slice(2);
 function arg(flag: string): string | undefined {
@@ -39,6 +40,7 @@ const entry = entryPath
       name?: string;
       run?: string;
       setup?: string[];
+      toolMappings?: Record<string, { tool: string; args: Record<string, unknown> }>;
       env?: Record<string, string>;
       sessionFiles?: Record<string, unknown>;
       probeProfiles?: ProbeProfile[];
@@ -201,12 +203,13 @@ async function main() {
   if (useMitm && llm) {
     mitm = await setupMitm(Number(new URL(llm.url).port));
     if (mitm) {
-      // per-runtime CA trust: every SDK family gets its own pointer
-      env.NODE_EXTRA_CA_CERTS = mitm.caCrt;
-      env.SSL_CERT_FILE = mitm.caCrt;
-      env.REQUESTS_CA_BUNDLE = mitm.caCrt;
-      env.CURL_CA_BUNDLE = mitm.caCrt;
-      env.GIT_SSL_CAINFO = mitm.caCrt;
+      // Add probe trust without replacing public/custom roots.
+      const bundle = writeCombinedCaBundle(join(dirname(mitm.caCrt), "combined.pem"), mitm.caCrt);
+      env.NODE_EXTRA_CA_CERTS = bundle;
+      env.SSL_CERT_FILE = bundle;
+      env.REQUESTS_CA_BUNDLE = bundle;
+      env.CURL_CA_BUNDLE = bundle;
+      env.GIT_SSL_CAINFO = bundle;
     }
   }
   process.on("exit", () => teardownMitm(mitm));
@@ -214,6 +217,14 @@ async function main() {
   // run cmd and sessionFiles all resolve against it. The agent is spawned
   // here, session/new's cwd points here — the real repo stays untouched.
   const workDir = mkdtempSync(join(tmpdir(), "acp-probe-"));
+  env.HOME ??= join(workDir, ".home");
+  env.XDG_CONFIG_HOME ??= join(env.HOME, ".config");
+  env.XDG_CACHE_HOME ??= join(env.HOME, ".cache");
+  env.XDG_DATA_HOME ??= join(env.HOME, ".local", "share");
+  // Keep prewarmed package caches without importing user Agent credentials.
+  env.npm_config_cache ??= process.env.npm_config_cache ?? join(process.env.HOME ?? workDir, ".npm");
+  env.UV_CACHE_DIR ??= process.env.UV_CACHE_DIR ?? join(process.env.HOME ?? workDir, ".cache", "uv");
+  for (const dir of [env.HOME, env.XDG_CONFIG_HOME, env.XDG_CACHE_HOME, env.XDG_DATA_HOME]) mkdirSync(dir!, { recursive: true });
   const mockUrl = arg("--mock-llm") ?? llm?.url ?? "";
   const subst = (s: string) =>
     s
@@ -224,6 +235,7 @@ async function main() {
     env[k] = subst(v);
   }
   const runCmd = subst(cmd);
+  if (llm && entry?.toolMappings) llm.evidence.toolMappings = JSON.parse(subst(JSON.stringify(entry.toolMappings)));
 
   writeFileSync(join(workDir, "PROBE_CANARY.txt"), "CANARY-7729\n");
   mkdirSync(join(workDir, "probe-scratch", "nested"), { recursive: true });
@@ -247,7 +259,7 @@ async function main() {
     environment.sourceDirty = !!execFileSync("git", ["status", "--porcelain", "--", "probe", "tools", "registry/overrides"], { encoding: "utf8" }).trim();
     const here = dirname(fileURLToPath(import.meta.url));
     const digest = createHash("sha256");
-    for (const f of ["cli.js", "probes.js", "report.js", "evidence.js", "rpc.js", "mock-llm.js", "schema.js", "stubs.js", "setup.js", "mcp-fixture.js", "../fixtures/mcp-server.js"]) digest.update(readFileSync(join(here, f)));
+    for (const f of ["cli.js", "probes.js", "report.js", "evidence.js", "rpc.js", "mock-llm.js", "schema.js", "stubs.js", "setup.js", "ca-trust.js", "mcp-fixture.js", "../fixtures/mcp-server.js"]) digest.update(readFileSync(join(here, f)));
     environment.sourceHash = digest.digest("hex");
     environment.dependencySha256 = createHash("sha256").update(readFileSync(join(REPO_ROOT, "probe", "package-lock.json"))).digest("hex");
     environment.mcpSdkVersion = JSON.parse(readFileSync(join(REPO_ROOT, "probe", "node_modules", "@modelcontextprotocol", "sdk", "package.json"), "utf8")).version;
@@ -321,7 +333,7 @@ async function main() {
   // Cold launches flake: uvx/npx first-resolves and fresh binaries can die
   // before answering initialize. A closed stdio means the agent is already
   // gone — relaunch once. A live-but-silent agent is a real hang, not retried.
-  if (!ctx.initResult && rpc.isClosed) {
+  if (!ctx.initResult && rpc.isClosed && ctx.results.initialize?.status !== "blocked") {
     console.log("  [initialize: agent died before answering — relaunching once]");
     deadTranscript.push(...rpc.transcript);
     rpc.close();
