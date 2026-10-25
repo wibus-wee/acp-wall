@@ -32,17 +32,17 @@
       }
     ]
   },
-  "probedAt": "2026-10-25T15:54:29.447Z",
+  "probedAt": "2026-10-25T16:11:10.009Z",
   "state": "blocked",
   "summary": {
-    "pass": 7,
+    "pass": 4,
     "observed": 1,
-    "blocked": 10,
+    "blocked": 12,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 17,
+    "na": 18,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -59,8 +59,8 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "04ef8f6633e066161058595810d5bd225a79a465856486a9f3ddbea16fb7f86e",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
-    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40210057587",
+    "revision": "76bacb015e7ecd0681e9e5134c35d2b6de42abd9",
     "sourceDirty": false,
     "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -82,7 +82,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · sigit",
-          "latencyMs": 3285
+          "latencyMs": 3424
         }
       ]
     },
@@ -109,7 +109,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 31
+          "latencyMs": 74
         }
       ]
     },
@@ -201,13 +201,15 @@
     {
       "key": "fork",
       "scope": "optional",
-      "status": "pass",
+      "status": "na",
       "items": [
         {
           "method": "session/fork",
-          "status": "pass",
+          "status": "na",
+          "reason": "timeout",
+          "note": "session/fork timed out after 15000ms",
           "advertised": true,
-          "latencyMs": 5930
+          "latencyMs": 15004
         }
       ]
     },
@@ -250,7 +252,7 @@
           "errorCode": -32603,
           "note": "model loader thread crashed",
           "advertised": true,
-          "latencyMs": 132
+          "latencyMs": 87
         }
       ]
     },
@@ -285,12 +287,14 @@
     {
       "key": "message*",
       "scope": "observation",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "update:message",
-          "status": "pass",
-          "note": "2 notification(s) observed"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -302,7 +306,7 @@
         {
           "method": "update:tool_call",
           "status": "pass",
-          "note": "15 notification(s) observed"
+          "note": "20 notification(s) observed"
         }
       ]
     },
@@ -323,12 +327,14 @@
     {
       "key": "permission",
       "scope": "observation",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "request_permission",
-          "status": "pass",
-          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
@@ -354,7 +360,7 @@
         {
           "method": "update:commands",
           "status": "pass",
-          "note": "3 notification(s) observed"
+          "note": "1 notification(s) observed"
         }
       ]
     },
@@ -492,18 +498,18 @@
     "session/prompt": "session/prompt: session/prompt timed out after 30000ms",
     "prompt:content": "prompt:image: Not advertised; optional method not invoked · prompt:embedded-context: Not advertised; optional method not invoked",
     "sessions/*": "session/list: Not advertised; optional method not invoked · session/resume: Not advertised; optional method not invoked · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
-    "fork": "session/fork: pass",
+    "fork": "session/fork: session/fork timed out after 15000ms",
     "load:replay": "load:replay: Load attempt 1 rejected; replay could not be exercised",
     "set_mode": "set_mode: No session modes offered",
     "set_config": "set_config: model loader thread crashed",
     "cancel": "cancel: No successful prompt to establish cancellation conditions",
     "logout": "logout: Not advertised; optional method not invoked",
-    "message*": "update:message: 2 notification(s) observed",
-    "tool_call*": "update:tool_call: 15 notification(s) observed",
+    "message*": "update:message: No matching notifications observed; see scenario stimuli",
+    "tool_call*": "update:tool_call: 20 notification(s) observed",
     "usage": "update:usage: No matching notifications observed; see scenario stimuli",
-    "permission": "request_permission: 1 client request(s) observed with simulated client replies; see scenarios for conditions",
+    "permission": "request_permission: Not observed; prerequisite session/prompt unavailable",
     "plan": "update:plan: No matching notifications observed; see scenario stimuli",
-    "slash_cmds": "update:commands: 3 notification(s) observed",
+    "slash_cmds": "update:commands: 1 notification(s) observed",
     "fs/*": "fs/read_text_file: Not observed; prerequisite session/prompt unavailable · fs/write_text_file: Not observed; prerequisite session/prompt unavailable",
     "terminal/*": "terminal/*: Not observed; prerequisite session/prompt unavailable",
     "elicitation": "elicitation: Not observed; prerequisite session/prompt unavailable",
@@ -515,12 +521,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · sigit",
-      "latencyMs": 3285
+      "latencyMs": 3424
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 31
+      "latencyMs": 74
     },
     "set_mode": {
       "status": "na",
@@ -533,7 +539,7 @@
       "errorCode": -32603,
       "note": "model loader thread crashed",
       "advertised": true,
-      "latencyMs": 132
+      "latencyMs": 87
     },
     "session/prompt": {
       "status": "na",
@@ -561,9 +567,11 @@
       "note": "Load attempt 1 rejected; replay could not be exercised"
     },
     "session/fork": {
-      "status": "pass",
+      "status": "na",
+      "reason": "timeout",
+      "note": "session/fork timed out after 15000ms",
       "advertised": true,
-      "latencyMs": 5930
+      "latencyMs": 15004
     },
     "prompt:image": {
       "status": "na",
@@ -662,8 +670,10 @@
       "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "request_permission": {
-      "status": "pass",
-      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "elicitation": {
       "status": "blocked",
@@ -672,12 +682,14 @@
       "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "update:message": {
-      "status": "pass",
-      "note": "2 notification(s) observed"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:tool_call": {
       "status": "pass",
-      "note": "15 notification(s) observed"
+      "note": "20 notification(s) observed"
     },
     "update:plan": {
       "status": "blocked",
@@ -687,7 +699,7 @@
     },
     "update:commands": {
       "status": "pass",
-      "note": "3 notification(s) observed"
+      "note": "1 notification(s) observed"
     },
     "update:usage": {
       "status": "blocked",
@@ -724,29 +736,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T15:53:34.971Z",
+      "at": "2026-10-25T16:10:06.300Z",
       "outcome": "success",
-      "latencyMs": 3285
+      "latencyMs": 3424
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T15:53:38.285Z",
+      "at": "2026-10-25T16:10:09.764Z",
       "outcome": "success",
-      "latencyMs": 31
+      "latencyMs": 74
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-25T15:53:38.330Z",
+      "at": "2026-10-25T16:10:09.859Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 132
+      "latencyMs": 87
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-25T15:53:38.474Z",
+      "at": "2026-10-25T16:10:09.964Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 30002
@@ -754,7 +766,7 @@
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-10-25T15:54:08.491Z",
+      "at": "2026-10-25T16:10:39.984Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 15001
@@ -762,22 +774,23 @@
     {
       "method": "session/fork",
       "scenario": "session/fork",
-      "at": "2026-10-25T15:54:23.506Z",
-      "outcome": "success",
-      "latencyMs": 5930
+      "at": "2026-10-25T16:10:54.998Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 15004
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T15:54:29.446Z",
+      "at": "2026-10-25T16:11:10.004Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 3
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-25T15:54:29.446Z",
+      "at": "2026-10-25T16:11:10.007Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -785,7 +798,7 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-25T15:54:29.446Z",
+      "at": "2026-10-25T16:11:10.007Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -795,7 +808,7 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "82f8d8e1-06ca-415a-8e3a-403dff27259a",
+      "sessionId": "9e4d5f87-c385-4628-8a6c-2c3291ff09e3",
       "configuration": {
         "sigit-model": "bartowski/Qwen2.5-3B-Instruct-GGUF",
         "sigit-local-inference": "local-inference-on",
@@ -819,7 +832,7 @@
       ],
       "tools": [
         {
-          "id": "startup-load-8c58d222-4d7f-4abe-978a-f5776e5ee63a",
+          "id": "startup-load-c7bb5076-c9f7-4ae2-a4ad-cc8b4aefb0bc",
           "name": "✓ Qwen 2.5 3B downloaded and loaded",
           "status": "completed"
         }
@@ -832,9 +845,9 @@
   ],
   "uncertaintyReasons": {
     "interactive-auth": 1,
-    "timeout": 2,
+    "timeout": 3,
     "not-advertised": 12,
-    "prerequisite": 9,
+    "prerequisite": 11,
     "not-run": 3
   },
   "lody": {
@@ -872,10 +885,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 43753,
+      "port": 33643,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 10,
+      "relayed": 9,
       "drops": 0
     }
   }
