@@ -14,7 +14,7 @@ export async function runSetup(commands: string[], env: NodeJS.ProcessEnv, cwd: 
         clearTimeout(timer);
         resolve({ code, diagnostic: detail ?? diagnostic.trim().slice(-400) });
       };
-      child.stdout?.resume();
+      child.stdout?.on("data", b => { diagnostic = (diagnostic + b).slice(-2000); });
       child.stderr?.on("data", b => { diagnostic = (diagnostic + b).slice(-2000); });
       const timer = setTimeout(() => {
         try { if (process.platform !== "win32" && child.pid) process.kill(-child.pid, "SIGKILL"); else child.kill("SIGKILL"); } catch { /* process already exited */ }

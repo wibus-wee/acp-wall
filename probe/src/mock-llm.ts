@@ -14,6 +14,9 @@ export interface MockLlmEvidence {
   issuedCalls: PickedTool[];
   skippedCalls: string[];
   requests: number;
+  toolMappings?: Record<string, { tool: string; args: Record<string, unknown> }>;
+  slowRequests: number;
+  slowPending: number;
 }
 
 export interface MockLlm {
@@ -63,6 +66,14 @@ function pickToolCall(tools: any[], body: any): PickedTool | null {
   const scenario = currentText(body).match(/__probe_(exec|read|write|plan|mcp)__/i)?.[1]?.toLowerCase();
   const match: Record<string, RegExp> = { exec: /bash|shell|exec|command|terminal/i, read: /read|open|view|cat/i, write: /write|create_file/i, mcp: /probe_noop/i, plan: /^(todowrite|todo_write|update_plan|write_plan|plan_update)$/i };
   if (!scenario) return null;
+  const mapped = evidence().toolMappings?.[scenario];
+  if (mapped) {
+    const offered = norm.find(t => t.name === mapped.tool);
+    if (!offered) { evidence().skippedCalls.push(`${scenario}: configured tool ${mapped.tool} not offered`); return null; }
+    const errors = schema.validate(mapped.args, offered.params);
+    if (errors.length) { evidence().skippedCalls.push(`${scenario}: configured arguments rejected for ${mapped.tool}: ${errors[0].path}`); return null; }
+    return { id: `call_probe_${evidence().issuedCalls.length + 1}`, name: offered.name, args: structuredClone(mapped.args) };
+  }
   const pick = norm.find(t => match[scenario].test(t.name) && (scenario === "mcp" || !/probe_noop/i.test(t.name)));
   if (!pick) { evidence().skippedCalls.push(`${scenario}: no matching tool offered`); return null; }
   const writer = /write|edit|create|patch|apply/i.test(pick.name);
@@ -345,7 +356,7 @@ function anthropicSse(body: any): string {
 }
 
 export function startMockLlm(port = 0): Promise<MockLlm> {
-  const state: MockLlmEvidence = { seenTools: new Set(), issuedCalls: [], skippedCalls: [], requests: 0 };
+  const state: MockLlmEvidence = { seenTools: new Set(), issuedCalls: [], skippedCalls: [], requests: 0, slowRequests: 0, slowPending: 0 };
   const server: Server = createServer((req, res) => mockContext.run(state, () => {
     state.requests++;
     let raw = "";
@@ -367,7 +378,14 @@ export function startMockLlm(port = 0): Promise<MockLlm> {
       // script word: the probe's cancel test sends __probe_slow__ and needs
       // the turn to still be open when session/cancel lands
       if (currentText(body).includes("__probe_slow__")) {
-        setTimeout(() => {
+        state.slowRequests++;
+        state.slowPending++;
+        let ended = false;
+        const finish = () => { if (!ended) { ended = true; state.slowPending--; } };
+        res.once("close", finish);
+        const slowTimer = setTimeout(() => {
+          finish();
+          if (res.destroyed) return;
           if (path.endsWith("/responses")) {
             const { output, tool } = responsesOutput(body);
             if (body?.stream) {
@@ -391,7 +409,9 @@ export function startMockLlm(port = 0): Promise<MockLlm> {
             } else json(anthropicResponse(body));
           }
           else res.writeHead(404).end("not found");
-        }, 8000).unref();
+        }, 8000);
+        slowTimer.unref();
+        res.once("close", () => clearTimeout(slowTimer));
         return;
       }
       if (path.endsWith("/responses")) {

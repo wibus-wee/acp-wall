@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // install-dist.mjs — fetch a registry agent's distribution for this platform.
 //   binary → download archive, verify sha256, extract into .cache/agents/<id>/
-//   npx/uvx → no-op (the run command self-installs)
+//   npx/uvx → resolve/install into package-manager cache without starting ACP
 // Prints the resolved run command on stdout (last line).
 //
 // usage: node tools/install-dist.mjs registry/agents/<id>.json
@@ -24,8 +24,14 @@ function platformKey() {
 }
 
 const dist = entry.dist;
-if (!dist || dist.type === "npx" || dist.type === "uvx") {
-  // nothing to fetch — the run command self-installs
+if (!dist) { console.log(entry.run); process.exit(0); }
+if (dist.type === "npx" || dist.type === "uvx") {
+  if (!dist.package) throw new Error("Package distribution requires a package spec");
+  if (dist.type === "npx") {
+    execFileSync("npm", ["exec", "--yes", `--package=${dist.package}`, "--", "node", "-e", ""], { stdio: "inherit" });
+  } else {
+    execFileSync("uvx", ["--from", dist.package, "python", "-c", "pass"], { stdio: "inherit" });
+  }
   console.log(entry.run);
   process.exit(0);
 }

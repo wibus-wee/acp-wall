@@ -8,7 +8,7 @@
   "website": null,
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/minion-code.svg",
   "license": "AGPL-3.0",
-  "install": null,
+  "install": "uvx --with agent-client-protocol==0.8.1 --from minion-code@0.1.44 python -c \"pass\"",
   "run": "uvx --with agent-client-protocol==0.8.1 minion-code@0.1.44 acp",
   "setup": [],
   "probeProfiles": [],

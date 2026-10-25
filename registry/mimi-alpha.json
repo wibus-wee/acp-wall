@@ -2,17 +2,75 @@
   "name": "mimi-alpha",
   "display": "Mimi Alpha",
   "vendor": "Unknown",
-  "version": "0.0.0",
+  "version": "alpha",
   "description": "An anonymous ACP",
   "repo": "anonymous/acp-extension-mimi-alpha",
   "website": "https://github.com/anonymous/acp-extension-mimi-alpha",
   "icon": null,
-  "install": "npx -y @sorbetai/acp@latest",
-  "run": "npx -y @sorbetai/acp@latest",
-  "env": {},
-  "sessionFiles": null,
-  "dist": { "type": "npx", "package": "@sorbetai/acp@latest", "args": [] },
+  "install": "npm exec --yes --package=@sorbetai/acp@alpha -- node -e \"\"",
+  "run": "npx -y @sorbetai/acp@alpha",
+  "env": {
+    "SORBET_DATA_DIR": "${WORK_DIR}/sorbet-home"
+  },
+  "sessionFiles": {
+    "sorbet-home/providers.json": {
+      "wall-probe": {
+        "id": "wall-probe",
+        "name": "Wall Probe",
+        "protocol": "openai-completions",
+        "baseUrl": "${MOCK_LLM_URL}",
+        "models": [
+          {
+            "id": "probe-model",
+            "name": "Probe Model",
+            "input": [
+              "text"
+            ],
+            "reasoning": false,
+            "contextWindow": 32768,
+            "maxTokens": 4096
+          }
+        ]
+      }
+    },
+    "sorbet-home/credentials.json": {
+      "wall-probe": {
+        "type": "api_key",
+        "key": "probe-mock-key"
+      }
+    }
+  },
+  "dist": {
+    "type": "npx",
+    "package": "@sorbetai/acp@alpha",
+    "args": []
+  },
   "disabled": false,
   "selftest": false,
-  "notes": "Bridge only."
+  "notes": "Explicit alpha channel; isolated local mock provider with dummy credentials only. Prepare downloads without invoking the Agent; npx launch belongs to initialize. Linux sandbox remains workspace-write; CI supplies rg/bwrap/socat rather than disabling it.",
+  "toolMappings": {
+    "read": {
+      "tool": "acp_fs_read_text_file",
+      "args": {
+        "path": "${WORK_DIR}/PROBE_CANARY.txt"
+      }
+    },
+    "write": {
+      "tool": "acp_fs_write_text_file",
+      "args": {
+        "path": "${WORK_DIR}/probe-out.txt",
+        "content": "CANARY-7729\n"
+      }
+    },
+    "exec": {
+      "tool": "acp_terminal_create",
+      "args": {
+        "command": "cat",
+        "args": [
+          "PROBE_CANARY.txt"
+        ],
+        "cwd": "${WORK_DIR}"
+      }
+    }
+  }
 }

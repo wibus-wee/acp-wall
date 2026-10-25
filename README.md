@@ -3,7 +3,7 @@
 The Wall is an independent evidence ledger for Agent Client Protocol (ACP)
 implementations. It records observed operations, capability declarations,
 authentication blockers and test failures with their version and environment.
-The original league table, rank, score and tier remain the public presentation.
+The league table retains measured coverage ranks; environment/authentication-blocked runs are shown separately without a rank.
 Detailed observations explain what each measurement did and did not establish.
 
 | Area | Location | Responsibility |
@@ -25,7 +25,7 @@ evidence; it does not mean unsupported. An unsupported optional method is not a
 protocol violation. Grouped cells preserve each method's result.
 
 Click an agent name to open its existing case file, including per-method notes
-and schema diagnostics. The league table retains its rank, score, tier sections,
+and schema diagnostics. The league table retains its measured-coverage rank, score, tier sections,
 Lody toggle, search palette and original visual design. Full scenario conditions
 and uncertainty reasons are available in `data/reports/<agent-id>.json`.
 
@@ -88,6 +88,7 @@ Human-owned preparation and environment settings live in
 | --- | --- |
 | `run` | Command that launches ACP over stdio. |
 | `setup` | Ordered shell commands completed before ACP starts; any failure prevents launch. |
+| `toolMappings` | Exact offered tool names and schema-checked arguments per controlled scenario; optional, versioned with the recipe. |
 | `probeProfiles` | Explicit session configuration profiles; each must match an offered option and runs in a distinct session. |
 | `env` | Environment passed to preparation and the agent. |
 | `sessionFiles` | Configuration files written into the temporary workspace. |

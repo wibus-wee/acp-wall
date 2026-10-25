@@ -5,7 +5,7 @@ name: probe
 # mean upstream changed; registry/overrides/ is where humans submit tweaks.
 on:
   pull_request:
-    paths: ["registry/**", "probe/**", "tools/**"]
+    paths: ["registry/**", "probe/**", "tools/**", "ui/**", "index.html", ".github/workflows/**"]
 
 # a new push to the same PR cancels the stale probe — only the newest
 # submission state matters
@@ -55,6 +55,12 @@ jobs:
           echo "entries=$(echo "$CHANGED" | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
           echo "will probe: $CHANGED"
 
+      - name: Prepare Mimi Linux sandbox dependencies
+        if: contains(steps.changed.outputs.entries, 'mimi-alpha.json')
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ripgrep bubblewrap socat
+
       - name: Build probe
         working-directory: probe
         run: |
@@ -75,9 +81,10 @@ jobs:
             if [ -n "$install" ]; then
               echo "install: $install"
               status=0
-              timeout 600 sh -c "$install" || status=$?
+              timeout 600 sh -c "$install" > "probe/reports/$name.install.log" 2>&1 || status=$?
+              cat "probe/reports/$name.install.log"
               if [ "$status" != "0" ]; then
-                node tools/record-failure.mjs "$entry" "probe/reports/$name.report.json" "Distribution installation failed" "$status"
+                node tools/record-failure.mjs "$entry" "probe/reports/$name.report.json" "Distribution installation failed" "$status" "probe/reports/$name.install.log"
                 continue
               fi
             fi
@@ -91,7 +98,9 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: probe-reports
-          path: probe/reports/*.report.json*
+          path: |
+            probe/reports/*.report.json*
+            probe/reports/*.install.log
 
       - name: Comment results on PR
         if: github.event_name == 'pull_request'

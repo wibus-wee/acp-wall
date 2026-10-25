@@ -1,6 +1,8 @@
 /** Shared report and UI vocabulary. Counts describe evidence, never a quality score. */
 export const METHODOLOGY_VERSION = "2.1.0";
 export const REASONS = {
+  "environment-tls": "Test environment certificate trust failed", "runtime-prerequisite": "Required runtime dependency unavailable", "package-resolution": "Package resolution failed",
+  "no-alternative": "No safe alternative offered", "restoration-unconfirmed": "Baseline restoration unconfirmed",
   "not-advertised": "Not declared", "not-run": "No scenario run", "not-triggered": "Attempted, not triggered",
   "prerequisite": "Prerequisite unavailable", "policy-rejected": "Policy rejected the stimulus",
   "stimulus-unavailable": "No valid model stimulus", "no-client-callback": "No client callback",

@@ -8,8 +8,8 @@
 export interface ClientCalls {
   fsReads: Array<{ path: string; sessionId?: string }>;
   fsWrites: Array<{ path: string; content: string; sessionId?: string }>;
-  terminalCreates: Array<{ command: string; sessionId?: string }>;
-  terminalCalls: Array<{ method: string; terminalId?: string }>;
+  terminalCreates: Array<{ command: string; terminalId?: string; sessionId?: string }>;
+  terminalCalls: Array<{ method: string; terminalId?: string; sessionId?: string }>;
   permissionRequests: Array<{ options: unknown[]; toolCall?: unknown; sessionId?: string }>;
   elicitations: Array<{ message?: string; sessionId?: string }>;
   /** agent→client MCP-over-ACP relay calls (mcp/connect|message|disconnect)
@@ -21,7 +21,12 @@ export interface ClientCalls {
 export const STUB_FILE_CONTENT = "PROBE_CANNED_FILE_CONTENT\nline two\n";
 
 export function makeClientStubs(calls: ClientCalls) {
-  const terminals = new Map<string, { command: string }>();
+  const terminals = new Map<string, { command: string; sessionId?: string }>();
+  const requireTerminal = (params: any) => {
+    const terminal = terminals.get(params?.terminalId);
+    if (!terminal || terminal.sessionId !== params?.sessionId) throw { code: -32602, message: "unknown terminalId for this session" };
+    return terminal;
+  };
   let termSeq = 0;
 
   return async (method: string, params: any): Promise<unknown> => {
@@ -40,12 +45,13 @@ export function makeClientStubs(calls: ClientCalls) {
       }
       case "terminal/create": {
         const terminalId = `probe-term-${++termSeq}`;
-        terminals.set(terminalId, { command: params?.command });
-        calls.terminalCreates.push({ command: params?.command, sessionId: params?.sessionId });
+        terminals.set(terminalId, { command: params?.command, sessionId: params?.sessionId });
+        calls.terminalCreates.push({ terminalId, command: params?.command, sessionId: params?.sessionId });
         return { terminalId };
       }
       case "terminal/output": {
-        calls.terminalCalls.push({ method, terminalId: params?.terminalId });
+        requireTerminal(params);
+        calls.terminalCalls.push({ method, terminalId: params?.terminalId, sessionId: params?.sessionId });
         const t = terminals.get(params?.terminalId);
         if (!t) throw { code: -32602, message: "unknown terminalId" };
         return {
@@ -55,12 +61,15 @@ export function makeClientStubs(calls: ClientCalls) {
         };
       }
       case "terminal/wait_for_exit": {
-        calls.terminalCalls.push({ method, terminalId: params?.terminalId });
+        requireTerminal(params);
+        calls.terminalCalls.push({ method, terminalId: params?.terminalId, sessionId: params?.sessionId });
         return { exitCode: 0 };
       }
       case "terminal/kill":
       case "terminal/release": {
-        calls.terminalCalls.push({ method, terminalId: params?.terminalId });
+        requireTerminal(params);
+        calls.terminalCalls.push({ method, terminalId: params?.terminalId, sessionId: params?.sessionId });
+        if (method === "terminal/release") terminals.delete(params.terminalId);
         return {};
       }
       case "session/request_permission": {

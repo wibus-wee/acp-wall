@@ -109,6 +109,12 @@ jobs:
         id: h
         run: echo "name=$(node -p "JSON.parse(require('fs').readFileSync('${{ matrix.entry }}','utf8')).name")" >> "$GITHUB_OUTPUT"
 
+      - name: Prepare Mimi Linux sandbox dependencies
+        if: steps.h.outputs.name == 'mimi-alpha'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ripgrep bubblewrap socat
+
       - name: Build probe
         working-directory: probe
         run: |
@@ -119,8 +125,12 @@ jobs:
         id: install
         run: |
           install=$(node -p "JSON.parse(require('fs').readFileSync('${{ matrix.entry }}','utf8')).install||''")
+          mkdir -p probe/reports
           status=0
-          if [ -n "$install" ]; then timeout 600 sh -c "$install" || status=$?; fi
+          if [ -n "$install" ]; then
+            timeout 600 sh -c "$install" > "probe/reports/${{ steps.h.outputs.name }}.install.log" 2>&1 || status=$?
+            cat "probe/reports/${{ steps.h.outputs.name }}.install.log"
+          fi
           echo "status=$status" >> "$GITHUB_OUTPUT"
 
       - name: Probe
@@ -134,7 +144,7 @@ jobs:
           entry="${{ matrix.entry }}"
           out="probe/reports/${{ steps.h.outputs.name }}.report.json"
           if [ "${{ steps.install.outputs.status }}" != "0" ]; then
-            node tools/record-failure.mjs "$entry" "$out" "Distribution installation failed" "${{ steps.install.outputs.status }}"
+            node tools/record-failure.mjs "$entry" "$out" "Distribution installation failed" "${{ steps.install.outputs.status }}" "probe/reports/${{ steps.h.outputs.name }}.install.log"
           else
             status=0
             timeout 600 node probe/dist/src/cli.js --entry "$entry" --out "$out" --transcript || status=$?
@@ -146,7 +156,9 @@ jobs:
         with:
           # artifact names may not contain '/' — use the resolved name, not the path
           name: report-${{ steps.h.outputs.name }}
-          path: probe/reports/*.report.json*
+          path: |
+            probe/reports/*.report.json*
+            probe/reports/*.install.log
           # a probe that died before writing a report is a data point, not a red job
           if-no-files-found: warn
           include-hidden-files: true
