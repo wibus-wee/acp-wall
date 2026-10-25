@@ -3,49 +3,180 @@
   "methodologyVersion": "2.1.0",
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "mimi-alpha",
+  "agentName": "sorbet-acp",
+  "agentVersion": "0.1.0-alpha.3",
   "specVersion": 1,
   "advertised": {
-    "capabilities": {},
+    "capabilities": {
+      "loadSession": true,
+      "promptCapabilities": {
+        "image": true,
+        "audio": false,
+        "embeddedContext": true
+      },
+      "mcpCapabilities": {
+        "http": true,
+        "sse": true
+      },
+      "sessionCapabilities": {
+        "list": {},
+        "delete": {},
+        "additionalDirectories": {},
+        "resume": {},
+        "close": {},
+        "fork": {}
+      },
+      "auth": {
+        "logout": {}
+      },
+      "providers": {},
+      "_meta": {
+        "sorbet.dev": {
+          "version": 1,
+          "runInspection": true,
+          "replay": true,
+          "plugins": {
+            "version": 2,
+            "query": true,
+            "apply": true,
+            "watch": true
+          }
+        },
+        "lody": {
+          "usage": {
+            "version": 1
+          },
+          "forkAtTurn": {
+            "version": 1
+          },
+          "steering": {
+            "version": 1,
+            "transport": "request",
+            "upstreamTurn": "same",
+            "configPolicy": "active"
+          },
+          "goal": {
+            "version": 1,
+            "actions": [
+              "set",
+              "pause",
+              "resume",
+              "clear"
+            ],
+            "controlActions": [
+              "pause",
+              "resume",
+              "clear"
+            ],
+            "promptActions": [
+              "set",
+              "pause",
+              "resume",
+              "clear"
+            ]
+          },
+          "compaction": {
+            "version": 1
+          },
+          "subagents": {
+            "version": 1,
+            "lifecycle": true,
+            "list": true,
+            "cancel": true,
+            "output": true
+          },
+          "sessionHistory": {
+            "version": 1
+          },
+          "sessionTitle": {
+            "version": 1
+          }
+        }
+      }
+    },
     "authMethods": []
   },
-  "probedAt": "2026-10-25T09:14:11.599Z",
-  "state": "probe-error",
+  "probedAt": "2026-10-25T15:53:26.983Z",
+  "state": "measured",
   "summary": {
-    "pass": 0,
-    "observed": 0,
+    "pass": 20,
+    "observed": 4,
     "blocked": 0,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 35,
+    "na": 11,
     "mixed": 0,
     "legacy": 0,
     "total": 35
   },
   "setup": {
-    "status": "error",
-    "phase": "installation",
-    "note": "Distribution installation failed (exit 1); no completed measurement"
+    "status": "not-configured"
   },
   "environment": {
-    "profile": "not-started",
+    "profile": "mock",
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.21.0",
-    "revision": "5795da2c28d36f39dfb482ca7f9f7e1e210b922e",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016"
+    "command": "npx -y @sorbetai/acp@alpha",
+    "discovery": false,
+    "authenticationAttempted": false,
+    "recipeSha256": "bbfbf8b215df76ba6d2ed88fa436a8c97df33d13962d55f4470ead97f41113b8",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
+    "sourceDirty": false,
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
+    "mcpSdkVersion": "1.32.0",
+    "mockRequests": 42,
+    "modelEvidence": {
+      "seenTools": [
+        "acp_fs_read_text_file",
+        "acp_fs_write_text_file",
+        "acp_terminal_create",
+        "acp_terminal_kill",
+        "acp_terminal_output",
+        "acp_terminal_release",
+        "acp_terminal_wait",
+        "agent",
+        "artifact",
+        "bash",
+        "edit",
+        "goal",
+        "read",
+        "tool_search",
+        "wait",
+        "write"
+      ],
+      "issuedTools": [
+        "acp_terminal_create",
+        "acp_fs_read_text_file",
+        "acp_fs_write_text_file"
+      ],
+      "skippedCalls": [
+        "exec: configured tool acp_terminal_create not offered",
+        "plan: no matching tool offered",
+        "mcp: no matching tool offered",
+        "mcp: no matching tool offered",
+        "mcp: no matching tool offered",
+        "mcp: no matching tool offered",
+        "mcp: no matching tool offered",
+        "mcp: no matching tool offered"
+      ]
+    }
   },
   "cells": [
     {
       "key": "initialize",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "initialize",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "Protocol 1 · sorbet-acp",
+          "latencyMs": 3248
         }
       ]
     },
@@ -57,111 +188,121 @@
         {
           "method": "authenticate",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-advertised",
+          "note": "No protocol authentication method advertised"
         }
       ]
     },
     {
       "key": "session/new",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "session/new",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "Created a session without additional MCP dependencies",
+          "latencyMs": 1149
         }
       ]
     },
     {
       "key": "session/load",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "session/load",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 658
         }
       ]
     },
     {
       "key": "session/prompt",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "session/prompt",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "4 prompt responses received; content and tool choice are observed separately"
         }
       ]
     },
     {
       "key": "prompt:content",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "prompt:image",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
         },
         {
           "method": "prompt:embedded-context",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
         }
       ]
     },
     {
       "key": "sessions/*",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "session/list",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 3
         },
         {
           "method": "session/resume",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 24
         },
         {
           "method": "session/close",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 4
         },
         {
           "method": "session/delete",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 10
         }
       ]
     },
     {
       "key": "fork",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "session/fork",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 785
         }
       ]
     },
     {
       "key": "load:replay",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "load:replay",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "Prior conversation text replayed for the same session"
         }
       ]
     },
@@ -173,31 +314,34 @@
         {
           "method": "set_mode",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "no-alternative",
+          "note": "No safe alternative and restoration mode offered"
         }
       ]
     },
     {
       "key": "set_config",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "set_config",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "Changed permission_mode to another offered value",
+          "advertised": true,
+          "latencyMs": 525
         }
       ]
     },
     {
       "key": "cancel",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "cancel",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "In-flight prompt returned cancelled after 48ms"
         }
       ]
     },
@@ -209,55 +353,57 @@
         {
           "method": "logout",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-run",
+          "advertised": true,
+          "note": "No authentication established by this run; shared account state is not changed"
         }
       ]
     },
     {
       "key": "message*",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "update:message",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "13 notification(s) observed"
         }
       ]
     },
     {
       "key": "tool_call*",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "update:tool_call",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "15 notification(s) observed"
         }
       ]
     },
     {
       "key": "usage",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "update:usage",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "27 notification(s) observed"
         }
       ]
     },
     {
       "key": "permission",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "request_permission",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "3 client request(s) observed with simulated client replies; see scenarios for conditions"
         }
       ]
     },
@@ -269,7 +415,8 @@
         {
           "method": "update:plan",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -281,36 +428,37 @@
         {
           "method": "update:commands",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
     {
       "key": "fs/*",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "fs/read_text_file",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
         },
         {
           "method": "fs/write_text_file",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
         }
       ]
     },
     {
       "key": "terminal/*",
       "scope": "observation",
-      "status": "na",
+      "status": "observed",
       "items": [
         {
           "method": "terminal/*",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "observed",
+          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
         }
       ]
     },
@@ -322,7 +470,8 @@
         {
           "method": "elicitation",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-run",
+          "note": "No controlled elicitation scenario configured"
         }
       ]
     },
@@ -334,17 +483,23 @@
         {
           "method": "providers/list",
           "status": "na",
-          "note": "Not exercised in this run"
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "providers/set",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
         },
         {
           "method": "providers/disable",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
         }
       ]
     },
@@ -356,69 +511,941 @@
         {
           "method": "nes/start",
           "status": "na",
-          "note": "Not exercised in this run"
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "nes/suggest",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-run",
+          "note": "No controlled scenario exercised this check"
         }
       ]
     },
     {
       "key": "mcp",
       "scope": "observation",
-      "status": "na",
+      "status": "observed",
       "items": [
         {
           "method": "mcp:stdio",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "observed",
+          "reason": "tool-not-called",
+          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
         },
         {
           "method": "mcp:http",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "observed",
+          "reason": "tool-not-called",
+          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
+          "advertised": true
         },
         {
           "method": "mcp:sse",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "observed",
+          "reason": "tool-not-called",
+          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
+          "advertised": true
         }
       ]
     }
   ],
   "notes": {
-    "initialize": "initialize: Not exercised in this run",
-    "authenticate": "authenticate: Not exercised in this run",
-    "session/new": "session/new: Not exercised in this run",
-    "session/load": "session/load: Not exercised in this run",
-    "session/prompt": "session/prompt: Not exercised in this run",
-    "prompt:content": "prompt:image: Not exercised in this run · prompt:embedded-context: Not exercised in this run",
-    "sessions/*": "session/list: Not exercised in this run · session/resume: Not exercised in this run · session/close: Not exercised in this run · session/delete: Not exercised in this run",
-    "fork": "session/fork: Not exercised in this run",
-    "load:replay": "load:replay: Not exercised in this run",
-    "set_mode": "set_mode: Not exercised in this run",
-    "set_config": "set_config: Not exercised in this run",
-    "cancel": "cancel: Not exercised in this run",
-    "logout": "logout: Not exercised in this run",
-    "message*": "update:message: Not exercised in this run",
-    "tool_call*": "update:tool_call: Not exercised in this run",
-    "usage": "update:usage: Not exercised in this run",
-    "permission": "request_permission: Not exercised in this run",
-    "plan": "update:plan: Not exercised in this run",
-    "slash_cmds": "update:commands: Not exercised in this run",
-    "fs/*": "fs/read_text_file: Not exercised in this run · fs/write_text_file: Not exercised in this run",
-    "terminal/*": "terminal/*: Not exercised in this run",
-    "elicitation": "elicitation: Not exercised in this run",
-    "providers": "providers/list: Not exercised in this run · providers/set: Not exercised in this run · providers/disable: Not exercised in this run",
-    "nes": "nes/start: Not exercised in this run · nes/suggest: Not exercised in this run",
-    "mcp": "mcp:stdio: Not exercised in this run · mcp:http: Not exercised in this run · mcp:sse: Not exercised in this run"
+    "initialize": "initialize: Protocol 1 · sorbet-acp",
+    "authenticate": "authenticate: No protocol authentication method advertised",
+    "session/new": "session/new: Created a session without additional MCP dependencies",
+    "session/load": "session/load: pass",
+    "session/prompt": "session/prompt: 4 prompt responses received; content and tool choice are observed separately",
+    "prompt:content": "prompt:image: Typed prompt accepted and answered; model understanding and content preservation are not established · prompt:embedded-context: Typed prompt accepted and answered; model understanding and content preservation are not established",
+    "sessions/*": "session/list: pass · session/resume: pass · session/close: pass · session/delete: pass",
+    "fork": "session/fork: pass",
+    "load:replay": "load:replay: Prior conversation text replayed for the same session",
+    "set_mode": "set_mode: No safe alternative and restoration mode offered",
+    "set_config": "set_config: Changed permission_mode to another offered value",
+    "cancel": "cancel: In-flight prompt returned cancelled after 48ms",
+    "logout": "logout: No authentication established by this run; shared account state is not changed",
+    "message*": "update:message: 13 notification(s) observed",
+    "tool_call*": "update:tool_call: 15 notification(s) observed",
+    "usage": "update:usage: 27 notification(s) observed",
+    "permission": "request_permission: 3 client request(s) observed with simulated client replies; see scenarios for conditions",
+    "plan": "update:plan: No matching notifications observed; see scenario stimuli",
+    "slash_cmds": "update:commands: No matching notifications observed; see scenario stimuli",
+    "fs/*": "fs/read_text_file: 1 client request(s) observed with simulated client replies; see scenarios for conditions · fs/write_text_file: 1 client request(s) observed with simulated client replies; see scenarios for conditions",
+    "terminal/*": "terminal/*: 1 client request(s) observed with simulated client replies; see scenarios for conditions",
+    "elicitation": "elicitation: No controlled elicitation scenario configured",
+    "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
+    "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
+    "mcp": "mcp:stdio: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:sse: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
   },
-  "methods": {},
+  "methods": {
+    "initialize": {
+      "status": "pass",
+      "note": "Protocol 1 · sorbet-acp",
+      "latencyMs": 3248
+    },
+    "session/new": {
+      "status": "pass",
+      "note": "Created a session without additional MCP dependencies",
+      "latencyMs": 1149
+    },
+    "set_mode": {
+      "status": "na",
+      "reason": "no-alternative",
+      "note": "No safe alternative and restoration mode offered"
+    },
+    "set_config": {
+      "status": "pass",
+      "note": "Changed permission_mode to another offered value",
+      "advertised": true,
+      "latencyMs": 525
+    },
+    "session/prompt": {
+      "status": "pass",
+      "note": "4 prompt responses received; content and tool choice are observed separately"
+    },
+    "cancel": {
+      "status": "pass",
+      "note": "In-flight prompt returned cancelled after 48ms"
+    },
+    "session/load": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 658
+    },
+    "load:replay": {
+      "status": "pass",
+      "note": "Prior conversation text replayed for the same session"
+    },
+    "session/fork": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 785
+    },
+    "prompt:image": {
+      "status": "pass",
+      "advertised": true,
+      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+    },
+    "prompt:embedded-context": {
+      "status": "pass",
+      "advertised": true,
+      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+    },
+    "providers/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/set": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "providers/disable": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "nes/start": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/list": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 3
+    },
+    "session/resume": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 24
+    },
+    "session/close": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 4
+    },
+    "session/delete": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 10
+    },
+    "mcp:stdio": {
+      "status": "observed",
+      "reason": "tool-not-called",
+      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
+    },
+    "mcp:http": {
+      "status": "observed",
+      "reason": "tool-not-called",
+      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
+      "advertised": true
+    },
+    "mcp:sse": {
+      "status": "observed",
+      "reason": "tool-not-called",
+      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
+      "advertised": true
+    },
+    "fs/read_text_file": {
+      "status": "pass",
+      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+    },
+    "fs/write_text_file": {
+      "status": "pass",
+      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+    },
+    "terminal/*": {
+      "status": "observed",
+      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+    },
+    "request_permission": {
+      "status": "pass",
+      "note": "3 client request(s) observed with simulated client replies; see scenarios for conditions"
+    },
+    "elicitation": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled elicitation scenario configured"
+    },
+    "update:message": {
+      "status": "pass",
+      "note": "13 notification(s) observed"
+    },
+    "update:tool_call": {
+      "status": "pass",
+      "note": "15 notification(s) observed"
+    },
+    "update:plan": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:commands": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:usage": {
+      "status": "pass",
+      "note": "27 notification(s) observed"
+    },
+    "lody": {
+      "status": "observed",
+      "note": "8 feature(s) advertised: usage v1, forkAtTurn v1, steering v1, goal v1, compaction v1, subagents v1, sessionHistory v1, sessionTitle v1 · _lody/* answered: subagents/list, session/history/read · on wire: goal, modelConfigOptions, turnId, titleSource"
+    },
+    "authenticate": {
+      "status": "na",
+      "reason": "not-advertised",
+      "note": "No protocol authentication method advertised"
+    },
+    "logout": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": true,
+      "note": "No authentication established by this run; shared account state is not changed"
+    },
+    "nes/suggest": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled scenario exercised this check"
+    }
+  },
   "claimMismatches": [],
   "violations": [],
-  "attempts": [],
-  "scenarios": [],
-  "uncertaintyReasons": {}
+  "attempts": [
+    {
+      "method": "initialize",
+      "scenario": "initialize",
+      "at": "2026-10-25T15:53:07.082Z",
+      "outcome": "success",
+      "latencyMs": 3248
+    },
+    {
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-10-25T15:53:10.377Z",
+      "outcome": "success",
+      "latencyMs": 1149
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-10-25T15:53:11.551Z",
+      "outcome": "success",
+      "latencyMs": 525
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-10-25T15:53:12.094Z",
+      "outcome": "success",
+      "latencyMs": 774
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:exec",
+      "at": "2026-10-25T15:53:12.884Z",
+      "outcome": "success",
+      "latencyMs": 456
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:read",
+      "at": "2026-10-25T15:53:13.348Z",
+      "outcome": "success",
+      "latencyMs": 180
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:write",
+      "at": "2026-10-25T15:53:13.528Z",
+      "outcome": "success",
+      "latencyMs": 193
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:plan",
+      "at": "2026-10-25T15:53:13.721Z",
+      "outcome": "success",
+      "latencyMs": 39
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "cancel",
+      "at": "2026-10-25T15:53:13.760Z",
+      "outcome": "success",
+      "latencyMs": 48
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-10-25T15:53:13.820Z",
+      "outcome": "success",
+      "latencyMs": 658
+    },
+    {
+      "method": "session/fork",
+      "scenario": "session/fork",
+      "at": "2026-10-25T15:53:14.505Z",
+      "outcome": "success",
+      "latencyMs": 785
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-25T15:53:15.304Z",
+      "outcome": "success",
+      "latencyMs": 1083
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:image",
+      "at": "2026-10-25T15:53:16.388Z",
+      "outcome": "success",
+      "latencyMs": 199
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-25T15:53:16.587Z",
+      "outcome": "success",
+      "latencyMs": 1024
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:embedded-context",
+      "at": "2026-10-25T15:53:17.612Z",
+      "outcome": "success",
+      "latencyMs": 157
+    },
+    {
+      "method": "session/list",
+      "scenario": "session-mgmt",
+      "at": "2026-10-25T15:53:17.775Z",
+      "outcome": "success",
+      "latencyMs": 3
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-25T15:53:17.785Z",
+      "outcome": "success",
+      "latencyMs": 1130
+    },
+    {
+      "method": "session/resume",
+      "scenario": "session-mgmt",
+      "at": "2026-10-25T15:53:18.927Z",
+      "outcome": "success",
+      "latencyMs": 24
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-25T15:53:18.963Z",
+      "outcome": "success",
+      "latencyMs": 997
+    },
+    {
+      "method": "session/close",
+      "scenario": "session-mgmt",
+      "at": "2026-10-25T15:53:19.966Z",
+      "outcome": "success",
+      "latencyMs": 4
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-10-25T15:53:19.975Z",
+      "outcome": "success",
+      "latencyMs": 1088
+    },
+    {
+      "method": "session/delete",
+      "scenario": "session-mgmt",
+      "at": "2026-10-25T15:53:21.069Z",
+      "outcome": "success",
+      "latencyMs": 10
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-10-25T15:53:21.086Z",
+      "outcome": "success",
+      "latencyMs": 1434
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-10-25T15:53:22.520Z",
+      "outcome": "success",
+      "latencyMs": 180
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:http:default",
+      "at": "2026-10-25T15:53:23.203Z",
+      "outcome": "success",
+      "latencyMs": 1180
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:http:default",
+      "at": "2026-10-25T15:53:24.383Z",
+      "outcome": "success",
+      "latencyMs": 171
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:sse:default",
+      "at": "2026-10-25T15:53:25.056Z",
+      "outcome": "success",
+      "latencyMs": 1057
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:sse:default",
+      "at": "2026-10-25T15:53:26.114Z",
+      "outcome": "success",
+      "latencyMs": 169
+    },
+    {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-10-25T15:53:26.787Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-25T15:53:26.788Z",
+      "outcome": "success",
+      "latencyMs": 4
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-10-25T15:53:26.792Z",
+      "outcome": "success",
+      "latencyMs": 190
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "default:exec",
+      "profile": "default",
+      "sessionId": "44ca71dd-ae7b-4343-9481-2c225e29abb0",
+      "configuration": {
+        "model": "wall-probe/probe-model",
+        "permission_mode": "ask"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 1,
+        "request_permission": 1,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "usage_update",
+        "tool_call",
+        "tool_call_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "call_probe_1",
+          "name": "cat PROBE_CANARY.txt",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "acp_terminal_create"
+        ],
+        "skippedCalls": [
+          "exec: configured tool acp_terminal_create not offered"
+        ]
+      }
+    },
+    {
+      "id": "default:read",
+      "profile": "default",
+      "sessionId": "44ca71dd-ae7b-4343-9481-2c225e29abb0",
+      "configuration": {
+        "model": "wall-probe/probe-model",
+        "permission_mode": "ask"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 1,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 1,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "usage_update",
+        "tool_call",
+        "tool_call_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "call_probe_2",
+          "name": "Read client file",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "acp_fs_read_text_file"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:write",
+      "profile": "default",
+      "sessionId": "44ca71dd-ae7b-4343-9481-2c225e29abb0",
+      "configuration": {
+        "model": "wall-probe/probe-model",
+        "permission_mode": "ask"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 1,
+        "terminal/*": 0,
+        "request_permission": 1,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "usage_update",
+        "tool_call",
+        "tool_call_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "call_probe_3",
+          "name": "Write client file",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "acp_fs_write_text_file"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:plan",
+      "profile": "default",
+      "sessionId": "44ca71dd-ae7b-4343-9481-2c225e29abb0",
+      "configuration": {
+        "model": "wall-probe/probe-model",
+        "permission_mode": "ask"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "usage_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "plan: no matching tool offered"
+        ]
+      }
+    },
+    {
+      "id": "prompt:image",
+      "profile": "default",
+      "sessionId": "ebb8c5ed-da83-45ff-aa68-beed4cc32cdc",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "usage_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "prompt:embedded-context",
+      "profile": "default",
+      "sessionId": "6b5df356-b666-45bd-83ca-7671159b4911",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "usage_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "mcp:stdio:default",
+      "profile": "default",
+      "sessionId": "a6d162ad-67bf-49c0-9530-12d4201559fd",
+      "configuration": {
+        "model": "wall-probe/probe-model",
+        "permission_mode": "ask"
+      },
+      "result": {
+        "status": "observed",
+        "reason": "tool-not-called",
+        "note": "Fixture tool discovery completed; no fixture call received"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "usage_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "mcp: no matching tool offered",
+          "mcp: no matching tool offered"
+        ]
+      },
+      "diagnostics": [],
+      "mcpEvents": [
+        {
+          "event": "spawned",
+          "ts": 1792943601759
+        },
+        {
+          "event": "spawned",
+          "ts": 1792943601950
+        },
+        {
+          "event": "initialized",
+          "ts": 1792943601970
+        },
+        {
+          "event": "tools/list",
+          "ts": 1792943601970
+        }
+      ]
+    },
+    {
+      "id": "mcp:http:default",
+      "profile": "default",
+      "sessionId": "55d4e198-63d1-485e-97b5-49494cc937bb",
+      "configuration": {
+        "model": "wall-probe/probe-model",
+        "permission_mode": "ask"
+      },
+      "result": {
+        "status": "observed",
+        "reason": "tool-not-called",
+        "note": "Fixture tool discovery completed; no fixture call received"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "usage_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "mcp: no matching tool offered",
+          "mcp: no matching tool offered"
+        ]
+      },
+      "diagnostics": [],
+      "mcpEvents": [
+        {
+          "event": "connected",
+          "ts": 1792943603844
+        },
+        {
+          "event": "initialized",
+          "ts": 1792943603851
+        },
+        {
+          "event": "tools/list",
+          "ts": 1792943603855
+        }
+      ]
+    },
+    {
+      "id": "mcp:sse:default",
+      "profile": "default",
+      "sessionId": "233db5bc-cbbc-4aa3-adf8-ff8a58e5271b",
+      "configuration": {
+        "model": "wall-probe/probe-model",
+        "permission_mode": "ask"
+      },
+      "result": {
+        "status": "observed",
+        "reason": "tool-not-called",
+        "note": "Fixture tool discovery completed; no fixture call received"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "usage_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "mcp: no matching tool offered",
+          "mcp: no matching tool offered"
+        ]
+      },
+      "diagnostics": [],
+      "mcpEvents": [
+        {
+          "event": "connected",
+          "ts": 1792943605592
+        },
+        {
+          "event": "initialized",
+          "ts": 1792943605603
+        },
+        {
+          "event": "tools/list",
+          "ts": 1792943605605
+        }
+      ]
+    }
+  ],
+  "uncertaintyReasons": {
+    "not-advertised": 3,
+    "no-alternative": 1,
+    "not-run": 5,
+    "not-triggered": 2
+  },
+  "lody": {
+    "advertised": {
+      "usage": {
+        "version": 1
+      },
+      "forkAtTurn": {
+        "version": 1
+      },
+      "steering": {
+        "version": 1,
+        "transport": "request",
+        "upstreamTurn": "same",
+        "configPolicy": "active"
+      },
+      "goal": {
+        "version": 1,
+        "actions": [
+          "set",
+          "pause",
+          "resume",
+          "clear"
+        ],
+        "controlActions": [
+          "pause",
+          "resume",
+          "clear"
+        ],
+        "promptActions": [
+          "set",
+          "pause",
+          "resume",
+          "clear"
+        ]
+      },
+      "compaction": {
+        "version": 1
+      },
+      "subagents": {
+        "version": 1,
+        "lifecycle": true,
+        "list": true,
+        "cancel": true,
+        "output": true
+      },
+      "sessionHistory": {
+        "version": 1
+      },
+      "sessionTitle": {
+        "version": 1
+      }
+    },
+    "answered": [
+      "_lody/subagents/list",
+      "_lody/session/history/read"
+    ],
+    "missing": [
+      "_lody/rate_limits/get"
+    ],
+    "observed": [
+      "goal",
+      "modelConfigOptions",
+      "turnId",
+      "titleSource"
+    ],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      },
+      {
+        "method": "_lody/subagents/list",
+        "outcome": "unvalidated-result"
+      },
+      {
+        "method": "_lody/session/history/read",
+        "outcome": "unvalidated-result"
+      }
+    ]
+  },
+  "ext": {
+    "advertised": [
+      "lody",
+      "sorbet.dev",
+      "steering"
+    ],
+    "observed": [
+      "lody.goal",
+      "lody.modelConfigOptions",
+      "lody.turnId",
+      "lody.titleSource"
+    ]
+  },
+  "transport": {
+    "mitm": {
+      "port": 38671,
+      "impersonated": [],
+      "impersonations": 0,
+      "relayed": 2,
+      "drops": 0
+    }
+  }
 }

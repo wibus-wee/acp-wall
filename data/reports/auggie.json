@@ -18,7 +18,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-10-25T09:11:46.311Z",
+  "probedAt": "2026-10-25T15:50:06.984Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -44,12 +44,12 @@
     "command": "npx -y @augmentcode/auggie@0.36.0 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "37eea358548b5e66e791a139bf60e3b1e24cee78703f4590c87a3869d7c09750",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "recipeSha256": "a1f6565b4b16958a8914f1e75527a6092e33a6c1eade7eca9c222bd0efcb6677",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 0,
     "modelEvidence": {
@@ -68,7 +68,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · auggie",
-          "latencyMs": 2649
+          "latencyMs": 1397
         }
       ]
     },
@@ -96,7 +96,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Auggie does not currently support authenticating over ACP. Please run `auggie login` from your terminal then try again.",
-          "latencyMs": 2
+          "latencyMs": 3
         }
       ]
     },
@@ -158,7 +158,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 1
+          "latencyMs": 3
         },
         {
           "method": "session/resume",
@@ -509,14 +509,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · auggie",
-      "latencyMs": 2649
+      "latencyMs": 1397
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Auggie does not currently support authenticating over ACP. Please run `auggie login` from your terminal then try again.",
-      "latencyMs": 2
+      "latencyMs": 3
     },
     "set_mode": {
       "status": "blocked",
@@ -593,7 +593,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 1
+      "latencyMs": 3
     },
     "session/resume": {
       "status": "na",
@@ -726,45 +726,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:11:43.651Z",
+      "at": "2026-10-25T15:50:05.498Z",
       "outcome": "success",
-      "latencyMs": 2649
+      "latencyMs": 1397
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T09:11:46.301Z",
+      "at": "2026-10-25T15:50:06.952Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 2
+      "latencyMs": 3
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:11:46.305Z",
+      "at": "2026-10-25T15:50:06.969Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T09:11:46.308Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 1
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-25T09:11:46.309Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 0
-    },
-    {
-      "method": "_lody/session/history/read",
-      "scenario": "lody",
-      "at": "2026-10-25T09:11:46.309Z",
+      "at": "2026-10-25T15:50:06.982Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -781,11 +765,16 @@
     "advertised": {},
     "answered": [],
     "missing": [
-      "_lody/rate_limits/get",
-      "_lody/subagents/list",
-      "_lody/session/history/read"
+      "_lody/rate_limits/get"
     ],
-    "observed": []
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      }
+    ]
   },
   "ext": {
     "advertised": [],
@@ -793,10 +782,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 43905,
+      "port": 45695,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 4,
+      "relayed": 1,
       "drops": 0
     }
   }

@@ -27,7 +27,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-10-25T09:14:09.510Z",
+  "probedAt": "2026-10-25T15:52:50.477Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -43,22 +43,22 @@
     "total": 35
   },
   "setup": {
-    "status": "not-configured"
+    "status": "pass"
   },
   "environment": {
     "profile": "mock",
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.21.0",
-    "command": "npx -y @minimax-ai/code@0.2.7 provider add --name probe --base-url ${MOCK_LLM_URL} --model probe-model --api-key probe-mock-key --yes ; npx -y @minimax-ai/code@0.2.7 acp",
+    "command": "npx -y @minimax-ai/code@0.2.7 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "4917920000d8ef8caaf75ebb18f60afd7e436574476f24a95535cbc9f3aa7e42",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "recipeSha256": "29dabb012657e23e48f98d3c9f4d35a6e15720bca3f3f2db81e2a06566100fc6",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 0,
     "modelEvidence": {
@@ -77,7 +77,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · minimax-code",
-          "latencyMs": 6118
+          "latencyMs": 1571
         }
       ]
     },
@@ -170,7 +170,7 @@
           "errorCode": -32000,
           "note": "Authentication required: Run `mcode login` and try again.",
           "advertised": true,
-          "latencyMs": 1
+          "latencyMs": 2
         },
         {
           "method": "session/resume",
@@ -521,7 +521,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · minimax-code",
-      "latencyMs": 6118
+      "latencyMs": 1571
     },
     "session/new": {
       "status": "blocked",
@@ -608,7 +608,7 @@
       "errorCode": -32000,
       "note": "Authentication required: Run `mcode login` and try again.",
       "advertised": true,
-      "latencyMs": 1
+      "latencyMs": 2
     },
     "session/resume": {
       "status": "blocked",
@@ -741,14 +741,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:14:03.382Z",
+      "at": "2026-10-25T15:52:48.851Z",
       "outcome": "success",
-      "latencyMs": 6118
+      "latencyMs": 1571
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T09:14:09.500Z",
+      "at": "2026-10-25T15:52:50.462Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 4
@@ -756,31 +756,15 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:14:09.505Z",
+      "at": "2026-10-25T15:52:50.472Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 1
+      "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T09:14:09.507Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 1
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-25T09:14:09.508Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 0
-    },
-    {
-      "method": "_lody/session/history/read",
-      "scenario": "lody",
-      "at": "2026-10-25T09:14:09.508Z",
+      "at": "2026-10-25T15:52:50.475Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -797,11 +781,16 @@
     "advertised": {},
     "answered": [],
     "missing": [
-      "_lody/rate_limits/get",
-      "_lody/subagents/list",
-      "_lody/session/history/read"
+      "_lody/rate_limits/get"
     ],
-    "observed": []
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      }
+    ]
   },
   "ext": {
     "advertised": [
@@ -811,10 +800,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 43477,
+      "port": 44321,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 19,
+      "relayed": 18,
       "drops": 0
     }
   }

@@ -36,7 +36,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-25T09:11:48.276Z",
+  "probedAt": "2026-10-25T15:50:08.566Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -62,12 +62,12 @@
     "command": "npx -y @ibm/bob@2.0.9 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "86b347889bcc968a1a48d783460cac03f920da5223a6cfbffa95abd74e5abc6d",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "recipeSha256": "917d35280332223d9c35bd5e39f523dc1ef4223f2b79ea1c9ce4e1b39719e4f3",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 0,
     "modelEvidence": {
@@ -86,7 +86,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · bob-shell",
-          "latencyMs": 3428
+          "latencyMs": 1298
         }
       ]
     },
@@ -115,7 +115,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required",
-          "latencyMs": 389
+          "latencyMs": 809
         }
       ]
     },
@@ -528,14 +528,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · bob-shell",
-      "latencyMs": 3428
+      "latencyMs": 1298
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required",
-      "latencyMs": 389
+      "latencyMs": 809
     },
     "set_mode": {
       "status": "blocked",
@@ -746,45 +746,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:11:44.448Z",
+      "at": "2026-10-25T15:50:06.397Z",
       "outcome": "success",
-      "latencyMs": 3428
+      "latencyMs": 1298
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T09:11:47.877Z",
+      "at": "2026-10-25T15:50:07.738Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 389
+      "latencyMs": 809
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:11:48.269Z",
+      "at": "2026-10-25T15:50:08.555Z",
       "outcome": "success",
       "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T09:11:48.273Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 1
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-25T09:11:48.274Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 1
-    },
-    {
-      "method": "_lody/session/history/read",
-      "scenario": "lody",
-      "at": "2026-10-25T09:11:48.275Z",
+      "at": "2026-10-25T15:50:08.565Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -802,11 +786,16 @@
     "advertised": {},
     "answered": [],
     "missing": [
-      "_lody/rate_limits/get",
-      "_lody/subagents/list",
-      "_lody/session/history/read"
+      "_lody/rate_limits/get"
     ],
-    "observed": []
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      }
+    ]
   },
   "ext": {
     "advertised": [
@@ -816,10 +805,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 43075,
+      "port": 44109,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 10,
+      "relayed": 3,
       "drops": 0
     }
   }

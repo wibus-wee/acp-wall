@@ -84,11 +84,11 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-10-25T09:12:22.016Z",
+  "probedAt": "2026-10-25T15:50:51.664Z",
   "state": "blocked",
   "summary": {
-    "pass": 16,
-    "observed": 1,
+    "pass": 15,
+    "observed": 2,
     "blocked": 10,
     "unsupported": 0,
     "fail": 0,
@@ -111,13 +111,13 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "3163266e917232fab5c2e7d6914e0f9593aad8eb656d992baa9b1a530b163980",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
-    "mockRequests": 995,
+    "mockRequests": 792,
     "modelEvidence": {
       "seenTools": [
         "Agent",
@@ -929,209 +929,6 @@
         "Read",
         "Read",
         "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
-        "Read",
         "Read"
       ],
       "skippedCalls": [
@@ -1149,7 +946,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · acp-extension-claude",
-          "latencyMs": 184
+          "latencyMs": 195
         }
       ]
     },
@@ -1175,7 +972,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 460
+          "latencyMs": 617
         }
       ]
     },
@@ -1188,7 +985,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 217
+          "latencyMs": 131
         }
       ]
     },
@@ -1202,7 +999,7 @@
           "status": "na",
           "reason": "timeout",
           "note": "1 earlier turn(s) succeeded; subsequent attempt: session/prompt timed out after 30000ms",
-          "latencyMs": 30001
+          "latencyMs": 30000
         }
       ]
     },
@@ -1234,7 +1031,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 7
+          "latencyMs": 8
         },
         {
           "method": "session/resume",
@@ -1246,16 +1043,16 @@
           "method": "session/close",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 3
+          "latencyMs": 4
         },
         {
           "method": "session/delete",
           "status": "observed",
           "reason": "request-rejected",
           "errorCode": -32603,
-          "note": "Internal error — Session 27aec7e5-93a0-4feb-8a48-a8ed0a0e7c36 not found in any project directory",
+          "note": "Internal error — Session 49804290-6c77-4cc0-8af6-94291c097033 not found in any project directory",
           "advertised": true,
-          "latencyMs": 4
+          "latencyMs": 5
         }
       ]
     },
@@ -1268,7 +1065,7 @@
           "method": "session/fork",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 52
+          "latencyMs": 60
         }
       ]
     },
@@ -1287,14 +1084,14 @@
     {
       "key": "set_mode",
       "scope": "optional",
-      "status": "pass",
+      "status": "observed",
       "items": [
         {
           "method": "set_mode",
-          "status": "pass",
-          "note": "Accepted offered mode default; policy semantics not inferred from its name",
+          "status": "observed",
           "advertised": true,
-          "latencyMs": 18
+          "reason": "configuration-unconfirmed",
+          "note": "Mode change accepted but no matching current_mode_update observed"
         }
       ]
     },
@@ -1306,9 +1103,9 @@
         {
           "method": "set_config",
           "status": "pass",
-          "note": "Accepted current value of mode",
+          "note": "Changed mode to another offered value",
           "advertised": true,
-          "latencyMs": 5
+          "latencyMs": 2
         }
       ]
     },
@@ -1360,7 +1157,7 @@
         {
           "method": "update:tool_call",
           "status": "pass",
-          "note": "5892 notification(s) observed"
+          "note": "4669 notification(s) observed"
         }
       ]
     },
@@ -1372,7 +1169,7 @@
         {
           "method": "update:usage",
           "status": "pass",
-          "note": "1987 notification(s) observed"
+          "note": "1581 notification(s) observed"
         }
       ]
     },
@@ -1549,16 +1346,16 @@
     "session/load": "session/load: pass",
     "session/prompt": "session/prompt: 1 earlier turn(s) succeeded; subsequent attempt: session/prompt timed out after 30000ms",
     "prompt:content": "prompt:image: Typed prompt accepted and answered; model understanding and content preservation are not established · prompt:embedded-context: Typed prompt accepted and answered; model understanding and content preservation are not established",
-    "sessions/*": "session/list: pass · session/resume: pass · session/close: pass · session/delete: Internal error — Session 27aec7e5-93a0-4feb-8a48-a8ed0a0e7c36 not found in any project directory",
+    "sessions/*": "session/list: pass · session/resume: pass · session/close: pass · session/delete: Internal error — Session 49804290-6c77-4cc0-8af6-94291c097033 not found in any project directory",
     "fork": "session/fork: pass",
     "load:replay": "load:replay: Prior conversation text replayed for the same session",
-    "set_mode": "set_mode: Accepted offered mode default; policy semantics not inferred from its name",
-    "set_config": "set_config: Accepted current value of mode",
+    "set_mode": "set_mode: Mode change accepted but no matching current_mode_update observed",
+    "set_config": "set_config: Changed mode to another offered value",
     "cancel": "cancel: No successful prompt to establish cancellation conditions",
     "logout": "logout: No authentication established by this run; shared account state is not changed",
     "message*": "update:message: 4 notification(s) observed",
-    "tool_call*": "update:tool_call: 5892 notification(s) observed",
-    "usage": "update:usage: 1987 notification(s) observed",
+    "tool_call*": "update:tool_call: 4669 notification(s) observed",
+    "usage": "update:usage: 1581 notification(s) observed",
     "permission": "request_permission: Not observed; prerequisite session/prompt unavailable",
     "plan": "update:plan: No matching notifications observed; see scenario stimuli",
     "slash_cmds": "update:commands: 11 notification(s) observed",
@@ -1573,30 +1370,30 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · acp-extension-claude",
-      "latencyMs": 184
+      "latencyMs": 195
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 460
+      "latencyMs": 617
     },
     "set_mode": {
-      "status": "pass",
-      "note": "Accepted offered mode default; policy semantics not inferred from its name",
+      "status": "observed",
       "advertised": true,
-      "latencyMs": 18
+      "reason": "configuration-unconfirmed",
+      "note": "Mode change accepted but no matching current_mode_update observed"
     },
     "set_config": {
       "status": "pass",
-      "note": "Accepted current value of mode",
+      "note": "Changed mode to another offered value",
       "advertised": true,
-      "latencyMs": 5
+      "latencyMs": 2
     },
     "session/prompt": {
       "status": "na",
       "reason": "timeout",
       "note": "1 earlier turn(s) succeeded; subsequent attempt: session/prompt timed out after 30000ms",
-      "latencyMs": 30001
+      "latencyMs": 30000
     },
     "cancel": {
       "status": "blocked",
@@ -1607,7 +1404,7 @@
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 217
+      "latencyMs": 131
     },
     "load:replay": {
       "status": "pass",
@@ -1616,7 +1413,7 @@
     "session/fork": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 52
+      "latencyMs": 60
     },
     "prompt:image": {
       "status": "pass",
@@ -1655,7 +1452,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 7
+      "latencyMs": 8
     },
     "session/resume": {
       "status": "pass",
@@ -1665,15 +1462,15 @@
     "session/close": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 3
+      "latencyMs": 4
     },
     "session/delete": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32603,
-      "note": "Internal error — Session 27aec7e5-93a0-4feb-8a48-a8ed0a0e7c36 not found in any project directory",
+      "note": "Internal error — Session 49804290-6c77-4cc0-8af6-94291c097033 not found in any project directory",
       "advertised": true,
-      "latencyMs": 4
+      "latencyMs": 5
     },
     "mcp:stdio": {
       "status": "blocked",
@@ -1729,7 +1526,7 @@
     },
     "update:tool_call": {
       "status": "pass",
-      "note": "5892 notification(s) observed"
+      "note": "4669 notification(s) observed"
     },
     "update:plan": {
       "status": "blocked",
@@ -1743,7 +1540,7 @@
     },
     "update:usage": {
       "status": "pass",
-      "note": "1987 notification(s) observed"
+      "note": "1581 notification(s) observed"
     },
     "lody": {
       "status": "observed",
@@ -1772,157 +1569,171 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:11:49.437Z",
+      "at": "2026-10-25T15:50:18.633Z",
       "outcome": "success",
-      "latencyMs": 184
+      "latencyMs": 195
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T09:11:49.621Z",
+      "at": "2026-10-25T15:50:18.890Z",
       "outcome": "success",
-      "latencyMs": 460
+      "latencyMs": 617
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-10-25T09:11:50.082Z",
+      "at": "2026-10-25T15:50:19.531Z",
       "outcome": "success",
-      "latencyMs": 18
+      "latencyMs": 55
+    },
+    {
+      "method": "session/set_mode",
+      "scenario": "set_mode",
+      "at": "2026-10-25T15:50:19.594Z",
+      "outcome": "success",
+      "latencyMs": 3
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-25T09:11:50.101Z",
+      "at": "2026-10-25T15:50:19.603Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 2
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-10-25T15:50:19.614Z",
+      "outcome": "success",
+      "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-25T09:11:50.107Z",
+      "at": "2026-10-25T15:50:19.630Z",
       "outcome": "success",
-      "latencyMs": 299
+      "latencyMs": 166
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-10-25T09:11:50.407Z",
+      "at": "2026-10-25T15:50:19.804Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 30001
+      "latencyMs": 30000
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-10-25T09:12:20.412Z",
+      "at": "2026-10-25T15:50:49.821Z",
       "outcome": "success",
-      "latencyMs": 217
+      "latencyMs": 131
     },
     {
       "method": "session/fork",
       "scenario": "session/fork",
-      "at": "2026-10-25T09:12:20.630Z",
+      "at": "2026-10-25T15:50:49.973Z",
       "outcome": "success",
-      "latencyMs": 52
+      "latencyMs": 60
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-25T09:12:20.683Z",
+      "at": "2026-10-25T15:50:50.044Z",
       "outcome": "success",
-      "latencyMs": 183
+      "latencyMs": 234
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-10-25T09:12:20.866Z",
+      "at": "2026-10-25T15:50:50.281Z",
       "outcome": "success",
-      "latencyMs": 152
+      "latencyMs": 148
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-25T09:12:21.019Z",
+      "at": "2026-10-25T15:50:50.430Z",
       "outcome": "success",
-      "latencyMs": 187
+      "latencyMs": 258
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-10-25T09:12:21.206Z",
+      "at": "2026-10-25T15:50:50.688Z",
       "outcome": "success",
-      "latencyMs": 123
+      "latencyMs": 127
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:12:21.330Z",
+      "at": "2026-10-25T15:50:50.824Z",
       "outcome": "success",
-      "latencyMs": 7
+      "latencyMs": 8
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:12:21.337Z",
+      "at": "2026-10-25T15:50:50.838Z",
       "outcome": "success",
-      "latencyMs": 188
+      "latencyMs": 247
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:12:21.525Z",
+      "at": "2026-10-25T15:50:51.109Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:12:21.527Z",
+      "at": "2026-10-25T15:50:51.125Z",
       "outcome": "success",
-      "latencyMs": 222
+      "latencyMs": 234
     },
     {
       "method": "session/close",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:12:21.749Z",
+      "at": "2026-10-25T15:50:51.367Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 4
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:12:21.753Z",
+      "at": "2026-10-25T15:50:51.379Z",
       "outcome": "success",
-      "latencyMs": 219
+      "latencyMs": 246
     },
     {
       "method": "session/delete",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:12:21.972Z",
+      "at": "2026-10-25T15:50:51.633Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 4
+      "latencyMs": 5
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T09:12:21.986Z",
+      "at": "2026-10-25T15:50:51.650Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-25T09:12:21.987Z",
+      "at": "2026-10-25T15:50:51.651Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-25T09:12:21.988Z",
+      "at": "2026-10-25T15:50:51.651Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -1932,7 +1743,7 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "8490f90d-b52b-4d7a-b779-d7e12e0bcd24",
+      "sessionId": "4c26290e-1d35-4105-a2d2-4a374602ebb5",
       "configuration": {
         "mode": "default",
         "model": "default",
@@ -1975,7 +1786,7 @@
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "8490f90d-b52b-4d7a-b779-d7e12e0bcd24",
+      "sessionId": "4c26290e-1d35-4105-a2d2-4a374602ebb5",
       "configuration": {
         "mode": "default",
         "model": "default",
@@ -1995,10 +1806,10 @@
         "elicitation": 0
       },
       "notifications": [
+        "session_info_update",
         "usage_update",
         "tool_call",
-        "tool_call_update",
-        "session_info_update"
+        "tool_call_update"
       ],
       "tools": [
         {
@@ -5815,1246 +5626,10 @@
           "id": "call_probe_764",
           "name": "Read",
           "status": "completed"
-        },
-        {
-          "id": "call_probe_765",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_766",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_767",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_768",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_769",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_770",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_771",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_772",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_773",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_774",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_775",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_776",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_777",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_778",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_779",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_780",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_781",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_782",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_783",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_784",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_785",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_786",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_787",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_788",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_789",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_790",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_791",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_792",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_793",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_794",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_795",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_796",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_797",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_798",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_799",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_800",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_801",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_802",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_803",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_804",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_805",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_806",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_807",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_808",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_809",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_810",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_811",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_812",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_813",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_814",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_815",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_816",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_817",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_818",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_819",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_820",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_821",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_822",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_823",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_824",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_825",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_826",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_827",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_828",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_829",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_830",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_831",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_832",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_833",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_834",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_835",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_836",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_837",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_838",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_839",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_840",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_841",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_842",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_843",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_844",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_845",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_846",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_847",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_848",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_849",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_850",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_851",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_852",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_853",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_854",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_855",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_856",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_857",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_858",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_859",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_860",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_861",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_862",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_863",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_864",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_865",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_866",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_867",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_868",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_869",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_870",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_871",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_872",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_873",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_874",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_875",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_876",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_877",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_878",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_879",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_880",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_881",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_882",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_883",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_884",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_885",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_886",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_887",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_888",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_889",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_890",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_891",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_892",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_893",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_894",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_895",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_896",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_897",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_898",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_899",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_900",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_901",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_902",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_903",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_904",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_905",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_906",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_907",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_908",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_909",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_910",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_911",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_912",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_913",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_914",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_915",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_916",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_917",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_918",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_919",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_920",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_921",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_922",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_923",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_924",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_925",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_926",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_927",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_928",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_929",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_930",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_931",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_932",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_933",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_934",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_935",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_936",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_937",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_938",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_939",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_940",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_941",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_942",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_943",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_944",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_945",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_946",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_947",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_948",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_949",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_950",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_951",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_952",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_953",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_954",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_955",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_956",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_957",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_958",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_959",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_960",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_961",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_962",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_963",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_964",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_965",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_966",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_967",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_968",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_969",
-          "name": "Read",
-          "status": "completed"
-        },
-        {
-          "id": "call_probe_970",
-          "name": "Read",
-          "status": "completed"
         }
       ],
       "model": {
         "issuedTools": [
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
-          "Read",
           "Read",
           "Read",
           "Read",
@@ -7827,7 +6402,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "e96bbeff-013f-43c0-b925-1368605be677",
+      "sessionId": "71412c48-e715-4360-93de-ed3e5921f2c1",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -7849,6 +6424,7 @@
       "tools": [],
       "model": {
         "issuedTools": [
+          "Read",
           "Read"
         ],
         "skippedCalls": []
@@ -7857,7 +6433,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "2a1f00d8-2493-4ff8-abe0-669f390791e8",
+      "sessionId": "a69a74e3-82fe-481e-936e-8a753e8dbf33",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -7949,6 +6525,22 @@
       "turnId",
       "usageScopeId",
       "titleSource"
+    ],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "unvalidated-result"
+      },
+      {
+        "method": "_lody/subagents/list",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      },
+      {
+        "method": "_lody/session/history/read",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      }
     ]
   },
   "ext": {
@@ -7972,10 +6564,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 33847,
+      "port": 36919,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 1,
+      "relayed": 0,
       "drops": 0
     }
   }

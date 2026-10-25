@@ -86,17 +86,17 @@
       }
     ]
   },
-  "probedAt": "2026-10-25T09:13:52.937Z",
+  "probedAt": "2026-10-25T15:52:47.131Z",
   "state": "blocked",
   "summary": {
-    "pass": 19,
-    "observed": 2,
+    "pass": 14,
+    "observed": 3,
     "blocked": 1,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 13,
+    "na": 17,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -113,13 +113,13 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "1f49b65be800c1e51e90173217efea4c7bf2f0d3f302881afb4895162646da9c",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
-    "mockRequests": 24,
+    "mockRequests": 20,
     "modelEvidence": {
       "seenTools": [
         "run_terminal_command",
@@ -149,17 +149,16 @@
         "reference_to_video",
         "write"
       ],
-      "issuedTools": [
-        "run_terminal_command",
-        "run_terminal_command",
-        "read_file",
-        "read_file",
-        "todo_write",
-        "todo_write",
-        "todo_write",
-        "todo_write"
-      ],
+      "issuedTools": [],
       "skippedCalls": [
+        "run_terminal_command: could not construct valid arguments ()",
+        "run_terminal_command: could not construct valid arguments ()",
+        "read_file: could not construct valid arguments ()",
+        "read_file: could not construct valid arguments ()",
+        "todo_write: could not construct valid arguments ()",
+        "todo_write: could not construct valid arguments ()",
+        "todo_write: could not construct valid arguments ()",
+        "todo_write: could not construct valid arguments ()",
         "mcp: no matching tool offered",
         "mcp: no matching tool offered",
         "mcp: no matching tool offered",
@@ -179,7 +178,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · unnamed agent",
-          "latencyMs": 480
+          "latencyMs": 606
         }
       ]
     },
@@ -206,7 +205,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 2024
+          "latencyMs": 2033
         }
       ]
     },
@@ -219,7 +218,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 2008
+          "latencyMs": 2006
         }
       ]
     },
@@ -270,13 +269,13 @@
           "method": "session/resume",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 2005
+          "latencyMs": 2007
         },
         {
           "method": "session/close",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 12
+          "latencyMs": 13
         },
         {
           "method": "session/delete",
@@ -296,7 +295,7 @@
           "method": "session/fork",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 2427
+          "latencyMs": 2020
         }
       ]
     },
@@ -328,12 +327,14 @@
     {
       "key": "set_config",
       "scope": "optional",
-      "status": "pass",
+      "status": "observed",
       "items": [
         {
           "method": "set_config",
-          "status": "pass",
-          "note": "Accepted current value of plan_mode",
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32602,
+          "note": "Grok permission mode requires the current Lody clientIdentifier",
           "advertised": true,
           "latencyMs": 1
         }
@@ -347,7 +348,7 @@
         {
           "method": "cancel",
           "status": "pass",
-          "note": "In-flight prompt returned cancelled after 402ms"
+          "note": "In-flight prompt returned cancelled after 34ms"
         }
       ]
     },
@@ -380,12 +381,13 @@
     {
       "key": "tool_call*",
       "scope": "observation",
-      "status": "pass",
+      "status": "na",
       "items": [
         {
           "method": "update:tool_call",
-          "status": "pass",
-          "note": "16 notification(s) observed"
+          "status": "na",
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -409,20 +411,21 @@
         {
           "method": "request_permission",
           "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "reason": "stimulus-unavailable",
+          "note": "No valid matching model tool stimulus could be issued"
         }
       ]
     },
     {
       "key": "plan",
       "scope": "observation",
-      "status": "pass",
+      "status": "na",
       "items": [
         {
           "method": "update:plan",
-          "status": "pass",
-          "note": "4 notification(s) observed"
+          "status": "na",
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -441,30 +444,32 @@
     {
       "key": "fs/*",
       "scope": "observation",
-      "status": "mixed",
+      "status": "na",
       "items": [
         {
           "method": "fs/read_text_file",
-          "status": "pass",
-          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+          "status": "na",
+          "reason": "stimulus-unavailable",
+          "note": "No valid matching model tool stimulus could be issued"
         },
         {
           "method": "fs/write_text_file",
           "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "reason": "stimulus-unavailable",
+          "note": "No valid matching model tool stimulus could be issued"
         }
       ]
     },
     {
       "key": "terminal/*",
       "scope": "observation",
-      "status": "pass",
+      "status": "na",
       "items": [
         {
           "method": "terminal/*",
-          "status": "pass",
-          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+          "status": "na",
+          "reason": "stimulus-unavailable",
+          "note": "No valid matching model tool stimulus could be issued"
         }
       ]
     },
@@ -568,17 +573,17 @@
     "fork": "session/fork: pass",
     "load:replay": "load:replay: Prior conversation text replayed for the same session",
     "set_mode": "set_mode: No session modes offered",
-    "set_config": "set_config: Accepted current value of plan_mode",
-    "cancel": "cancel: In-flight prompt returned cancelled after 402ms",
+    "set_config": "set_config: Grok permission mode requires the current Lody clientIdentifier",
+    "cancel": "cancel: In-flight prompt returned cancelled after 34ms",
     "logout": "logout: Not advertised; optional method not invoked",
     "message*": "update:message: 12 notification(s) observed",
-    "tool_call*": "update:tool_call: 16 notification(s) observed",
+    "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
     "usage": "update:usage: 21 notification(s) observed",
-    "permission": "request_permission: No client request observed; internal tools and policy choices are permitted",
-    "plan": "update:plan: 4 notification(s) observed",
+    "permission": "request_permission: No valid matching model tool stimulus could be issued",
+    "plan": "update:plan: No matching notifications observed; see scenario stimuli",
     "slash_cmds": "update:commands: 18 notification(s) observed",
-    "fs/*": "fs/read_text_file: 1 client request(s) observed with simulated client replies; see scenarios for conditions · fs/write_text_file: No client request observed; internal tools and policy choices are permitted",
-    "terminal/*": "terminal/*: 1 client request(s) observed with simulated client replies; see scenarios for conditions",
+    "fs/*": "fs/read_text_file: No valid matching model tool stimulus could be issued · fs/write_text_file: No valid matching model tool stimulus could be issued",
+    "terminal/*": "terminal/*: No valid matching model tool stimulus could be issued",
     "elicitation": "elicitation: No controlled elicitation scenario configured",
     "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
     "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
@@ -588,12 +593,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · unnamed agent",
-      "latencyMs": 480
+      "latencyMs": 606
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 2024
+      "latencyMs": 2033
     },
     "set_mode": {
       "status": "na",
@@ -601,8 +606,10 @@
       "note": "No session modes offered"
     },
     "set_config": {
-      "status": "pass",
-      "note": "Accepted current value of plan_mode",
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32602,
+      "note": "Grok permission mode requires the current Lody clientIdentifier",
       "advertised": true,
       "latencyMs": 1
     },
@@ -612,12 +619,12 @@
     },
     "cancel": {
       "status": "pass",
-      "note": "In-flight prompt returned cancelled after 402ms"
+      "note": "In-flight prompt returned cancelled after 34ms"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 2008
+      "latencyMs": 2006
     },
     "load:replay": {
       "status": "pass",
@@ -626,7 +633,7 @@
     "session/fork": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 2427
+      "latencyMs": 2020
     },
     "prompt:image": {
       "status": "na",
@@ -671,12 +678,12 @@
     "session/resume": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 2005
+      "latencyMs": 2007
     },
     "session/close": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 12
+      "latencyMs": 13
     },
     "session/delete": {
       "status": "na",
@@ -702,22 +709,24 @@
       "advertised": true
     },
     "fs/read_text_file": {
-      "status": "pass",
-      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+      "status": "na",
+      "reason": "stimulus-unavailable",
+      "note": "No valid matching model tool stimulus could be issued"
     },
     "fs/write_text_file": {
       "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "reason": "stimulus-unavailable",
+      "note": "No valid matching model tool stimulus could be issued"
     },
     "terminal/*": {
-      "status": "pass",
-      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+      "status": "na",
+      "reason": "stimulus-unavailable",
+      "note": "No valid matching model tool stimulus could be issued"
     },
     "request_permission": {
       "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "reason": "stimulus-unavailable",
+      "note": "No valid matching model tool stimulus could be issued"
     },
     "elicitation": {
       "status": "na",
@@ -729,12 +738,14 @@
       "note": "12 notification(s) observed"
     },
     "update:tool_call": {
-      "status": "pass",
-      "note": "16 notification(s) observed"
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:plan": {
-      "status": "pass",
-      "note": "4 notification(s) observed"
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:commands": {
       "status": "pass",
@@ -772,175 +783,176 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:13:29.386Z",
+      "at": "2026-10-25T15:52:24.405Z",
       "outcome": "success",
-      "latencyMs": 480
+      "latencyMs": 606
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T09:13:29.867Z",
+      "at": "2026-10-25T15:52:25.066Z",
       "outcome": "success",
-      "latencyMs": 2024
+      "latencyMs": 2033
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-25T09:13:31.891Z",
-      "outcome": "success",
+      "at": "2026-10-25T15:52:27.122Z",
+      "outcome": "error",
+      "errorCode": -32602,
       "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-25T09:13:31.892Z",
-      "outcome": "success",
-      "latencyMs": 31
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:read",
-      "at": "2026-10-25T09:13:31.923Z",
-      "outcome": "success",
-      "latencyMs": 31
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:write",
-      "at": "2026-10-25T09:13:31.954Z",
-      "outcome": "success",
-      "latencyMs": 21
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:plan",
-      "at": "2026-10-25T09:13:31.975Z",
-      "outcome": "success",
-      "latencyMs": 20
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "cancel",
-      "at": "2026-10-25T09:13:31.995Z",
-      "outcome": "success",
-      "latencyMs": 402
-    },
-    {
-      "method": "session/load",
-      "scenario": "load:replay:1",
-      "at": "2026-10-25T09:13:32.398Z",
-      "outcome": "success",
-      "latencyMs": 2008
-    },
-    {
-      "method": "session/fork",
-      "scenario": "session/fork",
-      "at": "2026-10-25T09:13:34.406Z",
-      "outcome": "success",
-      "latencyMs": 2427
-    },
-    {
-      "method": "session/new",
-      "scenario": "prompt-content",
-      "at": "2026-10-25T09:13:36.833Z",
-      "outcome": "success",
-      "latencyMs": 2404
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "prompt:embedded-context",
-      "at": "2026-10-25T09:13:39.237Z",
+      "at": "2026-10-25T15:52:27.146Z",
       "outcome": "success",
       "latencyMs": 25
     },
     {
+      "method": "session/prompt",
+      "scenario": "default:read",
+      "at": "2026-10-25T15:52:27.181Z",
+      "outcome": "success",
+      "latencyMs": 18
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:write",
+      "at": "2026-10-25T15:52:27.200Z",
+      "outcome": "success",
+      "latencyMs": 18
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:plan",
+      "at": "2026-10-25T15:52:27.219Z",
+      "outcome": "success",
+      "latencyMs": 18
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "cancel",
+      "at": "2026-10-25T15:52:27.237Z",
+      "outcome": "success",
+      "latencyMs": 34
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-10-25T15:52:27.285Z",
+      "outcome": "success",
+      "latencyMs": 2006
+    },
+    {
+      "method": "session/fork",
+      "scenario": "session/fork",
+      "at": "2026-10-25T15:52:29.320Z",
+      "outcome": "success",
+      "latencyMs": 2020
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-25T15:52:31.354Z",
+      "outcome": "success",
+      "latencyMs": 2015
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:embedded-context",
+      "at": "2026-10-25T15:52:33.370Z",
+      "outcome": "success",
+      "latencyMs": 19
+    },
+    {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:13:39.263Z",
+      "at": "2026-10-25T15:52:33.396Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:13:39.263Z",
+      "at": "2026-10-25T15:52:33.403Z",
       "outcome": "success",
-      "latencyMs": 2015
+      "latencyMs": 2016
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:13:41.279Z",
+      "at": "2026-10-25T15:52:35.430Z",
       "outcome": "success",
-      "latencyMs": 2005
+      "latencyMs": 2007
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:13:43.285Z",
+      "at": "2026-10-25T15:52:37.450Z",
       "outcome": "success",
-      "latencyMs": 2015
+      "latencyMs": 2025
     },
     {
       "method": "session/close",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:13:45.301Z",
+      "at": "2026-10-25T15:52:39.483Z",
       "outcome": "success",
-      "latencyMs": 12
+      "latencyMs": 13
     },
     {
       "method": "session/new",
       "scenario": "mcp:stdio:default",
-      "at": "2026-10-25T09:13:45.314Z",
+      "at": "2026-10-25T15:52:39.502Z",
       "outcome": "success",
-      "latencyMs": 2014
+      "latencyMs": 2019
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:stdio:default",
-      "at": "2026-10-25T09:13:47.328Z",
+      "at": "2026-10-25T15:52:41.521Z",
+      "outcome": "success",
+      "latencyMs": 21
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:http:default",
+      "at": "2026-10-25T15:52:42.045Z",
+      "outcome": "success",
+      "latencyMs": 2018
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:http:default",
+      "at": "2026-10-25T15:52:44.063Z",
       "outcome": "success",
       "latencyMs": 20
     },
     {
       "method": "session/new",
-      "scenario": "mcp:http:default",
-      "at": "2026-10-25T09:13:47.851Z",
-      "outcome": "success",
-      "latencyMs": 2017
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "mcp:http:default",
-      "at": "2026-10-25T09:13:49.869Z",
-      "outcome": "success",
-      "latencyMs": 19
-    },
-    {
-      "method": "session/new",
       "scenario": "mcp:sse:default",
-      "at": "2026-10-25T09:13:50.390Z",
+      "at": "2026-10-25T15:52:44.585Z",
       "outcome": "success",
-      "latencyMs": 2016
+      "latencyMs": 2019
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:sse:default",
-      "at": "2026-10-25T09:13:52.407Z",
+      "at": "2026-10-25T15:52:46.604Z",
       "outcome": "success",
-      "latencyMs": 26
+      "latencyMs": 21
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T09:13:52.935Z",
+      "at": "2026-10-25T15:52:47.128Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-25T09:13:52.936Z",
+      "at": "2026-10-25T15:52:47.129Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -948,186 +960,22 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-25T09:13:52.936Z",
+      "at": "2026-10-25T15:52:47.129Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "01a17256-220c-75a1-95bf-18c125bd3ea7",
+      "sessionId": "01a173c3-5aed-7940-aa81-ea97ebc251d6",
       "configuration": {
         "plan_mode": false,
         "permission_mode": "ask",
         "model": "probe-model"
       },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 1,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "call_probe_1",
-          "name": "Execute `cat PROBE_CANARY.txt`",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "run_terminal_command",
-          "run_terminal_command"
-        ],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "default:read",
-      "profile": "default",
-      "sessionId": "01a17256-220c-75a1-95bf-18c125bd3ea7",
-      "configuration": {
-        "plan_mode": false,
-        "permission_mode": "ask",
-        "model": "probe-model"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 1,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "usage_update",
-        "session_info_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "call_probe_3",
-          "name": "Read `./PROBE_CANARY.txt`",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "read_file",
-          "read_file"
-        ],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "default:write",
-      "profile": "default",
-      "sessionId": "01a17256-220c-75a1-95bf-18c125bd3ea7",
-      "configuration": {
-        "plan_mode": false,
-        "permission_mode": "ask",
-        "model": "probe-model"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "tool_call",
-        "tool_call_update",
-        "plan",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "call_probe_5",
-          "name": "Updating plan",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "todo_write",
-          "todo_write"
-        ],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "default:plan",
-      "profile": "default",
-      "sessionId": "01a17256-220c-75a1-95bf-18c125bd3ea7",
-      "configuration": {
-        "plan_mode": false,
-        "permission_mode": "ask",
-        "model": "probe-model"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "usage_update",
-        "session_info_update",
-        "tool_call",
-        "tool_call_update",
-        "plan",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "call_probe_7",
-          "name": "Updating plan",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "todo_write",
-          "todo_write"
-        ],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "prompt:embedded-context",
-      "profile": "default",
-      "sessionId": "01a17256-3d42-7ad2-9463-43d5adc71a9a",
-      "configuration": {},
       "result": {
         "status": "pass",
         "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
@@ -1147,13 +995,144 @@
       "tools": [],
       "model": {
         "issuedTools": [],
+        "skippedCalls": [
+          "run_terminal_command: could not construct valid arguments ()",
+          "run_terminal_command: could not construct valid arguments ()"
+        ]
+      }
+    },
+    {
+      "id": "default:read",
+      "profile": "default",
+      "sessionId": "01a173c3-5aed-7940-aa81-ea97ebc251d6",
+      "configuration": {
+        "plan_mode": false,
+        "permission_mode": "ask",
+        "model": "probe-model"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "agent_message_chunk",
+        "usage_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "read_file: could not construct valid arguments ()",
+          "read_file: could not construct valid arguments ()"
+        ]
+      }
+    },
+    {
+      "id": "default:write",
+      "profile": "default",
+      "sessionId": "01a173c3-5aed-7940-aa81-ea97ebc251d6",
+      "configuration": {
+        "plan_mode": false,
+        "permission_mode": "ask",
+        "model": "probe-model"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "agent_message_chunk",
+        "usage_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "todo_write: could not construct valid arguments ()",
+          "todo_write: could not construct valid arguments ()"
+        ]
+      }
+    },
+    {
+      "id": "default:plan",
+      "profile": "default",
+      "sessionId": "01a173c3-5aed-7940-aa81-ea97ebc251d6",
+      "configuration": {
+        "plan_mode": false,
+        "permission_mode": "ask",
+        "model": "probe-model"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "agent_message_chunk",
+        "usage_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "todo_write: could not construct valid arguments ()",
+          "todo_write: could not construct valid arguments ()"
+        ]
+      }
+    },
+    {
+      "id": "prompt:embedded-context",
+      "profile": "default",
+      "sessionId": "01a173c3-737b-78f3-9f41-168d5d501817",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
         "skippedCalls": []
       }
     },
     {
       "id": "mcp:stdio:default",
       "profile": "default",
-      "sessionId": "01a17256-5e63-70d2-841a-c13ae4197d52",
+      "sessionId": "01a173c3-9350-77b1-b33a-a0e31adee92e",
       "configuration": {
         "plan_mode": false,
         "permission_mode": "ask",
@@ -1187,22 +1166,22 @@
       "mcpEvents": [
         {
           "event": "spawned",
-          "ts": 1792919625448
+          "ts": 1792943559724
         },
         {
           "event": "initialized",
-          "ts": 1792919625464
+          "ts": 1792943559746
         },
         {
           "event": "tools/list",
-          "ts": 1792919625465
+          "ts": 1792943559747
         }
       ]
     },
     {
       "id": "mcp:http:default",
       "profile": "default",
-      "sessionId": "01a17256-684c-7131-b5ac-5b7870c6d219",
+      "sessionId": "01a173c3-9d3e-7b30-bf30-60f6a1ef08c0",
       "configuration": {
         "plan_mode": false,
         "permission_mode": "ask",
@@ -1236,22 +1215,22 @@
       "mcpEvents": [
         {
           "event": "connected",
-          "ts": 1792919627884
+          "ts": 1792943562086
         },
         {
           "event": "initialized",
-          "ts": 1792919627888
+          "ts": 1792943562092
         },
         {
           "event": "tools/list",
-          "ts": 1792919627890
+          "ts": 1792943562094
         }
       ]
     },
     {
       "id": "mcp:sse:default",
       "profile": "default",
-      "sessionId": "01a17256-7237-7121-bb20-4a8873e90a65",
+      "sessionId": "01a173c3-a72a-72e2-9b2b-54a61b73b3cc",
       "configuration": {
         "plan_mode": false,
         "permission_mode": "ask",
@@ -1271,8 +1250,7 @@
       },
       "notifications": [
         "session_info_update",
-        "agent_message_chunk",
-        "usage_update"
+        "agent_message_chunk"
       ],
       "tools": [],
       "model": {
@@ -1283,7 +1261,7 @@
         ]
       },
       "diagnostics": [
-        "2026-10-25T09:13:50.406425Z ERROR worker quit with fatal: Transport channel closed, when UnexpectedServerResponse(\"HTTP 404 Not Found: \")"
+        "2026-10-25T15:52:44.605579Z ERROR worker quit with fatal: Transport channel closed, when UnexpectedServerResponse(\"HTTP 404 Not Found: \")"
       ],
       "mcpEvents": []
     }
@@ -1291,7 +1269,8 @@
   "uncertaintyReasons": {
     "interactive-auth": 1,
     "not-advertised": 6,
-    "no-client-callback": 2,
+    "not-triggered": 2,
+    "stimulus-unavailable": 4,
     "not-run": 4,
     "fixture-not-contacted": 1
   },
@@ -1328,6 +1307,22 @@
     "observed": [
       "turnId",
       "titleSource"
+    ],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "unvalidated-result"
+      },
+      {
+        "method": "_lody/subagents/list",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      },
+      {
+        "method": "_lody/session/history/read",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      }
     ]
   },
   "ext": {
@@ -1358,13 +1353,6 @@
     "observed": [
       "tools",
       "lody.turnId",
-      "x.ai/tool.version",
-      "x.ai/tool.name",
-      "x.ai/tool.kind",
-      "x.ai/tool.namespace",
-      "x.ai/tool.label",
-      "x.ai/tool.read_only",
-      "x.ai/tool.input",
       "eventId",
       "agentTimestampMs",
       "lody.titleSource",
@@ -1376,12 +1364,12 @@
   },
   "transport": {
     "mitm": {
-      "port": 44199,
+      "port": 46203,
       "impersonated": [
         "api.x.ai"
       ],
       "impersonations": 1,
-      "relayed": 2,
+      "relayed": 1,
       "drops": 0
     }
   }

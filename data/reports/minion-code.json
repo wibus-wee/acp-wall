@@ -3,22 +3,33 @@
   "methodologyVersion": "2.1.0",
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "minion-code",
+  "agentName": "minion-code",
+  "agentVersion": "0.1.44",
   "specVersion": 1,
   "advertised": {
     "capabilities": {},
-    "authMethods": []
+    "authMethods": [
+      {
+        "_meta": {
+          "agent-auth": true
+        },
+        "description": "Sign in with your OpenRouter account to use AI models (Claude, GPT-4, etc.)",
+        "id": "openrouter-oauth",
+        "name": "Sign in with OpenRouter"
+      }
+    ]
   },
-  "probedAt": "2026-10-25T09:14:06.538Z",
+  "probedAt": "2026-10-25T15:52:48.614Z",
   "state": "blocked",
   "summary": {
-    "pass": 0,
+    "pass": 1,
     "observed": 0,
-    "blocked": 34,
+    "blocked": 19,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 1,
+    "na": 15,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -34,12 +45,12 @@
     "command": "uvx --with agent-client-protocol==0.8.1 minion-code@0.1.44 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "259232fdf7e465fb2e4099a063da64a62ddfb1569dc92227259722c6f3c78e58",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "recipeSha256": "be36cbfeff6c9a958c0b4fd59aa01fe01a7762ffc2bb39f8f7c0cbb02829c040",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 0,
     "modelEvidence": {
@@ -52,14 +63,13 @@
     {
       "key": "initialize",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "initialize",
-          "status": "na",
-          "reason": "transport",
-          "note": "agent exited (code 2)",
-          "latencyMs": 56
+          "status": "pass",
+          "note": "Protocol 1 · minion-code",
+          "latencyMs": 712
         }
       ]
     },
@@ -71,9 +81,9 @@
         {
           "method": "authenticate",
           "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "advertised": true,
+          "reason": "interactive-auth",
+          "note": "Advertised: openrouter-oauth; login not attempted in unattended discovery"
         }
       ]
     },
@@ -85,23 +95,24 @@
         {
           "method": "session/new",
           "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "reason": "authentication",
+          "errorCode": -32000,
+          "note": "Authentication required — {\"message\":\"Please sign in to use Minion Code.\"}",
+          "latencyMs": 1
         }
       ]
     },
     {
       "key": "session/load",
       "scope": "optional",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "session/load",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
@@ -114,78 +125,78 @@
           "method": "session/prompt",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
         }
       ]
     },
     {
       "key": "prompt:content",
       "scope": "optional",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "prompt:image",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "prompt:embedded-context",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
     {
       "key": "sessions/*",
       "scope": "optional",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "session/list",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "session/resume",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "session/close",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "session/delete",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
     {
       "key": "fork",
       "scope": "optional",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "session/fork",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
@@ -198,8 +209,8 @@
           "method": "load:replay",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
         }
       ]
     },
@@ -212,8 +223,8 @@
           "method": "set_mode",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
         }
       ]
     },
@@ -226,8 +237,8 @@
           "method": "set_config",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
         }
       ]
     },
@@ -240,22 +251,22 @@
           "method": "cancel",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
         }
       ]
     },
     {
       "key": "logout",
       "scope": "optional",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "logout",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
@@ -268,8 +279,8 @@
           "method": "update:message",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -282,8 +293,8 @@
           "method": "update:tool_call",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -296,8 +307,8 @@
           "method": "update:usage",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -310,8 +321,8 @@
           "method": "request_permission",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "Not observed; prerequisite session/new unavailable"
         }
       ]
     },
@@ -324,8 +335,8 @@
           "method": "update:plan",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -338,8 +349,8 @@
           "method": "update:commands",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -352,15 +363,15 @@
           "method": "fs/read_text_file",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "Not observed; prerequisite session/new unavailable"
         },
         {
           "method": "fs/write_text_file",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "Not observed; prerequisite session/new unavailable"
         }
       ]
     },
@@ -373,8 +384,8 @@
           "method": "terminal/*",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "Not observed; prerequisite session/new unavailable"
         }
       ]
     },
@@ -387,326 +398,330 @@
           "method": "elicitation",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "Not observed; prerequisite session/new unavailable"
         }
       ]
     },
     {
       "key": "providers",
       "scope": "experimental",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "providers/list",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "providers/set",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
         },
         {
           "method": "providers/disable",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
         }
       ]
     },
     {
       "key": "nes",
       "scope": "experimental",
-      "status": "blocked",
+      "status": "mixed",
       "items": [
         {
           "method": "nes/start",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "nes/suggest",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/new",
+          "note": "Not exercised; prerequisite session/new unavailable"
         }
       ]
     },
     {
       "key": "mcp",
       "scope": "observation",
-      "status": "blocked",
+      "status": "mixed",
       "items": [
         {
           "method": "mcp:stdio",
           "status": "blocked",
           "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
         },
         {
           "method": "mcp:http",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "mcp:sse",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     }
   ],
   "notes": {
-    "initialize": "initialize: agent exited (code 2)",
-    "authenticate": "authenticate: Not exercised; prerequisite initialize unavailable",
-    "session/new": "session/new: Not exercised; prerequisite initialize unavailable",
-    "session/load": "session/load: Not exercised; prerequisite initialize unavailable",
-    "session/prompt": "session/prompt: Not exercised; prerequisite initialize unavailable",
-    "prompt:content": "prompt:image: Not exercised; prerequisite initialize unavailable · prompt:embedded-context: Not exercised; prerequisite initialize unavailable",
-    "sessions/*": "session/list: Not exercised; prerequisite initialize unavailable · session/resume: Not exercised; prerequisite initialize unavailable · session/close: Not exercised; prerequisite initialize unavailable · session/delete: Not exercised; prerequisite initialize unavailable",
-    "fork": "session/fork: Not exercised; prerequisite initialize unavailable",
-    "load:replay": "load:replay: Not exercised; prerequisite initialize unavailable",
-    "set_mode": "set_mode: Not exercised; prerequisite initialize unavailable",
-    "set_config": "set_config: Not exercised; prerequisite initialize unavailable",
-    "cancel": "cancel: Not exercised; prerequisite initialize unavailable",
-    "logout": "logout: Not exercised; prerequisite initialize unavailable",
-    "message*": "update:message: Not exercised; prerequisite initialize unavailable",
-    "tool_call*": "update:tool_call: Not exercised; prerequisite initialize unavailable",
-    "usage": "update:usage: Not exercised; prerequisite initialize unavailable",
-    "permission": "request_permission: Not exercised; prerequisite initialize unavailable",
-    "plan": "update:plan: Not exercised; prerequisite initialize unavailable",
-    "slash_cmds": "update:commands: Not exercised; prerequisite initialize unavailable",
-    "fs/*": "fs/read_text_file: Not exercised; prerequisite initialize unavailable · fs/write_text_file: Not exercised; prerequisite initialize unavailable",
-    "terminal/*": "terminal/*: Not exercised; prerequisite initialize unavailable",
-    "elicitation": "elicitation: Not exercised; prerequisite initialize unavailable",
-    "providers": "providers/list: Not exercised; prerequisite initialize unavailable · providers/set: Not exercised; prerequisite initialize unavailable · providers/disable: Not exercised; prerequisite initialize unavailable",
-    "nes": "nes/start: Not exercised; prerequisite initialize unavailable · nes/suggest: Not exercised; prerequisite initialize unavailable",
-    "mcp": "mcp:stdio: Not exercised; prerequisite initialize unavailable · mcp:http: Not exercised; prerequisite initialize unavailable · mcp:sse: Not exercised; prerequisite initialize unavailable"
+    "initialize": "initialize: Protocol 1 · minion-code",
+    "authenticate": "authenticate: Advertised: openrouter-oauth; login not attempted in unattended discovery",
+    "session/new": "session/new: Authentication required — {\"message\":\"Please sign in to use Minion Code.\"}",
+    "session/load": "session/load: Not advertised; optional method not invoked",
+    "session/prompt": "session/prompt: No usable session; see session/new",
+    "prompt:content": "prompt:image: Not advertised; optional method not invoked · prompt:embedded-context: Not advertised; optional method not invoked",
+    "sessions/*": "session/list: Not advertised; optional method not invoked · session/resume: Not advertised; optional method not invoked · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
+    "fork": "session/fork: Not advertised; optional method not invoked",
+    "load:replay": "load:replay: No usable session; see session/new",
+    "set_mode": "set_mode: No usable session; see session/new",
+    "set_config": "set_config: No usable session; see session/new",
+    "cancel": "cancel: No usable session; see session/new",
+    "logout": "logout: Not advertised; optional method not invoked",
+    "message*": "update:message: No matching notifications observed; see scenario stimuli",
+    "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
+    "usage": "update:usage: No matching notifications observed; see scenario stimuli",
+    "permission": "request_permission: Not observed; prerequisite session/new unavailable",
+    "plan": "update:plan: No matching notifications observed; see scenario stimuli",
+    "slash_cmds": "update:commands: No matching notifications observed; see scenario stimuli",
+    "fs/*": "fs/read_text_file: Not observed; prerequisite session/new unavailable · fs/write_text_file: Not observed; prerequisite session/new unavailable",
+    "terminal/*": "terminal/*: Not observed; prerequisite session/new unavailable",
+    "elicitation": "elicitation: Not observed; prerequisite session/new unavailable",
+    "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
+    "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: Not exercised; prerequisite session/new unavailable",
+    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
   },
   "methods": {
     "initialize": {
-      "status": "na",
-      "reason": "transport",
-      "note": "agent exited (code 2)",
-      "latencyMs": 56
-    },
-    "authenticate": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "status": "pass",
+      "note": "Protocol 1 · minion-code",
+      "latencyMs": 712
     },
     "session/new": {
       "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/load": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/prompt": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "prompt:image": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "prompt:embedded-context": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/list": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/resume": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/close": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/delete": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/fork": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "load:replay": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "reason": "authentication",
+      "errorCode": -32000,
+      "note": "Authentication required — {\"message\":\"Please sign in to use Minion Code.\"}",
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
       "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
     },
     "set_config": {
       "status": "blocked",
       "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
+    },
+    "session/prompt": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
     },
     "cancel": {
       "status": "blocked",
       "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
     },
-    "logout": {
+    "load:replay": {
       "status": "blocked",
       "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
     },
-    "update:message": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+    "session/fork": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
     },
-    "update:tool_call": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+    "prompt:image": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
     },
-    "update:usage": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "request_permission": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "update:plan": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "update:commands": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "fs/read_text_file": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "fs/write_text_file": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "terminal/*": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "elicitation": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+    "prompt:embedded-context": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
     },
     "providers/list": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
     },
     "providers/set": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
     },
     "providers/disable": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
     },
     "nes/start": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
     },
-    "nes/suggest": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+    "session/load": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/resume": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/close": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/delete": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
     },
     "mcp:stdio": {
       "status": "blocked",
       "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
     },
     "mcp:http": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
     },
     "mcp:sse": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "fs/read_text_file": {
       "status": "blocked",
       "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "blockedBy": "session/new",
+      "note": "Not observed; prerequisite session/new unavailable"
+    },
+    "fs/write_text_file": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not observed; prerequisite session/new unavailable"
+    },
+    "terminal/*": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not observed; prerequisite session/new unavailable"
+    },
+    "request_permission": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not observed; prerequisite session/new unavailable"
+    },
+    "elicitation": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not observed; prerequisite session/new unavailable"
+    },
+    "update:message": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:tool_call": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:plan": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:commands": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:usage": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "lody": {
+      "status": "observed",
+      "note": "_lody/* answered: rate_limits/get — but no _meta.lody capabilities advertised"
+    },
+    "authenticate": {
+      "status": "blocked",
+      "advertised": true,
+      "reason": "interactive-auth",
+      "note": "Advertised: openrouter-oauth; login not attempted in unattended discovery"
+    },
+    "logout": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "nes/suggest": {
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "Not exercised; prerequisite session/new unavailable"
     }
   },
   "claimMismatches": [],
@@ -715,29 +730,60 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:14:06.376Z",
-      "outcome": "error",
-      "latencyMs": 102
+      "at": "2026-10-25T15:52:47.865Z",
+      "outcome": "success",
+      "latencyMs": 712
     },
     {
-      "method": "initialize",
-      "scenario": "initialize",
-      "at": "2026-10-25T09:14:06.481Z",
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-10-25T15:52:48.609Z",
       "outcome": "error",
-      "latencyMs": 56
+      "errorCode": -32000,
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-10-25T15:52:48.612Z",
+      "outcome": "success",
+      "latencyMs": 2
     }
   ],
   "scenarios": [],
   "uncertaintyReasons": {
-    "transport": 1,
-    "prerequisite": 34
+    "interactive-auth": 1,
+    "authentication": 1,
+    "not-advertised": 13,
+    "prerequisite": 17,
+    "not-run": 2
+  },
+  "lody": {
+    "advertised": {},
+    "answered": [
+      "_lody/rate_limits/get"
+    ],
+    "missing": [],
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "unvalidated-result"
+      }
+    ]
+  },
+  "ext": {
+    "advertised": [
+      "auth:agent-auth"
+    ],
+    "observed": []
   },
   "transport": {
     "mitm": {
-      "port": 35927,
+      "port": 40115,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 4,
+      "relayed": 0,
       "drops": 0
     }
   }

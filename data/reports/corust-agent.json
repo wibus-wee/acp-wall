@@ -28,7 +28,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-25T09:12:14.821Z",
+  "probedAt": "2026-10-25T15:50:38.625Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -55,11 +55,11 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "4d14b224892b5de46a0c18c15231649bd0358382063aa0a85fce1a0bdc9dc8b1",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 0,
     "modelEvidence": {
@@ -78,7 +78,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · corust-acp",
-          "latencyMs": 2
+          "latencyMs": 1
         }
       ]
     },
@@ -107,7 +107,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — authentication required",
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -521,14 +521,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · corust-acp",
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — authentication required",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -712,7 +712,7 @@
     },
     "lody": {
       "status": "observed",
-      "note": "_lody/* answered: rate_limits/get, subagents/list, session/history/read — but no _meta.lody capabilities advertised"
+      "note": "_lody/* answered: rate_limits/get — but no _meta.lody capabilities advertised"
     },
     "authenticate": {
       "status": "blocked",
@@ -739,38 +739,24 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:12:14.813Z",
-      "outcome": "success",
-      "latencyMs": 2
-    },
-    {
-      "method": "session/new",
-      "scenario": "session/new",
-      "at": "2026-10-25T09:12:14.815Z",
-      "outcome": "error",
-      "errorCode": -32000,
-      "latencyMs": 0
-    },
-    {
-      "method": "_lody/rate_limits/get",
-      "scenario": "lody",
-      "at": "2026-10-25T09:12:14.819Z",
+      "at": "2026-10-25T15:50:38.588Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-25T09:12:14.820Z",
-      "outcome": "success",
-      "latencyMs": 0
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-10-25T15:50:38.621Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 1
     },
     {
-      "method": "_lody/session/history/read",
+      "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T09:12:14.820Z",
+      "at": "2026-10-25T15:50:38.624Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -784,12 +770,16 @@
   "lody": {
     "advertised": {},
     "answered": [
-      "_lody/rate_limits/get",
-      "_lody/subagents/list",
-      "_lody/session/history/read"
+      "_lody/rate_limits/get"
     ],
     "missing": [],
-    "observed": []
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "null-result"
+      }
+    ]
   },
   "ext": {
     "advertised": [],
@@ -797,7 +787,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 40761,
+      "port": 37907,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

@@ -37,17 +37,17 @@
       }
     ]
   },
-  "probedAt": "2026-10-25T09:15:05.443Z",
+  "probedAt": "2026-10-25T15:53:09.823Z",
   "state": "blocked",
   "summary": {
-    "pass": 19,
-    "observed": 1,
-    "blocked": 1,
+    "pass": 10,
+    "observed": 4,
+    "blocked": 13,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 14,
+    "na": 8,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -64,11 +64,11 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "69eba1a7f414eed8d691b9a363538665f368b99630467b9837edb3f3de9cc029",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 0,
     "modelEvidence": {
@@ -87,7 +87,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · OpenCode",
-          "latencyMs": 450
+          "latencyMs": 386
         }
       ]
     },
@@ -114,7 +114,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 808
+          "latencyMs": 830
         }
       ]
     },
@@ -127,38 +127,45 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 19
+          "latencyMs": 17
         }
       ]
     },
     {
       "key": "session/prompt",
       "scope": "core",
-      "status": "pass",
+      "status": "observed",
       "items": [
         {
           "method": "session/prompt",
-          "status": "pass",
-          "note": "4 prompt responses received; content and tool choice are observed separately"
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}",
+          "latencyMs": 290
         }
       ]
     },
     {
       "key": "prompt:content",
       "scope": "optional",
-      "status": "pass",
+      "status": "observed",
       "items": [
         {
           "method": "prompt:image",
-          "status": "pass",
-          "advertised": true,
-          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}",
+          "advertised": true
         },
         {
           "method": "prompt:embedded-context",
-          "status": "pass",
-          "advertised": true,
-          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}",
+          "advertised": true
         }
       ]
     },
@@ -171,25 +178,25 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 4
+          "latencyMs": 7
         },
         {
           "method": "session/resume",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 3
+          "latencyMs": 5
         },
         {
           "method": "session/close",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 3
+          "latencyMs": 5
         },
         {
           "method": "session/delete",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 5
+          "latencyMs": 6
         }
       ]
     },
@@ -202,19 +209,19 @@
           "method": "session/fork",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 12
+          "latencyMs": 14
         }
       ]
     },
     {
       "key": "load:replay",
       "scope": "optional",
-      "status": "pass",
+      "status": "observed",
       "items": [
         {
           "method": "load:replay",
-          "status": "pass",
-          "note": "Prior conversation text replayed for the same session"
+          "status": "observed",
+          "note": "Conversation replay observed; prior content not fully matched"
         }
       ]
     },
@@ -239,21 +246,23 @@
         {
           "method": "set_config",
           "status": "pass",
-          "note": "Accepted current value of model",
+          "note": "Changed model to another offered value",
           "advertised": true,
-          "latencyMs": 14
+          "latencyMs": 63
         }
       ]
     },
     {
       "key": "cancel",
       "scope": "core",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "cancel",
-          "status": "pass",
-          "note": "In-flight prompt returned cancelled after 414ms"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No successful prompt to establish cancellation conditions"
         }
       ]
     },
@@ -274,61 +283,69 @@
     {
       "key": "message*",
       "scope": "observation",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "update:message",
-          "status": "pass",
-          "note": "77 notification(s) observed"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
     {
       "key": "tool_call*",
       "scope": "observation",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "update:tool_call",
-          "status": "pass",
-          "note": "36 notification(s) observed"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
     {
       "key": "usage",
       "scope": "observation",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "update:usage",
-          "status": "pass",
-          "note": "8 notification(s) observed"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
     {
       "key": "permission",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "request_permission",
-          "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
     {
       "key": "plan",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "update:plan",
-          "status": "na",
-          "reason": "not-triggered",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
           "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
@@ -341,52 +358,56 @@
         {
           "method": "update:commands",
           "status": "pass",
-          "note": "11 notification(s) observed"
+          "note": "9 notification(s) observed"
         }
       ]
     },
     {
       "key": "fs/*",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "fs/read_text_file",
-          "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         },
         {
           "method": "fs/write_text_file",
-          "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
     {
       "key": "terminal/*",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "terminal/*",
-          "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
     {
       "key": "elicitation",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "elicitation",
-          "status": "na",
-          "reason": "not-run",
-          "note": "No controlled elicitation scenario configured"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
@@ -445,15 +466,17 @@
       "items": [
         {
           "method": "mcp:stdio",
-          "status": "pass",
-          "note": "Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario."
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
         },
         {
           "method": "mcp:http",
-          "status": "observed",
-          "reason": "tool-not-called",
-          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
-          "advertised": true
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
         },
         {
           "method": "mcp:sse",
@@ -470,38 +493,38 @@
     "authenticate": "authenticate: Advertised: opencode-login; login not attempted in unattended discovery",
     "session/new": "session/new: Created a session without additional MCP dependencies",
     "session/load": "session/load: pass",
-    "session/prompt": "session/prompt: 4 prompt responses received; content and tool choice are observed separately",
-    "prompt:content": "prompt:image: Typed prompt accepted and answered; model understanding and content preservation are not established · prompt:embedded-context: Typed prompt accepted and answered; model understanding and content preservation are not established",
+    "session/prompt": "session/prompt: Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}",
+    "prompt:content": "prompt:image: Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"} · prompt:embedded-context: Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}",
     "sessions/*": "session/list: pass · session/resume: pass · session/close: pass · session/delete: pass",
     "fork": "session/fork: pass",
-    "load:replay": "load:replay: Prior conversation text replayed for the same session",
+    "load:replay": "load:replay: Conversation replay observed; prior content not fully matched",
     "set_mode": "set_mode: No session modes offered",
-    "set_config": "set_config: Accepted current value of model",
-    "cancel": "cancel: In-flight prompt returned cancelled after 414ms",
+    "set_config": "set_config: Changed model to another offered value",
+    "cancel": "cancel: No successful prompt to establish cancellation conditions",
     "logout": "logout: Not advertised; optional method not invoked",
-    "message*": "update:message: 77 notification(s) observed",
-    "tool_call*": "update:tool_call: 36 notification(s) observed",
-    "usage": "update:usage: 8 notification(s) observed",
-    "permission": "request_permission: No client request observed; internal tools and policy choices are permitted",
+    "message*": "update:message: No matching notifications observed; see scenario stimuli",
+    "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
+    "usage": "update:usage: No matching notifications observed; see scenario stimuli",
+    "permission": "request_permission: Not observed; prerequisite session/prompt unavailable",
     "plan": "update:plan: No matching notifications observed; see scenario stimuli",
-    "slash_cmds": "update:commands: 11 notification(s) observed",
-    "fs/*": "fs/read_text_file: No client request observed; internal tools and policy choices are permitted · fs/write_text_file: No client request observed; internal tools and policy choices are permitted",
-    "terminal/*": "terminal/*: No client request observed; internal tools and policy choices are permitted",
-    "elicitation": "elicitation: No controlled elicitation scenario configured",
+    "slash_cmds": "update:commands: 9 notification(s) observed",
+    "fs/*": "fs/read_text_file: Not observed; prerequisite session/prompt unavailable · fs/write_text_file: Not observed; prerequisite session/prompt unavailable",
+    "terminal/*": "terminal/*: Not observed; prerequisite session/prompt unavailable",
+    "elicitation": "elicitation: Not observed; prerequisite session/prompt unavailable",
     "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
     "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
-    "mcp": "mcp:stdio: Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:sse: Not advertised; optional method not invoked"
+    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: MCP scenario prerequisites unavailable · mcp:sse: Not advertised; optional method not invoked"
   },
   "methods": {
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · OpenCode",
-      "latencyMs": 450
+      "latencyMs": 386
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 808
+      "latencyMs": 830
     },
     "set_mode": {
       "status": "na",
@@ -510,41 +533,50 @@
     },
     "set_config": {
       "status": "pass",
-      "note": "Accepted current value of model",
+      "note": "Changed model to another offered value",
       "advertised": true,
-      "latencyMs": 14
+      "latencyMs": 63
     },
     "session/prompt": {
-      "status": "pass",
-      "note": "4 prompt responses received; content and tool choice are observed separately"
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}",
+      "latencyMs": 290
     },
     "cancel": {
-      "status": "pass",
-      "note": "In-flight prompt returned cancelled after 414ms"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No successful prompt to establish cancellation conditions"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 19
+      "latencyMs": 17
     },
     "load:replay": {
-      "status": "pass",
-      "note": "Prior conversation text replayed for the same session"
+      "status": "observed",
+      "note": "Conversation replay observed; prior content not fully matched"
     },
     "session/fork": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 12
+      "latencyMs": 14
     },
     "prompt:image": {
-      "status": "pass",
-      "advertised": true,
-      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}",
+      "advertised": true
     },
     "prompt:embedded-context": {
-      "status": "pass",
-      "advertised": true,
-      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}",
+      "advertised": true
     },
     "providers/list": {
       "status": "na",
@@ -573,32 +605,34 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 4
+      "latencyMs": 7
     },
     "session/resume": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 3
+      "latencyMs": 5
     },
     "session/close": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 3
+      "latencyMs": 5
     },
     "session/delete": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 5
+      "latencyMs": 6
     },
     "mcp:stdio": {
-      "status": "pass",
-      "note": "Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario."
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
     },
     "mcp:http": {
-      "status": "observed",
-      "reason": "tool-not-called",
-      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
-      "advertised": true
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
     },
     "mcp:sse": {
       "status": "na",
@@ -607,50 +641,62 @@
       "note": "Not advertised; optional method not invoked"
     },
     "fs/read_text_file": {
-      "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "fs/write_text_file": {
-      "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "terminal/*": {
-      "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "request_permission": {
-      "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "elicitation": {
-      "status": "na",
-      "reason": "not-run",
-      "note": "No controlled elicitation scenario configured"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "update:message": {
-      "status": "pass",
-      "note": "77 notification(s) observed"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:tool_call": {
-      "status": "pass",
-      "note": "36 notification(s) observed"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:plan": {
-      "status": "na",
-      "reason": "not-triggered",
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
       "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:commands": {
       "status": "pass",
-      "note": "11 notification(s) observed"
+      "note": "9 notification(s) observed"
     },
     "update:usage": {
-      "status": "pass",
-      "note": "8 notification(s) observed"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
     },
     "lody": {
       "status": "na",
@@ -681,198 +727,152 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:14:27.395Z",
+      "at": "2026-10-25T15:53:07.409Z",
       "outcome": "success",
-      "latencyMs": 450
+      "latencyMs": 386
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T09:14:27.846Z",
+      "at": "2026-10-25T15:53:07.852Z",
       "outcome": "success",
-      "latencyMs": 808
+      "latencyMs": 830
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-25T09:14:28.655Z",
+      "at": "2026-10-25T15:53:08.730Z",
       "outcome": "success",
-      "latencyMs": 14
+      "latencyMs": 63
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-10-25T15:53:08.821Z",
+      "outcome": "success",
+      "latencyMs": 16
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-25T09:14:28.670Z",
-      "outcome": "success",
-      "latencyMs": 8021
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:read",
-      "at": "2026-10-25T09:14:36.692Z",
-      "outcome": "success",
-      "latencyMs": 1386
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:write",
-      "at": "2026-10-25T09:14:38.078Z",
-      "outcome": "success",
-      "latencyMs": 7860
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:plan",
-      "at": "2026-10-25T09:14:45.938Z",
-      "outcome": "success",
-      "latencyMs": 3195
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "cancel",
-      "at": "2026-10-25T09:14:49.134Z",
-      "outcome": "success",
-      "latencyMs": 414
+      "at": "2026-10-25T15:53:08.862Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 290
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-10-25T09:14:49.549Z",
+      "at": "2026-10-25T15:53:09.167Z",
       "outcome": "success",
-      "latencyMs": 19
+      "latencyMs": 17
     },
     {
       "method": "session/fork",
       "scenario": "session/fork",
-      "at": "2026-10-25T09:14:49.568Z",
+      "at": "2026-10-25T15:53:09.216Z",
       "outcome": "success",
-      "latencyMs": 12
+      "latencyMs": 14
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-25T09:14:49.580Z",
+      "at": "2026-10-25T15:53:09.247Z",
+      "outcome": "success",
+      "latencyMs": 8
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:image",
+      "at": "2026-10-25T15:53:09.255Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 299
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-25T15:53:09.554Z",
       "outcome": "success",
       "latencyMs": 7
     },
     {
       "method": "session/prompt",
-      "scenario": "prompt:image",
-      "at": "2026-10-25T09:14:49.587Z",
-      "outcome": "success",
-      "latencyMs": 2636
-    },
-    {
-      "method": "session/new",
-      "scenario": "prompt-content",
-      "at": "2026-10-25T09:14:52.224Z",
-      "outcome": "success",
-      "latencyMs": 5
-    },
-    {
-      "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-10-25T09:14:52.229Z",
-      "outcome": "success",
-      "latencyMs": 1978
+      "at": "2026-10-25T15:53:09.562Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 128
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:14:54.208Z",
+      "at": "2026-10-25T15:53:09.700Z",
       "outcome": "success",
-      "latencyMs": 4
+      "latencyMs": 7
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:14:54.212Z",
+      "at": "2026-10-25T15:53:09.717Z",
       "outcome": "success",
-      "latencyMs": 6
+      "latencyMs": 7
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:14:54.218Z",
+      "at": "2026-10-25T15:53:09.739Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 5
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:14:54.221Z",
+      "at": "2026-10-25T15:53:09.762Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 8
     },
     {
       "method": "session/close",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:14:54.226Z",
+      "at": "2026-10-25T15:53:09.777Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 5
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:14:54.229Z",
+      "at": "2026-10-25T15:53:09.789Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 6
     },
     {
       "method": "session/delete",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:14:54.234Z",
+      "at": "2026-10-25T15:53:09.804Z",
       "outcome": "success",
-      "latencyMs": 5
-    },
-    {
-      "method": "session/new",
-      "scenario": "mcp:stdio:default",
-      "at": "2026-10-25T09:14:54.240Z",
-      "outcome": "success",
-      "latencyMs": 271
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "mcp:stdio:default",
-      "at": "2026-10-25T09:14:54.511Z",
-      "outcome": "success",
-      "latencyMs": 6169
-    },
-    {
-      "method": "session/new",
-      "scenario": "mcp:http:default",
-      "at": "2026-10-25T09:15:01.184Z",
-      "outcome": "success",
-      "latencyMs": 51
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "mcp:http:default",
-      "at": "2026-10-25T09:15:01.236Z",
-      "outcome": "success",
-      "latencyMs": 3701
+      "latencyMs": 6
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T09:15:05.441Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 1
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-25T09:15:05.442Z",
+      "at": "2026-10-25T15:53:09.819Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
     },
     {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-25T15:53:09.820Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    },
+    {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-25T09:15:05.442Z",
+      "at": "2026-10-25T15:53:09.821Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -882,14 +882,16 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "ses_e8da8f85effegU0m5py9FilUeI",
+      "sessionId": "ses_e8c3bfac3ffeijcbw8n06iRQq0",
       "configuration": {
         "model": "opencode/big-pickle",
         "mode": "build"
       },
       "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}"
       },
       "callbacks": {
         "fs/read_text_file": 0,
@@ -898,126 +900,7 @@
         "request_permission": 0,
         "elicitation": 0
       },
-      "notifications": [
-        "agent_message_chunk",
-        "tool_call",
-        "tool_call_update",
-        "usage_update"
-      ],
-      "tools": [
-        {
-          "id": "call_4a90ae6c7bf04dde97d2e1ff",
-          "name": "cat PROBE_CANARY.txt",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "default:read",
-      "profile": "default",
-      "sessionId": "ses_e8da8f85effegU0m5py9FilUeI",
-      "configuration": {
-        "model": "opencode/big-pickle",
-        "mode": "build"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "agent_message_chunk",
-        "tool_call",
-        "tool_call_update",
-        "usage_update"
-      ],
-      "tools": [
-        {
-          "id": "call_74d706a951774f5fa892a139",
-          "name": "read",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "default:write",
-      "profile": "default",
-      "sessionId": "ses_e8da8f85effegU0m5py9FilUeI",
-      "configuration": {
-        "model": "opencode/big-pickle",
-        "mode": "build"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "agent_message_chunk",
-        "tool_call",
-        "tool_call_update",
-        "usage_update"
-      ],
-      "tools": [
-        {
-          "id": "call_ed16d8cf4d06463abad4a979",
-          "name": "write",
-          "status": "completed"
-        },
-        {
-          "id": "call_3e4856104b764d3590f42896",
-          "name": "read",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "default:plan",
-      "profile": "default",
-      "sessionId": "ses_e8da8f85effegU0m5py9FilUeI",
-      "configuration": {
-        "model": "opencode/big-pickle",
-        "mode": "build"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "agent_message_chunk",
-        "usage_update"
-      ],
+      "notifications": [],
       "tools": [],
       "model": {
         "issuedTools": [],
@@ -1027,11 +910,13 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "ses_e8da8a691ffeQF5J7unEjZramG",
+      "sessionId": "ses_e8c3bf87dffe5UqFlZzoIkOsEp",
       "configuration": {},
       "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}"
       },
       "callbacks": {
         "fs/read_text_file": 0,
@@ -1041,10 +926,7 @@
         "elicitation": 0
       },
       "notifications": [
-        "available_commands_update",
-        "agent_thought_chunk",
-        "agent_message_chunk",
-        "usage_update"
+        "available_commands_update"
       ],
       "tools": [],
       "model": {
@@ -1055,11 +937,13 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "ses_e8da89c3effeuX9md4kkt48BdX",
+      "sessionId": "ses_e8c3bf74bffeqQbbwEw7msyqSU",
       "configuration": {},
       "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}"
       },
       "callbacks": {
         "fs/read_text_file": 0,
@@ -1069,143 +953,20 @@
         "elicitation": 0
       },
       "notifications": [
-        "available_commands_update",
-        "agent_thought_chunk",
-        "agent_message_chunk",
-        "usage_update"
+        "available_commands_update"
       ],
       "tools": [],
       "model": {
         "issuedTools": [],
         "skippedCalls": []
       }
-    },
-    {
-      "id": "mcp:stdio:default",
-      "profile": "default",
-      "sessionId": "ses_e8da8945cffeHwNr7XaSuYCD0e",
-      "configuration": {
-        "model": "opencode/big-pickle",
-        "mode": "build"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Fixture received probe_noop and returned its controlled result"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "available_commands_update",
-        "agent_thought_chunk",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk",
-        "usage_update"
-      ],
-      "tools": [
-        {
-          "id": "call_00_yj100tg65n3pkxrjdnitv1hv",
-          "name": "execute",
-          "status": "completed"
-        },
-        {
-          "id": "call_00_1zfm6ila80igdcsz87okop61",
-          "name": "execute",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [],
-        "skippedCalls": []
-      },
-      "diagnostics": [],
-      "mcpEvents": [
-        {
-          "event": "spawned",
-          "ts": 1792919694474
-        },
-        {
-          "event": "initialized",
-          "ts": 1792919694501
-        },
-        {
-          "event": "tools/list",
-          "ts": 1792919694502
-        },
-        {
-          "event": "tools/call",
-          "ts": 1792919699277,
-          "name": "probe_noop"
-        }
-      ]
-    },
-    {
-      "id": "mcp:http:default",
-      "profile": "default",
-      "sessionId": "ses_e8da8793dffeLP53xSV4I3NE0e",
-      "configuration": {
-        "model": "opencode/big-pickle",
-        "mode": "build"
-      },
-      "result": {
-        "status": "observed",
-        "reason": "tool-not-called",
-        "note": "Fixture tool discovery completed; no fixture call received"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "available_commands_update",
-        "agent_message_chunk",
-        "tool_call",
-        "tool_call_update",
-        "agent_thought_chunk",
-        "usage_update"
-      ],
-      "tools": [
-        {
-          "id": "call_00_tdnqmi9466zovj3b1e6aft8s",
-          "name": "execute",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [],
-        "skippedCalls": []
-      },
-      "diagnostics": [],
-      "mcpEvents": [
-        {
-          "event": "connected",
-          "ts": 1792919701218
-        },
-        {
-          "event": "initialized",
-          "ts": 1792919701228
-        },
-        {
-          "event": "tools/list",
-          "ts": 1792919701232
-        }
-      ]
     }
   ],
   "uncertaintyReasons": {
     "interactive-auth": 1,
     "not-advertised": 5,
-    "no-client-callback": 4,
-    "not-triggered": 1,
-    "not-run": 4
+    "prerequisite": 12,
+    "not-run": 3
   },
   "lody": {
     "advertised": {},
@@ -1215,7 +976,24 @@
       "_lody/subagents/list",
       "_lody/session/history/read"
     ],
-    "observed": []
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      },
+      {
+        "method": "_lody/subagents/list",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      },
+      {
+        "method": "_lody/session/history/read",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      }
+    ]
   },
   "ext": {
     "advertised": [
@@ -1225,10 +1003,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 42979,
+      "port": 44791,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 8,
+      "relayed": 3,
       "drops": 0
     }
   }

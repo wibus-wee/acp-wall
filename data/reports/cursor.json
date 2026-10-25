@@ -28,7 +28,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-25T09:12:30.661Z",
+  "probedAt": "2026-10-25T15:51:09.128Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -55,11 +55,11 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "380f73de7724c7667483c48609005a0c2477684d6ad53d9411c696e0f6e22b10",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 0,
     "modelEvidence": {
@@ -78,7 +78,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · unnamed agent",
-          "latencyMs": 773
+          "latencyMs": 787
         }
       ]
     },
@@ -107,7 +107,7 @@
           "reason": "request-rejected",
           "errorCode": -32603,
           "note": "Internal error — {\"message\":\"Failed to initialize session services\"}",
-          "latencyMs": 469
+          "latencyMs": 371
         }
       ]
     },
@@ -169,7 +169,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -520,14 +520,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · unnamed agent",
-      "latencyMs": 773
+      "latencyMs": 787
     },
     "session/new": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32603,
       "note": "Internal error — {\"message\":\"Failed to initialize session services\"}",
-      "latencyMs": 469
+      "latencyMs": 371
     },
     "set_mode": {
       "status": "blocked",
@@ -604,7 +604,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "na",
@@ -738,48 +738,32 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:12:29.409Z",
+      "at": "2026-10-25T15:51:07.884Z",
       "outcome": "success",
-      "latencyMs": 773
+      "latencyMs": 787
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T09:12:30.184Z",
+      "at": "2026-10-25T15:51:08.734Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 469
+      "latencyMs": 371
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:12:30.655Z",
+      "at": "2026-10-25T15:51:09.115Z",
       "outcome": "success",
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T09:12:30.658Z",
+      "at": "2026-10-25T15:51:09.126Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-25T09:12:30.659Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 1
-    },
-    {
-      "method": "_lody/session/history/read",
-      "scenario": "lody",
-      "at": "2026-10-25T09:12:30.660Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -793,11 +777,16 @@
     "advertised": {},
     "answered": [],
     "missing": [
-      "_lody/rate_limits/get",
-      "_lody/subagents/list",
-      "_lody/session/history/read"
+      "_lody/rate_limits/get"
     ],
-    "observed": []
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      }
+    ]
   },
   "ext": {
     "advertised": [],
@@ -805,7 +794,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 33097,
+      "port": 40427,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 4,

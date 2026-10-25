@@ -57,7 +57,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-25T09:11:51.918Z",
+  "probedAt": "2026-10-25T15:50:12.617Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -84,11 +84,11 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "b2613f703dbf9a4448b32cb27764ac67d2817958545f445ef6d45d8429ba7268",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 0,
     "modelEvidence": {
@@ -107,7 +107,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · antigravity-acp",
-          "latencyMs": 1497
+          "latencyMs": 1784
         }
       ]
     },
@@ -549,7 +549,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · antigravity-acp",
-      "latencyMs": 1497
+      "latencyMs": 1784
     },
     "session/new": {
       "status": "blocked",
@@ -733,7 +733,7 @@
     },
     "lody": {
       "status": "observed",
-      "note": "_lody/* answered: rate_limits/get, subagents/list, session/history/read — but no _meta.lody capabilities advertised"
+      "note": "_lody/* answered: rate_limits/get — but no _meta.lody capabilities advertised"
     },
     "authenticate": {
       "status": "blocked",
@@ -766,14 +766,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:11:50.415Z",
+      "at": "2026-10-25T15:50:10.757Z",
       "outcome": "success",
-      "latencyMs": 1497
+      "latencyMs": 1784
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T09:11:51.913Z",
+      "at": "2026-10-25T15:50:12.593Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 1
@@ -781,28 +781,14 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:11:51.915Z",
+      "at": "2026-10-25T15:50:12.604Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T09:11:51.917Z",
-      "outcome": "success",
-      "latencyMs": 0
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-25T09:11:51.917Z",
-      "outcome": "success",
-      "latencyMs": 0
-    },
-    {
-      "method": "_lody/session/history/read",
-      "scenario": "lody",
-      "at": "2026-10-25T09:11:51.917Z",
+      "at": "2026-10-25T15:50:12.615Z",
       "outcome": "success",
       "latencyMs": 1
     }
@@ -818,12 +804,16 @@
   "lody": {
     "advertised": {},
     "answered": [
-      "_lody/rate_limits/get",
-      "_lody/subagents/list",
-      "_lody/session/history/read"
+      "_lody/rate_limits/get"
     ],
     "missing": [],
-    "observed": []
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "null-result"
+      }
+    ]
   },
   "ext": {
     "advertised": [
@@ -833,7 +823,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 43063,
+      "port": 40575,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

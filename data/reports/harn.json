@@ -241,7 +241,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-25T09:13:39.961Z",
+  "probedAt": "2026-10-25T15:52:19.331Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -268,11 +268,11 @@
     "discovery": false,
     "authenticationAttempted": false,
     "recipeSha256": "b402556115a05b48f151a8bc9c4375ac34187a28435c0b8dd8082becf0a66d08",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40179597016",
-    "revision": "418ccc8dee8b0d69402d4f3cc8b63a809e2f629a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40208764334",
+    "revision": "dbb7f9a14551b8845abc014c13929139bcaed605",
     "sourceDirty": false,
-    "sourceHash": "fe7a729046c452b7b5a1e1cb560751b81a7b9b1fbbaa3dd85677713aed40a5d3",
-    "dependencySha256": "2e442f5c9c8d3165fe277ad4e61f46531c437a4f35aad0db41ea6bd42a190929",
+    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 0,
     "modelEvidence": {
@@ -291,7 +291,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · harn",
-          "latencyMs": 40
+          "latencyMs": 20
         }
       ]
     },
@@ -320,7 +320,7 @@
           "reason": "request-rejected",
           "errorCode": -32602,
           "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -382,7 +382,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 1
+          "latencyMs": 3
         },
         {
           "method": "session/resume",
@@ -733,14 +733,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · harn",
-      "latencyMs": 40
+      "latencyMs": 20
     },
     "session/new": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32602,
       "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -817,7 +817,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 1
+      "latencyMs": 3
     },
     "session/resume": {
       "status": "blocked",
@@ -951,48 +951,32 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T09:13:39.914Z",
+      "at": "2026-10-25T15:52:19.228Z",
       "outcome": "success",
-      "latencyMs": 40
+      "latencyMs": 20
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T09:13:39.955Z",
+      "at": "2026-10-25T15:52:19.303Z",
       "outcome": "error",
       "errorCode": -32602,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T09:13:39.957Z",
+      "at": "2026-10-25T15:52:19.317Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T09:13:39.959Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 0
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-25T09:13:39.959Z",
+      "at": "2026-10-25T15:52:19.329Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
-    },
-    {
-      "method": "_lody/session/history/read",
-      "scenario": "lody",
-      "at": "2026-10-25T09:13:39.960Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -1006,11 +990,16 @@
     "advertised": {},
     "answered": [],
     "missing": [
-      "_lody/rate_limits/get",
-      "_lody/subagents/list",
-      "_lody/session/history/read"
+      "_lody/rate_limits/get"
     ],
-    "observed": []
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      }
+    ]
   },
   "ext": {
     "advertised": [
@@ -1021,7 +1010,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 39715,
+      "port": 35413,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
