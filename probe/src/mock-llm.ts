@@ -71,10 +71,20 @@ function pickToolCall(tools: any[], body: any): PickedTool | null {
     const offered = norm.find(t => t.name === mapped.tool);
     if (!offered) { evidence().skippedCalls.push(`${scenario}: configured tool ${mapped.tool} not offered`); return null; }
     const errors = schema.validate(mapped.args, offered.params);
-    if (errors.length) { evidence().skippedCalls.push(`${scenario}: configured arguments rejected for ${mapped.tool}: ${errors[0].path}`); return null; }
+    if (errors.length) { evidence().skippedCalls.push(`${scenario}: configured arguments rejected for ${mapped.tool}: ${errors[0].path}: ${errors[0].msg}`); return null; }
     return { id: `call_probe_${evidence().issuedCalls.length + 1}`, name: offered.name, args: structuredClone(mapped.args) };
   }
-  const pick = norm.find(t => match[scenario].test(t.name) && (scenario === "mcp" || !/probe_noop/i.test(t.name)));
+  let pick = norm.find(t => match[scenario].test(t.name) && (scenario === "mcp" || !/probe_noop/i.test(t.name)));
+  if (!pick && scenario === "mcp" && !hasToolResult(body)) {
+    const discovery = norm.find(t => /^(tool_search|ToolSearch|search_tool)$/.test(t.name));
+    if (discovery) {
+      const args = { query: "probe_noop" };
+      const errors = schema.validate(args, discovery.params);
+      if (!errors.length) return { id: `call_probe_${evidence().issuedCalls.length + 1}`, name: discovery.name, args };
+      evidence().skippedCalls.push(`MCP discovery arguments rejected for ${discovery.name}: ${errors[0].msg}`);
+      return null;
+    }
+  }
   if (!pick) { evidence().skippedCalls.push(`${scenario}: no matching tool offered`); return null; }
   const writer = /write|edit|create|patch|apply/i.test(pick.name);
 
@@ -100,7 +110,7 @@ function pickToolCall(tools: any[], body: any): PickedTool | null {
     else if (type === "object") args[k] = {};
   }
   const errors = schema.validate(args, pick.params);
-  if (errors.length) { evidence().skippedCalls.push(`${pick.name}: could not construct valid arguments (${errors[0].path})`); return null; }
+  if (errors.length) { evidence().skippedCalls.push(`${pick.name}: could not construct valid arguments (${errors[0].path}: ${errors[0].msg})`); return null; }
   return { id: `call_probe_${evidence().issuedCalls.length + 1}`, name: pick.name, args };
 }
 
@@ -119,9 +129,25 @@ const hasToolResult = (body: any): boolean => {
     (Array.isArray(m?.parts) && m.parts.some((p: any) => p?.functionResponse)));
 };
 
+/** A lazy MCP catalogue needs one search result before the fixture tool appears.
+ * Continue only that bounded chain; ordinary tool results still terminate the turn. */
+function nextToolCall(body: any): PickedTool | null {
+  if (!hasToolResult(body)) return pickToolCall(toolList(body), body);
+  if (!currentText(body).includes("__probe_mcp__")) return null;
+  const list = messages(body);
+  const names = list.slice(currentUserIndex(list) + 1).flatMap(m => [
+    ...(m.tool_calls ?? []).map((c: any) => c.function?.name),
+    ...(m.type === "function_call" ? [m.name] : []),
+    ...(Array.isArray(m.content) ? m.content.filter((c: any) => c.type === "tool_use").map((c: any) => c.name) : []),
+    ...(m.parts ?? []).filter((p: any) => p.functionCall).map((p: any) => p.functionCall.name),
+  ]).filter(Boolean);
+  if (names.length !== 1 || !/^(tool_search|ToolSearch|search_tool)$/.test(names[0])) return null;
+  return pickToolCall(toolList(body), body);
+}
+
 /** OpenAI Responses API output items for a completed response. */
 function responsesOutput(body: any): { output: any[]; tool: PickedTool | null } {
-  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body), body);
+  const tool = nextToolCall(body);
   if (tool) { evidence().issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const output = tool
@@ -228,7 +254,7 @@ function jsonModeText(body: any, gc?: any): string | null {
 }
 
 function openaiResponse(body: any) {
-  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body), body);
+  const tool = nextToolCall(body);
   if (tool) { evidence().issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const message: any = tool
@@ -253,7 +279,7 @@ function openaiResponse(body: any) {
 /** SSE chunk sequence for `stream:true` chat completions — same tool
  *  decision as openaiResponse, emitted as deltas + [DONE]. */
 function openaiSse(body: any): string {
-  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body), body);
+  const tool = nextToolCall(body);
   if (tool) { evidence().issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const base = {
@@ -278,7 +304,7 @@ function openaiSse(body: any): string {
 
 /** Gemini generateContent — parts carry functionCall or text. */
 function geminiResponse(body: any) {
-  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body), body);
+  const tool = nextToolCall(body);
   if (tool) { evidence().issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const parts = tool
@@ -293,7 +319,7 @@ function geminiResponse(body: any) {
 }
 
 function anthropicResponse(body: any) {
-  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body), body);
+  const tool = nextToolCall(body);
   if (tool) { evidence().issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const content = tool
@@ -314,7 +340,7 @@ function anthropicResponse(body: any) {
 
 /** Anthropic SSE sequence for stream:true requests. */
 function anthropicSse(body: any): string {
-  const tool = hasToolResult(body) ? null : pickToolCall(toolList(body), body);
+  const tool = nextToolCall(body);
   if (tool) { evidence().issuedCalls.push(tool); }
   const sawCanary = JSON.stringify(body).includes(CANARY);
   const model = body?.model ?? "probe-model";

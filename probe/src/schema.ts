@@ -1,5 +1,7 @@
 // Pinned ACP schema validated with JSON Schema Draft 2020-12.
 // Format annotations are deliberately not assertions. No coercion or mutation.
+import { Ajv } from "ajv";
+import { Ajv2019 } from "ajv/dist/2019.js";
 import { Ajv2020 } from "ajv/dist/2020.js";
 import type { ValidateFunction } from "ajv";
 import { createHash } from "node:crypto";
@@ -20,7 +22,10 @@ export interface MethodBinding {
 export class SchemaIndex {
   readonly sha256: string;
   private root: any;
-  private readonly ajv = new Ajv2020({ strict: false, allErrors: true, validateFormats: false });
+  private readonly options = { strict: false, allErrors: true, validateFormats: false, addUsedSchema: false };
+  private readonly ajv = new Ajv2020(this.options);
+  private readonly draft7 = new Ajv(this.options);
+  private readonly draft2019 = new Ajv2019(this.options);
   private readonly compiled = new Map<any, ValidateFunction>();
   private defs: Record<string, any>;
   /** method → {request,response} def names, split by side */
@@ -67,7 +72,15 @@ export class SchemaIndex {
         const document = typeof schemaOrName === "string"
           ? { $defs: this.defs, $ref: `#/$defs/${schemaOrName}` }
           : typeof selected === "boolean" ? selected : { $defs: this.defs, ...selected };
-        validate = this.ajv.compile(document);
+        // ACP remains pinned to 2020-12. Model tool schemas are independent
+        // documents and may explicitly use older dialects (e.g. Zod Draft 7).
+        // Never strip $schema or silently accept a compilation error.
+        const dialect = typeof schemaOrName === "string" ? undefined : selected?.$schema;
+        const compiler = /^https?:\/\/json-schema\.org\/draft-07\/schema#?$/.test(dialect ?? "") ? this.draft7
+          : /^https?:\/\/json-schema\.org\/draft\/2019-09\/schema#?$/.test(dialect ?? "") ? this.draft2019 : this.ajv;
+        const canonicalDialect = compiler === this.draft7 ? "http://json-schema.org/draft-07/schema#"
+          : compiler === this.draft2019 ? "https://json-schema.org/draft/2019-09/schema" : dialect;
+        validate = compiler.compile(dialect && typeof document === "object" ? { ...document, $schema: canonicalDialect } : document);
         this.compiled.set(schemaOrName, validate);
       }
       if (validate(value)) return [];
