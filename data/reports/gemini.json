@@ -53,7 +53,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-25T16:08:20.272Z",
+  "probedAt": "2026-10-26T06:41:02.373Z",
   "state": "blocked",
   "summary": {
     "pass": 11,
@@ -79,11 +79,11 @@
     "command": "npx -y @google/gemini-cli@0.65.0 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "7fd425673fcb74f542df92d08425b0011e36e4a2dc6db010d72175145dbb3835",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40210057587",
-    "revision": "76bacb015e7ecd0681e9e5134c35d2b6de42abd9",
+    "recipeSha256": "a9939a539477a2462fcf1244d033de19f337b45feaaa14f7b5dbf59ca683874d",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40281036941",
+    "revision": "e17124e73a2fc9d42f508b82ff4927adb302e687",
     "sourceDirty": false,
-    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 14,
@@ -128,7 +128,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · gemini-cli",
-          "latencyMs": 2124
+          "latencyMs": 2042
         }
       ]
     },
@@ -155,7 +155,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 42
+          "latencyMs": 43
         }
       ]
     },
@@ -168,7 +168,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 42
+          "latencyMs": 40
         }
       ]
     },
@@ -545,12 +545,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · gemini-cli",
-      "latencyMs": 2124
+      "latencyMs": 2042
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 42
+      "latencyMs": 43
     },
     "set_mode": {
       "status": "observed",
@@ -576,7 +576,7 @@
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 42
+      "latencyMs": 40
     },
     "load:replay": {
       "status": "observed",
@@ -738,21 +738,21 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T16:08:15.981Z",
+      "at": "2026-10-26T06:40:58.169Z",
       "outcome": "success",
-      "latencyMs": 2124
+      "latencyMs": 2042
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T16:08:18.163Z",
+      "at": "2026-10-26T06:41:00.274Z",
       "outcome": "success",
-      "latencyMs": 42
+      "latencyMs": 43
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-10-25T16:08:18.229Z",
+      "at": "2026-10-26T06:41:00.343Z",
       "outcome": "error",
       "errorCode": -32603,
       "latencyMs": 62
@@ -760,119 +760,119 @@
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-25T16:08:18.313Z",
+      "at": "2026-10-26T06:41:00.427Z",
       "outcome": "success",
-      "latencyMs": 110
+      "latencyMs": 106
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-10-25T16:08:18.432Z",
+      "at": "2026-10-26T06:41:00.542Z",
       "outcome": "success",
-      "latencyMs": 22
+      "latencyMs": 21
     },
     {
       "method": "session/prompt",
       "scenario": "default:write",
-      "at": "2026-10-25T16:08:18.455Z",
+      "at": "2026-10-26T06:41:00.563Z",
       "outcome": "success",
       "latencyMs": 22
     },
     {
       "method": "session/prompt",
       "scenario": "default:plan",
-      "at": "2026-10-25T16:08:18.477Z",
+      "at": "2026-10-26T06:41:00.585Z",
       "outcome": "success",
-      "latencyMs": 7
+      "latencyMs": 6
     },
     {
       "method": "session/prompt",
       "scenario": "cancel",
-      "at": "2026-10-25T16:08:18.484Z",
+      "at": "2026-10-26T06:41:00.591Z",
       "outcome": "success",
       "latencyMs": 36
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-10-25T16:08:18.533Z",
+      "at": "2026-10-26T06:41:00.639Z",
       "outcome": "success",
-      "latencyMs": 42
+      "latencyMs": 40
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-25T16:08:18.589Z",
+      "at": "2026-10-26T06:41:00.693Z",
       "outcome": "success",
-      "latencyMs": 29
+      "latencyMs": 28
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-10-25T16:08:18.618Z",
+      "at": "2026-10-26T06:41:00.721Z",
       "outcome": "success",
       "latencyMs": 10
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-25T16:08:18.629Z",
+      "at": "2026-10-26T06:41:00.731Z",
       "outcome": "success",
-      "latencyMs": 28
+      "latencyMs": 26
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-10-25T16:08:18.658Z",
+      "at": "2026-10-26T06:41:00.757Z",
       "outcome": "success",
       "latencyMs": 9
     },
     {
       "method": "session/new",
       "scenario": "mcp:stdio:default",
-      "at": "2026-10-25T16:08:18.669Z",
+      "at": "2026-10-26T06:41:00.769Z",
       "outcome": "success",
-      "latencyMs": 29
+      "latencyMs": 28
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:stdio:default",
-      "at": "2026-10-25T16:08:18.698Z",
+      "at": "2026-10-26T06:41:00.797Z",
       "outcome": "success",
       "latencyMs": 6
     },
     {
       "method": "session/new",
       "scenario": "mcp:http:default",
-      "at": "2026-10-25T16:08:19.207Z",
+      "at": "2026-10-26T06:41:01.307Z",
       "outcome": "success",
-      "latencyMs": 22
+      "latencyMs": 23
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:http:default",
-      "at": "2026-10-25T16:08:19.230Z",
+      "at": "2026-10-26T06:41:01.330Z",
       "outcome": "success",
       "latencyMs": 6
     },
     {
       "method": "session/new",
       "scenario": "mcp:sse:default",
-      "at": "2026-10-25T16:08:19.738Z",
+      "at": "2026-10-26T06:41:01.838Z",
       "outcome": "success",
-      "latencyMs": 24
+      "latencyMs": 25
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:sse:default",
-      "at": "2026-10-25T16:08:19.762Z",
+      "at": "2026-10-26T06:41:01.863Z",
       "outcome": "success",
       "latencyMs": 5
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T16:08:20.269Z",
+      "at": "2026-10-26T06:41:02.370Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -880,7 +880,7 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-25T16:08:20.270Z",
+      "at": "2026-10-26T06:41:02.371Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -888,17 +888,17 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-25T16:08:20.270Z",
+      "at": "2026-10-26T06:41:02.371Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "81704d20-f386-48cd-92b8-96adac24cf3d",
+      "sessionId": "432a9dfb-e910-40aa-88c5-852cd1341320",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -918,7 +918,7 @@
       ],
       "tools": [
         {
-          "id": "run_shell_command__run_shell_command_1792944498352_0",
+          "id": "run_shell_command__run_shell_command_1792996860465_0",
           "status": "failed",
           "detail": "[{\"type\":\"content\",\"content\":{\"type\":\"text\",\"text\":\"params must have required property 'command'\"}}]"
         }
@@ -933,7 +933,7 @@
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "81704d20-f386-48cd-92b8-96adac24cf3d",
+      "sessionId": "432a9dfb-e910-40aa-88c5-852cd1341320",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -953,7 +953,7 @@
       ],
       "tools": [
         {
-          "id": "read_file__read_file_1792944498444_0",
+          "id": "read_file__read_file_1792996860553_0",
           "status": "failed",
           "detail": "[{\"type\":\"content\",\"content\":{\"type\":\"text\",\"text\":\"params must have required property 'file_path'\"}}]"
         }
@@ -968,7 +968,7 @@
     {
       "id": "default:write",
       "profile": "default",
-      "sessionId": "81704d20-f386-48cd-92b8-96adac24cf3d",
+      "sessionId": "432a9dfb-e910-40aa-88c5-852cd1341320",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -988,7 +988,7 @@
       ],
       "tools": [
         {
-          "id": "write_file__write_file_1792944498465_0",
+          "id": "write_file__write_file_1792996860573_0",
           "status": "failed",
           "detail": "[{\"type\":\"content\",\"content\":{\"type\":\"text\",\"text\":\"params must have required property 'file_path'\"}}]"
         }
@@ -1003,7 +1003,7 @@
     {
       "id": "default:plan",
       "profile": "default",
-      "sessionId": "81704d20-f386-48cd-92b8-96adac24cf3d",
+      "sessionId": "432a9dfb-e910-40aa-88c5-852cd1341320",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1031,7 +1031,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "05382a10-8801-44f7-bf79-8d72e0dbf359",
+      "sessionId": "3752d612-aef7-4bc8-9ce6-75bb5b387f15",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1058,7 +1058,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "5bfdad85-d75a-4620-91ee-ce58cb771b09",
+      "sessionId": "2ef20584-ee24-4fbc-8018-35c15b049726",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1085,7 +1085,7 @@
     {
       "id": "mcp:stdio:default",
       "profile": "default",
-      "sessionId": "82d890d6-402b-4701-8043-0dbd9779f1bb",
+      "sessionId": "a9ce5258-a182-4bf6-81bf-822cce4f3b87",
       "configuration": {},
       "result": {
         "status": "na",
@@ -1117,7 +1117,7 @@
     {
       "id": "mcp:http:default",
       "profile": "default",
-      "sessionId": "f4d510a8-5fdd-4b04-a6dd-950ceb1b4813",
+      "sessionId": "f7914010-7177-4db5-bd45-528dfeee47c2",
       "configuration": {},
       "result": {
         "status": "na",
@@ -1149,7 +1149,7 @@
     {
       "id": "mcp:sse:default",
       "profile": "default",
-      "sessionId": "4b08ea62-4098-4bd2-a1ce-06084526cdb3",
+      "sessionId": "9539023f-d05d-485a-886f-58dbe1985b9f",
       "configuration": {},
       "result": {
         "status": "na",
@@ -1224,7 +1224,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 39975,
+      "port": 37251,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 3,

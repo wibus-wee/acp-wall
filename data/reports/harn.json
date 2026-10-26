@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "harn",
   "agentName": "harn",
-  "agentVersion": "0.10.177",
+  "agentVersion": "0.10.180",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -127,6 +127,7 @@
             "handoff",
             "hitl_request",
             "hitl_resolved",
+            "inference_speed",
             "live_session_client",
             "log",
             "progress",
@@ -136,6 +137,7 @@
             "skill_narrow",
             "skill_scope_tools",
             "stance_transition",
+            "state_update",
             "tool_search_query",
             "tool_search_result",
             "transcript_compacted",
@@ -177,20 +179,14 @@
       },
       "promptCapabilities": {
         "audio": false,
+        "delivery": {
+          "queue": {},
+          "steer": {}
+        },
         "embeddedContext": false,
         "image": true
       },
       "session": {
-        "inject": {
-          "modes": [
-            "queue",
-            "steer",
-            "interrupt_immediate"
-          ],
-          "pending": {
-            "replace": true
-          }
-        },
         "injectHostEvent": {
           "delivery": [
             "turn_boundary",
@@ -202,6 +198,7 @@
             "host_attachment"
           ]
         },
+        "pendingPrompts": {},
         "remind": {
           "modes": [
             "interrupt_immediate",
@@ -241,7 +238,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-25T16:08:41.272Z",
+  "probedAt": "2026-10-26T06:41:28.226Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -267,11 +264,11 @@
     "command": "${REPO_ROOT}/.cache/agents/harn/agent serve acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "b402556115a05b48f151a8bc9c4375ac34187a28435c0b8dd8082becf0a66d08",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40210057587",
-    "revision": "76bacb015e7ecd0681e9e5134c35d2b6de42abd9",
+    "recipeSha256": "1953cea119cdab4bbe3c3bc3cb95ca2d9f9e39e67f12a7c140a8207de39e9d13",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40281036941",
+    "revision": "e17124e73a2fc9d42f508b82ff4927adb302e687",
     "sourceDirty": false,
-    "sourceHash": "7a1942e942b3131c38f2eef835721e8e8cf50f201a4ad435b9103c5d0a0fa41e",
+    "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
     "mockRequests": 0,
@@ -291,7 +288,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · harn",
-          "latencyMs": 71
+          "latencyMs": 15
         }
       ]
     },
@@ -733,7 +730,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · harn",
-      "latencyMs": 71
+      "latencyMs": 15
     },
     "session/new": {
       "status": "observed",
@@ -951,14 +948,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-25T16:08:41.154Z",
+      "at": "2026-10-26T06:41:28.153Z",
       "outcome": "success",
-      "latencyMs": 71
+      "latencyMs": 15
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-25T16:08:41.255Z",
+      "at": "2026-10-26T06:41:28.206Z",
       "outcome": "error",
       "errorCode": -32602,
       "latencyMs": 1
@@ -966,17 +963,17 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-25T16:08:41.264Z",
+      "at": "2026-10-26T06:41:28.217Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-25T16:08:41.271Z",
+      "at": "2026-10-26T06:41:28.225Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -1010,7 +1007,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 43151,
+      "port": 39537,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
