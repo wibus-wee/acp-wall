@@ -2,7 +2,7 @@
   "name": "cline",
   "display": "Cline",
   "vendor": "Cline Bot Inc.",
-  "version": "3.0.73",
+  "version": "3.0.74",
   "description": "Autonomous coding agent CLI - capable of creating/editing files, running commands, using the browser, and more",
   "repo": "cline/cline",
   "website": "https://cline.bot/cli",
@@ -53,7 +53,7 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "cline@3.0.73",
+    "package": "cline@3.0.74",
     "args": [
       "--acp"
     ]
@@ -61,5 +61,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Isolated OpenAI-compatible mock provider. Setup output is separate from ACP stdout. CLINE_API_KEY is the documented ACP environment-key gate; no OAuth flow or real credentials are supplied.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-25"
+  "_synced": "acp-registry 1.0.0 · 2026-10-26"
 }
