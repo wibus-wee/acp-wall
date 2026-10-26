@@ -2,7 +2,7 @@
   "name": "claude-acp",
   "display": "Claude Agent",
   "vendor": "Anthropic, Zed Industries, JetBrains",
-  "version": "0.95.0",
+  "version": "0.96.0",
   "description": "ACP wrapper for Anthropic's Claude",
   "repo": "agentclientprotocol/claude-agent-acp",
   "website": null,
@@ -20,7 +20,7 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@agentclientprotocol/claude-agent-acp@0.95.0",
+    "package": "@agentclientprotocol/claude-agent-acp@0.96.0",
     "args": []
   },
   "disabled": false,
