@@ -60,3 +60,13 @@ test('offering interactive authentication is not the cause of every incomplete r
   const methods={initialize:{status:'pass'},authenticate:{status:'blocked',reason:'interactive-auth'},'session/new':{status:'observed',reason:'request-rejected'}};
   assert.equal(AcpEvidenceView.assessment({methods}).label,'Measurement incomplete');
 });
+test('set_mode success does not require an unsolicited mode notification',async()=>{
+  const calls=[];const ctx=context(async(m,p)=>{calls.push(p.modeId);return {};});
+  ctx.sessionId='s';ctx.sessionModes={currentModeId:'ask',availableModes:[{id:'ask'},{id:'code'}]};
+  await probeSetMode(ctx);assert.equal(ctx.results.set_mode.status,'pass');assert.deepEqual(calls,['code','ask']);
+});
+test('a sole advertised mode can be selected without inventing an alternative',async()=>{
+  const calls=[];const ctx=context(async(m,p)=>{calls.push(p.modeId);return {};});
+  ctx.sessionId='s';ctx.sessionModes={currentModeId:'default',availableModes:[{id:'default'}]};
+  await probeSetMode(ctx);assert.equal(ctx.results.set_mode.status,'pass');assert.deepEqual(calls,['default']);assert.match(ctx.results.set_mode.note,/sole advertised/);
+});

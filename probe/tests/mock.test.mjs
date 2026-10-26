@@ -63,3 +63,17 @@ test('explicit tool recipes override fuzzy matches but require offered valid sch
     assert.match(s.evidence.skippedCalls.at(-1),/arguments rejected/);
   }finally{s.close();}
 });
+test('lazy MCP tools are discovered once then called, without a search loop',async()=>{
+ const s=await startMockLlm();
+ const search={type:'function',function:{name:'tool_search',parameters:{type:'object',properties:{query:{type:'string',minLength:1}},required:['query']}}};
+ const fixture={type:'function',function:{name:'mcp__probe_noop',parameters:{type:'object',properties:{}}}};
+ try{
+  const messages=[{role:'user',content:'__probe_mcp__ call probe_noop'}];
+  const a=await post(s,'/chat/completions',{tools:[search],messages});assert.equal(a.choices[0].message.tool_calls[0].function.name,'tool_search');
+  messages.push(a.choices[0].message,{role:'tool',tool_call_id:'call_probe_1',content:'probe_noop available'});
+  const unavailable=await post(s,'/chat/completions',{tools:[search],messages});assert.equal(unavailable.choices[0].finish_reason,'stop');
+  const b=await post(s,'/chat/completions',{tools:[search,fixture],messages});assert.equal(b.choices[0].message.tool_calls[0].function.name,'mcp__probe_noop');
+  messages.push(b.choices[0].message,{role:'tool',tool_call_id:'call_probe_2',content:'probe complete'});
+  const done=await post(s,'/chat/completions',{tools:[search,fixture],messages});assert.equal(done.choices[0].finish_reason,'stop');assert.equal(s.evidence.issuedCalls.length,2);
+ }finally{s.close();}
+});

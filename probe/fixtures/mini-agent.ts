@@ -30,18 +30,26 @@ peer.onRequest = async (method, params: any) => {
           stdio: ["pipe", "pipe", "inherit"],
         });
         const rl = createInterface({ input: child.stdout! });
-        rl.on("line", (line) => {
-          let msg: any;
-          try { msg = JSON.parse(line); } catch { return; }
-          if (msg.id === 1) {
-            child.stdin!.write(JSON.stringify({ jsonrpc: "2.0", method: "notifications/initialized" }) + "\n");
-            rl.close();
-          }
+        await new Promise<void>((resolve, reject) => {
+          const timer = setTimeout(() => { child.kill(); reject(new Error("MCP fixture handshake timed out")); }, 5000);
+          child.once("error", error => { clearTimeout(timer); reject(error); });
+          child.once("exit", () => { clearTimeout(timer); reject(new Error("MCP fixture exited before handshake")); });
+          rl.on("line", (line) => {
+            let msg: any;
+            try { msg = JSON.parse(line); } catch { return; }
+            if (msg.id === 1) {
+              if (msg.error) { clearTimeout(timer); reject(new Error("MCP fixture rejected initialize")); return; }
+              child.stdin!.write(JSON.stringify({ jsonrpc: "2.0", method: "notifications/initialized" }) + "\n");
+              clearTimeout(timer);
+              rl.close();
+              resolve();
+            }
+          });
+          child.stdin!.write(JSON.stringify({
+            jsonrpc: "2.0", id: 1, method: "initialize",
+            params: { protocolVersion: "2025-03-26", capabilities: {}, clientInfo: { name: "mini-agent", version: "0.0.1" } },
+          }) + "\n");
         });
-        child.stdin!.write(JSON.stringify({
-          jsonrpc: "2.0", id: 1, method: "initialize",
-          params: { protocolVersion: "2025-03-26", capabilities: {}, clientInfo: { name: "mini-agent", version: "0.0.1" } },
-        }) + "\n");
       }
       return { sessionId: `sess-mini-${++sessionSequence}` };
     }

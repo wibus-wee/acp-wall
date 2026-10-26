@@ -267,14 +267,16 @@ export async function probeSetMode(ctx: ProbeContext) {
   const modes = ctx.sessionModes?.availableModes;
   if (!Array.isArray(modes) || !modes.length) { put(ctx, "set_mode", { status: "na", reason: "not-advertised", note: "No session modes offered" }); return; }
   const original = ctx.sessionModes.currentModeId;
-  const target = modes.find((m: any) => m.id !== original);
+  const target = modes.find((m: any) => m.id !== original) ?? modes.find((m: any) => m.id === original);
   if (!target || !modes.some((m: any) => m.id === original)) { put(ctx, "set_mode", { status: "na", reason: "no-alternative", note: "No safe alternative and restoration mode offered" }); return; }
-  const before = ctx.updates.length;
   const r = await callAgent(ctx, "session/set_mode", { sessionId: ctx.sessionId, modeId: target.id });
-  verdict(ctx, "set_mode", r, true, false, `Accepted transition ${original} → ${target.id}`);
-  if (!r.ok) return;
-  const confirmed = ctx.updates.slice(before).some(u => u.params?.sessionId === ctx.sessionId && u.params?.update?.sessionUpdate === "current_mode_update" && u.params.update.currentModeId === target.id);
-  if (!confirmed) put(ctx, "set_mode", { status: "observed", advertised: true, reason: "configuration-unconfirmed", note: "Mode change accepted but no matching current_mode_update observed" });
+  // ACP permits the client to select any advertised mode, including the current
+  // one. current_mode_update describes agent-originated changes; it is not a
+  // required acknowledgement of session/set_mode (see protocol/v1/session-modes).
+  verdict(ctx, "set_mode", r, true, false, target.id === original
+    ? "Accepted selection of the sole advertised mode; no transition claimed"
+    : `Accepted mode selection ${original} → ${target.id}`);
+  if (!r.ok || target.id === original) return;
   const restore = await callAgent(ctx, "session/set_mode", { sessionId: ctx.sessionId, modeId: original });
   if (!restore.ok) { ctx.promptBlocked = true; put(ctx, "set_mode", { ...classifyError(restore.err, true), note: `Mode restoration failed: ${String(restore.err?.message ?? restore.err)}` }); }
 }
