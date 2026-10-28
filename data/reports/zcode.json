@@ -53,7 +53,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-27T09:55:29.875Z",
+  "probedAt": "2026-10-28T10:42:46.984Z",
   "state": "blocked",
   "summary": {
     "pass": 3,
@@ -75,13 +75,13 @@
     "profile": "mock",
     "client": "simulated",
     "platform": "linux-x64",
-    "node": "v24.21.0",
+    "node": "v24.22.1",
     "command": "npx -y acp-extension-zcode@0.38.0",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "3cac32cf87ff31b2df58c80b46f058e3aff379c1f5457102a22c0f365ad8882d",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40483935798",
-    "revision": "624f921d3a0b01255058ec9205fbeac602b03fca",
+    "recipeSha256": "328079bd8720f16aaccbf9f33e4dbc2fa04c47d89e8a04e9f317b4c95f53771d",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40673580258",
+    "revision": "7113db16034a1c054ee83969892df9fc681a2b90",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -103,7 +103,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · acp-extension-zcode",
-          "latencyMs": 553
+          "latencyMs": 348
         }
       ]
     },
@@ -130,7 +130,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 5
+          "latencyMs": 3
         }
       ]
     },
@@ -146,7 +146,7 @@
           "errorCode": -32603,
           "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
           "advertised": true,
-          "latencyMs": 7
+          "latencyMs": 6
         }
       ]
     },
@@ -161,7 +161,7 @@
           "reason": "request-rejected",
           "errorCode": -32603,
           "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
-          "latencyMs": 7
+          "latencyMs": 36
         }
       ]
     },
@@ -208,7 +208,7 @@
           "errorCode": -32603,
           "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
           "advertised": true,
-          "latencyMs": 5
+          "latencyMs": 4
         },
         {
           "method": "session/close",
@@ -238,7 +238,7 @@
           "errorCode": -32603,
           "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
           "advertised": true,
-          "latencyMs": 5
+          "latencyMs": 4
         }
       ]
     },
@@ -284,7 +284,7 @@
           "errorCode": -32603,
           "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
           "advertised": true,
-          "latencyMs": 73
+          "latencyMs": 6
         }
       ]
     },
@@ -555,12 +555,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · acp-extension-zcode",
-      "latencyMs": 553
+      "latencyMs": 348
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 5
+      "latencyMs": 3
     },
     "set_mode": {
       "status": "observed",
@@ -576,14 +576,14 @@
       "errorCode": -32603,
       "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
       "advertised": true,
-      "latencyMs": 73
+      "latencyMs": 6
     },
     "session/prompt": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32603,
       "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
-      "latencyMs": 7
+      "latencyMs": 36
     },
     "cancel": {
       "status": "blocked",
@@ -597,7 +597,7 @@
       "errorCode": -32603,
       "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
       "advertised": true,
-      "latencyMs": 7
+      "latencyMs": 6
     },
     "load:replay": {
       "status": "blocked",
@@ -611,7 +611,7 @@
       "errorCode": -32603,
       "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
       "advertised": true,
-      "latencyMs": 5
+      "latencyMs": 4
     },
     "prompt:image": {
       "status": "observed",
@@ -664,7 +664,7 @@
       "errorCode": -32603,
       "note": "Internal error — zcode create failed: zcode backend reader exited (backend dead)",
       "advertised": true,
-      "latencyMs": 5
+      "latencyMs": 4
     },
     "session/close": {
       "status": "na",
@@ -782,21 +782,21 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-27T09:55:29.022Z",
+      "at": "2026-10-28T10:42:46.446Z",
       "outcome": "success",
-      "latencyMs": 553
+      "latencyMs": 348
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-27T09:55:29.633Z",
+      "at": "2026-10-28T10:42:46.830Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 3
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-10-27T09:55:29.670Z",
+      "at": "2026-10-28T10:42:46.849Z",
       "outcome": "error",
       "errorCode": -32603,
       "latencyMs": 12
@@ -804,54 +804,54 @@
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-27T09:55:29.691Z",
-      "outcome": "error",
-      "errorCode": -32603,
-      "latencyMs": 73
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:exec",
-      "at": "2026-10-27T09:55:29.780Z",
-      "outcome": "error",
-      "errorCode": -32603,
-      "latencyMs": 7
-    },
-    {
-      "method": "session/load",
-      "scenario": "load:replay:1",
-      "at": "2026-10-27T09:55:29.802Z",
-      "outcome": "error",
-      "errorCode": -32603,
-      "latencyMs": 7
-    },
-    {
-      "method": "session/fork",
-      "scenario": "session/fork",
-      "at": "2026-10-27T09:55:29.827Z",
-      "outcome": "error",
-      "errorCode": -32603,
-      "latencyMs": 5
-    },
-    {
-      "method": "session/new",
-      "scenario": "prompt-content",
-      "at": "2026-10-27T09:55:29.833Z",
-      "outcome": "success",
-      "latencyMs": 1
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "prompt:image",
-      "at": "2026-10-27T09:55:29.834Z",
+      "at": "2026-10-28T10:42:46.867Z",
       "outcome": "error",
       "errorCode": -32603,
       "latencyMs": 6
     },
     {
+      "method": "session/prompt",
+      "scenario": "default:exec",
+      "at": "2026-10-28T10:42:46.888Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 36
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-10-28T10:42:46.935Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 6
+    },
+    {
+      "method": "session/fork",
+      "scenario": "session/fork",
+      "at": "2026-10-28T10:42:46.950Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 4
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-10-28T10:42:46.955Z",
+      "outcome": "success",
+      "latencyMs": 0
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:image",
+      "at": "2026-10-28T10:42:46.956Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 4
+    },
+    {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-27T09:55:29.847Z",
+      "at": "2026-10-28T10:42:46.964Z",
       "outcome": "error",
       "errorCode": -32603,
       "latencyMs": 5
@@ -859,37 +859,37 @@
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-27T09:55:29.852Z",
+      "at": "2026-10-28T10:42:46.969Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-10-27T09:55:29.864Z",
+      "at": "2026-10-28T10:42:46.976Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 5
+      "latencyMs": 4
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-27T09:55:29.871Z",
+      "at": "2026-10-28T10:42:46.981Z",
       "outcome": "success",
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-27T09:55:29.873Z",
+      "at": "2026-10-28T10:42:46.982Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-27T09:55:29.873Z",
+      "at": "2026-10-28T10:42:46.983Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -899,7 +899,7 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "5027a9f1-4e5a-40cc-9988-642ea10fc3da",
+      "sessionId": "493b5d61-5430-44e4-829a-c4e8b810106a",
       "configuration": {
         "model": "builtin:bigmodel-coding-plan\\GLM-5.3",
         "mode": "yolo",
@@ -918,7 +918,9 @@
         "request_permission": 0,
         "elicitation": 0
       },
-      "notifications": [],
+      "notifications": [
+        "available_commands_update"
+      ],
       "tools": [],
       "model": {
         "issuedTools": [],
@@ -928,7 +930,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "755b8556-6aec-4372-9942-5bd88f0b651a",
+      "sessionId": "c4d62c9b-b66e-44a4-b691-5d5bcebd314f",
       "configuration": {},
       "result": {
         "status": "observed",
@@ -1008,7 +1010,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 35393,
+      "port": 34957,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 1,
