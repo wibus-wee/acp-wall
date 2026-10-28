@@ -61,5 +61,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Isolated OpenAI-compatible mock provider. Setup output is separate from ACP stdout. CLINE_API_KEY is the documented ACP environment-key gate; no OAuth flow or real credentials are supplied.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-27"
+  "_synced": "acp-registry 1.0.0 · 2026-10-28"
 }
