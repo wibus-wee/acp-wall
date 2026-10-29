@@ -2,7 +2,7 @@
   "name": "antigravity-acp",
   "display": "Google Antigravity",
   "vendor": "Google LLC",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Google’s AI coding agent",
   "repo": null,
   "website": "https://antigravity.google/docs/ide/extensions",
@@ -20,45 +20,45 @@
     "type": "binary",
     "per_platform": {
       "darwin-aarch64": {
-        "archive": "https://dl.google.com/agy-extensions/releases/macos/agy-acp-server-1.4.3-darwin-arm64.zip",
+        "archive": "https://dl.google.com/agy-extensions/releases/macos/agy-acp-server-1.4.4-darwin-arm64.zip",
         "cmd": "./agy_acp_server.par",
-        "sha256": "c57db0a9b8b712daa9c3c17cdb990a61842ea569f279e8bd79d7aa85a303b20b"
+        "sha256": "a3cf324046396380fcd8c055a4a4c83ac4ea74a38ea883ccbfce5ca1e9927ae9"
       },
       "darwin-x86_64": {
-        "archive": "https://dl.google.com/agy-extensions/releases/macos/agy-acp-server-1.4.3-darwin-x86_64.zip",
+        "archive": "https://dl.google.com/agy-extensions/releases/macos/agy-acp-server-1.4.4-darwin-x86_64.zip",
         "cmd": "./agy_acp_server.par",
-        "sha256": "9392dbbdad7f0663dbfb5a0bf641297b0cf80d2ee9cd2d49a616bbbc7378731d"
+        "sha256": "019e6ce30cf906ba94b761d752c7ccd01a324f4701efca31542de04b60be8fd7"
       },
       "linux-x86_64": {
-        "archive": "https://dl.google.com/agy-extensions/releases/linux/agy-acp-server-1.4.3-linux-x86_64.zip",
+        "archive": "https://dl.google.com/agy-extensions/releases/linux/agy-acp-server-1.4.4-linux-x86_64.zip",
         "cmd": "./agy_acp_server.par",
         "args": [
           "--uid="
         ],
-        "sha256": "0634ce5306ba92c932945455e7a83fda78e2d99c33fa8aa6ee0566206a382714"
+        "sha256": "baf31b7a97602dee359cf2a43f72b6e11c6bf354be874987d80660cd3526bb6a"
       },
       "linux-aarch64": {
-        "archive": "https://dl.google.com/agy-extensions/releases/linux/agy-acp-server-1.4.3-linux-arm64.zip",
+        "archive": "https://dl.google.com/agy-extensions/releases/linux/agy-acp-server-1.4.4-linux-arm64.zip",
         "cmd": "./agy_acp_server.par",
         "args": [
           "--uid="
         ],
-        "sha256": "05c153443b0b1175151c760eeddea538950bc9843e317d54786a1f03670182bc"
+        "sha256": "b0273227c07cfa1ea5c1d9ff869b64c5b2b39b98862081fcd4c597ec316e0c57"
       },
       "windows-x86_64": {
-        "archive": "https://dl.google.com/agy-extensions/releases/windows/agy-acp-server-1.4.3-windows-x86_64.zip",
+        "archive": "https://dl.google.com/agy-extensions/releases/windows/agy-acp-server-1.4.4-windows-x86_64.zip",
         "cmd": "./agy_acp_server.exe",
-        "sha256": "54c2e16378d9a4952e1da70e355f3c33c4f284308d6de48ab3e6e34a127bd325"
+        "sha256": "4b68e5936a3d7a60b520aa1ee9479c8be58c43e015f026dc41e7ad17ec54d427"
       },
       "windows-aarch64": {
-        "archive": "https://dl.google.com/agy-extensions/releases/windows/agy-acp-server-1.4.3-windows-arm64.zip",
+        "archive": "https://dl.google.com/agy-extensions/releases/windows/agy-acp-server-1.4.4-windows-arm64.zip",
         "cmd": "./agy_acp_server.exe",
-        "sha256": "fcd46431ad33d3b510ce0b98fe7b43d095bd8b3f1c363ee2d57faa7ee981c7bb"
+        "sha256": "655835b095e160d726ee894a10e56960a9a81b03503edbd348079336163b28de"
       }
     }
   },
   "disabled": false,
   "selftest": false,
   "notes": "Google Antigravity uses interactive Google OAuth against a real account — cannot be satisfied in CI; no API-key or custom-endpoint path.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-28"
+  "_synced": "acp-registry 1.0.0 · 2026-10-29"
 }
