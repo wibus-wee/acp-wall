@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "antigravity-acp",
   "agentName": "antigravity-acp",
-  "agentVersion": "1.4.3",
+  "agentVersion": "1.4.4",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -20,6 +20,7 @@
       },
       "sessionCapabilities": {
         "list": {},
+        "additionalDirectories": {},
         "resume": {}
       },
       "auth": {
@@ -57,7 +58,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-28T10:38:13.230Z",
+  "probedAt": "2026-10-29T10:55:51.992Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -79,13 +80,13 @@
     "profile": "mock",
     "client": "simulated",
     "platform": "linux-x64",
-    "node": "v24.21.0",
+    "node": "v24.22.1",
     "command": "${REPO_ROOT}/.cache/agents/antigravity-acp/agent --uid=",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "de2e0922118d9293e6d07e650b9969723cea0585bd830388c8e93d6a41ac62ff",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40673580258",
-    "revision": "7113db16034a1c054ee83969892df9fc681a2b90",
+    "recipeSha256": "835c89bcfdfb4b6de1d3897b8e6204a04b15bbf6c864594bb1e181336058b2a4",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40861309961",
+    "revision": "a22a61929cd635470e4f1ea5e59cf4dae76afe04",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -107,7 +108,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · antigravity-acp",
-          "latencyMs": 1754
+          "latencyMs": 1628
         }
       ]
     },
@@ -136,7 +137,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — {\"message\":\"No authentication method selected. Either call the `authenticate` method (supports oauth-personal, gemini-ap…",
-          "latencyMs": 2
+          "latencyMs": 1
         }
       ]
     },
@@ -549,14 +550,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · antigravity-acp",
-      "latencyMs": 1754
+      "latencyMs": 1628
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — {\"message\":\"No authentication method selected. Either call the `authenticate` method (supports oauth-personal, gemini-ap…",
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -766,31 +767,31 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-28T10:38:11.396Z",
+      "at": "2026-10-29T10:55:50.302Z",
       "outcome": "success",
-      "latencyMs": 1754
+      "latencyMs": 1628
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-28T10:38:13.200Z",
+      "at": "2026-10-29T10:55:51.970Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-28T10:38:13.215Z",
+      "at": "2026-10-29T10:55:51.981Z",
       "outcome": "success",
       "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-28T10:38:13.229Z",
+      "at": "2026-10-29T10:55:51.991Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -823,7 +824,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 42093,
+      "port": 42905,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

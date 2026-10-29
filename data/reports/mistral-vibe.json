@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "mistral-vibe",
   "agentName": "@mistralai/mistral-vibe",
-  "agentVersion": "3.0.1",
+  "agentVersion": "3.0.3",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -22,17 +22,17 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-10-28T10:41:22.560Z",
-  "state": "measured",
+  "probedAt": "2026-10-29T10:58:32.286Z",
+  "state": "blocked",
   "summary": {
-    "pass": 16,
-    "observed": 2,
-    "blocked": 0,
+    "pass": 12,
+    "observed": 3,
+    "blocked": 9,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 17,
+    "na": 11,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -44,18 +44,18 @@
     "profile": "mock",
     "client": "simulated",
     "platform": "linux-x64",
-    "node": "v24.21.0",
+    "node": "v24.22.1",
     "command": "${REPO_ROOT}/.cache/agents/mistral-vibe/agent",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "467219890904bb1377603b52cf67405c00e61dc79f5ab846a5f412b3dd130f98",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40673580258",
-    "revision": "7113db16034a1c054ee83969892df9fc681a2b90",
+    "recipeSha256": "661cbe907371f235ca2806d4199e6708527cd320c374e68b1e0e0ce1e8801a15",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40861309961",
+    "revision": "a22a61929cd635470e4f1ea5e59cf4dae76afe04",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
-    "mockRequests": 14,
+    "mockRequests": 4,
     "modelEvidence": {
       "seenTools": [
         "search_tool_functions",
@@ -70,15 +70,10 @@
         "cron"
       ],
       "issuedTools": [
-        "bash",
-        "read_file",
-        "write_file"
+        "bash"
       ],
       "skippedCalls": [
-        "exec: no matching tool offered",
-        "plan: no matching tool offered",
-        "mcp: no matching tool offered",
-        "mcp: no matching tool offered"
+        "exec: no matching tool offered"
       ]
     }
   },
@@ -92,7 +87,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · @mistralai/mistral-vibe",
-          "latencyMs": 2344
+          "latencyMs": 1799
         }
       ]
     },
@@ -118,7 +113,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 741
+          "latencyMs": 648
         }
       ]
     },
@@ -131,40 +126,45 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 138
+          "latencyMs": 98
         }
       ]
     },
     {
       "key": "session/prompt",
       "scope": "core",
-      "status": "pass",
+      "status": "observed",
       "items": [
         {
           "method": "session/prompt",
-          "status": "pass",
-          "note": "4 prompt responses received; content and tool choice are observed separately"
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null",
+          "latencyMs": 182
         }
       ]
     },
     {
       "key": "prompt:content",
       "scope": "optional",
-      "status": "mixed",
+      "status": "observed",
       "items": [
         {
           "method": "prompt:image",
           "status": "observed",
           "reason": "request-rejected",
-          "errorCode": -31008,
-          "note": "Model `probe-model` does not support images. Switch model, or ask me to enable the support for this model. — null",
+          "errorCode": -32603,
+          "note": "The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null",
           "advertised": true
         },
         {
           "method": "prompt:embedded-context",
-          "status": "pass",
-          "advertised": true,
-          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null",
+          "advertised": true
         }
       ]
     },
@@ -177,7 +177,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 49
+          "latencyMs": 56
         },
         {
           "method": "session/resume",
@@ -210,7 +210,7 @@
           "method": "session/fork",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 358
+          "latencyMs": 351
         }
       ]
     },
@@ -236,7 +236,7 @@
           "status": "pass",
           "note": "Accepted mode selection accept-edits → ask",
           "advertised": true,
-          "latencyMs": 22
+          "latencyMs": 17
         }
       ]
     },
@@ -250,19 +250,21 @@
           "status": "pass",
           "note": "Changed mode to another offered value",
           "advertised": true,
-          "latencyMs": 17
+          "latencyMs": 14
         }
       ]
     },
     {
       "key": "cancel",
       "scope": "core",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "cancel",
-          "status": "pass",
-          "note": "In-flight prompt returned cancelled after 71ms"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No successful prompt to establish cancellation conditions"
         }
       ]
     },
@@ -288,19 +290,21 @@
         {
           "method": "update:message",
           "status": "pass",
-          "note": "10 notification(s) observed"
+          "note": "2 notification(s) observed"
         }
       ]
     },
     {
       "key": "tool_call*",
       "scope": "observation",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "update:tool_call",
-          "status": "pass",
-          "note": "9 notification(s) observed"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -312,32 +316,34 @@
         {
           "method": "update:usage",
           "status": "pass",
-          "note": "32 notification(s) observed"
+          "note": "12 notification(s) observed"
         }
       ]
     },
     {
       "key": "permission",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "request_permission",
-          "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
     {
       "key": "plan",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "update:plan",
-          "status": "na",
-          "reason": "not-triggered",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
           "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
@@ -350,52 +356,56 @@
         {
           "method": "update:commands",
           "status": "pass",
-          "note": "6 notification(s) observed"
+          "note": "5 notification(s) observed"
         }
       ]
     },
     {
       "key": "fs/*",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "fs/read_text_file",
-          "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         },
         {
           "method": "fs/write_text_file",
-          "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
     {
       "key": "terminal/*",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "terminal/*",
-          "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
     {
       "key": "elicitation",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "elicitation",
-          "status": "na",
-          "reason": "not-run",
-          "note": "No controlled elicitation scenario configured"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
@@ -454,9 +464,10 @@
       "items": [
         {
           "method": "mcp:stdio",
-          "status": "observed",
-          "reason": "tool-not-called",
-          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
         },
         {
           "method": "mcp:http",
@@ -480,63 +491,68 @@
     "authenticate": "authenticate: No protocol authentication method advertised",
     "session/new": "session/new: Created a session without additional MCP dependencies",
     "session/load": "session/load: pass",
-    "session/prompt": "session/prompt: 4 prompt responses received; content and tool choice are observed separately",
-    "prompt:content": "prompt:image: Model `probe-model` does not support images. Switch model, or ask me to enable the support for this model. — null · prompt:embedded-context: Typed prompt accepted and answered; model understanding and content preservation are not established",
+    "session/prompt": "session/prompt: The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null",
+    "prompt:content": "prompt:image: The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null · prompt:embedded-context: The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null",
     "sessions/*": "session/list: pass · session/resume: Not advertised; optional method not invoked · session/close: pass · session/delete: Not advertised; optional method not invoked",
     "fork": "session/fork: pass",
     "load:replay": "load:replay: Prior conversation text replayed for the same session",
     "set_mode": "set_mode: Accepted mode selection accept-edits → ask",
     "set_config": "set_config: Changed mode to another offered value",
-    "cancel": "cancel: In-flight prompt returned cancelled after 71ms",
+    "cancel": "cancel: No successful prompt to establish cancellation conditions",
     "logout": "logout: Not advertised; optional method not invoked",
-    "message*": "update:message: 10 notification(s) observed",
-    "tool_call*": "update:tool_call: 9 notification(s) observed",
-    "usage": "update:usage: 32 notification(s) observed",
-    "permission": "request_permission: No client request observed; internal tools and policy choices are permitted",
+    "message*": "update:message: 2 notification(s) observed",
+    "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
+    "usage": "update:usage: 12 notification(s) observed",
+    "permission": "request_permission: Not observed; prerequisite session/prompt unavailable",
     "plan": "update:plan: No matching notifications observed; see scenario stimuli",
-    "slash_cmds": "update:commands: 6 notification(s) observed",
-    "fs/*": "fs/read_text_file: No client request observed; internal tools and policy choices are permitted · fs/write_text_file: No client request observed; internal tools and policy choices are permitted",
-    "terminal/*": "terminal/*: No client request observed; internal tools and policy choices are permitted",
-    "elicitation": "elicitation: No controlled elicitation scenario configured",
+    "slash_cmds": "update:commands: 5 notification(s) observed",
+    "fs/*": "fs/read_text_file: Not observed; prerequisite session/prompt unavailable · fs/write_text_file: Not observed; prerequisite session/prompt unavailable",
+    "terminal/*": "terminal/*: Not observed; prerequisite session/prompt unavailable",
+    "elicitation": "elicitation: Not observed; prerequisite session/prompt unavailable",
     "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
     "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
-    "mcp": "mcp:stdio: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
+    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
   },
   "methods": {
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · @mistralai/mistral-vibe",
-      "latencyMs": 2344
+      "latencyMs": 1799
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 741
+      "latencyMs": 648
     },
     "set_mode": {
       "status": "pass",
       "note": "Accepted mode selection accept-edits → ask",
       "advertised": true,
-      "latencyMs": 22
+      "latencyMs": 17
     },
     "set_config": {
       "status": "pass",
       "note": "Changed mode to another offered value",
       "advertised": true,
-      "latencyMs": 17
+      "latencyMs": 14
     },
     "session/prompt": {
-      "status": "pass",
-      "note": "4 prompt responses received; content and tool choice are observed separately"
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null",
+      "latencyMs": 182
     },
     "cancel": {
-      "status": "pass",
-      "note": "In-flight prompt returned cancelled after 71ms"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No successful prompt to establish cancellation conditions"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 138
+      "latencyMs": 98
     },
     "load:replay": {
       "status": "pass",
@@ -545,19 +561,21 @@
     "session/fork": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 358
+      "latencyMs": 351
     },
     "prompt:image": {
       "status": "observed",
       "reason": "request-rejected",
-      "errorCode": -31008,
-      "note": "Model `probe-model` does not support images. Switch model, or ask me to enable the support for this model. — null",
+      "errorCode": -32603,
+      "note": "The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null",
       "advertised": true
     },
     "prompt:embedded-context": {
-      "status": "pass",
-      "advertised": true,
-      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null",
+      "advertised": true
     },
     "providers/list": {
       "status": "na",
@@ -586,7 +604,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 49
+      "latencyMs": 56
     },
     "session/resume": {
       "status": "na",
@@ -606,9 +624,10 @@
       "note": "Not advertised; optional method not invoked"
     },
     "mcp:stdio": {
-      "status": "observed",
-      "reason": "tool-not-called",
-      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
     },
     "mcp:http": {
       "status": "na",
@@ -623,50 +642,58 @@
       "note": "Not advertised; optional method not invoked"
     },
     "fs/read_text_file": {
-      "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "fs/write_text_file": {
-      "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "terminal/*": {
-      "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "request_permission": {
-      "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "elicitation": {
-      "status": "na",
-      "reason": "not-run",
-      "note": "No controlled elicitation scenario configured"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "update:message": {
       "status": "pass",
-      "note": "10 notification(s) observed"
+      "note": "2 notification(s) observed"
     },
     "update:tool_call": {
-      "status": "pass",
-      "note": "9 notification(s) observed"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:plan": {
-      "status": "na",
-      "reason": "not-triggered",
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
       "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:commands": {
       "status": "pass",
-      "note": "6 notification(s) observed"
+      "note": "5 notification(s) observed"
     },
     "update:usage": {
       "status": "pass",
-      "note": "32 notification(s) observed"
+      "note": "12 notification(s) observed"
     },
     "lody": {
       "status": "na",
@@ -696,178 +723,138 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-28T10:41:16.406Z",
+      "at": "2026-10-29T10:58:28.424Z",
       "outcome": "success",
-      "latencyMs": 2344
+      "latencyMs": 1799
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-28T10:41:18.805Z",
+      "at": "2026-10-29T10:58:30.267Z",
       "outcome": "success",
-      "latencyMs": 741
+      "latencyMs": 648
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-10-28T10:41:19.572Z",
-      "outcome": "success",
-      "latencyMs": 22
-    },
-    {
-      "method": "session/set_mode",
-      "scenario": "set_mode",
-      "at": "2026-10-28T10:41:19.604Z",
-      "outcome": "success",
-      "latencyMs": 16
-    },
-    {
-      "method": "session/set_config_option",
-      "scenario": "set_config",
-      "at": "2026-10-28T10:41:19.629Z",
+      "at": "2026-10-29T10:58:30.935Z",
       "outcome": "success",
       "latencyMs": 17
     },
     {
+      "method": "session/set_mode",
+      "scenario": "set_mode",
+      "at": "2026-10-29T10:58:30.960Z",
+      "outcome": "success",
+      "latencyMs": 19
+    },
+    {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-10-28T10:41:19.658Z",
+      "at": "2026-10-29T10:58:30.985Z",
       "outcome": "success",
-      "latencyMs": 16
+      "latencyMs": 14
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-10-29T10:58:31.009Z",
+      "outcome": "success",
+      "latencyMs": 15
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-28T10:41:19.691Z",
-      "outcome": "success",
-      "latencyMs": 269
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:read",
-      "at": "2026-10-28T10:41:19.970Z",
-      "outcome": "success",
-      "latencyMs": 87
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:write",
-      "at": "2026-10-28T10:41:20.057Z",
-      "outcome": "success",
-      "latencyMs": 89
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:plan",
-      "at": "2026-10-28T10:41:20.146Z",
-      "outcome": "success",
-      "latencyMs": 43
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "cancel",
-      "at": "2026-10-28T10:41:20.189Z",
-      "outcome": "success",
-      "latencyMs": 71
+      "at": "2026-10-29T10:58:31.038Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 182
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-10-28T10:41:20.276Z",
+      "at": "2026-10-29T10:58:31.233Z",
       "outcome": "success",
-      "latencyMs": 138
+      "latencyMs": 98
     },
     {
       "method": "session/fork",
       "scenario": "session/fork",
-      "at": "2026-10-28T10:41:20.441Z",
+      "at": "2026-10-29T10:58:31.354Z",
       "outcome": "success",
-      "latencyMs": 358
+      "latencyMs": 351
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-28T10:41:20.814Z",
+      "at": "2026-10-29T10:58:31.717Z",
       "outcome": "success",
-      "latencyMs": 71
+      "latencyMs": 65
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-10-28T10:41:20.885Z",
+      "at": "2026-10-29T10:58:31.782Z",
       "outcome": "error",
-      "errorCode": -31008,
-      "latencyMs": 82
+      "errorCode": -32603,
+      "latencyMs": 88
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-28T10:41:20.967Z",
+      "at": "2026-10-29T10:58:31.870Z",
       "outcome": "success",
-      "latencyMs": 82
+      "latencyMs": 185
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-10-28T10:41:21.050Z",
-      "outcome": "success",
-      "latencyMs": 91
+      "at": "2026-10-29T10:58:32.055Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 81
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-28T10:41:21.149Z",
+      "at": "2026-10-29T10:58:32.142Z",
       "outcome": "success",
-      "latencyMs": 49
+      "latencyMs": 56
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-10-28T10:41:21.206Z",
+      "at": "2026-10-29T10:58:32.205Z",
       "outcome": "success",
-      "latencyMs": 74
+      "latencyMs": 62
     },
     {
       "method": "session/close",
       "scenario": "session-mgmt",
-      "at": "2026-10-28T10:41:21.286Z",
+      "at": "2026-10-29T10:58:32.273Z",
       "outcome": "success",
       "latencyMs": 4
     },
     {
-      "method": "session/new",
-      "scenario": "mcp:stdio:default",
-      "at": "2026-10-28T10:41:21.297Z",
-      "outcome": "success",
-      "latencyMs": 668
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "mcp:stdio:default",
-      "at": "2026-10-28T10:41:21.965Z",
-      "outcome": "success",
-      "latencyMs": 89
-    },
-    {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-28T10:41:22.557Z",
-      "outcome": "error",
-      "errorCode": -32601,
-      "latencyMs": 1
-    },
-    {
-      "method": "_lody/subagents/list",
-      "scenario": "lody",
-      "at": "2026-10-28T10:41:22.558Z",
+      "at": "2026-10-29T10:58:32.283Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
     },
     {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-10-29T10:58:32.283Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    },
+    {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-28T10:41:22.558Z",
+      "at": "2026-10-29T10:58:32.284Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -877,173 +864,17 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "ad269676-6998-af16-8d19-9c0d8bfc05c6",
+      "sessionId": "367e1b2f-e1f3-2a2e-1b1a-dc1100676131",
       "configuration": {
         "mode": "accept-edits",
         "model": "probe",
         "thinking": "off"
       },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "user_message_chunk",
-        "usage_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "effect-63c7cc66-236f-5b3b-8f94-a6b3e730f76b",
-          "name": "bash: cat PROBE_CANARY.txt",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "bash"
-        ],
-        "skippedCalls": [
-          "exec: no matching tool offered"
-        ]
-      }
-    },
-    {
-      "id": "default:read",
-      "profile": "default",
-      "sessionId": "ad269676-6998-af16-8d19-9c0d8bfc05c6",
-      "configuration": {
-        "mode": "accept-edits",
-        "model": "probe",
-        "thinking": "off"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "user_message_chunk",
-        "usage_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "effect-447ea80c-c322-59ac-a47a-6173b674fb12",
-          "name": "Reading ./PROBE_CANARY.txt",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "read_file"
-        ],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "default:write",
-      "profile": "default",
-      "sessionId": "ad269676-6998-af16-8d19-9c0d8bfc05c6",
-      "configuration": {
-        "mode": "accept-edits",
-        "model": "probe",
-        "thinking": "off"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "user_message_chunk",
-        "usage_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "effect-9fb8fef2-53a9-568c-93fe-e7c882d0dff4",
-          "name": "Writing ./probe-out.txt",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "write_file"
-        ],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "default:plan",
-      "profile": "default",
-      "sessionId": "ad269676-6998-af16-8d19-9c0d8bfc05c6",
-      "configuration": {
-        "mode": "accept-edits",
-        "model": "probe",
-        "thinking": "off"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "user_message_chunk",
-        "usage_update",
-        "agent_message_chunk"
-      ],
-      "tools": [],
-      "model": {
-        "issuedTools": [],
-        "skippedCalls": [
-          "plan: no matching tool offered"
-        ]
-      }
-    },
-    {
-      "id": "prompt:image",
-      "profile": "default",
-      "sessionId": "458235fc-4f9c-1321-d15a-b1b1a1e3ab50",
-      "configuration": {},
       "result": {
         "status": "observed",
         "reason": "request-rejected",
-        "errorCode": -31008,
-        "note": "Model `probe-model` does not support images. Switch model, or ask me to enable the support for this model. — null"
+        "errorCode": -32603,
+        "note": "The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null"
       },
       "callbacks": {
         "fs/read_text_file": 0,
@@ -1059,6 +890,38 @@
       ],
       "tools": [],
       "model": {
+        "issuedTools": [
+          "bash"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "prompt:image",
+      "profile": "default",
+      "sessionId": "c5ed4ed8-7195-7ac3-e97e-044255206887",
+      "configuration": {},
+      "result": {
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "session_info_update",
+        "user_message_chunk",
+        "usage_update",
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
         "issuedTools": [],
         "skippedCalls": []
       }
@@ -1066,11 +929,13 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "0f303876-0cf7-161c-99aa-bc1dd8acb4d8",
+      "sessionId": "e4f05d36-d63c-bc1a-72d9-0251e95d2f3b",
       "configuration": {},
       "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "The provider reply is unusable: the server returned no token usage; an OpenAI-compatible server must support stream_options.include_usage. — null"
       },
       "callbacks": {
         "fs/read_text_file": 0,
@@ -1090,71 +955,12 @@
         "issuedTools": [],
         "skippedCalls": []
       }
-    },
-    {
-      "id": "mcp:stdio:default",
-      "profile": "default",
-      "sessionId": "f42aa4da-caeb-3c71-a9a6-0a70eb63d666",
-      "configuration": {
-        "mode": "accept-edits",
-        "model": "probe",
-        "thinking": "off"
-      },
-      "result": {
-        "status": "observed",
-        "reason": "tool-not-called",
-        "note": "Fixture tool discovery completed; no fixture call received"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "user_message_chunk",
-        "usage_update",
-        "agent_message_chunk"
-      ],
-      "tools": [],
-      "model": {
-        "issuedTools": [],
-        "skippedCalls": [
-          "mcp: no matching tool offered",
-          "mcp: no matching tool offered"
-        ]
-      },
-      "diagnostics": [
-        "DEBUG:mistralai_vibe_local_harness.vibe._host:Initializing MCP integrations for f42aa4da-caeb-3c71-a9a6-0a70eb63d666 (1 servers)",
-        "DEBUG:mistralai_vibe_local_harness.vibe._host:MCP integrations initialized for f42aa4da-caeb-3c71-a9a6-0a70eb63d666",
-        "DEBUG:mistralai_vibe_local_harness.vibe._host:Initializing connector integrations for f42aa4da-caeb-3c71-a9a6-0a70eb63d666 (0 connectors)\nDEBUG:mistralai_vibe_local_harness.vibe._host:Connector integrations initialized for f42aa4da-caeb-3c71-a9a6-0a70eb63d666",
-        "INFO:mistralai_vibe_local_harness.vibe._host:Unified session opened",
-        "DEBUG:vibe:Session created: harness=unified session_id=f42aa4da-caeb-3c71-a9a6-0a70eb63d666",
-        "INFO:mistralai_vibe_local_harness.vibe._runtime:Unified session compaction completed"
-      ],
-      "mcpEvents": [
-        {
-          "event": "spawned",
-          "ts": 1793184081924
-        },
-        {
-          "event": "initialized",
-          "ts": 1793184081945
-        },
-        {
-          "event": "tools/list",
-          "ts": 1793184081945
-        }
-      ]
     }
   ],
   "uncertaintyReasons": {
     "not-advertised": 8,
-    "no-client-callback": 4,
-    "not-triggered": 1,
-    "not-run": 4
+    "prerequisite": 9,
+    "not-run": 3
   },
   "lody": {
     "advertised": {},
@@ -1193,14 +999,12 @@
       "totalTokens",
       "tokensPerSecond",
       "lastTurnDuration",
-      "lastTurnTotalTokens",
-      "tool_name",
-      "effect_kind"
+      "lastTurnTotalTokens"
     ]
   },
   "transport": {
     "mitm": {
-      "port": 37275,
+      "port": 39265,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

@@ -43,7 +43,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-28T10:41:37.946Z",
+  "probedAt": "2026-10-29T10:58:52.360Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -69,9 +69,9 @@
     "command": "npx -y @compass-ai/nova@1.1.43 models register --name probe --api openai --base-url ${MOCK_LLM_URL} --api-key probe-mock-key --model probe-model --default ; npx -y @compass-ai/nova@1.1.43 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "b76313632909c2501b49f547720f18be330b0e0ac8acf270460e6a4b898f4a92",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40673580258",
-    "revision": "7113db16034a1c054ee83969892df9fc681a2b90",
+    "recipeSha256": "d258bdd0bf30fd8186926ddea5958dfe1a7da23afb886a0dda78f2dcf141e36a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40861309961",
+    "revision": "a22a61929cd635470e4f1ea5e59cf4dae76afe04",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -93,7 +93,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · kore-cli",
-          "latencyMs": 19017
+          "latencyMs": 18415
         }
       ]
     },
@@ -122,7 +122,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Click Nova Setup to configure your API keys — {\"authMethods\":[{\"id\":\"kore-terminal-auth\",\"type\":\"terminal\",\"name\":\"Nova Setup\",\"description\":\"Complete interactive set…",
-          "latencyMs": 314
+          "latencyMs": 331
         }
       ]
     },
@@ -535,14 +535,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · kore-cli",
-      "latencyMs": 19017
+      "latencyMs": 18415
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Click Nova Setup to configure your API keys — {\"authMethods\":[{\"id\":\"kore-terminal-auth\",\"type\":\"terminal\",\"name\":\"Nova Setup\",\"description\":\"Complete interactive set…",
-      "latencyMs": 314
+      "latencyMs": 331
     },
     "set_mode": {
       "status": "blocked",
@@ -753,29 +753,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-28T10:41:18.537Z",
+      "at": "2026-10-29T10:58:33.531Z",
       "outcome": "success",
-      "latencyMs": 19017
+      "latencyMs": 18415
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-28T10:41:37.608Z",
+      "at": "2026-10-29T10:58:52.004Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 314
+      "latencyMs": 331
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-28T10:41:37.932Z",
+      "at": "2026-10-29T10:58:52.345Z",
       "outcome": "success",
       "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-28T10:41:37.944Z",
+      "at": "2026-10-29T10:58:52.358Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -810,7 +810,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 37563,
+      "port": 37031,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 20,

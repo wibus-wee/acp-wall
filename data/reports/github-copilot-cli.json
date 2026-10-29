@@ -43,7 +43,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-28T10:40:21.628Z",
+  "probedAt": "2026-10-29T10:57:30.168Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -69,9 +69,9 @@
     "command": "npx -y @github/copilot@1.0.105 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "53a585f9d8b49f3061c3178c9fd8341ab52476f18a28b1be6910675cabe878d8",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40673580258",
-    "revision": "7113db16034a1c054ee83969892df9fc681a2b90",
+    "recipeSha256": "fdc55966923ff398f0a97835384914027788391640f76062b54a10530f95f2a4",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40861309961",
+    "revision": "a22a61929cd635470e4f1ea5e59cf4dae76afe04",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -93,7 +93,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · Copilot",
-          "latencyMs": 2190
+          "latencyMs": 2435
         }
       ]
     },
@@ -122,7 +122,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required",
-          "latencyMs": 707
+          "latencyMs": 413
         }
       ]
     },
@@ -184,7 +184,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 0
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -535,14 +535,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · Copilot",
-      "latencyMs": 2190
+      "latencyMs": 2435
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required",
-      "latencyMs": 707
+      "latencyMs": 413
     },
     "set_mode": {
       "status": "blocked",
@@ -619,7 +619,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "na",
@@ -753,29 +753,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-28T10:40:18.674Z",
+      "at": "2026-10-29T10:57:27.244Z",
       "outcome": "success",
-      "latencyMs": 2190
+      "latencyMs": 2435
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-28T10:40:20.904Z",
+      "at": "2026-10-29T10:57:29.734Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 707
+      "latencyMs": 413
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-28T10:40:21.619Z",
+      "at": "2026-10-29T10:57:30.156Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-28T10:40:21.627Z",
+      "at": "2026-10-29T10:57:30.166Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -812,7 +812,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 38943,
+      "port": 42555,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 7,

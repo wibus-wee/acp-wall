@@ -39,7 +39,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-10-28T10:41:50.519Z",
+  "probedAt": "2026-10-29T10:58:46.364Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -61,13 +61,13 @@
     "profile": "mock",
     "client": "simulated",
     "platform": "linux-x64",
-    "node": "v24.21.0",
+    "node": "v24.22.1",
     "command": "${REPO_ROOT}/.cache/agents/poolside/agent acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "21f16fa25e1987e76deef0d9fb55a3c7fbbda710472006ece55c76a66aeaf2b2",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40673580258",
-    "revision": "7113db16034a1c054ee83969892df9fc681a2b90",
+    "recipeSha256": "7cab6327725e3d3baa1d8ecbcaa625ad7a06c0d8c6e3cf7b40402dff907d1b6c",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40861309961",
+    "revision": "a22a61929cd635470e4f1ea5e59cf4dae76afe04",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -179,7 +179,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 0
+          "latencyMs": 2
         },
         {
           "method": "session/resume",
@@ -614,7 +614,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 0
+      "latencyMs": 2
     },
     "session/resume": {
       "status": "na",
@@ -747,14 +747,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-28T10:41:50.442Z",
+      "at": "2026-10-29T10:58:46.281Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-28T10:41:50.496Z",
+      "at": "2026-10-29T10:58:46.337Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 1
@@ -762,17 +762,17 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-28T10:41:50.506Z",
+      "at": "2026-10-29T10:58:46.351Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-28T10:41:50.517Z",
+      "at": "2026-10-29T10:58:46.363Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -813,7 +813,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 35505,
+      "port": 32987,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
