@@ -41,5 +41,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Test the registry legacy ACP adapter, with its required autohand executable supplied by the official autohand-cli package (0.9.8), not nonexistent @autohandai/code-cli. Both packages are prepared before ACP starts; no global installation or native-adapter substitution.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-29"
+  "_synced": "acp-registry 1.0.0 · 2026-10-30"
 }

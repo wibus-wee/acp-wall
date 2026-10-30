@@ -28,5 +28,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Configure the custom provider using actual 0.2.7 CLI options; fail closed on preparation errors. The dummy key is valid only for the local mock. An account gate, if still required, remains blocked rather than bypassed. The add command does not support immediate activation until a connection test; do not force selection or fake the account gate.",
-  "_synced": "acp-registry 1.0.0 · 2026-10-29"
+  "_synced": "acp-registry 1.0.0 · 2026-10-30"
 }
