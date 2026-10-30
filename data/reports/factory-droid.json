@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "factory-droid",
   "agentName": "@factory/cli",
-  "agentVersion": "0.251.0",
+  "agentVersion": "1.0.0",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -12,7 +12,8 @@
       "sessionCapabilities": {
         "list": {},
         "resume": {},
-        "close": {}
+        "close": {},
+        "fork": {}
       },
       "promptCapabilities": {
         "image": true,
@@ -42,17 +43,17 @@
       }
     ]
   },
-  "probedAt": "2026-10-29T10:57:13.134Z",
+  "probedAt": "2026-10-30T10:55:16.382Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
     "observed": 0,
-    "blocked": 26,
+    "blocked": 27,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 7,
+    "na": 6,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -65,12 +66,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.1",
-    "command": "npx -y droid@0.251.0 exec --output-format acp-daemon",
+    "command": "npx -y droid@1.0.0 exec --output-format acp-daemon",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "5e9b110cff57f2864fa4b58f73daef5d7d8b3f00b061836d65de0a6eb9f6f5ce",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40861309961",
-    "revision": "a22a61929cd635470e4f1ea5e59cf4dae76afe04",
+    "recipeSha256": "1e401ce6cf155c20ca282a85ace4a6d96a5836805dfbb4e22f7d3076a73a3384",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41044044683",
+    "revision": "7fb448dfaf715d1657e445053f34c53d84133ad2",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -92,7 +93,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · @factory/cli",
-          "latencyMs": 1345
+          "latencyMs": 878
         }
       ]
     },
@@ -121,7 +122,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Authentication failed. Please log in using /login or set a valid FACTORY_API_KEY environment variable.",
-          "latencyMs": 196
+          "latencyMs": 201
         }
       ]
     },
@@ -183,7 +184,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 477
+          "latencyMs": 392
         },
         {
           "method": "session/resume",
@@ -211,14 +212,14 @@
     {
       "key": "fork",
       "scope": "optional",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "session/fork",
-          "status": "na",
-          "advertised": false,
-          "reason": "not-advertised",
-          "note": "Not advertised; optional method not invoked"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/new",
+          "note": "No usable session; see session/new"
         }
       ]
     },
@@ -511,7 +512,7 @@
     "session/prompt": "session/prompt: No usable session; see session/new",
     "prompt:content": "prompt:image: No usable session; see session/new · prompt:embedded-context: No usable session; see session/new",
     "sessions/*": "session/list: pass · session/resume: No usable session; see session/new · session/close: No usable session; see session/new · session/delete: Not advertised; optional method not invoked",
-    "fork": "session/fork: Not advertised; optional method not invoked",
+    "fork": "session/fork: No usable session; see session/new",
     "load:replay": "load:replay: No usable session; see session/new",
     "set_mode": "set_mode: No usable session; see session/new",
     "set_config": "set_config: No usable session; see session/new",
@@ -534,14 +535,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · @factory/cli",
-      "latencyMs": 1345
+      "latencyMs": 878
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Authentication failed. Please log in using /login or set a valid FACTORY_API_KEY environment variable.",
-      "latencyMs": 196
+      "latencyMs": 201
     },
     "set_mode": {
       "status": "blocked",
@@ -574,10 +575,10 @@
       "note": "No usable session; see session/new"
     },
     "session/fork": {
-      "status": "na",
-      "advertised": false,
-      "reason": "not-advertised",
-      "note": "Not advertised; optional method not invoked"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/new",
+      "note": "No usable session; see session/new"
     },
     "prompt:image": {
       "status": "blocked",
@@ -618,7 +619,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 477
+      "latencyMs": 392
     },
     "session/resume": {
       "status": "blocked",
@@ -752,29 +753,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-29T10:57:11.028Z",
+      "at": "2026-10-30T10:55:14.835Z",
       "outcome": "success",
-      "latencyMs": 1345
+      "latencyMs": 878
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-29T10:57:12.432Z",
+      "at": "2026-10-30T10:55:15.765Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 196
+      "latencyMs": 201
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-29T10:57:12.644Z",
+      "at": "2026-10-30T10:55:15.976Z",
       "outcome": "success",
-      "latencyMs": 477
+      "latencyMs": 392
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-29T10:57:13.132Z",
+      "at": "2026-10-30T10:55:16.380Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -784,8 +785,8 @@
   "uncertaintyReasons": {
     "interactive-auth": 1,
     "authentication": 1,
-    "prerequisite": 24,
-    "not-advertised": 4,
+    "prerequisite": 25,
+    "not-advertised": 3,
     "not-run": 3
   },
   "lody": {
@@ -811,10 +812,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 36353,
+      "port": 43257,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 7,
+      "relayed": 6,
       "drops": 0
     }
   }

@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "harn",
   "agentName": "harn",
-  "agentVersion": "0.10.180",
+  "agentVersion": "0.10.181",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -51,6 +51,7 @@
                 "orchestration_decision",
                 "pack_thinking_stripped",
                 "progress_reported",
+                "provider_usage",
                 "purpose_label",
                 "repair_output_contract_applied",
                 "require_successful_tools_violation",
@@ -72,8 +73,8 @@
             },
             "_harn/providerCatalog": {
               "description": "Return the normalized provider/model catalog used by this runtime.",
-              "schema": "https://harnlang.com/schemas/provider-catalog.v13.json",
-              "schemaVersion": 13
+              "schema": "https://harnlang.com/schemas/provider-catalog.v15.json",
+              "schemaVersion": 15
             },
             "harn.session_history.boundaries": {
               "description": "Acknowledge canonical history positions after the owning transcript journal flushes.",
@@ -119,7 +120,7 @@
             "os_hardened_refusal": null,
             "schema": "harn.process.sandbox_confinement.v1"
           },
-          "schemaCompatibility": "agentclientprotocol/agent-client-protocol schema v0.12.2",
+          "schemaCompatibility": "agentclientprotocol/agent-client-protocol schema v1.26.0",
           "sessionUpdateExtensions": [
             "artifact",
             "available_commands_update",
@@ -238,7 +239,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-29T10:57:44.592Z",
+  "probedAt": "2026-10-30T10:55:54.407Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -264,9 +265,9 @@
     "command": "${REPO_ROOT}/.cache/agents/harn/agent serve acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "9aaacc6ca9586c2d0f634f7705c7e3f1da5c8e6db5510bfd5ed69ee4df355a87",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/40861309961",
-    "revision": "a22a61929cd635470e4f1ea5e59cf4dae76afe04",
+    "recipeSha256": "2a243a9aaa9a283ce284b4888b985fbac388b7876d44f36eaa4a6d4b1d08f083",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41044044683",
+    "revision": "7fb448dfaf715d1657e445053f34c53d84133ad2",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -288,7 +289,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · harn",
-          "latencyMs": 12
+          "latencyMs": 28
         }
       ]
     },
@@ -730,7 +731,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · harn",
-      "latencyMs": 12
+      "latencyMs": 28
     },
     "session/new": {
       "status": "observed",
@@ -948,14 +949,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-29T10:57:44.532Z",
+      "at": "2026-10-30T10:55:54.325Z",
       "outcome": "success",
-      "latencyMs": 12
+      "latencyMs": 28
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-29T10:57:44.578Z",
+      "at": "2026-10-30T10:55:54.388Z",
       "outcome": "error",
       "errorCode": -32602,
       "latencyMs": 1
@@ -963,14 +964,14 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-29T10:57:44.584Z",
+      "at": "2026-10-30T10:55:54.398Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-29T10:57:44.591Z",
+      "at": "2026-10-30T10:55:54.406Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -1007,7 +1008,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 46655,
+      "port": 32971,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
