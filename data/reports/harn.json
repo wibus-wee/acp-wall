@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "harn",
   "agentName": "harn",
-  "agentVersion": "0.10.181",
+  "agentVersion": "0.10.182",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -20,16 +20,22 @@
             "_harn/agentEvent": {
               "description": "Harn agent events that have no canonical ACP session/update mapping.",
               "kinds": [
+                "agent_loop_stall_warning",
+                "agent_scratchpad_reorganization",
+                "anchor_changed",
                 "boundary_failure",
                 "budget_circuit_breaker",
                 "budget_exhausted",
+                "cache_hit",
+                "cache_miss",
+                "capability_gap",
                 "code_librarian_query_nl_fallback",
+                "compass_routing_decision",
                 "composition_child_call",
                 "composition_child_result",
                 "composition_error",
                 "composition_finish",
                 "composition_start",
-                "compass_routing_decision",
                 "control_outcome",
                 "daemon_watchdog_tripped",
                 "feedback_injected",
@@ -38,15 +44,20 @@
                 "host_tool_result",
                 "input_guardrail_verdict",
                 "iteration_end",
-                "session_health",
                 "iteration_start",
                 "judge_decision",
                 "judge_started",
+                "llm_call_log",
+                "llm_fallback_attempt",
+                "llm_routing_decision",
+                "llm_shadow_diff",
+                "loop_checkpoint",
                 "loop_control_decision",
                 "loop_stuck",
                 "mcp_auth_required",
                 "mcp_catalog_changed",
                 "mcp_notification",
+                "missing_tool_call_verdict",
                 "model_job",
                 "orchestration_decision",
                 "pack_thinking_stripped",
@@ -58,11 +69,14 @@
                 "reserved_terminal_verify",
                 "scope_classifier_verdict",
                 "self_consistency_tie",
+                "semantic_cache_hit",
+                "semantic_cache_miss",
                 "session_closed",
+                "session_health",
+                "step_judge_decision",
                 "structural_validator_decision",
                 "subagent_join",
                 "subagent_stop",
-                "step_judge_decision",
                 "tool_batch_disposition",
                 "tool_call_audit",
                 "tool_format_override",
@@ -175,8 +189,8 @@
       },
       "loadSession": true,
       "mcpCapabilities": {
-        "http": true,
-        "sse": true
+        "http": false,
+        "sse": false
       },
       "promptCapabilities": {
         "audio": false,
@@ -213,6 +227,7 @@
         }
       },
       "sessionCapabilities": {
+        "additionalDirectories": {},
         "cancelToolCall": {},
         "close": {},
         "list": {},
@@ -239,17 +254,17 @@
       }
     ]
   },
-  "probedAt": "2026-10-30T10:55:54.407Z",
+  "probedAt": "2026-10-31T10:27:54.741Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
     "observed": 1,
-    "blocked": 24,
+    "blocked": 22,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 8,
+    "na": 10,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -265,9 +280,9 @@
     "command": "${REPO_ROOT}/.cache/agents/harn/agent serve acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "2a243a9aaa9a283ce284b4888b985fbac388b7876d44f36eaa4a6d4b1d08f083",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41044044683",
-    "revision": "7fb448dfaf715d1657e445053f34c53d84133ad2",
+    "recipeSha256": "d143045d41d64504e05c383e1d5264757e5d65be9e08af0fb5c5b4b4d52b6b61",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41192692313",
+    "revision": "7445189ca13a242b3d750b3f0f427e3258361267",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -289,7 +304,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · harn",
-          "latencyMs": 28
+          "latencyMs": 21
         }
       ]
     },
@@ -380,7 +395,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 1
+          "latencyMs": 2
         },
         {
           "method": "session/resume",
@@ -674,7 +689,7 @@
     {
       "key": "mcp",
       "scope": "observation",
-      "status": "blocked",
+      "status": "mixed",
       "items": [
         {
           "method": "mcp:stdio",
@@ -685,17 +700,17 @@
         },
         {
           "method": "mcp:http",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "session/prompt",
-          "note": "MCP scenario prerequisites unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "mcp:sse",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "session/prompt",
-          "note": "MCP scenario prerequisites unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     }
@@ -725,13 +740,13 @@
     "elicitation": "elicitation: Not observed; prerequisite session/new unavailable",
     "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
     "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: Not exercised; prerequisite session/new unavailable",
-    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: MCP scenario prerequisites unavailable · mcp:sse: MCP scenario prerequisites unavailable"
+    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
   },
   "methods": {
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · harn",
-      "latencyMs": 28
+      "latencyMs": 21
     },
     "session/new": {
       "status": "observed",
@@ -815,7 +830,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 1
+      "latencyMs": 2
     },
     "session/resume": {
       "status": "blocked",
@@ -842,16 +857,16 @@
       "note": "MCP scenario prerequisites unavailable"
     },
     "mcp:http": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "session/prompt",
-      "note": "MCP scenario prerequisites unavailable"
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
     },
     "mcp:sse": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "session/prompt",
-      "note": "MCP scenario prerequisites unavailable"
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
     },
     "fs/read_text_file": {
       "status": "blocked",
@@ -949,14 +964,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-30T10:55:54.325Z",
+      "at": "2026-10-31T10:27:54.638Z",
       "outcome": "success",
-      "latencyMs": 28
+      "latencyMs": 21
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-30T10:55:54.388Z",
+      "at": "2026-10-31T10:27:54.713Z",
       "outcome": "error",
       "errorCode": -32602,
       "latencyMs": 1
@@ -964,24 +979,24 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-10-30T10:55:54.398Z",
+      "at": "2026-10-31T10:27:54.728Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-30T10:55:54.406Z",
+      "at": "2026-10-31T10:27:54.739Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
   "uncertaintyReasons": {
     "interactive-auth": 1,
-    "prerequisite": 23,
-    "not-advertised": 6,
+    "prerequisite": 21,
+    "not-advertised": 8,
     "not-run": 2
   },
   "lody": {
@@ -1008,7 +1023,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 32971,
+      "port": 45545,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
