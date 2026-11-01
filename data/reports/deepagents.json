@@ -53,7 +53,7 @@
       }
     ]
   },
-  "probedAt": "2026-10-31T10:27:00.329Z",
+  "probedAt": "2026-11-01T11:20:20.827Z",
   "state": "blocked",
   "summary": {
     "pass": 5,
@@ -79,9 +79,9 @@
     "command": "npx -y deepagents-acp@0.1.7",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "3f70e81ccb1ebb54443e1973f59bd7eb7c0c53598734a3f8ffef2c7d2451c3c9",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41192692313",
-    "revision": "7445189ca13a242b3d750b3f0f427e3258361267",
+    "recipeSha256": "c1da56098b7ec4d10fab7f8375a796b5456e9e68b9696731fc17825a5d84e3f1",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41301322672",
+    "revision": "5c91772b4f7a58e3d5adc36d3f4211bb1b881f06",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -103,7 +103,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · deepagents-acp",
-          "latencyMs": 993
+          "latencyMs": 948
         }
       ]
     },
@@ -130,7 +130,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 89
+          "latencyMs": 81
         }
       ]
     },
@@ -158,7 +158,7 @@
           "reason": "request-rejected",
           "errorCode": -32603,
           "note": "Internal error — Unable to import @langchain/anthropic. Please install with `npm install @langchain/anthropic` or `pnpm install @langchai…",
-          "latencyMs": 40
+          "latencyMs": 37
         }
       ]
     },
@@ -540,12 +540,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · deepagents-acp",
-      "latencyMs": 993
+      "latencyMs": 948
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 89
+      "latencyMs": 81
     },
     "set_mode": {
       "status": "pass",
@@ -563,7 +563,7 @@
       "reason": "request-rejected",
       "errorCode": -32603,
       "note": "Internal error — Unable to import @langchain/anthropic. Please install with `npm install @langchain/anthropic` or `pnpm install @langchai…",
-      "latencyMs": 40
+      "latencyMs": 37
     },
     "cancel": {
       "status": "blocked",
@@ -753,80 +753,80 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-10-31T10:26:59.024Z",
+      "at": "2026-11-01T11:20:19.582Z",
       "outcome": "success",
-      "latencyMs": 993
+      "latencyMs": 948
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-10-31T10:27:00.079Z",
+      "at": "2026-11-01T11:20:20.586Z",
       "outcome": "success",
-      "latencyMs": 89
+      "latencyMs": 81
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-10-31T10:27:00.190Z",
+      "at": "2026-11-01T11:20:20.689Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-10-31T10:27:00.201Z",
+      "at": "2026-11-01T11:20:20.700Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-10-31T10:27:00.224Z",
+      "at": "2026-11-01T11:20:20.725Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 40
+      "latencyMs": 37
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-10-31T10:27:00.278Z",
+      "at": "2026-11-01T11:20:20.778Z",
       "outcome": "success",
       "latencyMs": 4
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-31T10:27:00.297Z",
+      "at": "2026-11-01T11:20:20.795Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-10-31T10:27:00.298Z",
+      "at": "2026-11-01T11:20:20.796Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 13
+      "latencyMs": 14
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-10-31T10:27:00.312Z",
+      "at": "2026-11-01T11:20:20.810Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-10-31T10:27:00.313Z",
+      "at": "2026-11-01T11:20:20.812Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 11
+      "latencyMs": 10
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-10-31T10:27:00.326Z",
+      "at": "2026-11-01T11:20:20.824Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -834,7 +834,7 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-10-31T10:27:00.327Z",
+      "at": "2026-11-01T11:20:20.825Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -842,7 +842,7 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-10-31T10:27:00.327Z",
+      "at": "2026-11-01T11:20:20.825Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -852,7 +852,7 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "sess_ec51ef657130408c",
+      "sessionId": "sess_40bf957148ad4538",
       "configuration": {},
       "result": {
         "status": "observed",
@@ -877,7 +877,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "sess_3e08ad2377ce40cf",
+      "sessionId": "sess_5ce2f953e680430a",
       "configuration": {},
       "result": {
         "status": "observed",
@@ -902,7 +902,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "sess_4da6ba5f6ff245f4",
+      "sessionId": "sess_000a05d622b344e6",
       "configuration": {},
       "result": {
         "status": "observed",
@@ -965,10 +965,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 46061,
+      "port": 39369,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 2,
+      "relayed": 1,
       "drops": 0
     }
   }
