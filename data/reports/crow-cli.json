@@ -4,23 +4,33 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "crow-cli",
   "agentName": "crow-cli",
-  "agentVersion": "0.1.24",
+  "agentVersion": "0.1.49",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
       "loadSession": true,
       "promptCapabilities": {
+        "image": true,
         "audio": false,
-        "embeddedContext": true,
-        "image": true
+        "embeddedContext": true
+      },
+      "sessionCapabilities": {
+        "list": {},
+        "delete": {},
+        "fork": {}
       }
     },
     "authMethods": [
       {
+        "id": "none",
+        "name": "No Authentication Required",
+        "description": "This agent does not require authentication for FOSS deployments.",
         "_meta": {
           "terminal-auth": {
             "command": "uvx",
             "args": [
+              "--from",
+              "crow-cli",
               "crow-cli",
               "acp"
             ],
@@ -28,24 +38,21 @@
             "env": {},
             "type": "terminal"
           }
-        },
-        "description": "This agent does not require authentication for FOSS deployments.",
-        "id": "none",
-        "name": "No Authentication Required"
+        }
       }
     ]
   },
-  "probedAt": "2026-11-01T11:20:48.260Z",
+  "probedAt": "2026-11-02T12:31:33.343Z",
   "state": "blocked",
   "summary": {
-    "pass": 6,
+    "pass": 15,
     "observed": 0,
-    "blocked": 3,
+    "blocked": 1,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 26,
+    "na": 19,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -61,18 +68,27 @@
     "command": "${REPO_ROOT}/.cache/agents/crow-cli/agent acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "e8a8e87c74bca706b06c2df334d5131100def7d6da3b3d7af89dbf38255b1c27",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41301322672",
-    "revision": "5c91772b4f7a58e3d5adc36d3f4211bb1b881f06",
+    "recipeSha256": "2b96085fa3a2db0c4fad76d4fdf0c31e4843376e77f07e34f9d05dab966b3896",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41445231898",
+    "revision": "3339c5df5bc74d483cfd217fdc6141ebd2fb66b4",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
-    "mockRequests": 0,
+    "mockRequests": 9,
     "modelEvidence": {
-      "seenTools": [],
-      "issuedTools": [],
-      "skippedCalls": []
+      "seenTools": [
+        "probe_noop"
+      ],
+      "issuedTools": [
+        "probe_noop"
+      ],
+      "skippedCalls": [
+        "exec: no matching tool offered",
+        "read: no matching tool offered",
+        "write: no matching tool offered",
+        "plan: no matching tool offered"
+      ]
     }
   },
   "cells": [
@@ -85,7 +101,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · crow-cli",
-          "latencyMs": 2037
+          "latencyMs": 2750
         }
       ]
     },
@@ -112,7 +128,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 5119
+          "latencyMs": 195
         }
       ]
     },
@@ -125,7 +141,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 6
+          "latencyMs": 22
         }
       ]
     },
@@ -144,35 +160,32 @@
     {
       "key": "prompt:content",
       "scope": "optional",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "prompt:image",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "session/new",
-          "note": "No distinct session for the content scenario"
+          "status": "pass",
+          "advertised": true,
+          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
         },
         {
           "method": "prompt:embedded-context",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "session/new",
-          "note": "No distinct session for the content scenario"
+          "status": "pass",
+          "advertised": true,
+          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
         }
       ]
     },
     {
       "key": "sessions/*",
       "scope": "optional",
-      "status": "na",
+      "status": "mixed",
       "items": [
         {
           "method": "session/list",
-          "status": "na",
-          "advertised": false,
-          "reason": "not-advertised",
-          "note": "Not advertised; optional method not invoked"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -190,37 +203,34 @@
         },
         {
           "method": "session/delete",
-          "status": "na",
-          "advertised": false,
-          "reason": "not-advertised",
-          "note": "Not advertised; optional method not invoked"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 13
         }
       ]
     },
     {
       "key": "fork",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "session/fork",
-          "status": "na",
-          "advertised": false,
-          "reason": "not-advertised",
-          "note": "Not advertised; optional method not invoked"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 22
         }
       ]
     },
     {
       "key": "load:replay",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "load:replay",
-          "status": "na",
-          "reason": "not-triggered",
-          "note": "No conversation text observed during either of two load attempts"
+          "status": "pass",
+          "note": "Prior conversation text replayed for the same session"
         }
       ]
     },
@@ -253,13 +263,12 @@
     {
       "key": "cancel",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "cancel",
-          "status": "na",
-          "reason": "no-active-turn",
-          "note": "No cancellable turn established"
+          "status": "pass",
+          "note": "In-flight prompt returned cancelled after 32ms"
         }
       ]
     },
@@ -285,20 +294,19 @@
         {
           "method": "update:message",
           "status": "pass",
-          "note": "5 notification(s) observed"
+          "note": "11 notification(s) observed"
         }
       ]
     },
     {
       "key": "tool_call*",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "update:tool_call",
-          "status": "na",
-          "reason": "not-triggered",
-          "note": "No matching notifications observed; see scenario stimuli"
+          "status": "pass",
+          "note": "3 notification(s) observed"
         }
       ]
     },
@@ -323,8 +331,8 @@
         {
           "method": "request_permission",
           "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "reason": "stimulus-unavailable",
+          "note": "No valid matching model tool stimulus could be issued"
         }
       ]
     },
@@ -349,7 +357,7 @@
         {
           "method": "update:commands",
           "status": "pass",
-          "note": "1 notification(s) observed"
+          "note": "7 notification(s) observed"
         }
       ]
     },
@@ -361,14 +369,14 @@
         {
           "method": "fs/read_text_file",
           "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "reason": "stimulus-unavailable",
+          "note": "No valid matching model tool stimulus could be issued"
         },
         {
           "method": "fs/write_text_file",
           "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "reason": "stimulus-unavailable",
+          "note": "No valid matching model tool stimulus could be issued"
         }
       ]
     },
@@ -380,8 +388,8 @@
         {
           "method": "terminal/*",
           "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "reason": "stimulus-unavailable",
+          "note": "No valid matching model tool stimulus could be issued"
         }
       ]
     },
@@ -449,13 +457,12 @@
     {
       "key": "mcp",
       "scope": "observation",
-      "status": "na",
+      "status": "mixed",
       "items": [
         {
           "method": "mcp:stdio",
-          "status": "na",
-          "reason": "timeout",
-          "note": "session/new timed out after 15000ms; 0/1 configured scenarios received a fixture call. See each scenario."
+          "status": "pass",
+          "note": "Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario."
         },
         {
           "method": "mcp:http",
@@ -480,37 +487,37 @@
     "session/new": "session/new: Created a session without additional MCP dependencies",
     "session/load": "session/load: pass",
     "session/prompt": "session/prompt: 4 prompt responses received; content and tool choice are observed separately",
-    "prompt:content": "prompt:image: No distinct session for the content scenario · prompt:embedded-context: No distinct session for the content scenario",
-    "sessions/*": "session/list: Not advertised; optional method not invoked · session/resume: Not advertised; optional method not invoked · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
-    "fork": "session/fork: Not advertised; optional method not invoked",
-    "load:replay": "load:replay: No conversation text observed during either of two load attempts",
+    "prompt:content": "prompt:image: Typed prompt accepted and answered; model understanding and content preservation are not established · prompt:embedded-context: Typed prompt accepted and answered; model understanding and content preservation are not established",
+    "sessions/*": "session/list: pass · session/resume: Not advertised; optional method not invoked · session/close: Not advertised; optional method not invoked · session/delete: pass",
+    "fork": "session/fork: pass",
+    "load:replay": "load:replay: Prior conversation text replayed for the same session",
     "set_mode": "set_mode: No session modes offered",
     "set_config": "set_config: No offered alternative select value; boolean capability is not negotiated",
-    "cancel": "cancel: No cancellable turn established",
+    "cancel": "cancel: In-flight prompt returned cancelled after 32ms",
     "logout": "logout: Not advertised; optional method not invoked",
-    "message*": "update:message: 5 notification(s) observed",
-    "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
+    "message*": "update:message: 11 notification(s) observed",
+    "tool_call*": "update:tool_call: 3 notification(s) observed",
     "usage": "update:usage: No matching notifications observed; see scenario stimuli",
-    "permission": "request_permission: No client request observed; internal tools and policy choices are permitted",
+    "permission": "request_permission: No valid matching model tool stimulus could be issued",
     "plan": "update:plan: No matching notifications observed; see scenario stimuli",
-    "slash_cmds": "update:commands: 1 notification(s) observed",
-    "fs/*": "fs/read_text_file: No client request observed; internal tools and policy choices are permitted · fs/write_text_file: No client request observed; internal tools and policy choices are permitted",
-    "terminal/*": "terminal/*: No client request observed; internal tools and policy choices are permitted",
+    "slash_cmds": "update:commands: 7 notification(s) observed",
+    "fs/*": "fs/read_text_file: No valid matching model tool stimulus could be issued · fs/write_text_file: No valid matching model tool stimulus could be issued",
+    "terminal/*": "terminal/*: No valid matching model tool stimulus could be issued",
     "elicitation": "elicitation: No controlled elicitation scenario configured",
     "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
     "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
-    "mcp": "mcp:stdio: session/new timed out after 15000ms; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
+    "mcp": "mcp:stdio: Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Not advertised; optional method not invoked · mcp:sse: Not advertised; optional method not invoked"
   },
   "methods": {
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · crow-cli",
-      "latencyMs": 2037
+      "latencyMs": 2750
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 5119
+      "latencyMs": 195
     },
     "set_mode": {
       "status": "na",
@@ -527,37 +534,32 @@
       "note": "4 prompt responses received; content and tool choice are observed separately"
     },
     "cancel": {
-      "status": "na",
-      "reason": "no-active-turn",
-      "note": "No cancellable turn established"
+      "status": "pass",
+      "note": "In-flight prompt returned cancelled after 32ms"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 6
+      "latencyMs": 22
     },
     "load:replay": {
-      "status": "na",
-      "reason": "not-triggered",
-      "note": "No conversation text observed during either of two load attempts"
+      "status": "pass",
+      "note": "Prior conversation text replayed for the same session"
     },
     "session/fork": {
-      "status": "na",
-      "advertised": false,
-      "reason": "not-advertised",
-      "note": "Not advertised; optional method not invoked"
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 22
     },
     "prompt:image": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "session/new",
-      "note": "No distinct session for the content scenario"
+      "status": "pass",
+      "advertised": true,
+      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
     },
     "prompt:embedded-context": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "session/new",
-      "note": "No distinct session for the content scenario"
+      "status": "pass",
+      "advertised": true,
+      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
     },
     "providers/list": {
       "status": "na",
@@ -584,10 +586,9 @@
       "note": "Not advertised; optional method not invoked"
     },
     "session/list": {
-      "status": "na",
-      "advertised": false,
-      "reason": "not-advertised",
-      "note": "Not advertised; optional method not invoked"
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "na",
@@ -602,15 +603,13 @@
       "note": "Not advertised; optional method not invoked"
     },
     "session/delete": {
-      "status": "na",
-      "advertised": false,
-      "reason": "not-advertised",
-      "note": "Not advertised; optional method not invoked"
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 13
     },
     "mcp:stdio": {
-      "status": "na",
-      "reason": "timeout",
-      "note": "session/new timed out after 15000ms; 0/1 configured scenarios received a fixture call. See each scenario."
+      "status": "pass",
+      "note": "Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario."
     },
     "mcp:http": {
       "status": "na",
@@ -626,23 +625,23 @@
     },
     "fs/read_text_file": {
       "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "reason": "stimulus-unavailable",
+      "note": "No valid matching model tool stimulus could be issued"
     },
     "fs/write_text_file": {
       "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "reason": "stimulus-unavailable",
+      "note": "No valid matching model tool stimulus could be issued"
     },
     "terminal/*": {
       "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "reason": "stimulus-unavailable",
+      "note": "No valid matching model tool stimulus could be issued"
     },
     "request_permission": {
       "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "reason": "stimulus-unavailable",
+      "note": "No valid matching model tool stimulus could be issued"
     },
     "elicitation": {
       "status": "na",
@@ -651,12 +650,11 @@
     },
     "update:message": {
       "status": "pass",
-      "note": "5 notification(s) observed"
+      "note": "11 notification(s) observed"
     },
     "update:tool_call": {
-      "status": "na",
-      "reason": "not-triggered",
-      "note": "No matching notifications observed; see scenario stimuli"
+      "status": "pass",
+      "note": "3 notification(s) observed"
     },
     "update:plan": {
       "status": "na",
@@ -665,7 +663,7 @@
     },
     "update:commands": {
       "status": "pass",
-      "note": "1 notification(s) observed"
+      "note": "7 notification(s) observed"
     },
     "update:usage": {
       "status": "na",
@@ -700,108 +698,147 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-01T11:19:55.933Z",
+      "at": "2026-11-02T12:31:29.107Z",
       "outcome": "success",
-      "latencyMs": 2037
+      "latencyMs": 2750
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-01T11:19:58.011Z",
+      "at": "2026-11-02T12:31:31.899Z",
       "outcome": "success",
-      "latencyMs": 5119
+      "latencyMs": 195
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-11-01T11:20:03.159Z",
+      "at": "2026-11-02T12:31:32.119Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 172
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-11-01T11:20:03.172Z",
+      "at": "2026-11-02T12:31:32.301Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 25
     },
     {
       "method": "session/prompt",
       "scenario": "default:write",
-      "at": "2026-11-01T11:20:03.174Z",
+      "at": "2026-11-02T12:31:32.326Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 21
     },
     {
       "method": "session/prompt",
       "scenario": "default:plan",
-      "at": "2026-11-01T11:20:03.174Z",
+      "at": "2026-11-02T12:31:32.347Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 20
     },
     {
       "method": "session/prompt",
       "scenario": "cancel",
-      "at": "2026-11-01T11:20:03.175Z",
+      "at": "2026-11-02T12:31:32.368Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 32
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-11-01T11:20:03.211Z",
+      "at": "2026-11-02T12:31:32.410Z",
       "outcome": "success",
-      "latencyMs": 7
+      "latencyMs": 22
     },
     {
-      "method": "session/load",
-      "scenario": "load:replay:2",
-      "at": "2026-11-01T11:20:03.229Z",
+      "method": "session/fork",
+      "scenario": "session/fork",
+      "at": "2026-11-02T12:31:32.457Z",
       "outcome": "success",
-      "latencyMs": 6
+      "latencyMs": 22
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-01T11:20:03.235Z",
-      "outcome": "error",
-      "errorCode": -32000,
-      "latencyMs": 15009
+      "at": "2026-11-02T12:31:32.490Z",
+      "outcome": "success",
+      "latencyMs": 24
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:image",
+      "at": "2026-11-02T12:31:32.514Z",
+      "outcome": "success",
+      "latencyMs": 19
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-01T11:20:18.244Z",
-      "outcome": "error",
-      "errorCode": -32000,
-      "latencyMs": 15006
+      "at": "2026-11-02T12:31:32.533Z",
+      "outcome": "success",
+      "latencyMs": 22
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:embedded-context",
+      "at": "2026-11-02T12:31:32.555Z",
+      "outcome": "success",
+      "latencyMs": 18
+    },
+    {
+      "method": "session/list",
+      "scenario": "session-mgmt",
+      "at": "2026-11-02T12:31:32.580Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-11-02T12:31:32.586Z",
+      "outcome": "success",
+      "latencyMs": 23
+    },
+    {
+      "method": "session/delete",
+      "scenario": "session-mgmt",
+      "at": "2026-11-02T12:31:32.614Z",
+      "outcome": "success",
+      "latencyMs": 13
     },
     {
       "method": "session/new",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-01T11:20:33.252Z",
-      "outcome": "error",
-      "errorCode": -32000,
-      "latencyMs": 15005
+      "at": "2026-11-02T12:31:32.633Z",
+      "outcome": "success",
+      "latencyMs": 170
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-11-02T12:31:32.803Z",
+      "outcome": "success",
+      "latencyMs": 37
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-01T11:20:48.258Z",
+      "at": "2026-11-02T12:31:33.341Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-01T11:20:48.259Z",
+      "at": "2026-11-02T12:31:33.342Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-01T11:20:48.259Z",
+      "at": "2026-11-02T12:31:33.342Z",
       "outcome": "success",
       "latencyMs": 0
     }
@@ -810,9 +847,9 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "puzzling-nondescript-chowchow-from-hyperborea",
+      "sessionId": "naughty-sticky-ocelot-of-happiness",
       "configuration": {
-        "model": ""
+        "model": "probe:probe-model"
       },
       "result": {
         "status": "pass",
@@ -831,15 +868,17 @@
       "tools": [],
       "model": {
         "issuedTools": [],
-        "skippedCalls": []
+        "skippedCalls": [
+          "exec: no matching tool offered"
+        ]
       }
     },
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "puzzling-nondescript-chowchow-from-hyperborea",
+      "sessionId": "naughty-sticky-ocelot-of-happiness",
       "configuration": {
-        "model": ""
+        "model": "probe:probe-model"
       },
       "result": {
         "status": "pass",
@@ -858,16 +897,74 @@
       "tools": [],
       "model": {
         "issuedTools": [],
-        "skippedCalls": []
+        "skippedCalls": [
+          "read: no matching tool offered"
+        ]
       }
     },
     {
       "id": "default:write",
       "profile": "default",
-      "sessionId": "puzzling-nondescript-chowchow-from-hyperborea",
+      "sessionId": "naughty-sticky-ocelot-of-happiness",
       "configuration": {
-        "model": ""
+        "model": "probe:probe-model"
       },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "write: no matching tool offered"
+        ]
+      }
+    },
+    {
+      "id": "default:plan",
+      "profile": "default",
+      "sessionId": "naughty-sticky-ocelot-of-happiness",
+      "configuration": {
+        "model": "probe:probe-model"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "plan: no matching tool offered"
+        ]
+      }
+    },
+    {
+      "id": "prompt:image",
+      "profile": "default",
+      "sessionId": "ordinary-eager-agouti-of-imagination",
+      "configuration": {},
       "result": {
         "status": "pass",
         "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
@@ -889,12 +986,10 @@
       }
     },
     {
-      "id": "default:plan",
+      "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "puzzling-nondescript-chowchow-from-hyperborea",
-      "configuration": {
-        "model": ""
-      },
+      "sessionId": "dashing-wisteria-agouti-of-aptitude",
+      "configuration": {},
       "result": {
         "status": "pass",
         "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
@@ -918,26 +1013,68 @@
     {
       "id": "mcp:stdio:default",
       "profile": "default",
-      "result": {
-        "status": "na",
-        "reason": "timeout",
-        "note": "session/new timed out after 15000ms"
+      "sessionId": "dark-benign-spoonbill-of-dignity",
+      "configuration": {
+        "model": "probe:probe-model"
       },
-      "callbacks": {},
-      "notifications": [],
-      "tools": []
+      "result": {
+        "status": "pass",
+        "note": "Fixture received probe_noop and returned its controlled result"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "tool_call",
+        "tool_call_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "2921efbb-a3be-4b9c-9f45-82e4bbf49b20/call_probe_1",
+          "name": "probe_noop",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "probe_noop"
+        ],
+        "skippedCalls": []
+      },
+      "diagnostics": [],
+      "mcpEvents": [
+        {
+          "event": "spawned",
+          "ts": 1793622692766
+        },
+        {
+          "event": "initialized",
+          "ts": 1793622692780
+        },
+        {
+          "event": "tools/list",
+          "ts": 1793622692780
+        },
+        {
+          "event": "tools/call",
+          "ts": 1793622692825,
+          "name": "probe_noop"
+        }
+      ]
     }
   ],
   "uncertaintyReasons": {
     "interactive-auth": 1,
-    "prerequisite": 2,
-    "not-advertised": 11,
-    "not-triggered": 4,
+    "not-advertised": 8,
     "no-alternative": 1,
-    "no-active-turn": 1,
-    "no-client-callback": 4,
-    "not-run": 4,
-    "timeout": 1
+    "not-triggered": 2,
+    "stimulus-unavailable": 4,
+    "not-run": 4
   },
   "lody": {
     "advertised": {},
@@ -971,10 +1108,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 45023,
+      "port": 43133,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 52,
+      "relayed": 0,
       "drops": 0
     }
   }

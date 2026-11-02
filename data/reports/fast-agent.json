@@ -36,7 +36,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-01T11:20:43.288Z",
+  "probedAt": "2026-11-02T12:32:20.881Z",
   "state": "blocked",
   "summary": {
     "pass": 16,
@@ -62,9 +62,9 @@
     "command": "uvx fast-agent-acp==0.10.1 -x",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "f56e25667e779f0f0647c3f93dc3edf21208695d39e2feeed648c5abe624e682",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41301322672",
-    "revision": "5c91772b4f7a58e3d5adc36d3f4211bb1b881f06",
+    "recipeSha256": "df1b0df71a68f6ea4904757ac9030f3a411ca4ff7c9c1b4ea3e93ee16e65b295",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41445231898",
+    "revision": "3339c5df5bc74d483cfd217fdc6141ebd2fb66b4",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -102,7 +102,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · fast-agent-acp",
-          "latencyMs": 7259
+          "latencyMs": 4647
         }
       ]
     },
@@ -129,7 +129,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 87
+          "latencyMs": 51
         }
       ]
     },
@@ -142,7 +142,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 17
+          "latencyMs": 9
         }
       ]
     },
@@ -193,7 +193,7 @@
           "status": "observed",
           "reason": "request-rejected",
           "errorCode": -32002,
-          "note": "Session not found: 2611011120-mv2f3Y — Session 2611011120-mv2f3Y could not be resolved from /tmp/acp-probe-q9lbLd",
+          "note": "Session not found: 2611021232-CAZZMj — Session 2611021232-CAZZMj could not be resolved from /tmp/acp-probe-vCEb06",
           "advertised": true,
           "latencyMs": 1
         },
@@ -249,7 +249,7 @@
           "status": "pass",
           "note": "Accepted selection of the sole advertised mode; no transition claimed",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 1
         }
       ]
     },
@@ -274,7 +274,7 @@
         {
           "method": "cancel",
           "status": "pass",
-          "note": "In-flight prompt returned cancelled after 39ms"
+          "note": "In-flight prompt returned cancelled after 37ms"
         }
       ]
     },
@@ -490,12 +490,12 @@
     "session/load": "session/load: pass",
     "session/prompt": "session/prompt: 4 prompt responses received; content and tool choice are observed separately",
     "prompt:content": "prompt:image: Typed prompt accepted and answered; model understanding and content preservation are not established · prompt:embedded-context: Typed prompt accepted and answered; model understanding and content preservation are not established",
-    "sessions/*": "session/list: pass · session/resume: Session not found: 2611011120-mv2f3Y — Session 2611011120-mv2f3Y could not be resolved from /tmp/acp-probe-q9lbLd · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
+    "sessions/*": "session/list: pass · session/resume: Session not found: 2611021232-CAZZMj — Session 2611021232-CAZZMj could not be resolved from /tmp/acp-probe-vCEb06 · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
     "fork": "session/fork: Not advertised; optional method not invoked",
     "load:replay": "load:replay: Conversation replay observed; prior content not fully matched",
     "set_mode": "set_mode: Accepted selection of the sole advertised mode; no transition claimed",
     "set_config": "set_config: No offered alternative select value; boolean capability is not negotiated",
-    "cancel": "cancel: In-flight prompt returned cancelled after 39ms",
+    "cancel": "cancel: In-flight prompt returned cancelled after 37ms",
     "logout": "logout: Not advertised; optional method not invoked",
     "message*": "update:message: 15 notification(s) observed",
     "tool_call*": "update:tool_call: 24 notification(s) observed",
@@ -514,18 +514,18 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · fast-agent-acp",
-      "latencyMs": 7259
+      "latencyMs": 4647
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 87
+      "latencyMs": 51
     },
     "set_mode": {
       "status": "pass",
       "note": "Accepted selection of the sole advertised mode; no transition claimed",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "set_config": {
       "status": "na",
@@ -538,12 +538,12 @@
     },
     "cancel": {
       "status": "pass",
-      "note": "In-flight prompt returned cancelled after 39ms"
+      "note": "In-flight prompt returned cancelled after 37ms"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 17
+      "latencyMs": 9
     },
     "load:replay": {
       "status": "observed",
@@ -598,7 +598,7 @@
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32002,
-      "note": "Session not found: 2611011120-mv2f3Y — Session 2611011120-mv2f3Y could not be resolved from /tmp/acp-probe-q9lbLd",
+      "note": "Session not found: 2611021232-CAZZMj — Session 2611021232-CAZZMj could not be resolved from /tmp/acp-probe-vCEb06",
       "advertised": true,
       "latencyMs": 1
     },
@@ -701,112 +701,112 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-01T11:20:32.507Z",
+      "at": "2026-11-02T12:32:13.394Z",
       "outcome": "success",
-      "latencyMs": 7259
+      "latencyMs": 4647
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-01T11:20:39.820Z",
+      "at": "2026-11-02T12:32:18.074Z",
       "outcome": "success",
-      "latencyMs": 87
+      "latencyMs": 51
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-11-01T11:20:39.928Z",
+      "at": "2026-11-02T12:32:18.136Z",
       "outcome": "success",
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-11-01T11:20:39.961Z",
+      "at": "2026-11-02T12:32:18.156Z",
       "outcome": "success",
-      "latencyMs": 760
+      "latencyMs": 482
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-11-01T11:20:40.729Z",
+      "at": "2026-11-02T12:32:18.643Z",
       "outcome": "success",
-      "latencyMs": 45
+      "latencyMs": 27
     },
     {
       "method": "session/prompt",
       "scenario": "default:write",
-      "at": "2026-11-01T11:20:40.775Z",
+      "at": "2026-11-02T12:32:18.670Z",
       "outcome": "success",
-      "latencyMs": 48
+      "latencyMs": 27
     },
     {
       "method": "session/prompt",
       "scenario": "default:plan",
-      "at": "2026-11-01T11:20:40.824Z",
+      "at": "2026-11-02T12:32:18.697Z",
       "outcome": "success",
-      "latencyMs": 17
+      "latencyMs": 9
     },
     {
       "method": "session/prompt",
       "scenario": "cancel",
-      "at": "2026-11-01T11:20:40.841Z",
+      "at": "2026-11-02T12:32:18.707Z",
       "outcome": "success",
-      "latencyMs": 39
+      "latencyMs": 37
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-11-01T11:20:40.897Z",
+      "at": "2026-11-02T12:32:18.751Z",
       "outcome": "success",
-      "latencyMs": 17
+      "latencyMs": 9
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-01T11:20:40.932Z",
+      "at": "2026-11-02T12:32:18.767Z",
       "outcome": "success",
-      "latencyMs": 19
+      "latencyMs": 7
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-11-01T11:20:40.951Z",
+      "at": "2026-11-02T12:32:18.774Z",
       "outcome": "success",
-      "latencyMs": 21
+      "latencyMs": 12
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-01T11:20:40.972Z",
+      "at": "2026-11-02T12:32:18.786Z",
       "outcome": "success",
-      "latencyMs": 19
+      "latencyMs": 7
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-11-01T11:20:40.992Z",
+      "at": "2026-11-02T12:32:18.793Z",
       "outcome": "success",
-      "latencyMs": 23
+      "latencyMs": 16
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-01T11:20:41.021Z",
+      "at": "2026-11-02T12:32:18.813Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-11-01T11:20:41.029Z",
+      "at": "2026-11-02T12:32:18.818Z",
       "outcome": "success",
-      "latencyMs": 13
+      "latencyMs": 7
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-11-01T11:20:41.053Z",
+      "at": "2026-11-02T12:32:18.831Z",
       "outcome": "error",
       "errorCode": -32002,
       "latencyMs": 1
@@ -814,63 +814,63 @@
     {
       "method": "session/new",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-01T11:20:41.057Z",
+      "at": "2026-11-02T12:32:18.833Z",
       "outcome": "success",
-      "latencyMs": 329
+      "latencyMs": 217
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-01T11:20:41.386Z",
+      "at": "2026-11-02T12:32:19.050Z",
       "outcome": "success",
-      "latencyMs": 47
+      "latencyMs": 30
     },
     {
       "method": "session/new",
       "scenario": "mcp:http:default",
-      "at": "2026-11-01T11:20:41.936Z",
+      "at": "2026-11-02T12:32:19.582Z",
       "outcome": "success",
-      "latencyMs": 130
+      "latencyMs": 116
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:http:default",
-      "at": "2026-11-01T11:20:42.066Z",
+      "at": "2026-11-02T12:32:19.698Z",
       "outcome": "success",
-      "latencyMs": 46
+      "latencyMs": 28
     },
     {
       "method": "session/new",
       "scenario": "mcp:sse:default",
-      "at": "2026-11-01T11:20:42.615Z",
+      "at": "2026-11-02T12:32:20.227Z",
       "outcome": "success",
-      "latencyMs": 127
+      "latencyMs": 114
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:sse:default",
-      "at": "2026-11-01T11:20:42.742Z",
+      "at": "2026-11-02T12:32:20.341Z",
       "outcome": "success",
-      "latencyMs": 42
+      "latencyMs": 37
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-01T11:20:43.286Z",
+      "at": "2026-11-02T12:32:20.880Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-01T11:20:43.287Z",
+      "at": "2026-11-02T12:32:20.880Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-01T11:20:43.287Z",
+      "at": "2026-11-02T12:32:20.880Z",
       "outcome": "success",
       "latencyMs": 0
     }
@@ -879,7 +879,7 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "2611011120-LbD3q7",
+      "sessionId": "2611021232-jQr6hR",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -900,7 +900,7 @@
       ],
       "tools": [
         {
-          "id": "f831da1023bf4a9ebd55f055cf18ce84",
+          "id": "8c75fda7dadd4bda805174ec160b115c",
           "name": "execute",
           "status": "completed"
         }
@@ -915,7 +915,7 @@
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "2611011120-LbD3q7",
+      "sessionId": "2611021232-jQr6hR",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -936,7 +936,7 @@
       ],
       "tools": [
         {
-          "id": "5bfcf9e15f3e4e8b854d6f5957fa52f0",
+          "id": "736d4cbc593b4ce5b6453f2326130dc1",
           "name": "read_text_file",
           "status": "failed",
           "detail": "\"path must be absolute\""
@@ -952,7 +952,7 @@
     {
       "id": "default:write",
       "profile": "default",
-      "sessionId": "2611011120-LbD3q7",
+      "sessionId": "2611021232-jQr6hR",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -973,7 +973,7 @@
       ],
       "tools": [
         {
-          "id": "73c9a75065db4fe18f1c10400143204f",
+          "id": "03980470149d41d0881be4efbcf98b1e",
           "name": "write_text_file",
           "status": "failed",
           "detail": "\"path must be absolute\""
@@ -989,7 +989,7 @@
     {
       "id": "default:plan",
       "profile": "default",
-      "sessionId": "2611011120-LbD3q7",
+      "sessionId": "2611021232-jQr6hR",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1017,7 +1017,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "2611011120-2NWvOU",
+      "sessionId": "2611021232-4b0nm5",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1043,7 +1043,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "2611011120-uJhOKX",
+      "sessionId": "2611021232-aAitQQ",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1069,7 +1069,7 @@
     {
       "id": "mcp:stdio:default",
       "profile": "default",
-      "sessionId": "2611011120-dRbd9P",
+      "sessionId": "2611021232-Q9ARqq",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1090,7 +1090,7 @@
       ],
       "tools": [
         {
-          "id": "d3adb3d707ba4b18bc17c0e08304fceb",
+          "id": "30491777648349b29acaaf303b2528a9",
           "name": "acp-probe-mcp/probe_noop",
           "status": "completed"
         }
@@ -1102,24 +1102,24 @@
         "skippedCalls": []
       },
       "diagnostics": [
-        "ERROR:root:Background task failed\nTraceback (most recent call last):\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/K9HusVyKYKkOnkCk/lib/python3.14/site-packages/acp/task/supervisor.py\", line 51, in _on_done\n    task.result()\n    ~~~~~~~~~~~^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/K9HusVyKYKkOnkCk/lib/python3.14/site-packages/acp/task/dispatcher.py\", line 81, in runner\n    result = await self._request_runner(message)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/K9HusVyKYKkOnkCk/lib/python3.14/site-packages/acp/connection.py\", line 216, in _run_request\n    result = await self._handler(method, message.get(\"params\"), False)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/K9HusVyKYKkOnkCk/lib/python3.14/site-packages/acp/router.py\", line 184, in __call__\n    return await route.handle(params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/K9HusVyKYKkOnkCk/lib/python3.14/site-packages/acp/router.py\", line 73, in handle\n    result = await self.func(params)\n             ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/K9HusVyKYKkOnkCk/lib/python3.14/site-packages/acp/router.py\", line 107, in wrapper\n    return await func(**params)  # type: ignore[arg-type]\n           ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/K9HusVyKYKkOnkCk/lib/python3.14/site-packages/fast_agent/acp/server/agent_acp_server.py\", line 628, in resume_session\n    return await self._session_store.resume_session(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<4 lines>...\n    )\n    ^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/K9HusVyKYKkOnkCk/lib/python3.14/site-packages/fast_agent/acp/server/session_store.py\", line 482, in resume_session\n    response = await self.load_session(\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/K9HusVyKYKkOnkCk/lib/python3.14/site-packages/fast_agent/acp/server/session_store.py\", line 428, in load_session\n    self._raise_session_not_found(session_id=session_id, request_cwd=request_cwd)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/K9HusVyKYKkOnkCk/lib/python3.14/site-packages/fast_agent/acp/server/session_store.py\", line 539, in _raise_session_not_found\n    raise RequestError(\n    ...<7 lines>...\n    )\nacp.exceptions.RequestError: Session not found: 2611011120-mv2f3Y"
+        "ERROR:root:Background task failed\nTraceback (most recent call last):\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/qt_nTuB668gkq5qQ/lib/python3.14/site-packages/acp/task/supervisor.py\", line 51, in _on_done\n    task.result()\n    ~~~~~~~~~~~^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/qt_nTuB668gkq5qQ/lib/python3.14/site-packages/acp/task/dispatcher.py\", line 81, in runner\n    result = await self._request_runner(message)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/qt_nTuB668gkq5qQ/lib/python3.14/site-packages/acp/connection.py\", line 216, in _run_request\n    result = await self._handler(method, message.get(\"params\"), False)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/qt_nTuB668gkq5qQ/lib/python3.14/site-packages/acp/router.py\", line 184, in __call__\n    return await route.handle(params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/qt_nTuB668gkq5qQ/lib/python3.14/site-packages/acp/router.py\", line 73, in handle\n    result = await self.func(params)\n             ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/qt_nTuB668gkq5qQ/lib/python3.14/site-packages/acp/router.py\", line 107, in wrapper\n    return await func(**params)  # type: ignore[arg-type]\n           ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/qt_nTuB668gkq5qQ/lib/python3.14/site-packages/fast_agent/acp/server/agent_acp_server.py\", line 628, in resume_session\n    return await self._session_store.resume_session(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<4 lines>...\n    )\n    ^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/qt_nTuB668gkq5qQ/lib/python3.14/site-packages/fast_agent/acp/server/session_store.py\", line 482, in resume_session\n    response = await self.load_session(\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/qt_nTuB668gkq5qQ/lib/python3.14/site-packages/fast_agent/acp/server/session_store.py\", line 428, in load_session\n    self._raise_session_not_found(session_id=session_id, request_cwd=request_cwd)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/_temp/setup-uv-cache/archive-v0/qt_nTuB668gkq5qQ/lib/python3.14/site-packages/fast_agent/acp/server/session_store.py\", line 539, in _raise_session_not_found\n    raise RequestError(\n    ...<7 lines>...\n    )\nacp.exceptions.RequestError: Session not found: 2611021232-CAZZMj"
       ],
       "mcpEvents": [
         {
           "event": "spawned",
-          "ts": 1793532041276
+          "ts": 1793622738959
         },
         {
           "event": "initialized",
-          "ts": 1793532041298
+          "ts": 1793622738972
         },
         {
           "event": "tools/list",
-          "ts": 1793532041369
+          "ts": 1793622739040
         },
         {
           "event": "tools/call",
-          "ts": 1793532041416,
+          "ts": 1793622739070,
           "name": "probe_noop"
         }
       ]
@@ -1127,7 +1127,7 @@
     {
       "id": "mcp:http:default",
       "profile": "default",
-      "sessionId": "2611011120-uNFNy2",
+      "sessionId": "2611021232-g0ahI4",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1148,7 +1148,7 @@
       ],
       "tools": [
         {
-          "id": "1154b0aa025f426da3e497d7add21135",
+          "id": "c472574e932148e99419606d4682ba74",
           "name": "acp-probe-http/probe_noop",
           "status": "completed"
         }
@@ -1163,19 +1163,19 @@
       "mcpEvents": [
         {
           "event": "connected",
-          "ts": 1793532042031
+          "ts": 1793622739640
         },
         {
           "event": "initialized",
-          "ts": 1793532042038
+          "ts": 1793622739644
         },
         {
           "event": "tools/list",
-          "ts": 1793532042050
+          "ts": 1793622739690
         },
         {
           "event": "tools/call",
-          "ts": 1793532042095,
+          "ts": 1793622739716,
           "name": "probe_noop"
         }
       ]
@@ -1183,7 +1183,7 @@
     {
       "id": "mcp:sse:default",
       "profile": "default",
-      "sessionId": "2611011120-58ukSq",
+      "sessionId": "2611021232-DFbeE3",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1204,7 +1204,7 @@
       ],
       "tools": [
         {
-          "id": "aac0cdb19f004b61bc90b71d828156c3",
+          "id": "54a6465b65fc4f62b18602374ca89b5b",
           "name": "acp-probe-sse/probe_noop",
           "status": "completed"
         }
@@ -1219,19 +1219,19 @@
       "mcpEvents": [
         {
           "event": "connected",
-          "ts": 1793532042630
+          "ts": 1793622740236
         },
         {
           "event": "initialized",
-          "ts": 1793532042641
+          "ts": 1793622740243
         },
         {
           "event": "tools/list",
-          "ts": 1793532042727
+          "ts": 1793622740333
         },
         {
           "event": "tools/call",
-          "ts": 1793532042769,
+          "ts": 1793622740368,
           "name": "probe_noop"
         }
       ]
@@ -1277,7 +1277,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 41123,
+      "port": 44173,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

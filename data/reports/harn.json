@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "harn",
   "agentName": "harn",
-  "agentVersion": "0.10.184",
+  "agentVersion": "0.10.185",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -254,7 +254,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-01T11:21:10.277Z",
+  "probedAt": "2026-11-02T12:32:46.482Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -280,9 +280,9 @@
     "command": "${REPO_ROOT}/.cache/agents/harn/agent serve acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "cba0ec3ade88f321dd2ac26d79f0a0723e9945ead334c69d874b06793b82ac76",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41301322672",
-    "revision": "5c91772b4f7a58e3d5adc36d3f4211bb1b881f06",
+    "recipeSha256": "8a6a19036e39631c18bb4122303e966e1aaee0279b3ddd3bd195e94e68acc839",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41445231898",
+    "revision": "3339c5df5bc74d483cfd217fdc6141ebd2fb66b4",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -304,7 +304,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · harn",
-          "latencyMs": 19
+          "latencyMs": 18
         }
       ]
     },
@@ -333,7 +333,7 @@
           "reason": "request-rejected",
           "errorCode": -32602,
           "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-          "latencyMs": 4
+          "latencyMs": 0
         }
       ]
     },
@@ -746,14 +746,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · harn",
-      "latencyMs": 19
+      "latencyMs": 18
     },
     "session/new": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32602,
       "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-      "latencyMs": 4
+      "latencyMs": 0
     },
     "set_mode": {
       "status": "blocked",
@@ -964,32 +964,32 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-01T11:21:10.173Z",
+      "at": "2026-11-02T12:32:46.384Z",
       "outcome": "success",
-      "latencyMs": 19
+      "latencyMs": 18
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-01T11:21:10.248Z",
+      "at": "2026-11-02T12:32:46.457Z",
       "outcome": "error",
       "errorCode": -32602,
-      "latencyMs": 4
+      "latencyMs": 0
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-01T11:21:10.264Z",
+      "at": "2026-11-02T12:32:46.470Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-01T11:21:10.275Z",
+      "at": "2026-11-02T12:32:46.481Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -1023,7 +1023,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 40673,
+      "port": 34591,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
