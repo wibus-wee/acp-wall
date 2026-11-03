@@ -1,6 +1,6 @@
 {
   "name": "github-copilot-cli",
-  "display": "Copilot",
+  "display": "GitHub Copilot",
   "vendor": "GitHub",
   "version": "1.0.105",
   "description": "GitHub's AI pair programmer",
@@ -28,5 +28,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "GitHub Copilot CLI validates the token against GitHub's Copilot entitlement endpoint — a placeholder cannot pass. Honest result: harness requires a real Copilot subscription; no documented BYOK/custom-endpoint path exists.",
-  "_synced": "acp-registry 1.0.0 · 2026-11-02"
+  "_synced": "acp-registry 1.0.0 · 2026-11-03"
 }
