@@ -22,17 +22,17 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-11-03T12:02:56.105Z",
+  "probedAt": "2026-11-04T12:16:47.265Z",
   "state": "measured",
   "summary": {
-    "pass": 10,
+    "pass": 11,
     "observed": 0,
     "blocked": 0,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 25,
+    "na": 24,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -48,9 +48,9 @@
     "command": "${REPO_ROOT}/.cache/agents/stakpak/agent acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "3e2197a4e83b56be06e05b5416a1d3d144b0784f39cbb63f8031d53f14a19ab4",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41631871161",
-    "revision": "a5d1a3e819cfb796e5ffa20538f76784d3d73380",
+    "recipeSha256": "071aab86258f724630f99ed0ca6950e055c930e32cadf00adb4faf5f4cba8e20",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41827324229",
+    "revision": "9593e68a10fdefede0d336f6bb8f55d9e26c7e5a",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -58,29 +58,29 @@
     "mockRequests": 12,
     "modelEvidence": {
       "seenTools": [
-        "stakpak__run_remote_command",
-        "stakpak__load_skill",
-        "stakpak__get_all_tasks",
-        "stakpak__get_task_details",
-        "stakpak__wait_for_tasks",
-        "stakpak__cancel_task",
-        "stakpak__run_command_task",
-        "stakpak__str_replace",
-        "stakpak__view_web_page",
-        "stakpak__ask_user",
-        "stakpak__resume_subagent_task",
-        "stakpak__view",
-        "stakpak__run_command",
-        "stakpak__dynamic_subagent_task",
-        "stakpak__create",
-        "stakpak__remove",
         "stakpak__generate_password",
+        "stakpak__get_all_tasks",
+        "stakpak__load_skill",
+        "stakpak__dynamic_subagent_task",
+        "stakpak__str_replace",
+        "stakpak__run_command",
+        "stakpak__get_task_details",
         "stakpak__search_docs",
-        "stakpak__run_remote_command_task"
+        "stakpak__remove",
+        "stakpak__ask_user",
+        "stakpak__run_remote_command_task",
+        "stakpak__run_remote_command",
+        "stakpak__cancel_task",
+        "stakpak__wait_for_tasks",
+        "stakpak__run_command_task",
+        "stakpak__create",
+        "stakpak__view",
+        "stakpak__resume_subagent_task",
+        "stakpak__view_web_page"
       ],
       "issuedTools": [
-        "stakpak__run_remote_command",
-        "stakpak__view_web_page"
+        "stakpak__run_command",
+        "stakpak__view"
       ],
       "skippedCalls": [
         "write: no matching tool offered",
@@ -101,7 +101,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · stakpak",
-          "latencyMs": 2490
+          "latencyMs": 2529
         }
       ]
     },
@@ -334,7 +334,7 @@
         {
           "method": "request_permission",
           "status": "pass",
-          "note": "2 client request(s) observed with simulated client replies; see scenarios for conditions"
+          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
         }
       ]
     },
@@ -367,13 +367,12 @@
     {
       "key": "fs/*",
       "scope": "observation",
-      "status": "na",
+      "status": "mixed",
       "items": [
         {
           "method": "fs/read_text_file",
-          "status": "na",
-          "reason": "no-client-callback",
-          "note": "No client request observed; internal tools and policy choices are permitted"
+          "status": "pass",
+          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
         },
         {
           "method": "fs/write_text_file",
@@ -502,10 +501,10 @@
     "message*": "update:message: 9 notification(s) observed",
     "tool_call*": "update:tool_call: 6 notification(s) observed",
     "usage": "update:usage: No matching notifications observed; see scenario stimuli",
-    "permission": "request_permission: 2 client request(s) observed with simulated client replies; see scenarios for conditions",
+    "permission": "request_permission: 1 client request(s) observed with simulated client replies; see scenarios for conditions",
     "plan": "update:plan: No matching notifications observed; see scenario stimuli",
     "slash_cmds": "update:commands: No matching notifications observed; see scenario stimuli",
-    "fs/*": "fs/read_text_file: No client request observed; internal tools and policy choices are permitted · fs/write_text_file: No valid matching model tool stimulus could be issued",
+    "fs/*": "fs/read_text_file: 1 client request(s) observed with simulated client replies; see scenarios for conditions · fs/write_text_file: No valid matching model tool stimulus could be issued",
     "terminal/*": "terminal/*: No client request observed; internal tools and policy choices are permitted",
     "elicitation": "elicitation: No controlled elicitation scenario configured",
     "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
@@ -516,7 +515,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · stakpak",
-      "latencyMs": 2490
+      "latencyMs": 2529
     },
     "session/new": {
       "status": "pass",
@@ -633,9 +632,8 @@
       "advertised": true
     },
     "fs/read_text_file": {
-      "status": "na",
-      "reason": "no-client-callback",
-      "note": "No client request observed; internal tools and policy choices are permitted"
+      "status": "pass",
+      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
     },
     "fs/write_text_file": {
       "status": "na",
@@ -649,7 +647,7 @@
     },
     "request_permission": {
       "status": "pass",
-      "note": "2 client request(s) observed with simulated client replies; see scenarios for conditions"
+      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
     },
     "elicitation": {
       "status": "na",
@@ -706,163 +704,163 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-03T12:02:49.674Z",
+      "at": "2026-11-04T12:16:41.454Z",
       "outcome": "success",
-      "latencyMs": 2490
+      "latencyMs": 2529
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-03T12:02:52.203Z",
+      "at": "2026-11-04T12:16:44.014Z",
       "outcome": "success",
       "latencyMs": 7
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-11-03T12:02:52.238Z",
+      "at": "2026-11-04T12:16:44.041Z",
       "outcome": "success",
-      "latencyMs": 2132
+      "latencyMs": 1587
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-11-03T12:02:54.376Z",
+      "at": "2026-11-04T12:16:45.636Z",
       "outcome": "success",
-      "latencyMs": 118
+      "latencyMs": 23
     },
     {
       "method": "session/prompt",
       "scenario": "default:write",
-      "at": "2026-11-03T12:02:54.494Z",
+      "at": "2026-11-04T12:16:45.660Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 4
     },
     {
       "method": "session/prompt",
       "scenario": "default:plan",
-      "at": "2026-11-03T12:02:54.499Z",
+      "at": "2026-11-04T12:16:45.664Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 8
     },
     {
       "method": "session/prompt",
       "scenario": "cancel",
-      "at": "2026-11-03T12:02:54.504Z",
+      "at": "2026-11-04T12:16:45.672Z",
       "outcome": "success",
       "latencyMs": 31
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-11-03T12:02:54.545Z",
+      "at": "2026-11-04T12:16:45.710Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "session/load",
       "scenario": "load:replay:2",
-      "at": "2026-11-03T12:02:54.555Z",
+      "at": "2026-11-04T12:16:45.717Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-03T12:02:54.556Z",
+      "at": "2026-11-04T12:16:45.717Z",
       "outcome": "success",
       "latencyMs": 3
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-11-03T12:02:54.559Z",
+      "at": "2026-11-04T12:16:45.720Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 4
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-03T12:02:54.564Z",
+      "at": "2026-11-04T12:16:45.724Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-11-03T12:02:54.566Z",
+      "at": "2026-11-04T12:16:45.726Z",
       "outcome": "success",
       "latencyMs": 4
     },
     {
       "method": "session/new",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-03T12:02:54.572Z",
+      "at": "2026-11-04T12:16:45.731Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-03T12:02:54.574Z",
+      "at": "2026-11-04T12:16:45.733Z",
       "outcome": "success",
-      "latencyMs": 4
+      "latencyMs": 11
     },
     {
       "method": "session/new",
       "scenario": "mcp:http:default",
-      "at": "2026-11-03T12:02:55.081Z",
+      "at": "2026-11-04T12:16:46.246Z",
+      "outcome": "success",
+      "latencyMs": 2
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:http:default",
+      "at": "2026-11-04T12:16:46.248Z",
+      "outcome": "success",
+      "latencyMs": 5
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:sse:default",
+      "at": "2026-11-04T12:16:46.754Z",
       "outcome": "success",
       "latencyMs": 3
     },
     {
       "method": "session/prompt",
-      "scenario": "mcp:http:default",
-      "at": "2026-11-03T12:02:55.084Z",
-      "outcome": "success",
-      "latencyMs": 10
-    },
-    {
-      "method": "session/new",
       "scenario": "mcp:sse:default",
-      "at": "2026-11-03T12:02:55.596Z",
+      "at": "2026-11-04T12:16:46.757Z",
       "outcome": "success",
-      "latencyMs": 2
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "mcp:sse:default",
-      "at": "2026-11-03T12:02:55.599Z",
-      "outcome": "success",
-      "latencyMs": 4
+      "latencyMs": 5
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-03T12:02:56.104Z",
+      "at": "2026-11-04T12:16:47.264Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-03T12:02:56.104Z",
+      "at": "2026-11-04T12:16:47.264Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-03T12:02:56.104Z",
+      "at": "2026-11-04T12:16:47.264Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "eaf1d672-55c4-4495-a649-5c029f94340e",
+      "sessionId": "2517b208-d4c9-4663-a6d0-66b3bea49b92",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -882,14 +880,14 @@
       ],
       "tools": [
         {
-          "id": "toolu_f291f047e99d47338ba327a5e948c26b",
-          "name": "Run remote command on acp-probe: cat PROBE_CANARY.txt",
+          "id": "toolu_86844a14ba6f41b98fc7ed1d119c37ef",
+          "name": "Run command cat PROBE_CANARY.txt",
           "status": "completed"
         }
       ],
       "model": {
         "issuedTools": [
-          "stakpak__run_remote_command"
+          "stakpak__run_command"
         ],
         "skippedCalls": []
       }
@@ -897,17 +895,17 @@
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "eaf1d672-55c4-4495-a649-5c029f94340e",
+      "sessionId": "2517b208-d4c9-4663-a6d0-66b3bea49b92",
       "configuration": {},
       "result": {
         "status": "pass",
         "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
       },
       "callbacks": {
-        "fs/read_text_file": 0,
+        "fs/read_text_file": 1,
         "fs/write_text_file": 0,
         "terminal/*": 0,
-        "request_permission": 1,
+        "request_permission": 0,
         "elicitation": 0
       },
       "notifications": [
@@ -917,14 +915,14 @@
       ],
       "tools": [
         {
-          "id": "toolu_db5c2f5b61df4e28a973771c8f594bdb",
-          "name": "View Web Page",
+          "id": "toolu_2368368ca7184a36a2da2f4a5acc437d",
+          "name": "Read ./PROBE_CANARY.txt",
           "status": "completed"
         }
       ],
       "model": {
         "issuedTools": [
-          "stakpak__view_web_page"
+          "stakpak__view"
         ],
         "skippedCalls": []
       }
@@ -932,7 +930,7 @@
     {
       "id": "default:write",
       "profile": "default",
-      "sessionId": "eaf1d672-55c4-4495-a649-5c029f94340e",
+      "sessionId": "2517b208-d4c9-4663-a6d0-66b3bea49b92",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -959,7 +957,7 @@
     {
       "id": "default:plan",
       "profile": "default",
-      "sessionId": "eaf1d672-55c4-4495-a649-5c029f94340e",
+      "sessionId": "2517b208-d4c9-4663-a6d0-66b3bea49b92",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -986,7 +984,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "f7274ed5-2524-4f50-b1fb-c7405270ad42",
+      "sessionId": "d9076a6f-4a64-48fa-bd99-ad616a9bedb4",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1011,7 +1009,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "9c34aee3-8927-4a3e-9da5-c59565ea347c",
+      "sessionId": "b5968035-4a3e-4c0e-b702-af026506760d",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1036,7 +1034,7 @@
     {
       "id": "mcp:stdio:default",
       "profile": "default",
-      "sessionId": "2099dcc6-b0b0-4494-be78-bdd1aa5cb1f9",
+      "sessionId": "f273c86e-5e86-4523-b90f-356e22fc41c5",
       "configuration": {},
       "result": {
         "status": "na",
@@ -1066,7 +1064,7 @@
     {
       "id": "mcp:http:default",
       "profile": "default",
-      "sessionId": "6dc0a22c-0212-42b3-88ad-503bb10d7cf7",
+      "sessionId": "ea14a0e3-85f0-421c-bd27-487bd0b3bee5",
       "configuration": {},
       "result": {
         "status": "na",
@@ -1096,7 +1094,7 @@
     {
       "id": "mcp:sse:default",
       "profile": "default",
-      "sessionId": "1592b0e1-3503-4b75-968f-012943a741d1",
+      "sessionId": "7fdf9019-ad2a-453d-9822-bde07177ad3b",
       "configuration": {},
       "result": {
         "status": "na",
@@ -1128,8 +1126,8 @@
     "not-advertised": 10,
     "not-triggered": 4,
     "no-alternative": 1,
-    "no-client-callback": 2,
     "stimulus-unavailable": 1,
+    "no-client-callback": 1,
     "not-run": 4,
     "fixture-not-contacted": 3
   },
@@ -1163,10 +1161,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 40305,
+      "port": 36259,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 7,
+      "relayed": 5,
       "drops": 0
     }
   }
