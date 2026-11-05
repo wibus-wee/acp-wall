@@ -28,7 +28,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-04T12:14:07.228Z",
+  "probedAt": "2026-11-05T12:27:04.557Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -50,13 +50,13 @@
     "profile": "mock",
     "client": "simulated",
     "platform": "linux-x64",
-    "node": "v24.22.2",
+    "node": "v24.22.1",
     "command": "${REPO_ROOT}/.cache/agents/corust-agent/agent",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "9c74d80ea16c02b518e4e57528fb3e4e7be560c496f02683b6925d0cf009339b",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41827324229",
-    "revision": "9593e68a10fdefede0d336f6bb8f55d9e26c7e5a",
+    "recipeSha256": "2aa46a6f3fe6e5ac435d8588ecc5afa0a3668545fef37bb0285f6675ee215ba1",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42027039586",
+    "revision": "cf4bb9062366c162f6bfcdbe1520eacf06f21067",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -107,7 +107,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — authentication required",
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -528,7 +528,7 @@
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — authentication required",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -739,24 +739,24 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-04T12:14:07.191Z",
+      "at": "2026-11-05T12:27:04.492Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-04T12:14:07.221Z",
+      "at": "2026-11-05T12:27:04.546Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-04T12:14:07.223Z",
+      "at": "2026-11-05T12:27:04.551Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 4
     }
   ],
   "scenarios": [],
@@ -787,7 +787,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 42153,
+      "port": 45835,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

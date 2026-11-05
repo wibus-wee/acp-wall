@@ -29,7 +29,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-04T12:15:42.994Z",
+  "probedAt": "2026-11-05T12:28:35.715Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -55,9 +55,9 @@
     "command": "${REPO_ROOT}/.cache/agents/kiro/agent acp --agent-engine=v3",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "dbc47325baf0b23947e5f56ae053e25587d259819a2bb6566eaf411f5a23f616",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/41827324229",
-    "revision": "9593e68a10fdefede0d336f6bb8f55d9e26c7e5a",
+    "recipeSha256": "f44a3610e8f119c76ef40dd38cffe1bd7c798fb4e6beef79a1c17c58558cb723",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42027039586",
+    "revision": "cf4bb9062366c162f6bfcdbe1520eacf06f21067",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -79,7 +79,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · Kiro CLI Agent",
-          "latencyMs": 29
+          "latencyMs": 1
         }
       ]
     },
@@ -522,7 +522,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · Kiro CLI Agent",
-      "latencyMs": 29
+      "latencyMs": 1
     },
     "session/new": {
       "status": "blocked",
@@ -740,14 +740,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-04T12:15:42.920Z",
+      "at": "2026-11-05T12:28:35.648Z",
       "outcome": "success",
-      "latencyMs": 29
+      "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-04T12:15:42.988Z",
+      "at": "2026-11-05T12:28:35.703Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 1
@@ -755,10 +755,10 @@
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-04T12:15:42.992Z",
+      "at": "2026-11-05T12:28:35.707Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 1
+      "latencyMs": 6
     }
   ],
   "scenarios": [],
@@ -790,7 +790,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 45347,
+      "port": 38221,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
