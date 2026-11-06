@@ -68,6 +68,22 @@
           "--acp"
         ]
       },
+      "linux-aarch64-musl": {
+        "archive": "https://github.com/autohandai/code-cli/releases/download/v0.9.10/autohand-linux-arm64-musl.tar.gz",
+        "sha256": "de3ef40020ceed8a19e5478b0e38220d1aadcd76490997b7eb6c068709f4ed57",
+        "cmd": "./autohand",
+        "args": [
+          "--acp"
+        ]
+      },
+      "linux-x86_64-musl": {
+        "archive": "https://github.com/autohandai/code-cli/releases/download/v0.9.10/autohand-linux-x64-musl.tar.gz",
+        "sha256": "1d799472884281f8767e08a3634980412651a578d42f4d84feedcb0931d69828",
+        "cmd": "./autohand",
+        "args": [
+          "--acp"
+        ]
+      },
       "windows-x86_64": {
         "archive": "https://github.com/autohandai/code-cli/releases/download/v0.9.10/autohand-windows-x64.zip",
         "sha256": "4dbce386c61d860c323bbfbbdb851e15b35dfbb2aa4bb32b13b4d53e54a04419",
@@ -81,5 +97,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Test the registry legacy ACP adapter, with its required autohand executable supplied by the official autohand-cli package (0.9.8), not nonexistent @autohandai/code-cli. Both packages are prepared before ACP starts; no global installation or native-adapter substitution.",
-  "_synced": "acp-registry 1.0.0 · 2026-11-05"
+  "_synced": "acp-registry 1.0.0 · 2026-11-06"
 }
