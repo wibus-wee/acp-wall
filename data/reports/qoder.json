@@ -41,7 +41,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-05T12:29:23.030Z",
+  "probedAt": "2026-11-06T12:14:08.994Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -67,9 +67,9 @@
     "command": "npx -y @qoder-ai/qodercli@0.2.14 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "ff53c605f62993286415d0eda0c33c2ef34fbe9b33e366ba29fc87b240ddc741",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42027039586",
-    "revision": "cf4bb9062366c162f6bfcdbe1520eacf06f21067",
+    "recipeSha256": "4ffe7bcb834eae675876a1d4ee1174e0e24320bf046d028db452319468be2a66",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42215642076",
+    "revision": "1355976dd82b75b2630c70b912ea3f4d64b43202",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -91,7 +91,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · qoder-cli",
-          "latencyMs": 7425
+          "latencyMs": 8074
         }
       ]
     },
@@ -182,7 +182,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 1
+          "latencyMs": 3
         },
         {
           "method": "session/resume",
@@ -533,7 +533,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · qoder-cli",
-      "latencyMs": 7425
+      "latencyMs": 8074
     },
     "session/new": {
       "status": "blocked",
@@ -617,7 +617,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 1
+      "latencyMs": 3
     },
     "session/resume": {
       "status": "na",
@@ -751,14 +751,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-05T12:29:15.540Z",
+      "at": "2026-11-06T12:14:00.836Z",
       "outcome": "success",
-      "latencyMs": 7425
+      "latencyMs": 8074
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-05T12:29:23.006Z",
+      "at": "2026-11-06T12:14:08.962Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 8
@@ -766,17 +766,17 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-05T12:29:23.021Z",
+      "at": "2026-11-06T12:14:08.980Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-05T12:29:23.028Z",
+      "at": "2026-11-06T12:14:08.991Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 2
     }
   ],
   "scenarios": [],
@@ -808,7 +808,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 35633,
+      "port": 32777,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 3,
