@@ -18,7 +18,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-11-06T12:11:10.665Z",
+  "probedAt": "2026-11-07T11:07:41.565Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -44,9 +44,9 @@
     "command": "npx -y @augmentcode/auggie@0.37.0 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "dc10f26f5281885b9375e646e0bf6dc12e1c497d5ce3b785eb1dda8a756a0f50",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42215642076",
-    "revision": "1355976dd82b75b2630c70b912ea3f4d64b43202",
+    "recipeSha256": "5696c14104628fd86ebe6708264b93231c855dac71fa6bfda96d81076d313069",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42366807921",
+    "revision": "6577d8cfb1aac043ae028820304a471d513f487e",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -68,7 +68,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · auggie",
-          "latencyMs": 1838
+          "latencyMs": 1229
         }
       ]
     },
@@ -96,7 +96,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Auggie does not currently support authenticating over ACP. Please run `auggie login` from your terminal then try again.",
-          "latencyMs": 2
+          "latencyMs": 3
         }
       ]
     },
@@ -158,7 +158,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 3
+          "latencyMs": 2
         },
         {
           "method": "session/resume",
@@ -509,14 +509,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · auggie",
-      "latencyMs": 1838
+      "latencyMs": 1229
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Auggie does not currently support authenticating over ACP. Please run `auggie login` from your terminal then try again.",
-      "latencyMs": 2
+      "latencyMs": 3
     },
     "set_mode": {
       "status": "blocked",
@@ -593,7 +593,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 3
+      "latencyMs": 2
     },
     "session/resume": {
       "status": "na",
@@ -726,32 +726,32 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-06T12:11:08.749Z",
+      "at": "2026-11-07T11:07:40.266Z",
       "outcome": "success",
-      "latencyMs": 1838
+      "latencyMs": 1229
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-06T12:11:10.637Z",
+      "at": "2026-11-07T11:07:41.540Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 2
+      "latencyMs": 3
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-06T12:11:10.651Z",
+      "at": "2026-11-07T11:07:41.553Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-06T12:11:10.663Z",
+      "at": "2026-11-07T11:07:41.563Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -782,10 +782,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 42543,
+      "port": 42435,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 2,
+      "relayed": 1,
       "drops": 0
     }
   }

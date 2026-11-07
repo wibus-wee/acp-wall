@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "opencode-v2",
   "agentName": "OpenCode",
-  "agentVersion": "2.2.5",
+  "agentVersion": "2.2.6",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -37,7 +37,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-06T12:13:43.387Z",
+  "probedAt": "2026-11-07T11:10:21.545Z",
   "state": "blocked",
   "summary": {
     "pass": 10,
@@ -63,9 +63,9 @@
     "command": "${REPO_ROOT}/.cache/agents/opencode-v2/agent acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "c81365f64d9b12c269cf34e101fa6f9730e4f3a73b8b53c540fcb020fa37f83b",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42215642076",
-    "revision": "1355976dd82b75b2630c70b912ea3f4d64b43202",
+    "recipeSha256": "8080c7aa05815b1aaf0040f64d2a556fbcfe3762a1c8794822ab714e8a9a1ab7",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42366807921",
+    "revision": "6577d8cfb1aac043ae028820304a471d513f487e",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -87,7 +87,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · OpenCode",
-          "latencyMs": 277
+          "latencyMs": 419
         }
       ]
     },
@@ -114,7 +114,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 428
+          "latencyMs": 1191
         }
       ]
     },
@@ -127,7 +127,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 16
+          "latencyMs": 13
         }
       ]
     },
@@ -142,7 +142,7 @@
           "reason": "request-rejected",
           "errorCode": -32603,
           "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}",
-          "latencyMs": 225
+          "latencyMs": 259
         }
       ]
     },
@@ -178,19 +178,19 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 5
+          "latencyMs": 7
         },
         {
           "method": "session/resume",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 4
+          "latencyMs": 3
         },
         {
           "method": "session/close",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 10
         },
         {
           "method": "session/delete",
@@ -209,7 +209,7 @@
           "method": "session/fork",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 10
+          "latencyMs": 13
         }
       ]
     },
@@ -248,7 +248,7 @@
           "status": "pass",
           "note": "Changed model to another offered value",
           "advertised": true,
-          "latencyMs": 42
+          "latencyMs": 63
         }
       ]
     },
@@ -519,12 +519,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · OpenCode",
-      "latencyMs": 277
+      "latencyMs": 419
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 428
+      "latencyMs": 1191
     },
     "set_mode": {
       "status": "na",
@@ -535,14 +535,14 @@
       "status": "pass",
       "note": "Changed model to another offered value",
       "advertised": true,
-      "latencyMs": 42
+      "latencyMs": 63
     },
     "session/prompt": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32603,
       "note": "Internal error: Free usage limit reached. Connect a provider or subscribe to OpenCode Go to keep going, or switch models. — {\"service\":\"session\",\"errorName\":\"provider.free-limit\"}",
-      "latencyMs": 225
+      "latencyMs": 259
     },
     "cancel": {
       "status": "blocked",
@@ -553,7 +553,7 @@
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 16
+      "latencyMs": 13
     },
     "load:replay": {
       "status": "observed",
@@ -562,7 +562,7 @@
     "session/fork": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 10
+      "latencyMs": 13
     },
     "prompt:image": {
       "status": "observed",
@@ -605,17 +605,17 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 5
+      "latencyMs": 7
     },
     "session/resume": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 4
+      "latencyMs": 3
     },
     "session/close": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 10
     },
     "session/delete": {
       "status": "pass",
@@ -727,136 +727,136 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-06T12:13:41.353Z",
+      "at": "2026-11-07T11:10:18.884Z",
       "outcome": "success",
-      "latencyMs": 277
+      "latencyMs": 419
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-06T12:13:41.664Z",
+      "at": "2026-11-07T11:10:19.358Z",
       "outcome": "success",
-      "latencyMs": 428
+      "latencyMs": 1191
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-11-06T12:13:42.119Z",
+      "at": "2026-11-07T11:10:20.592Z",
       "outcome": "success",
-      "latencyMs": 42
+      "latencyMs": 63
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-11-06T12:13:42.173Z",
+      "at": "2026-11-07T11:10:20.677Z",
       "outcome": "success",
-      "latencyMs": 516
+      "latencyMs": 8
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-11-06T12:13:42.711Z",
+      "at": "2026-11-07T11:10:20.700Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 225
+      "latencyMs": 259
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-11-06T12:13:42.946Z",
+      "at": "2026-11-07T11:10:20.972Z",
       "outcome": "success",
-      "latencyMs": 16
+      "latencyMs": 13
     },
     {
       "method": "session/fork",
       "scenario": "session/fork",
-      "at": "2026-11-06T12:13:42.982Z",
+      "at": "2026-11-07T11:10:21.015Z",
       "outcome": "success",
-      "latencyMs": 10
+      "latencyMs": 13
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-06T12:13:43.000Z",
+      "at": "2026-11-07T11:10:21.041Z",
       "outcome": "success",
-      "latencyMs": 6
+      "latencyMs": 7
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-11-06T12:13:43.006Z",
+      "at": "2026-11-07T11:10:21.048Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 176
+      "latencyMs": 168
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-06T12:13:43.182Z",
+      "at": "2026-11-07T11:10:21.216Z",
       "outcome": "success",
       "latencyMs": 5
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-11-06T12:13:43.188Z",
+      "at": "2026-11-07T11:10:21.222Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 130
+      "latencyMs": 202
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-06T12:13:43.322Z",
+      "at": "2026-11-07T11:10:21.432Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 7
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-11-06T12:13:43.331Z",
+      "at": "2026-11-07T11:10:21.451Z",
       "outcome": "success",
-      "latencyMs": 4
+      "latencyMs": 7
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-11-06T12:13:43.342Z",
+      "at": "2026-11-07T11:10:21.471Z",
       "outcome": "success",
-      "latencyMs": 4
+      "latencyMs": 3
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-11-06T12:13:43.354Z",
+      "at": "2026-11-07T11:10:21.486Z",
       "outcome": "success",
-      "latencyMs": 4
+      "latencyMs": 6
     },
     {
       "method": "session/close",
       "scenario": "session-mgmt",
-      "at": "2026-11-06T12:13:43.363Z",
+      "at": "2026-11-07T11:10:21.502Z",
       "outcome": "success",
-      "latencyMs": 2
+      "latencyMs": 10
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-11-06T12:13:43.368Z",
+      "at": "2026-11-07T11:10:21.517Z",
       "outcome": "success",
-      "latencyMs": 4
+      "latencyMs": 6
     },
     {
       "method": "session/delete",
       "scenario": "session-mgmt",
-      "at": "2026-11-06T12:13:43.377Z",
+      "at": "2026-11-07T11:10:21.532Z",
       "outcome": "success",
       "latencyMs": 4
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-06T12:13:43.386Z",
+      "at": "2026-11-07T11:10:21.543Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -864,15 +864,15 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-06T12:13:43.386Z",
+      "at": "2026-11-07T11:10:21.543Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-06T12:13:43.386Z",
+      "at": "2026-11-07T11:10:21.544Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -882,7 +882,7 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "ses_e4f3892bbffeBNDgZ5AdtLkWg8",
+      "sessionId": "ses_e4a4c3884ffeHbtC7TfT1lYR71",
       "configuration": {
         "model": "opencode/big-pickle",
         "mode": "build"
@@ -900,9 +900,7 @@
         "request_permission": 0,
         "elicitation": 0
       },
-      "notifications": [
-        "config_option_update"
-      ],
+      "notifications": [],
       "tools": [],
       "model": {
         "issuedTools": [],
@@ -912,7 +910,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "ses_e4f388f25ffe9bMDFDO3FnMkif",
+      "sessionId": "ses_e4a4c368cffeevLXarqgDx3lrH",
       "configuration": {},
       "result": {
         "status": "observed",
@@ -939,7 +937,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "ses_e4f388e6fffeys6oiEwZ05o6wF",
+      "sessionId": "ses_e4a4c35ddffeeFMStPitWuX1AY",
       "configuration": {},
       "result": {
         "status": "observed",
@@ -954,7 +952,9 @@
         "request_permission": 0,
         "elicitation": 0
       },
-      "notifications": [],
+      "notifications": [
+        "available_commands_update"
+      ],
       "tools": [],
       "model": {
         "issuedTools": [],
@@ -1003,7 +1003,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 37019,
+      "port": 40979,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 3,

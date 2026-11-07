@@ -58,7 +58,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-06T12:11:15.530Z",
+  "probedAt": "2026-11-07T11:07:49.071Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -84,9 +84,9 @@
     "command": "${REPO_ROOT}/.cache/agents/antigravity-acp/agent --uid=",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "40d8c2925a55e62bd9ac2e954b097c49f55a22043163823d4d2d2f524dcab9b5",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42215642076",
-    "revision": "1355976dd82b75b2630c70b912ea3f4d64b43202",
+    "recipeSha256": "db846322d043e1127c7c97b5d92cffbe4d97d62edf0c4f7dd758fd475f8c1817",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42366807921",
+    "revision": "6577d8cfb1aac043ae028820304a471d513f487e",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -108,7 +108,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · antigravity-acp",
-          "latencyMs": 1909
+          "latencyMs": 1461
         }
       ]
     },
@@ -137,7 +137,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — {\"message\":\"No authentication method selected. Either call the `authenticate` method (supports oauth-personal, gemini-ap…",
-          "latencyMs": 2
+          "latencyMs": 1
         }
       ]
     },
@@ -199,7 +199,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 3
+          "latencyMs": 2
         },
         {
           "method": "session/resume",
@@ -550,14 +550,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · antigravity-acp",
-      "latencyMs": 1909
+      "latencyMs": 1461
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — {\"message\":\"No authentication method selected. Either call the `authenticate` method (supports oauth-personal, gemini-ap…",
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -634,7 +634,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 3
+      "latencyMs": 2
     },
     "session/resume": {
       "status": "blocked",
@@ -767,31 +767,31 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-06T12:11:13.539Z",
+      "at": "2026-11-07T11:07:47.542Z",
       "outcome": "success",
-      "latencyMs": 1909
+      "latencyMs": 1461
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-06T12:11:15.502Z",
+      "at": "2026-11-07T11:07:49.048Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-06T12:11:15.516Z",
+      "at": "2026-11-07T11:07:49.060Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-06T12:11:15.528Z",
+      "at": "2026-11-07T11:07:49.070Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -824,7 +824,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 43689,
+      "port": 45367,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

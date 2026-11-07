@@ -27,7 +27,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-11-06T12:13:29.574Z",
+  "probedAt": "2026-11-07T11:09:59.741Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -53,9 +53,9 @@
     "command": "npx -y @minimax-ai/code@0.2.7 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "5652148a6d97ecc09fce9477f69d9f19906bfa9c47c108bfbb1f9c62c84145c4",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42215642076",
-    "revision": "1355976dd82b75b2630c70b912ea3f4d64b43202",
+    "recipeSha256": "319f309008283d2e58898228c5bcad08d8a0c4d589b2086a318950ac87912a43",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42366807921",
+    "revision": "6577d8cfb1aac043ae028820304a471d513f487e",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -77,7 +77,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · minimax-code",
-          "latencyMs": 1675
+          "latencyMs": 1164
         }
       ]
     },
@@ -105,7 +105,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Run `mcode login` and try again.",
-          "latencyMs": 4
+          "latencyMs": 7
         }
       ]
     },
@@ -170,7 +170,7 @@
           "errorCode": -32000,
           "note": "Authentication required: Run `mcode login` and try again.",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -521,14 +521,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · minimax-code",
-      "latencyMs": 1675
+      "latencyMs": 1164
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Run `mcode login` and try again.",
-      "latencyMs": 4
+      "latencyMs": 7
     },
     "set_mode": {
       "status": "blocked",
@@ -608,7 +608,7 @@
       "errorCode": -32000,
       "note": "Authentication required: Run `mcode login` and try again.",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "blocked",
@@ -741,33 +741,33 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-06T12:13:27.841Z",
+      "at": "2026-11-07T11:09:58.533Z",
       "outcome": "success",
-      "latencyMs": 1675
+      "latencyMs": 1164
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-06T12:13:29.557Z",
+      "at": "2026-11-07T11:09:59.726Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 4
+      "latencyMs": 7
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-06T12:13:29.570Z",
+      "at": "2026-11-07T11:09:59.738Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-06T12:13:29.573Z",
+      "at": "2026-11-07T11:09:59.740Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -800,7 +800,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 42103,
+      "port": 46867,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 18,
