@@ -1,0 +1,28 @@
+{
+  "name": "kimi-code",
+  "display": "Kimi Code",
+  "vendor": "Moonshot AI",
+  "version": "2.5.2",
+  "description": "Moonshot AI's next-gen coding agent",
+  "repo": "MoonshotAI/kimi-code",
+  "website": "https://moonshotai.github.io/kimi-code/",
+  "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/kimi-code.svg",
+  "license": "MIT",
+  "install": "node tools/install-dist.mjs registry/agents/kimi-code.json",
+  "run": "npx -y @moonshot-ai/kimi-code@2.5.2 acp",
+  "setup": [],
+  "probeProfiles": [],
+  "env": {},
+  "sessionFiles": null,
+  "dist": {
+    "type": "npx",
+    "package": "@moonshot-ai/kimi-code@2.5.2",
+    "args": [
+      "acp"
+    ]
+  },
+  "disabled": false,
+  "selftest": false,
+  "notes": null,
+  "_synced": "acp-registry 1.0.0 · 2026-11-07"
+}
