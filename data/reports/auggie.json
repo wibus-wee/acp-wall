@@ -18,7 +18,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-11-07T11:07:41.565Z",
+  "probedAt": "2026-11-08T11:19:50.075Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -44,9 +44,9 @@
     "command": "npx -y @augmentcode/auggie@0.37.0 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "5696c14104628fd86ebe6708264b93231c855dac71fa6bfda96d81076d313069",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42366807921",
-    "revision": "6577d8cfb1aac043ae028820304a471d513f487e",
+    "recipeSha256": "b675338d48a25c887772cab8fd883691a0c000dde094dc0232e0ec671349fe9e",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42475220571",
+    "revision": "be92b527425d5a08f7b0ba22e20ecbd949366aaf",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -68,7 +68,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · auggie",
-          "latencyMs": 1229
+          "latencyMs": 1270
         }
       ]
     },
@@ -96,7 +96,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Auggie does not currently support authenticating over ACP. Please run `auggie login` from your terminal then try again.",
-          "latencyMs": 3
+          "latencyMs": 2
         }
       ]
     },
@@ -509,14 +509,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · auggie",
-      "latencyMs": 1229
+      "latencyMs": 1270
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Auggie does not currently support authenticating over ACP. Please run `auggie login` from your terminal then try again.",
-      "latencyMs": 3
+      "latencyMs": 2
     },
     "set_mode": {
       "status": "blocked",
@@ -726,29 +726,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-07T11:07:40.266Z",
+      "at": "2026-11-08T11:19:48.757Z",
       "outcome": "success",
-      "latencyMs": 1229
+      "latencyMs": 1270
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-07T11:07:41.540Z",
+      "at": "2026-11-08T11:19:50.057Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 3
+      "latencyMs": 2
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-07T11:07:41.553Z",
+      "at": "2026-11-08T11:19:50.066Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-07T11:07:41.563Z",
+      "at": "2026-11-08T11:19:50.073Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -782,7 +782,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 42435,
+      "port": 45751,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 1,

@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "harn",
   "agentName": "harn",
-  "agentVersion": "0.10.190",
+  "agentVersion": "0.10.191",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -253,7 +253,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-07T11:09:29.150Z",
+  "probedAt": "2026-11-08T11:21:47.236Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -279,9 +279,9 @@
     "command": "${REPO_ROOT}/.cache/agents/harn/agent serve acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "014bf9285f5764ac1829b996fffa7500439b5e03ed8b94b392ae9d5e67f314eb",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42366807921",
-    "revision": "6577d8cfb1aac043ae028820304a471d513f487e",
+    "recipeSha256": "f367bf11fa2246b168838b2901febe5ffd104d960f8035d00d03a1fa9845c4cc",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42475220571",
+    "revision": "be92b527425d5a08f7b0ba22e20ecbd949366aaf",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -303,7 +303,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · harn",
-          "latencyMs": 42
+          "latencyMs": 21
         }
       ]
     },
@@ -332,7 +332,7 @@
           "reason": "request-rejected",
           "errorCode": -32602,
           "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-          "latencyMs": 1
+          "latencyMs": 0
         }
       ]
     },
@@ -394,7 +394,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 3
+          "latencyMs": 2
         },
         {
           "method": "session/resume",
@@ -745,14 +745,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · harn",
-      "latencyMs": 42
+      "latencyMs": 21
     },
     "session/new": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32602,
       "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-      "latencyMs": 1
+      "latencyMs": 0
     },
     "set_mode": {
       "status": "blocked",
@@ -829,7 +829,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 3
+      "latencyMs": 2
     },
     "session/resume": {
       "status": "blocked",
@@ -963,29 +963,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-07T11:09:29.030Z",
+      "at": "2026-11-08T11:21:47.132Z",
       "outcome": "success",
-      "latencyMs": 42
+      "latencyMs": 21
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-07T11:09:29.124Z",
+      "at": "2026-11-08T11:21:47.209Z",
       "outcome": "error",
       "errorCode": -32602,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-07T11:09:29.137Z",
+      "at": "2026-11-08T11:21:47.223Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-07T11:09:29.149Z",
+      "at": "2026-11-08T11:21:47.235Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -1022,7 +1022,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 39293,
+      "port": 35629,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
