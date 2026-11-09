@@ -3,97 +3,217 @@
   "methodologyVersion": "2.1.0",
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "kimchi",
+  "agentName": "kimchi",
+  "agentVersion": "1.30.0",
   "specVersion": 1,
   "advertised": {
-    "capabilities": {},
-    "authMethods": []
+    "capabilities": {
+      "loadSession": true,
+      "auth": {
+        "logout": {}
+      },
+      "sessionCapabilities": {
+        "list": {},
+        "close": {},
+        "resume": {}
+      },
+      "promptCapabilities": {
+        "image": false,
+        "audio": false,
+        "embeddedContext": false
+      },
+      "mcpCapabilities": {
+        "http": true,
+        "sse": false
+      },
+      "_meta": {
+        "kimchi.dev": {
+          "pi_editor": true,
+          "set_session_title": true,
+          "steering": true,
+          "feedback": true,
+          "compact": true,
+          "compact_abort": true,
+          "memory_status": true,
+          "set_memory_enabled": true,
+          "auth_status": true,
+          "set_onboarding_flag": true,
+          "import_discover": true,
+          "import_apply": true,
+          "set_project_trust": true,
+          "get_path_trust": true,
+          "set_path_trust": true,
+          "list_resources": true,
+          "set_resource_enabled": true,
+          "memory_list": true,
+          "memory_search": true,
+          "memory_delete": true,
+          "memory_reset": true,
+          "probe_mcp_server": true,
+          "artifacts": true
+        }
+      }
+    },
+    "authMethods": [
+      {
+        "id": "kimchi-agent",
+        "name": "Kimchi Login",
+        "description": "Authenticate via browser to Kimchi"
+      },
+      {
+        "id": "kimchi-agent-us",
+        "name": "Kimchi Login (US)",
+        "description": "Authenticate via browser to Kimchi (United States region)"
+      },
+      {
+        "id": "kimchi-agent-eu",
+        "name": "Kimchi Login (EU)",
+        "description": "Authenticate via browser to Kimchi (Europe region)"
+      }
+    ]
   },
-  "probedAt": "2026-11-08T11:23:40.412Z",
-  "state": "probe-error",
+  "probedAt": "2026-11-09T12:58:57.117Z",
+  "state": "blocked",
   "summary": {
-    "pass": 0,
-    "observed": 0,
-    "blocked": 0,
+    "pass": 15,
+    "observed": 2,
+    "blocked": 1,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 35,
+    "na": 17,
     "mixed": 0,
     "legacy": 0,
     "total": 35
   },
   "setup": {
-    "status": "error",
-    "phase": "installation",
-    "note": "Distribution installation failed (exit 1); no completed measurement; downloading https://github.com/getkimchi/kimchi/releases/download/v1.29.0/kimchi_linux_amd64.tar.gz\ncurl: (22) The requested URL returned error: 504\nnode:internal/errors:986\n  const err = new Error(message);\n              ^\n\nError: Command failed: curl -fsSL https://github.com/getkimchi/kimchi/releases/download/v1.29.0/kimchi_linux_amd64.tar.gz -o /home/runner/work/acp-wall/acp-wall/.cache/agents/kimchi/dist.archive\n    at genericNodeError (node:internal/errors:986:15)\n    at wrappedFn (node:internal/errors:540:14)\n    at checkExecSyncError (node:child_process:943:11)\n    at execFileSync (node:child_process:979:15)\n    at file:///home/runner/work/acp-wall/acp-wall/tools/install-dist.mjs:68:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\n    at async node:internal/modules/esm/loader:647:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  status: 22,\n  signal: null,\n  output: [ null, null, null ],\n  pid: 2543,\n  stdout: null,\n  stderr: null\n}\n\nNode.js v24.22.2\n"
+    "status": "not-configured"
   },
   "environment": {
-    "profile": "not-started",
+    "profile": "mock",
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.2",
-    "revision": "6be14f56469eb607fc3bb63e158002c74fba72d3",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42475220571"
+    "command": "${REPO_ROOT}/.cache/agents/kimchi/agent --mode acp",
+    "discovery": false,
+    "authenticationAttempted": false,
+    "recipeSha256": "b60fc7b52c4d48409bdf44b038bfa46a4ed8ff606ebca145e31f49f7b04a13af",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42621137462",
+    "revision": "814ca156f7773d0d11dcf9faa388e318777acab1",
+    "sourceDirty": false,
+    "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
+    "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
+    "mcpSdkVersion": "1.32.0",
+    "mockRequests": 27,
+    "modelEvidence": {
+      "seenTools": [
+        "read",
+        "bash",
+        "edit",
+        "write",
+        "grep",
+        "find",
+        "ls",
+        "skill_view",
+        "bash_control",
+        "list_ferments",
+        "questionnaire",
+        "submit_plan",
+        "create_todos",
+        "update_todos",
+        "add_todo",
+        "mark_todo",
+        "clear_todos",
+        "confirm_todos",
+        "Agent",
+        "set_phase",
+        "dispatch_to_cloud_agent",
+        "web_fetch",
+        "web_search",
+        "set_model",
+        "list_models",
+        "mcp__acp_probe_mcp",
+        "mcp__acp_probe_http"
+      ],
+      "issuedTools": [
+        "bash",
+        "read",
+        "write"
+      ],
+      "skippedCalls": [
+        "exec: no matching tool offered",
+        "plan: no matching tool offered",
+        "mcp: no matching tool offered",
+        "mcp: no matching tool offered",
+        "mcp: no matching tool offered",
+        "mcp: no matching tool offered"
+      ]
+    }
   },
   "cells": [
     {
       "key": "initialize",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "initialize",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "Protocol 1 · kimchi",
+          "latencyMs": 888
         }
       ]
     },
     {
       "key": "authenticate",
       "scope": "core",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "authenticate",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "blocked",
+          "advertised": true,
+          "reason": "interactive-auth",
+          "note": "Advertised: kimchi-agent, kimchi-agent-us, kimchi-agent-eu; login not attempted in unattended discovery"
         }
       ]
     },
     {
       "key": "session/new",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "session/new",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "Created a session without additional MCP dependencies",
+          "latencyMs": 233
         }
       ]
     },
     {
       "key": "session/load",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "session/load",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 4
         }
       ]
     },
     {
       "key": "session/prompt",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "session/prompt",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "4 prompt responses received; content and tool choice are observed separately"
         }
       ]
     },
@@ -105,39 +225,48 @@
         {
           "method": "prompt:image",
           "status": "na",
-          "note": "Not exercised in this run"
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "prompt:embedded-context",
           "status": "na",
-          "note": "Not exercised in this run"
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
     {
       "key": "sessions/*",
       "scope": "optional",
-      "status": "na",
+      "status": "mixed",
       "items": [
         {
           "method": "session/list",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 6
         },
         {
           "method": "session/resume",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 1
         },
         {
           "method": "session/close",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 128
         },
         {
           "method": "session/delete",
           "status": "na",
-          "note": "Not exercised in this run"
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
@@ -149,19 +278,21 @@
         {
           "method": "session/fork",
           "status": "na",
-          "note": "Not exercised in this run"
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
     {
       "key": "load:replay",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "load:replay",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "Prior conversation text replayed for the same session"
         }
       ]
     },
@@ -173,31 +304,34 @@
         {
           "method": "set_mode",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-advertised",
+          "note": "No session modes offered"
         }
       ]
     },
     {
       "key": "set_config",
       "scope": "optional",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "set_config",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "Changed permissions-mode to another offered value",
+          "advertised": true,
+          "latencyMs": 8
         }
       ]
     },
     {
       "key": "cancel",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "cancel",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "In-flight prompt returned cancelled after 121ms"
         }
       ]
     },
@@ -209,55 +343,57 @@
         {
           "method": "logout",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-run",
+          "advertised": true,
+          "note": "No authentication established by this run; shared account state is not changed"
         }
       ]
     },
     {
       "key": "message*",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "update:message",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "10 notification(s) observed"
         }
       ]
     },
     {
       "key": "tool_call*",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "update:tool_call",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "24 notification(s) observed"
         }
       ]
     },
     {
       "key": "usage",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "update:usage",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "18 notification(s) observed"
         }
       ]
     },
     {
       "key": "permission",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "request_permission",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
         }
       ]
     },
@@ -269,19 +405,20 @@
         {
           "method": "update:plan",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
     {
       "key": "slash_cmds",
       "scope": "observation",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "update:commands",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "pass",
+          "note": "7 notification(s) observed"
         }
       ]
     },
@@ -293,12 +430,14 @@
         {
           "method": "fs/read_text_file",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
         },
         {
           "method": "fs/write_text_file",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
         }
       ]
     },
@@ -310,7 +449,8 @@
         {
           "method": "terminal/*",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
         }
       ]
     },
@@ -322,7 +462,8 @@
         {
           "method": "elicitation",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-run",
+          "note": "No controlled elicitation scenario configured"
         }
       ]
     },
@@ -334,17 +475,23 @@
         {
           "method": "providers/list",
           "status": "na",
-          "note": "Not exercised in this run"
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "providers/set",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
         },
         {
           "method": "providers/disable",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
         }
       ]
     },
@@ -356,69 +503,733 @@
         {
           "method": "nes/start",
           "status": "na",
-          "note": "Not exercised in this run"
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "nes/suggest",
           "status": "na",
-          "note": "Not exercised in this run"
+          "reason": "not-run",
+          "note": "No controlled scenario exercised this check"
         }
       ]
     },
     {
       "key": "mcp",
       "scope": "observation",
-      "status": "na",
+      "status": "mixed",
       "items": [
         {
           "method": "mcp:stdio",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "observed",
+          "reason": "tool-not-called",
+          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
         },
         {
           "method": "mcp:http",
-          "status": "na",
-          "note": "Not exercised in this run"
+          "status": "observed",
+          "reason": "tool-not-called",
+          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
+          "advertised": true
         },
         {
           "method": "mcp:sse",
           "status": "na",
-          "note": "Not exercised in this run"
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     }
   ],
   "notes": {
-    "initialize": "initialize: Not exercised in this run",
-    "authenticate": "authenticate: Not exercised in this run",
-    "session/new": "session/new: Not exercised in this run",
-    "session/load": "session/load: Not exercised in this run",
-    "session/prompt": "session/prompt: Not exercised in this run",
-    "prompt:content": "prompt:image: Not exercised in this run · prompt:embedded-context: Not exercised in this run",
-    "sessions/*": "session/list: Not exercised in this run · session/resume: Not exercised in this run · session/close: Not exercised in this run · session/delete: Not exercised in this run",
-    "fork": "session/fork: Not exercised in this run",
-    "load:replay": "load:replay: Not exercised in this run",
-    "set_mode": "set_mode: Not exercised in this run",
-    "set_config": "set_config: Not exercised in this run",
-    "cancel": "cancel: Not exercised in this run",
-    "logout": "logout: Not exercised in this run",
-    "message*": "update:message: Not exercised in this run",
-    "tool_call*": "update:tool_call: Not exercised in this run",
-    "usage": "update:usage: Not exercised in this run",
-    "permission": "request_permission: Not exercised in this run",
-    "plan": "update:plan: Not exercised in this run",
-    "slash_cmds": "update:commands: Not exercised in this run",
-    "fs/*": "fs/read_text_file: Not exercised in this run · fs/write_text_file: Not exercised in this run",
-    "terminal/*": "terminal/*: Not exercised in this run",
-    "elicitation": "elicitation: Not exercised in this run",
-    "providers": "providers/list: Not exercised in this run · providers/set: Not exercised in this run · providers/disable: Not exercised in this run",
-    "nes": "nes/start: Not exercised in this run · nes/suggest: Not exercised in this run",
-    "mcp": "mcp:stdio: Not exercised in this run · mcp:http: Not exercised in this run · mcp:sse: Not exercised in this run"
+    "initialize": "initialize: Protocol 1 · kimchi",
+    "authenticate": "authenticate: Advertised: kimchi-agent, kimchi-agent-us, kimchi-agent-eu; login not attempted in unattended discovery",
+    "session/new": "session/new: Created a session without additional MCP dependencies",
+    "session/load": "session/load: pass",
+    "session/prompt": "session/prompt: 4 prompt responses received; content and tool choice are observed separately",
+    "prompt:content": "prompt:image: Not advertised; optional method not invoked · prompt:embedded-context: Not advertised; optional method not invoked",
+    "sessions/*": "session/list: pass · session/resume: pass · session/close: pass · session/delete: Not advertised; optional method not invoked",
+    "fork": "session/fork: Not advertised; optional method not invoked",
+    "load:replay": "load:replay: Prior conversation text replayed for the same session",
+    "set_mode": "set_mode: No session modes offered",
+    "set_config": "set_config: Changed permissions-mode to another offered value",
+    "cancel": "cancel: In-flight prompt returned cancelled after 121ms",
+    "logout": "logout: No authentication established by this run; shared account state is not changed",
+    "message*": "update:message: 10 notification(s) observed",
+    "tool_call*": "update:tool_call: 24 notification(s) observed",
+    "usage": "update:usage: 18 notification(s) observed",
+    "permission": "request_permission: 1 client request(s) observed with simulated client replies; see scenarios for conditions",
+    "plan": "update:plan: No matching notifications observed; see scenario stimuli",
+    "slash_cmds": "update:commands: 7 notification(s) observed",
+    "fs/*": "fs/read_text_file: No client request observed; internal tools and policy choices are permitted · fs/write_text_file: No client request observed; internal tools and policy choices are permitted",
+    "terminal/*": "terminal/*: No client request observed; internal tools and policy choices are permitted",
+    "elicitation": "elicitation: No controlled elicitation scenario configured",
+    "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
+    "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
+    "mcp": "mcp:stdio: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:sse: Not advertised; optional method not invoked"
   },
-  "methods": {},
+  "methods": {
+    "initialize": {
+      "status": "pass",
+      "note": "Protocol 1 · kimchi",
+      "latencyMs": 888
+    },
+    "session/new": {
+      "status": "pass",
+      "note": "Created a session without additional MCP dependencies",
+      "latencyMs": 233
+    },
+    "set_mode": {
+      "status": "na",
+      "reason": "not-advertised",
+      "note": "No session modes offered"
+    },
+    "set_config": {
+      "status": "pass",
+      "note": "Changed permissions-mode to another offered value",
+      "advertised": true,
+      "latencyMs": 8
+    },
+    "session/prompt": {
+      "status": "pass",
+      "note": "4 prompt responses received; content and tool choice are observed separately"
+    },
+    "cancel": {
+      "status": "pass",
+      "note": "In-flight prompt returned cancelled after 121ms"
+    },
+    "session/load": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 4
+    },
+    "load:replay": {
+      "status": "pass",
+      "note": "Prior conversation text replayed for the same session"
+    },
+    "session/fork": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "prompt:image": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "prompt:embedded-context": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/set": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "providers/disable": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "nes/start": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/list": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 6
+    },
+    "session/resume": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 1
+    },
+    "session/close": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 128
+    },
+    "session/delete": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "mcp:stdio": {
+      "status": "observed",
+      "reason": "tool-not-called",
+      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
+    },
+    "mcp:http": {
+      "status": "observed",
+      "reason": "tool-not-called",
+      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
+      "advertised": true
+    },
+    "mcp:sse": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "fs/read_text_file": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "fs/write_text_file": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "terminal/*": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "request_permission": {
+      "status": "pass",
+      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+    },
+    "elicitation": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled elicitation scenario configured"
+    },
+    "update:message": {
+      "status": "pass",
+      "note": "10 notification(s) observed"
+    },
+    "update:tool_call": {
+      "status": "pass",
+      "note": "24 notification(s) observed"
+    },
+    "update:plan": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:commands": {
+      "status": "pass",
+      "note": "7 notification(s) observed"
+    },
+    "update:usage": {
+      "status": "pass",
+      "note": "18 notification(s) observed"
+    },
+    "lody": {
+      "status": "na",
+      "note": "no _meta.lody capabilities; _lody/* unanswered",
+      "definitive": true
+    },
+    "authenticate": {
+      "status": "blocked",
+      "advertised": true,
+      "reason": "interactive-auth",
+      "note": "Advertised: kimchi-agent, kimchi-agent-us, kimchi-agent-eu; login not attempted in unattended discovery"
+    },
+    "logout": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": true,
+      "note": "No authentication established by this run; shared account state is not changed"
+    },
+    "nes/suggest": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled scenario exercised this check"
+    }
+  },
   "claimMismatches": [],
   "violations": [],
-  "attempts": [],
-  "scenarios": [],
-  "uncertaintyReasons": {}
+  "attempts": [
+    {
+      "method": "initialize",
+      "scenario": "initialize",
+      "at": "2026-11-09T12:58:53.043Z",
+      "outcome": "success",
+      "latencyMs": 888
+    },
+    {
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-11-09T12:58:53.991Z",
+      "outcome": "success",
+      "latencyMs": 233
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-11-09T12:58:54.253Z",
+      "outcome": "success",
+      "latencyMs": 8
+    },
+    {
+      "method": "session/set_config_option",
+      "scenario": "set_config",
+      "at": "2026-11-09T12:58:54.279Z",
+      "outcome": "success",
+      "latencyMs": 3
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:exec",
+      "at": "2026-11-09T12:58:54.299Z",
+      "outcome": "success",
+      "latencyMs": 278
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:read",
+      "at": "2026-11-09T12:58:54.590Z",
+      "outcome": "success",
+      "latencyMs": 147
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:write",
+      "at": "2026-11-09T12:58:54.737Z",
+      "outcome": "success",
+      "latencyMs": 191
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:plan",
+      "at": "2026-11-09T12:58:54.929Z",
+      "outcome": "success",
+      "latencyMs": 134
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "cancel",
+      "at": "2026-11-09T12:58:55.063Z",
+      "outcome": "success",
+      "latencyMs": 121
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-11-09T12:58:55.196Z",
+      "outcome": "success",
+      "latencyMs": 4
+    },
+    {
+      "method": "session/list",
+      "scenario": "session-mgmt",
+      "at": "2026-11-09T12:58:55.220Z",
+      "outcome": "success",
+      "latencyMs": 6
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-11-09T12:58:55.233Z",
+      "outcome": "success",
+      "latencyMs": 64
+    },
+    {
+      "method": "session/resume",
+      "scenario": "session-mgmt",
+      "at": "2026-11-09T12:58:55.312Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-11-09T12:58:55.328Z",
+      "outcome": "success",
+      "latencyMs": 58
+    },
+    {
+      "method": "session/close",
+      "scenario": "session-mgmt",
+      "at": "2026-11-09T12:58:55.393Z",
+      "outcome": "success",
+      "latencyMs": 128
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-11-09T12:58:55.528Z",
+      "outcome": "success",
+      "latencyMs": 67
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-11-09T12:58:55.595Z",
+      "outcome": "success",
+      "latencyMs": 270
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:http:default",
+      "at": "2026-11-09T12:58:56.367Z",
+      "outcome": "success",
+      "latencyMs": 113
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:http:default",
+      "at": "2026-11-09T12:58:56.480Z",
+      "outcome": "success",
+      "latencyMs": 131
+    },
+    {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-11-09T12:58:57.114Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-11-09T12:58:57.115Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-11-09T12:58:57.115Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "default:exec",
+      "profile": "default",
+      "sessionId": "01a1c063-e2fa-70c1-a415-7f3c8a1a2a0f",
+      "configuration": {
+        "permissions-mode": "default",
+        "model": "kimchi-dev/probe-model"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "tool_call",
+        "tool_call_update",
+        "usage_update",
+        "session_info_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "kt.bash.0",
+          "name": "cat PROBE_CANARY.txt",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "bash"
+        ],
+        "skippedCalls": [
+          "exec: no matching tool offered"
+        ]
+      }
+    },
+    {
+      "id": "default:read",
+      "profile": "default",
+      "sessionId": "01a1c063-e2fa-70c1-a415-7f3c8a1a2a0f",
+      "configuration": {
+        "permissions-mode": "default",
+        "model": "kimchi-dev/probe-model"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "tool_call",
+        "tool_call_update",
+        "usage_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "kt.read.1",
+          "name": "./PROBE_CANARY.txt",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "read"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:write",
+      "profile": "default",
+      "sessionId": "01a1c063-e2fa-70c1-a415-7f3c8a1a2a0f",
+      "configuration": {
+        "permissions-mode": "default",
+        "model": "kimchi-dev/probe-model"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 1,
+        "elicitation": 0
+      },
+      "notifications": [
+        "tool_call",
+        "tool_call_update",
+        "usage_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "kt.write.2",
+          "name": "./probe-out.txt",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "write"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:plan",
+      "profile": "default",
+      "sessionId": "01a1c063-e2fa-70c1-a415-7f3c8a1a2a0f",
+      "configuration": {
+        "permissions-mode": "default",
+        "model": "kimchi-dev/probe-model"
+      },
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk",
+        "usage_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "plan: no matching tool offered"
+        ]
+      }
+    },
+    {
+      "id": "mcp:stdio:default",
+      "profile": "default",
+      "sessionId": "01a1c063-e8b7-70c1-a415-7f426c83c269",
+      "configuration": {
+        "permissions-mode": "default",
+        "model": "kimchi-dev/probe-model"
+      },
+      "result": {
+        "status": "observed",
+        "reason": "tool-not-called",
+        "note": "Fixture tool discovery completed; no fixture call received"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "available_commands_update",
+        "agent_message_chunk",
+        "usage_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "mcp: no matching tool offered",
+          "mcp: no matching tool offered"
+        ]
+      },
+      "diagnostics": [
+        "[model-roles] Warning: orchestrator model \"kimchi-dev/kimi-k3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: planner model \"kimchi-dev/glm-5.3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: builder model \"kimchi-dev/glm-5.3-flash\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: reviewer model \"kimchi-dev/kimi-k3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: explorer model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: researcher model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.",
+        "[model-roles] Warning: judge model \"kimchi-dev/glm-5.3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: compactor model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model."
+      ],
+      "mcpEvents": [
+        {
+          "event": "spawned",
+          "ts": 1794229135788
+        },
+        {
+          "event": "initialized",
+          "ts": 1794229135824
+        },
+        {
+          "event": "tools/list",
+          "ts": 1794229135825
+        }
+      ]
+    },
+    {
+      "id": "mcp:http:default",
+      "profile": "default",
+      "sessionId": "01a1c063-ebfd-70c1-a415-7f4486d59136",
+      "configuration": {
+        "permissions-mode": "default",
+        "model": "kimchi-dev/probe-model"
+      },
+      "result": {
+        "status": "observed",
+        "reason": "tool-not-called",
+        "note": "Fixture tool discovery completed; no fixture call received"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk",
+        "usage_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "mcp: no matching tool offered",
+          "mcp: no matching tool offered"
+        ]
+      },
+      "diagnostics": [
+        "[model-roles] Warning: orchestrator model \"kimchi-dev/kimi-k3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: planner model \"kimchi-dev/glm-5.3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: builder model \"kimchi-dev/glm-5.3-flash\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: reviewer model \"kimchi-dev/kimi-k3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: explorer model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: researcher model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: judge model \"kimchi-dev/glm-5.3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.",
+        "[model-roles] Warning: compactor model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model."
+      ],
+      "mcpEvents": [
+        {
+          "event": "connected",
+          "ts": 1794229136475
+        },
+        {
+          "event": "initialized",
+          "ts": 1794229136484
+        },
+        {
+          "event": "tools/list",
+          "ts": 1794229136489
+        }
+      ]
+    }
+  ],
+  "uncertaintyReasons": {
+    "interactive-auth": 1,
+    "not-advertised": 8,
+    "not-run": 5,
+    "not-triggered": 1,
+    "no-client-callback": 3
+  },
+  "lody": {
+    "advertised": {},
+    "answered": [],
+    "missing": [
+      "_lody/rate_limits/get",
+      "_lody/subagents/list",
+      "_lody/session/history/read"
+    ],
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      },
+      {
+        "method": "_lody/subagents/list",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      },
+      {
+        "method": "_lody/session/history/read",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      }
+    ]
+  },
+  "ext": {
+    "advertised": [
+      "kimchi.dev"
+    ],
+    "observed": [
+      "piToolCallId",
+      "generatedChars",
+      "kimchi/lifetimeUsage.input",
+      "kimchi/lifetimeUsage.output",
+      "kimchi/lifetimeUsage.cacheRead",
+      "kimchi/lifetimeUsage.cacheWrite",
+      "kimchi.dev.modelId",
+      "kimchi.dev.requestedModelId"
+    ]
+  },
+  "transport": {
+    "mitm": {
+      "port": 42267,
+      "impersonated": [],
+      "impersonations": 0,
+      "relayed": 6,
+      "drops": 0
+    }
+  }
 }

@@ -39,7 +39,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-11-08T11:22:50.074Z",
+  "probedAt": "2026-11-09T12:59:44.289Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -65,9 +65,9 @@
     "command": "${REPO_ROOT}/.cache/agents/poolside/agent acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "d7731e4cf3cd712cc8d2ebdbd7ec171f716b2049047b324054bf6948d166ea05",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42475220571",
-    "revision": "be92b527425d5a08f7b0ba22e20ecbd949366aaf",
+    "recipeSha256": "bae8dd2daf032796b980b9ebadd0b654018e38d7d7ca0ede149afaa4d605e0dc",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42621137462",
+    "revision": "814ca156f7773d0d11dcf9faa388e318777acab1",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -117,7 +117,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — {\"message\":\"Run `pool login` in a terminal to authenticate to Poolside.\"}",
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -537,7 +537,7 @@
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — {\"message\":\"Run `pool login` in a terminal to authenticate to Poolside.\"}",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -747,29 +747,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-08T11:22:50.013Z",
+      "at": "2026-11-09T12:59:44.242Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-08T11:22:50.053Z",
+      "at": "2026-11-09T12:59:44.272Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-08T11:22:50.063Z",
+      "at": "2026-11-09T12:59:44.281Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-08T11:22:50.073Z",
+      "at": "2026-11-09T12:59:44.288Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -813,7 +813,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 35171,
+      "port": 34393,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

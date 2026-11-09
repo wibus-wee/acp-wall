@@ -28,7 +28,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-08T11:20:14.351Z",
+  "probedAt": "2026-11-09T12:57:25.947Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -54,9 +54,9 @@
     "command": "${REPO_ROOT}/.cache/agents/corust-agent/agent",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "09d09a26a60eda327cc873c225671b0b7702be2122847906a3fa2f04b853982e",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42475220571",
-    "revision": "be92b527425d5a08f7b0ba22e20ecbd949366aaf",
+    "recipeSha256": "95a453170870c4d63462c31cf840ce6bbaffd66793541a6596cab28978e0cd8a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42621137462",
+    "revision": "814ca156f7773d0d11dcf9faa388e318777acab1",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -78,7 +78,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · corust-acp",
-          "latencyMs": 1
+          "latencyMs": 0
         }
       ]
     },
@@ -107,7 +107,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — authentication required",
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -521,14 +521,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · corust-acp",
-      "latencyMs": 1
+      "latencyMs": 0
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — authentication required",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -739,24 +739,24 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-08T11:20:14.306Z",
+      "at": "2026-11-09T12:57:25.893Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-08T11:20:14.342Z",
+      "at": "2026-11-09T12:57:25.937Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-08T11:20:14.345Z",
+      "at": "2026-11-09T12:57:25.940Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 6
     }
   ],
   "scenarios": [],
@@ -787,7 +787,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 39325,
+      "port": 33839,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

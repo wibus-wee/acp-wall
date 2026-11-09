@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "harn",
   "agentName": "harn",
-  "agentVersion": "0.10.191",
+  "agentVersion": "0.10.192",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -82,8 +82,8 @@
             },
             "_harn/providerCatalog": {
               "description": "Return the normalized provider/model catalog used by this runtime.",
-              "schema": "https://harnlang.com/schemas/provider-catalog.v15.json",
-              "schemaVersion": 15
+              "schema": "https://harnlang.com/schemas/provider-catalog.v16.json",
+              "schemaVersion": 16
             },
             "harn.session_history.boundaries": {
               "description": "Acknowledge canonical history positions after the owning transcript journal flushes.",
@@ -253,7 +253,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-08T11:21:47.236Z",
+  "probedAt": "2026-11-09T12:58:44.485Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -279,9 +279,9 @@
     "command": "${REPO_ROOT}/.cache/agents/harn/agent serve acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "f367bf11fa2246b168838b2901febe5ffd104d960f8035d00d03a1fa9845c4cc",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42475220571",
-    "revision": "be92b527425d5a08f7b0ba22e20ecbd949366aaf",
+    "recipeSha256": "182bfef4217e3a696665ed7c3cf118925b976209cc90ac7e103e5f0e80041177",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42621137462",
+    "revision": "814ca156f7773d0d11dcf9faa388e318777acab1",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -303,7 +303,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · harn",
-          "latencyMs": 21
+          "latencyMs": 33
         }
       ]
     },
@@ -332,7 +332,7 @@
           "reason": "request-rejected",
           "errorCode": -32602,
           "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -745,14 +745,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · harn",
-      "latencyMs": 21
+      "latencyMs": 33
     },
     "session/new": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32602,
       "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -963,29 +963,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-08T11:21:47.132Z",
+      "at": "2026-11-09T12:58:44.391Z",
       "outcome": "success",
-      "latencyMs": 21
+      "latencyMs": 33
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-08T11:21:47.209Z",
+      "at": "2026-11-09T12:58:44.465Z",
       "outcome": "error",
       "errorCode": -32602,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-08T11:21:47.223Z",
+      "at": "2026-11-09T12:58:44.475Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-08T11:21:47.235Z",
+      "at": "2026-11-09T12:58:44.484Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -1022,7 +1022,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 35629,
+      "port": 42429,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
