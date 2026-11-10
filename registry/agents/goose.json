@@ -2,7 +2,7 @@
   "name": "goose",
   "display": "goose",
   "vendor": "Block",
-  "version": "1.57.0",
+  "version": "1.58.1",
   "description": "A local, extensible, open source AI agent that automates engineering tasks",
   "repo": "block/goose",
   "website": "https://block.github.io/goose/",
@@ -26,65 +26,65 @@
     "type": "binary",
     "per_platform": {
       "darwin-aarch64": {
-        "archive": "https://github.com/block/goose/releases/download/v1.57.0/goose-aarch64-apple-darwin.tar.bz2",
+        "archive": "https://github.com/block/goose/releases/download/v1.58.1/goose-aarch64-apple-darwin.tar.bz2",
         "cmd": "./goose",
         "args": [
           "acp"
         ],
-        "sha256": "2fbafa227ab28654c47065f1c9ebcd12f527f017e30c08e618bc6fcf363d7935"
+        "sha256": "92a0482e51c0a804b187d78cd2fc2987496fbd05d50aca30f51a80de4a258c90"
       },
       "darwin-x86_64": {
-        "archive": "https://github.com/block/goose/releases/download/v1.57.0/goose-x86_64-apple-darwin.tar.bz2",
+        "archive": "https://github.com/block/goose/releases/download/v1.58.1/goose-x86_64-apple-darwin.tar.bz2",
         "cmd": "./goose",
         "args": [
           "acp"
         ],
-        "sha256": "e48fe024891a4c272a89c74b9ae843d76a73229643c917b785b0680fef9c647a"
+        "sha256": "e3826e89ffb7c3a1c4a7d6d802df80fa93b9efbae68dcb7c73467f458ba96080"
       },
       "linux-aarch64": {
-        "archive": "https://github.com/block/goose/releases/download/v1.57.0/goose-aarch64-unknown-linux-gnu.tar.bz2",
+        "archive": "https://github.com/block/goose/releases/download/v1.58.1/goose-aarch64-unknown-linux-gnu.tar.bz2",
         "cmd": "./goose",
         "args": [
           "acp"
         ],
-        "sha256": "17c6b090db6acc5605da904bbe19cc2765bc7a6786019d85a6d0a361de06dbf7"
+        "sha256": "bc53de9f3d948ef1d57b9bf4ac1372041f8bf0d77daf84c9e67bbb87404a49a5"
       },
       "linux-x86_64": {
-        "archive": "https://github.com/block/goose/releases/download/v1.57.0/goose-x86_64-unknown-linux-gnu.tar.bz2",
+        "archive": "https://github.com/block/goose/releases/download/v1.58.1/goose-x86_64-unknown-linux-gnu.tar.bz2",
         "cmd": "./goose",
         "args": [
           "acp"
         ],
-        "sha256": "e54036f3b7f95d3b0d7854c09465af5ef52a28c7fa03d2497d0ea68a6382282d"
+        "sha256": "20a71c86b119fe66216b40d76de0bfd2dc053feab8b81b4804ecf066df6874f2"
       },
       "linux-aarch64-musl": {
-        "archive": "https://github.com/block/goose/releases/download/v1.57.0/goose-aarch64-unknown-linux-musl.tar.bz2",
+        "archive": "https://github.com/block/goose/releases/download/v1.58.1/goose-aarch64-unknown-linux-musl.tar.bz2",
         "cmd": "./goose",
         "args": [
           "acp"
         ],
-        "sha256": "26dc9be443e92760c4b74c85a0c9be327ac8b48f74cca0985398e8dfdbb7e0d4"
+        "sha256": "2ef5f89bb4d67801fa389fca76b094f2e38f9aa8b0ac7d9254fbe49116ac04b8"
       },
       "linux-x86_64-musl": {
-        "archive": "https://github.com/block/goose/releases/download/v1.57.0/goose-x86_64-unknown-linux-musl.tar.bz2",
+        "archive": "https://github.com/block/goose/releases/download/v1.58.1/goose-x86_64-unknown-linux-musl.tar.bz2",
         "cmd": "./goose",
         "args": [
           "acp"
         ],
-        "sha256": "90ac71084236e1a896098e26a4cb9c3e090de6eba30782886d64de839924a966"
+        "sha256": "4f111026b22326e1579df330605bb996ad9e1e35cf0255437d48f766e6d8b175"
       },
       "windows-x86_64": {
-        "archive": "https://github.com/block/goose/releases/download/v1.57.0/goose-x86_64-pc-windows-msvc.zip",
+        "archive": "https://github.com/block/goose/releases/download/v1.58.1/goose-x86_64-pc-windows-msvc.zip",
         "cmd": "./goose-package\\goose.exe",
         "args": [
           "acp"
         ],
-        "sha256": "1ab2117ceec37f95be4d3ad0cdb921d3e97fd8b0fa244046631ecf4b7619d502"
+        "sha256": "17a535d2fa1918f2eef0217c9174fc79ccf1385df67fbfd2a36ec74e069c805c"
       }
     }
   },
   "disabled": false,
   "selftest": false,
   "notes": "Highest-precedence env wiring: GOOSE_PROVIDER=openai selects the OpenAI-compatible provider; OPENAI_HOST (mock /v1 root) + OPENAI_BASE_PATH=chat/completions lands requests on the mock's /v1/chat/completions. No goose account or interactive configure needed.",
-  "_synced": "acp-registry 1.0.0 · 2026-11-09"
+  "_synced": "acp-registry 1.0.0 · 2026-11-10"
 }
