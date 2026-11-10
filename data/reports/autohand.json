@@ -40,7 +40,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-09T12:57:20.509Z",
+  "probedAt": "2026-11-10T12:43:51.524Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -66,9 +66,9 @@
     "command": "npm exec --yes --package=autohand-cli@0.9.8 --package=@autohandai/autohand-acp@0.2.1 -- autohand-acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "140cbba8815bf3baa5d351776b4b427c4ad64f710e871bdcdd1ce197c7a4a9ad",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42621137462",
-    "revision": "814ca156f7773d0d11dcf9faa388e318777acab1",
+    "recipeSha256": "346e0dc8084026350f6e63fb910d50d1bea90a45cd94a10fcac879d2fdb56a72",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42818090516",
+    "revision": "1588e58f9223b4cc1029fc7702e482272bddeeba",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -90,7 +90,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · @autohandai/autohand-acp",
-          "latencyMs": 1290
+          "latencyMs": 1170
         }
       ]
     },
@@ -119,7 +119,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — {\"message\":\"Please run `autohand login` in your terminal, then try again.\"}",
-          "latencyMs": 5
+          "latencyMs": 7
         }
       ]
     },
@@ -181,7 +181,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 3
         },
         {
           "method": "session/resume",
@@ -532,14 +532,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · @autohandai/autohand-acp",
-      "latencyMs": 1290
+      "latencyMs": 1170
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — {\"message\":\"Please run `autohand login` in your terminal, then try again.\"}",
-      "latencyMs": 5
+      "latencyMs": 7
     },
     "set_mode": {
       "status": "blocked",
@@ -616,7 +616,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 3
     },
     "session/resume": {
       "status": "blocked",
@@ -750,29 +750,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-09T12:57:19.135Z",
+      "at": "2026-11-10T12:43:50.270Z",
       "outcome": "success",
-      "latencyMs": 1290
+      "latencyMs": 1170
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-09T12:57:20.480Z",
+      "at": "2026-11-10T12:43:51.491Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 5
+      "latencyMs": 7
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-09T12:57:20.496Z",
+      "at": "2026-11-10T12:43:51.508Z",
       "outcome": "success",
-      "latencyMs": 2
+      "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-09T12:57:20.507Z",
+      "at": "2026-11-10T12:43:51.522Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -809,7 +809,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 38575,
+      "port": 34859,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 2,

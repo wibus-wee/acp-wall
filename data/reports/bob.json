@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "bob",
   "agentName": "bob-shell",
-  "agentVersion": "2.0.9",
+  "agentVersion": "2.1.0",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -36,7 +36,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-09T12:56:53.876Z",
+  "probedAt": "2026-11-10T12:43:20.992Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -59,12 +59,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.2",
-    "command": "npx -y @ibm/bob@2.0.9 acp",
+    "command": "npx -y @ibm/bob@2.1.0 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "3c7662be9f857c7dbc35f5096d869ddd9ec9dd6861a50856f86a3a2db85dcc90",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42621137462",
-    "revision": "814ca156f7773d0d11dcf9faa388e318777acab1",
+    "recipeSha256": "8aed55af71bf0b364c560c17711292b51d55c6f45cf0187b8585b0ce1b4c61c6",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42818090516",
+    "revision": "1588e58f9223b4cc1029fc7702e482272bddeeba",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -86,7 +86,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · bob-shell",
-          "latencyMs": 1659
+          "latencyMs": 1519
         }
       ]
     },
@@ -115,7 +115,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required",
-          "latencyMs": 535
+          "latencyMs": 299
         }
       ]
     },
@@ -177,7 +177,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 4
+          "latencyMs": 3
         },
         {
           "method": "session/resume",
@@ -528,14 +528,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · bob-shell",
-      "latencyMs": 1659
+      "latencyMs": 1519
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required",
-      "latencyMs": 535
+      "latencyMs": 299
     },
     "set_mode": {
       "status": "blocked",
@@ -612,7 +612,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 4
+      "latencyMs": 3
     },
     "session/resume": {
       "status": "blocked",
@@ -746,32 +746,32 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-09T12:56:51.604Z",
+      "at": "2026-11-10T12:43:19.098Z",
       "outcome": "success",
-      "latencyMs": 1659
+      "latencyMs": 1519
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-09T12:56:53.316Z",
+      "at": "2026-11-10T12:43:20.671Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 535
+      "latencyMs": 299
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-09T12:56:53.861Z",
+      "at": "2026-11-10T12:43:20.979Z",
       "outcome": "success",
-      "latencyMs": 4
+      "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-09T12:56:53.874Z",
+      "at": "2026-11-10T12:43:20.990Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -805,10 +805,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 38057,
+      "port": 35963,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 3,
+      "relayed": 4,
       "drops": 0
     }
   }
