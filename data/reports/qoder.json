@@ -39,7 +39,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-10T12:46:30.404Z",
+  "probedAt": "2026-11-11T11:58:32.470Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -65,9 +65,9 @@
     "command": "npx -y @qoder-ai/qodercli@1.1.86 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "792d2fbff8658179d8187d883907ca8b37ddf1c34d3aab17ab1be6c18af1d599",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/42818090516",
-    "revision": "1588e58f9223b4cc1029fc7702e482272bddeeba",
+    "recipeSha256": "bb38c7ab2a0b21bab52ce927d21a2ad7db850acde88651c43b4926f0814ad365",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43015841993",
+    "revision": "300b69e6ce5bb9f5a7249e4cf2ce34c188cd385c",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -89,7 +89,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · qoder-cli",
-          "latencyMs": 6357
+          "latencyMs": 6840
         }
       ]
     },
@@ -118,7 +118,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Authentication is required.",
-          "latencyMs": 4
+          "latencyMs": 6
         }
       ]
     },
@@ -183,7 +183,7 @@
           "errorCode": -32000,
           "note": "Authentication required: Authentication is required.",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 3
         },
         {
           "method": "session/resume",
@@ -534,14 +534,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · qoder-cli",
-      "latencyMs": 6357
+      "latencyMs": 6840
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Authentication is required.",
-      "latencyMs": 4
+      "latencyMs": 6
     },
     "set_mode": {
       "status": "blocked",
@@ -621,7 +621,7 @@
       "errorCode": -32000,
       "note": "Authentication required: Authentication is required.",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 3
     },
     "session/resume": {
       "status": "blocked",
@@ -755,30 +755,30 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-10T12:46:23.985Z",
+      "at": "2026-11-11T11:58:25.554Z",
       "outcome": "success",
-      "latencyMs": 6357
+      "latencyMs": 6840
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-10T12:46:30.385Z",
+      "at": "2026-11-11T11:58:32.447Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 4
+      "latencyMs": 6
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-10T12:46:30.399Z",
+      "at": "2026-11-11T11:58:32.464Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 2
+      "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-10T12:46:30.402Z",
+      "at": "2026-11-11T11:58:32.468Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -815,10 +815,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 43711,
+      "port": 37323,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 14,
+      "relayed": 15,
       "drops": 18
     }
   }
