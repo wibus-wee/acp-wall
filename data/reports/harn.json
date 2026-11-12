@@ -253,7 +253,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-11T11:57:15.801Z",
+  "probedAt": "2026-11-12T12:51:08.216Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -279,9 +279,9 @@
     "command": "${REPO_ROOT}/.cache/agents/harn/agent serve acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "4fb1b078fd8ec4bdc6a01337a57c0e8be705b891d16aae3bd11230dc225577f7",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43015841993",
-    "revision": "300b69e6ce5bb9f5a7249e4cf2ce34c188cd385c",
+    "recipeSha256": "cd9615cc21afc897cac51d05afa7c279f59aaa9d939c57f0e9e4849ed127181a",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43221320238",
+    "revision": "e771edfedb0de40e756bef805d7d6b3522aec936",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -332,7 +332,7 @@
           "reason": "request-rejected",
           "errorCode": -32602,
           "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-          "latencyMs": 1
+          "latencyMs": 0
         }
       ]
     },
@@ -752,7 +752,7 @@
       "reason": "request-rejected",
       "errorCode": -32602,
       "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-      "latencyMs": 1
+      "latencyMs": 0
     },
     "set_mode": {
       "status": "blocked",
@@ -963,32 +963,32 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-11T11:57:15.702Z",
+      "at": "2026-11-12T12:51:08.113Z",
       "outcome": "success",
       "latencyMs": 19
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-11T11:57:15.774Z",
+      "at": "2026-11-12T12:51:08.188Z",
       "outcome": "error",
       "errorCode": -32602,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-11T11:57:15.788Z",
+      "at": "2026-11-12T12:51:08.203Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-11T11:57:15.799Z",
+      "at": "2026-11-12T12:51:08.214Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -1022,7 +1022,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 35957,
+      "port": 44837,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
