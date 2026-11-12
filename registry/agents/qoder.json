@@ -2,14 +2,14 @@
   "name": "qoder",
   "display": "Qoder CLI",
   "vendor": "Qoder AI",
-  "version": "1.1.86",
+  "version": "1.1.87",
   "description": "AI coding assistant with agentic capabilities",
   "repo": null,
   "website": "https://qoder.com",
   "icon": "https://cdn.agentclientprotocol.com/registry/v1/latest/qoder.svg",
   "license": "proprietary",
   "install": "node tools/install-dist.mjs registry/agents/qoder.json",
-  "run": "npx -y @qoder-ai/qodercli@1.1.86 --acp",
+  "run": "npx -y @qoder-ai/qodercli@1.1.87 --acp",
   "setup": [],
   "probeProfiles": [],
   "env": {
@@ -35,7 +35,7 @@
   },
   "dist": {
     "type": "npx",
-    "package": "@qoder-ai/qodercli@1.1.86",
+    "package": "@qoder-ai/qodercli@1.1.87",
     "args": [
       "--acp"
     ]
@@ -43,5 +43,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Attempted wiring: documented BYOK customModels shape (provider/apiKey/baseURL) planted via HOME=${WORK_DIR}. Whether the ACP session gate accepts a placeholder PAT is unknown — CI transcript will show if it demands a real qoder.com token.",
-  "_synced": "acp-registry 1.0.0 · 2026-11-11"
+  "_synced": "acp-registry 1.0.0 · 2026-11-12"
 }
