@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "kimi-code",
   "agentName": "Kimi Code CLI",
-  "agentVersion": "2.6.0",
+  "agentVersion": "2.6.1",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -44,7 +44,7 @@
           "terminal-auth": {
             "type": "terminal",
             "label": "Login with Kimi account",
-            "command": "/home/runner/.npm/_npx/09b6cb73ea539ad3/node_modules/.bin/kimi",
+            "command": "/home/runner/.npm/_npx/2721fa0c326697ff/node_modules/.bin/kimi",
             "args": [
               "login"
             ],
@@ -54,7 +54,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-12T12:51:14.457Z",
+  "probedAt": "2026-11-13T12:19:42.693Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -77,12 +77,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.2",
-    "command": "npx -y @moonshot-ai/kimi-code@2.6.0 acp",
+    "command": "npx -y @moonshot-ai/kimi-code@2.6.1 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "a5c083e24f0c34a745f86c311d42727495d554afb9207b3c0be83b94f9732885",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43221320238",
-    "revision": "e771edfedb0de40e756bef805d7d6b3522aec936",
+    "recipeSha256": "afcf53db7b2af0199c09d87981d70b81a56f9c7388a907da87d616b51aa41b8b",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43423832436",
+    "revision": "d5ba37437eb7732323b813f1bdb8b0929861864e",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -104,7 +104,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · Kimi Code CLI",
-          "latencyMs": 1332
+          "latencyMs": 1495
         }
       ]
     },
@@ -133,7 +133,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required",
-          "latencyMs": 8
+          "latencyMs": 10
         }
       ]
     },
@@ -195,7 +195,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 81
+          "latencyMs": 34
         },
         {
           "method": "session/resume",
@@ -546,14 +546,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · Kimi Code CLI",
-      "latencyMs": 1332
+      "latencyMs": 1495
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required",
-      "latencyMs": 8
+      "latencyMs": 10
     },
     "set_mode": {
       "status": "blocked",
@@ -630,7 +630,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 81
+      "latencyMs": 34
     },
     "session/resume": {
       "status": "blocked",
@@ -764,32 +764,32 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-12T12:51:12.975Z",
+      "at": "2026-11-13T12:19:41.069Z",
       "outcome": "success",
-      "latencyMs": 1332
+      "latencyMs": 1495
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-12T12:51:14.351Z",
+      "at": "2026-11-13T12:19:42.621Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 8
+      "latencyMs": 10
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-12T12:51:14.366Z",
+      "at": "2026-11-13T12:19:42.643Z",
       "outcome": "success",
-      "latencyMs": 81
+      "latencyMs": 34
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-12T12:51:14.456Z",
+      "at": "2026-11-13T12:19:42.689Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 2
     }
   ],
   "scenarios": [],
@@ -823,7 +823,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 33225,
+      "port": 38387,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 1,

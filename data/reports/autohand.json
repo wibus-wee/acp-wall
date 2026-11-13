@@ -40,7 +40,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-12T12:49:36.395Z",
+  "probedAt": "2026-11-13T12:17:43.741Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -66,9 +66,9 @@
     "command": "npm exec --yes --package=autohand-cli@0.9.8 --package=@autohandai/autohand-acp@0.2.1 -- autohand-acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "d99f24bc3096b84910fde64a243429b3233f296aed04cbf24f651995bf77b2a6",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43221320238",
-    "revision": "e771edfedb0de40e756bef805d7d6b3522aec936",
+    "recipeSha256": "d070d663516bc4ae967a91162d32912af87fc1611493fe83c83544f9695cd21f",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43423832436",
+    "revision": "d5ba37437eb7732323b813f1bdb8b0929861864e",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -90,7 +90,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · @autohandai/autohand-acp",
-          "latencyMs": 1229
+          "latencyMs": 796
         }
       ]
     },
@@ -532,7 +532,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · @autohandai/autohand-acp",
-      "latencyMs": 1229
+      "latencyMs": 796
     },
     "session/new": {
       "status": "blocked",
@@ -750,14 +750,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-12T12:49:35.083Z",
+      "at": "2026-11-13T12:17:42.890Z",
       "outcome": "success",
-      "latencyMs": 1229
+      "latencyMs": 796
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-12T12:49:36.366Z",
+      "at": "2026-11-13T12:17:43.720Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 5
@@ -765,14 +765,14 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-12T12:49:36.381Z",
+      "at": "2026-11-13T12:17:43.732Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-12T12:49:36.393Z",
+      "at": "2026-11-13T12:17:43.740Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -809,7 +809,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 41305,
+      "port": 45019,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 2,
