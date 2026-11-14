@@ -29,7 +29,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-13T12:19:50.248Z",
+  "probedAt": "2026-11-14T11:35:36.979Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -55,9 +55,9 @@
     "command": "${REPO_ROOT}/.cache/agents/kiro/agent acp --agent-engine=v3",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "c0505b84e84e02ff63cdd2b2cb50d4921818f94567a59fbf6c62d60c533e44e5",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43423832436",
-    "revision": "d5ba37437eb7732323b813f1bdb8b0929861864e",
+    "recipeSha256": "3656fdcddde91904389e441f49026860032584b1855aa1ee09702d0cbfe30973",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43590532453",
+    "revision": "ec253ef4460e17d406a4398fc1a8a993081a0bf0",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -79,7 +79,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · Kiro CLI Agent",
-          "latencyMs": 39
+          "latencyMs": 17
         }
       ]
     },
@@ -108,7 +108,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required. Not logged in. Set the KIRO_API_KEY environment variable or run `kiro-cli login` first. Then reconnect to start the Kiro agent.",
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -522,14 +522,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · Kiro CLI Agent",
-      "latencyMs": 39
+      "latencyMs": 17
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required. Not logged in. Set the KIRO_API_KEY environment variable or run `kiro-cli login` first. Then reconnect to start the Kiro agent.",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -740,25 +740,25 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-13T12:19:50.176Z",
+      "at": "2026-11-14T11:35:36.928Z",
       "outcome": "success",
-      "latencyMs": 39
+      "latencyMs": 17
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-13T12:19:50.245Z",
+      "at": "2026-11-14T11:35:36.975Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-13T12:19:50.247Z",
+      "at": "2026-11-14T11:35:36.978Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -790,7 +790,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 36293,
+      "port": 40565,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

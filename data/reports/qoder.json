@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "qoder",
   "agentName": "qoder-cli",
-  "agentVersion": "1.1.88",
+  "agentVersion": "1.1.89",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -39,7 +39,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-13T12:20:33.569Z",
+  "probedAt": "2026-11-14T11:36:39.451Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -62,12 +62,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.2",
-    "command": "npx -y @qoder-ai/qodercli@1.1.88 --acp",
+    "command": "npx -y @qoder-ai/qodercli@1.1.89 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "a99128bf947d6af217fc3dfab566b7b067ac33359524a5f08754462db4363363",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43423832436",
-    "revision": "d5ba37437eb7732323b813f1bdb8b0929861864e",
+    "recipeSha256": "834d130a043a1a968cb1bf0488fce533e575ddd2caaf5a356ef52fa2aa91bd5f",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43590532453",
+    "revision": "ec253ef4460e17d406a4398fc1a8a993081a0bf0",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -89,7 +89,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · qoder-cli",
-          "latencyMs": 6038
+          "latencyMs": 6136
         }
       ]
     },
@@ -118,7 +118,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Authentication is required.",
-          "latencyMs": 3
+          "latencyMs": 2
         }
       ]
     },
@@ -183,7 +183,7 @@
           "errorCode": -32000,
           "note": "Authentication required: Authentication is required.",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 3
         },
         {
           "method": "session/resume",
@@ -534,14 +534,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · qoder-cli",
-      "latencyMs": 6038
+      "latencyMs": 6136
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Authentication is required.",
-      "latencyMs": 3
+      "latencyMs": 2
     },
     "set_mode": {
       "status": "blocked",
@@ -621,7 +621,7 @@
       "errorCode": -32000,
       "note": "Authentication required: Authentication is required.",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 3
     },
     "session/resume": {
       "status": "blocked",
@@ -755,30 +755,30 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-13T12:20:27.474Z",
+      "at": "2026-11-14T11:36:33.237Z",
       "outcome": "success",
-      "latencyMs": 6038
+      "latencyMs": 6136
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-13T12:20:33.553Z",
-      "outcome": "error",
-      "errorCode": -32000,
-      "latencyMs": 3
-    },
-    {
-      "method": "session/list",
-      "scenario": "session-mgmt",
-      "at": "2026-11-13T12:20:33.564Z",
+      "at": "2026-11-14T11:36:39.431Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 2
     },
     {
+      "method": "session/list",
+      "scenario": "session-mgmt",
+      "at": "2026-11-14T11:36:39.445Z",
+      "outcome": "error",
+      "errorCode": -32000,
+      "latencyMs": 3
+    },
+    {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-13T12:20:33.567Z",
+      "at": "2026-11-14T11:36:39.449Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -815,10 +815,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 45027,
+      "port": 38381,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 11,
+      "relayed": 12,
       "drops": 12
     }
   }
