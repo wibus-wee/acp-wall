@@ -54,7 +54,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-15T12:01:32.166Z",
+  "probedAt": "2026-11-16T12:52:19.683Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -80,9 +80,9 @@
     "command": "npx -y @moonshot-ai/kimi-code@2.6.2 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "5a35ef80356bb3ae45946c0bb8e98895eb9e450fa7356a21297cc114fb4f226c",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43711512888",
-    "revision": "2065dcbb1787ab67333f5b0c44f4305d135ab1f5",
+    "recipeSha256": "642b9242f1d39b0f4cb538801c9e951db1683d8219e5229c0bf35bb0e03e92d6",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43870058915",
+    "revision": "d8895717ec538b2b00edc972266518076a448132",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -104,7 +104,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · Kimi Code CLI",
-          "latencyMs": 1499
+          "latencyMs": 1240
         }
       ]
     },
@@ -195,7 +195,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 20
+          "latencyMs": 63
         },
         {
           "method": "session/resume",
@@ -546,7 +546,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · Kimi Code CLI",
-      "latencyMs": 1499
+      "latencyMs": 1240
     },
     "session/new": {
       "status": "blocked",
@@ -630,7 +630,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 20
+      "latencyMs": 63
     },
     "session/resume": {
       "status": "blocked",
@@ -764,14 +764,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-15T12:01:30.551Z",
+      "at": "2026-11-16T12:52:18.311Z",
       "outcome": "success",
-      "latencyMs": 1499
+      "latencyMs": 1240
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-15T12:01:32.108Z",
+      "at": "2026-11-16T12:52:19.594Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 8
@@ -779,17 +779,17 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-15T12:01:32.128Z",
+      "at": "2026-11-16T12:52:19.610Z",
       "outcome": "success",
-      "latencyMs": 20
+      "latencyMs": 63
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-15T12:01:32.163Z",
+      "at": "2026-11-16T12:52:19.682Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -823,7 +823,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 43987,
+      "port": 45031,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 1,

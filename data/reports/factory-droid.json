@@ -49,7 +49,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-15T12:00:38.846Z",
+  "probedAt": "2026-11-16T12:51:22.007Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -75,9 +75,9 @@
     "command": "npx -y droid@1.12.1 exec --output-format acp-daemon",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "ece400f48941ffcfce7f258ea9cfdf446ee6eda138dab785e030f117572b636d",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43711512888",
-    "revision": "2065dcbb1787ab67333f5b0c44f4305d135ab1f5",
+    "recipeSha256": "2f33d4093c7651b1b0994cd71e1d7fe1f63189df44145668bb4c8f942ea4ee9d",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43870058915",
+    "revision": "d8895717ec538b2b00edc972266518076a448132",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -99,7 +99,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · @factory/cli",
-          "latencyMs": 801
+          "latencyMs": 1117
         }
       ]
     },
@@ -128,7 +128,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Authentication failed. Please log in using /login or set a valid FACTORY_API_KEY environment variable.",
-          "latencyMs": 207
+          "latencyMs": 432
         }
       ]
     },
@@ -190,7 +190,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 1120
+          "latencyMs": 692
         },
         {
           "method": "session/resume",
@@ -541,14 +541,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · @factory/cli",
-      "latencyMs": 801
+      "latencyMs": 1117
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Authentication failed. Please log in using /login or set a valid FACTORY_API_KEY environment variable.",
-      "latencyMs": 207
+      "latencyMs": 432
     },
     "set_mode": {
       "status": "blocked",
@@ -625,7 +625,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 1120
+      "latencyMs": 692
     },
     "session/resume": {
       "status": "blocked",
@@ -759,29 +759,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-15T12:00:36.671Z",
+      "at": "2026-11-16T12:51:19.682Z",
       "outcome": "success",
-      "latencyMs": 801
+      "latencyMs": 1117
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-15T12:00:37.502Z",
+      "at": "2026-11-16T12:51:20.859Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 207
+      "latencyMs": 432
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-15T12:00:37.716Z",
+      "at": "2026-11-16T12:51:21.300Z",
       "outcome": "success",
-      "latencyMs": 1120
+      "latencyMs": 692
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-15T12:00:38.844Z",
+      "at": "2026-11-16T12:51:22.004Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -819,10 +819,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 46115,
+      "port": 34615,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 6,
+      "relayed": 7,
       "drops": 0
     }
   }
