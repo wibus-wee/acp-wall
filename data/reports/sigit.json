@@ -32,7 +32,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-16T12:54:29.894Z",
+  "probedAt": "2026-11-17T13:36:04.835Z",
   "state": "blocked",
   "summary": {
     "pass": 4,
@@ -58,9 +58,9 @@
     "command": "npx -y @smbcloud/sigit@1.5.10 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "907545c8eef48b41dc52b505977bbbfa0f1a8d011a114b2c783bf4e892478904",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/43870058915",
-    "revision": "d8895717ec538b2b00edc972266518076a448132",
+    "recipeSha256": "f0cb89fd7505f9e25a28da63f8559bcedc431cf9a29ac04baea38b3cabc82dec",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44093501698",
+    "revision": "ef0fdb38f521a15f955b9488f92d35500a8389af",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -82,7 +82,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · sigit",
-          "latencyMs": 3823
+          "latencyMs": 3165
         }
       ]
     },
@@ -109,7 +109,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 69
+          "latencyMs": 67
         }
       ]
     },
@@ -209,7 +209,7 @@
           "reason": "timeout",
           "note": "session/fork timed out after 15000ms",
           "advertised": true,
-          "latencyMs": 15002
+          "latencyMs": 15003
         }
       ]
     },
@@ -252,7 +252,7 @@
           "errorCode": -32603,
           "note": "model loader thread crashed",
           "advertised": true,
-          "latencyMs": 69
+          "latencyMs": 118
         }
       ]
     },
@@ -306,7 +306,7 @@
         {
           "method": "update:tool_call",
           "status": "pass",
-          "note": "23 notification(s) observed"
+          "note": "13 notification(s) observed"
         }
       ]
     },
@@ -505,7 +505,7 @@
     "cancel": "cancel: No successful prompt to establish cancellation conditions",
     "logout": "logout: Not advertised; optional method not invoked",
     "message*": "update:message: No matching notifications observed; see scenario stimuli",
-    "tool_call*": "update:tool_call: 23 notification(s) observed",
+    "tool_call*": "update:tool_call: 13 notification(s) observed",
     "usage": "update:usage: No matching notifications observed; see scenario stimuli",
     "permission": "request_permission: Not observed; prerequisite session/prompt unavailable",
     "plan": "update:plan: No matching notifications observed; see scenario stimuli",
@@ -521,12 +521,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · sigit",
-      "latencyMs": 3823
+      "latencyMs": 3165
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 69
+      "latencyMs": 67
     },
     "set_mode": {
       "status": "na",
@@ -539,7 +539,7 @@
       "errorCode": -32603,
       "note": "model loader thread crashed",
       "advertised": true,
-      "latencyMs": 69
+      "latencyMs": 118
     },
     "session/prompt": {
       "status": "na",
@@ -571,7 +571,7 @@
       "reason": "timeout",
       "note": "session/fork timed out after 15000ms",
       "advertised": true,
-      "latencyMs": 15002
+      "latencyMs": 15003
     },
     "prompt:image": {
       "status": "na",
@@ -689,7 +689,7 @@
     },
     "update:tool_call": {
       "status": "pass",
-      "note": "23 notification(s) observed"
+      "note": "13 notification(s) observed"
     },
     "update:plan": {
       "status": "blocked",
@@ -736,29 +736,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-16T12:53:25.815Z",
+      "at": "2026-11-17T13:35:01.369Z",
       "outcome": "success",
-      "latencyMs": 3823
+      "latencyMs": 3165
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-16T12:53:29.678Z",
+      "at": "2026-11-17T13:35:04.573Z",
       "outcome": "success",
-      "latencyMs": 69
+      "latencyMs": 67
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-11-16T12:53:29.767Z",
+      "at": "2026-11-17T13:35:04.657Z",
       "outcome": "error",
       "errorCode": -32603,
-      "latencyMs": 69
+      "latencyMs": 118
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-11-16T12:53:29.854Z",
+      "at": "2026-11-17T13:35:04.793Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 30003
@@ -766,7 +766,7 @@
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-11-16T12:53:59.872Z",
+      "at": "2026-11-17T13:35:34.810Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 15002
@@ -774,23 +774,23 @@
     {
       "method": "session/fork",
       "scenario": "session/fork",
-      "at": "2026-11-16T12:54:14.887Z",
+      "at": "2026-11-17T13:35:49.827Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 15002
+      "latencyMs": 15003
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-16T12:54:29.892Z",
+      "at": "2026-11-17T13:36:04.832Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-16T12:54:29.892Z",
+      "at": "2026-11-17T13:36:04.833Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -798,17 +798,17 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-16T12:54:29.892Z",
+      "at": "2026-11-17T13:36:04.833Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "700f35e7-6b3a-4735-b749-9a918afe3aa2",
+      "sessionId": "e6e0b6e1-4e31-41bf-aae3-ebc4ce538f2f",
       "configuration": {
         "sigit-model": "bartowski/Qwen2.5-3B-Instruct-GGUF",
         "sigit-local-inference": "local-inference-on",
@@ -832,7 +832,7 @@
       ],
       "tools": [
         {
-          "id": "startup-load-9a120d9a-0925-49a2-b4ea-49a1fe235b61",
+          "id": "startup-load-3b226b00-8c02-4945-8722-70fdb8d04f58",
           "name": "✓ Qwen 2.5 3B downloaded and loaded",
           "status": "completed"
         }
@@ -885,10 +885,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 44633,
+      "port": 35133,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 10,
+      "relayed": 12,
       "drops": 0
     }
   }
