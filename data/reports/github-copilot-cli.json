@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "github-copilot-cli",
   "agentName": "Copilot",
-  "agentVersion": "1.0.112",
+  "agentVersion": "1.0.113",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -33,7 +33,7 @@
         "description": "Run `copilot login` in the terminal",
         "_meta": {
           "terminal-auth": {
-            "command": "/home/runner/.npm/_npx/9859b6df8cf36ded/node_modules/@github/copilot-linux-x64/copilot",
+            "command": "/home/runner/.npm/_npx/dbf534a956abfc70/node_modules/@github/copilot-linux-x64/copilot",
             "args": [
               "login"
             ],
@@ -43,7 +43,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-17T13:32:59.888Z",
+  "probedAt": "2026-11-18T13:10:35.947Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -66,12 +66,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.2",
-    "command": "npx -y @github/copilot@1.0.112 --acp",
+    "command": "npx -y @github/copilot@1.0.113 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "a1f911817417979c4703d31a0f8376eb9205ddfde7804b2a146ae4b3eab40643",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44093501698",
-    "revision": "ef0fdb38f521a15f955b9488f92d35500a8389af",
+    "recipeSha256": "e5a0530c469197cb45ef26870a2dfe1f217003e16f230c87abe87b620b312b3e",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44310649228",
+    "revision": "86917eb4aec506d2dce68e78067d2af40fd4fa3a",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -93,7 +93,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · Copilot",
-          "latencyMs": 1973
+          "latencyMs": 2528
         }
       ]
     },
@@ -122,7 +122,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required",
-          "latencyMs": 123
+          "latencyMs": 365
         }
       ]
     },
@@ -535,14 +535,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · Copilot",
-      "latencyMs": 1973
+      "latencyMs": 2528
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required",
-      "latencyMs": 123
+      "latencyMs": 365
     },
     "set_mode": {
       "status": "blocked",
@@ -753,32 +753,32 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-17T13:32:57.735Z",
+      "at": "2026-11-18T13:10:32.976Z",
       "outcome": "success",
-      "latencyMs": 1973
+      "latencyMs": 2528
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-17T13:32:59.748Z",
+      "at": "2026-11-18T13:10:35.560Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 123
+      "latencyMs": 365
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-17T13:32:59.879Z",
+      "at": "2026-11-18T13:10:35.936Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-17T13:32:59.887Z",
+      "at": "2026-11-18T13:10:35.945Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -812,7 +812,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 41127,
+      "port": 37821,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 7,
