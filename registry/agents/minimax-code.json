@@ -2,7 +2,7 @@
   "name": "minimax-code",
   "display": "MiniMax Code",
   "vendor": "MiniMax",
-  "version": "0.7.7",
+  "version": "0.7.8",
   "description": "MiniMax Code is an AI coding agent with Agent Client Protocol support.",
   "repo": null,
   "website": "https://agent.minimax.io",
@@ -20,7 +20,7 @@
   "sessionFiles": null,
   "dist": {
     "type": "npx",
-    "package": "@minimax-ai/code-acp@0.7.7",
+    "package": "@minimax-ai/code-acp@0.7.8",
     "args": [
       "acp"
     ]
@@ -28,5 +28,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "Configure the custom provider using actual 0.2.7 CLI options; fail closed on preparation errors. The dummy key is valid only for the local mock. An account gate, if still required, remains blocked rather than bypassed. The add command does not support immediate activation until a connection test; do not force selection or fake the account gate.",
-  "_synced": "acp-registry 1.0.0 · 2026-11-18"
+  "_synced": "acp-registry 1.0.0 · 2026-11-19"
 }
