@@ -2,7 +2,7 @@
   "name": "kimchi",
   "display": "Kimchi",
   "vendor": "Kimchi",
-  "version": "1.37.0",
+  "version": "1.37.3",
   "description": "Coding agent powered by multi-model orchestration",
   "repo": "getkimchi/kimchi",
   "website": "https://kimchi.dev",
@@ -30,8 +30,8 @@
     "type": "binary",
     "per_platform": {
       "darwin-aarch64": {
-        "archive": "https://github.com/getkimchi/kimchi/releases/download/v1.37.0/kimchi_darwin_arm64.tar.gz",
-        "sha256": "224483f1882a5b352f353e65b3f579789918598db673a496050a12100a6dfb54",
+        "archive": "https://github.com/getkimchi/kimchi/releases/download/v1.37.3/kimchi_darwin_arm64.tar.gz",
+        "sha256": "b51755230c02e32e9414b4a61261c2d030f35297fe934e12ae446de3af6f736b",
         "cmd": "./bin/kimchi",
         "args": [
           "--mode",
@@ -39,8 +39,8 @@
         ]
       },
       "darwin-x86_64": {
-        "archive": "https://github.com/getkimchi/kimchi/releases/download/v1.37.0/kimchi_darwin_amd64.tar.gz",
-        "sha256": "0c0771b173de069e4d797b2bd0abd411108a4f3830a03842ac3a9cba62ee130e",
+        "archive": "https://github.com/getkimchi/kimchi/releases/download/v1.37.3/kimchi_darwin_amd64.tar.gz",
+        "sha256": "e8cb8e906716bb847434e57fd73ffb9c2506d5b3e32be71ab24b98e25dc7c886",
         "cmd": "./bin/kimchi",
         "args": [
           "--mode",
@@ -48,8 +48,8 @@
         ]
       },
       "linux-aarch64": {
-        "archive": "https://github.com/getkimchi/kimchi/releases/download/v1.37.0/kimchi_linux_arm64.tar.gz",
-        "sha256": "e9cb33afbbc5573f8914a6538b8552728bcb5865ec870cb71fb1a9012bf23a4a",
+        "archive": "https://github.com/getkimchi/kimchi/releases/download/v1.37.3/kimchi_linux_arm64.tar.gz",
+        "sha256": "61588efed6d4ec2dee650e00ab2acfa33d17d09565ec7089f8e6cbbe5b411a7c",
         "cmd": "./bin/kimchi",
         "args": [
           "--mode",
@@ -57,8 +57,8 @@
         ]
       },
       "linux-x86_64": {
-        "archive": "https://github.com/getkimchi/kimchi/releases/download/v1.37.0/kimchi_linux_amd64.tar.gz",
-        "sha256": "72b8d1f999ecfdc9518d9bc1780385a48e683ad288b68d88f2cdb82e33bbcb87",
+        "archive": "https://github.com/getkimchi/kimchi/releases/download/v1.37.3/kimchi_linux_amd64.tar.gz",
+        "sha256": "a90bb1fb370d6506a6b3c9f2d432fce261403022f4e997793ac78fc352cdfd5e",
         "cmd": "./bin/kimchi",
         "args": [
           "--mode",
@@ -66,8 +66,8 @@
         ]
       },
       "windows-x86_64": {
-        "archive": "https://github.com/getkimchi/kimchi/releases/download/v1.37.0/kimchi_windows_amd64.zip",
-        "sha256": "3dde2d1004d53f50d7847e2640cd8770a209c278c10fcf77cd5906b70d8f2e9f",
+        "archive": "https://github.com/getkimchi/kimchi/releases/download/v1.37.3/kimchi_windows_amd64.zip",
+        "sha256": "3dc848b33c9bf00e4b55cbeee8dd0d9cd17f83e5d871b68fcf1f3094721fa3f6",
         "cmd": "./bin/kimchi.exe",
         "args": [
           "--mode",
@@ -79,5 +79,5 @@
   "disabled": false,
   "selftest": false,
   "notes": "kimchi resolves project .kimchi/config.json then ~/.config/kimchi/config.json — llmEndpoint is a documented OpenAI-compatible base (default llm.kimchi.dev/openai/v1) pointed at the mock; KIMCHI_API_KEY satisfies the credential path.",
-  "_synced": "acp-registry 1.0.0 · 2026-11-19"
+  "_synced": "acp-registry 1.0.0 · 2026-11-20"
 }
