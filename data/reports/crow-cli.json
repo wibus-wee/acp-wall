@@ -42,7 +42,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-19T13:20:22.122Z",
+  "probedAt": "2026-11-20T13:00:37.948Z",
   "state": "blocked",
   "summary": {
     "pass": 15,
@@ -68,9 +68,9 @@
     "command": "${REPO_ROOT}/.cache/agents/crow-cli/agent acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "f442b1ca2e2afbafaca55392c8a0c60cf963cfc48935042b3920e0bcd0fdbee9",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44532222072",
-    "revision": "d56ee8df2495d12cc13511e231f15da3894fa8b2",
+    "recipeSha256": "4221f85c460871a736a45a3e1da6df5ae246d5c8ecab4530970a80ac9463351e",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44740361281",
+    "revision": "7747fc6bb9303739225b817acc8e8d37ec788c57",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -101,7 +101,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · crow-cli",
-          "latencyMs": 3527
+          "latencyMs": 2739
         }
       ]
     },
@@ -128,7 +128,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 135
+          "latencyMs": 174
         }
       ]
     },
@@ -141,7 +141,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 20
+          "latencyMs": 18
         }
       ]
     },
@@ -185,7 +185,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 0
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
@@ -205,7 +205,7 @@
           "method": "session/delete",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 12
+          "latencyMs": 6
         }
       ]
     },
@@ -218,7 +218,7 @@
           "method": "session/fork",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 24
+          "latencyMs": 20
         }
       ]
     },
@@ -268,7 +268,7 @@
         {
           "method": "cancel",
           "status": "pass",
-          "note": "In-flight prompt returned cancelled after 32ms"
+          "note": "In-flight prompt returned cancelled after 31ms"
         }
       ]
     },
@@ -493,7 +493,7 @@
     "load:replay": "load:replay: Prior conversation text replayed for the same session",
     "set_mode": "set_mode: No session modes offered",
     "set_config": "set_config: No offered alternative select value; boolean capability is not negotiated",
-    "cancel": "cancel: In-flight prompt returned cancelled after 32ms",
+    "cancel": "cancel: In-flight prompt returned cancelled after 31ms",
     "logout": "logout: Not advertised; optional method not invoked",
     "message*": "update:message: 11 notification(s) observed",
     "tool_call*": "update:tool_call: 3 notification(s) observed",
@@ -512,12 +512,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · crow-cli",
-      "latencyMs": 3527
+      "latencyMs": 2739
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 135
+      "latencyMs": 174
     },
     "set_mode": {
       "status": "na",
@@ -535,12 +535,12 @@
     },
     "cancel": {
       "status": "pass",
-      "note": "In-flight prompt returned cancelled after 32ms"
+      "note": "In-flight prompt returned cancelled after 31ms"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 20
+      "latencyMs": 18
     },
     "load:replay": {
       "status": "pass",
@@ -549,7 +549,7 @@
     "session/fork": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 24
+      "latencyMs": 20
     },
     "prompt:image": {
       "status": "pass",
@@ -588,7 +588,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "na",
@@ -605,7 +605,7 @@
     "session/delete": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 12
+      "latencyMs": 6
     },
     "mcp:stdio": {
       "status": "pass",
@@ -698,156 +698,156 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-19T13:20:16.982Z",
+      "at": "2026-11-20T13:00:33.806Z",
       "outcome": "success",
-      "latencyMs": 3527
+      "latencyMs": 2739
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-19T13:20:20.561Z",
+      "at": "2026-11-20T13:00:36.582Z",
       "outcome": "success",
-      "latencyMs": 135
+      "latencyMs": 174
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-11-19T13:20:20.729Z",
+      "at": "2026-11-20T13:00:36.780Z",
       "outcome": "success",
-      "latencyMs": 242
+      "latencyMs": 162
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-11-19T13:20:20.986Z",
+      "at": "2026-11-20T13:00:36.951Z",
       "outcome": "success",
-      "latencyMs": 23
+      "latencyMs": 19
     },
     {
       "method": "session/prompt",
       "scenario": "default:write",
-      "at": "2026-11-19T13:20:21.009Z",
+      "at": "2026-11-20T13:00:36.970Z",
       "outcome": "success",
-      "latencyMs": 20
+      "latencyMs": 17
     },
     {
       "method": "session/prompt",
       "scenario": "default:plan",
-      "at": "2026-11-19T13:20:21.029Z",
+      "at": "2026-11-20T13:00:36.987Z",
       "outcome": "success",
-      "latencyMs": 21
+      "latencyMs": 18
     },
     {
       "method": "session/prompt",
       "scenario": "cancel",
-      "at": "2026-11-19T13:20:21.051Z",
+      "at": "2026-11-20T13:00:37.005Z",
       "outcome": "success",
-      "latencyMs": 32
+      "latencyMs": 31
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-11-19T13:20:21.095Z",
+      "at": "2026-11-20T13:00:37.045Z",
       "outcome": "success",
-      "latencyMs": 20
+      "latencyMs": 18
     },
     {
       "method": "session/fork",
       "scenario": "session/fork",
-      "at": "2026-11-19T13:20:21.144Z",
+      "at": "2026-11-20T13:00:37.085Z",
       "outcome": "success",
-      "latencyMs": 24
+      "latencyMs": 20
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-19T13:20:21.183Z",
+      "at": "2026-11-20T13:00:37.114Z",
       "outcome": "success",
-      "latencyMs": 26
+      "latencyMs": 20
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-11-19T13:20:21.209Z",
+      "at": "2026-11-20T13:00:37.135Z",
       "outcome": "success",
-      "latencyMs": 20
+      "latencyMs": 17
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-19T13:20:21.229Z",
+      "at": "2026-11-20T13:00:37.152Z",
       "outcome": "success",
-      "latencyMs": 26
+      "latencyMs": 22
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-11-19T13:20:21.255Z",
+      "at": "2026-11-20T13:00:37.175Z",
       "outcome": "success",
-      "latencyMs": 20
+      "latencyMs": 17
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-19T13:20:21.283Z",
+      "at": "2026-11-20T13:00:37.198Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-11-19T13:20:21.290Z",
+      "at": "2026-11-20T13:00:37.204Z",
       "outcome": "success",
-      "latencyMs": 27
+      "latencyMs": 21
     },
     {
       "method": "session/delete",
       "scenario": "session-mgmt",
-      "at": "2026-11-19T13:20:21.323Z",
+      "at": "2026-11-20T13:00:37.230Z",
       "outcome": "success",
-      "latencyMs": 12
+      "latencyMs": 6
     },
     {
       "method": "session/new",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-19T13:20:21.342Z",
+      "at": "2026-11-20T13:00:37.241Z",
       "outcome": "success",
-      "latencyMs": 236
+      "latencyMs": 169
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-19T13:20:21.578Z",
+      "at": "2026-11-20T13:00:37.411Z",
       "outcome": "success",
-      "latencyMs": 40
+      "latencyMs": 33
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-19T13:20:22.119Z",
+      "at": "2026-11-20T13:00:37.946Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-19T13:20:22.120Z",
+      "at": "2026-11-20T13:00:37.947Z",
       "outcome": "success",
       "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-19T13:20:22.120Z",
+      "at": "2026-11-20T13:00:37.947Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "thoughtful-splendid-crab-from-atlantis",
+      "sessionId": "valiant-rampant-husky-of-completion",
       "configuration": {
         "model": "probe:probe-model"
       },
@@ -876,7 +876,7 @@
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "thoughtful-splendid-crab-from-atlantis",
+      "sessionId": "valiant-rampant-husky-of-completion",
       "configuration": {
         "model": "probe:probe-model"
       },
@@ -905,7 +905,7 @@
     {
       "id": "default:write",
       "profile": "default",
-      "sessionId": "thoughtful-splendid-crab-from-atlantis",
+      "sessionId": "valiant-rampant-husky-of-completion",
       "configuration": {
         "model": "probe:probe-model"
       },
@@ -934,7 +934,7 @@
     {
       "id": "default:plan",
       "profile": "default",
-      "sessionId": "thoughtful-splendid-crab-from-atlantis",
+      "sessionId": "valiant-rampant-husky-of-completion",
       "configuration": {
         "model": "probe:probe-model"
       },
@@ -963,7 +963,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "snobbish-happy-fox-of-elegance",
+      "sessionId": "qualified-kingfisher-of-nonstop-argument",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -988,7 +988,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "original-boobook-of-delightful-perception",
+      "sessionId": "indefinable-beaver-of-impressive-awe",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1013,7 +1013,7 @@
     {
       "id": "mcp:stdio:default",
       "profile": "default",
-      "sessionId": "classy-mini-chupacabra-of-management",
+      "sessionId": "fantastic-casual-turkey-of-defense",
       "configuration": {
         "model": "probe:probe-model"
       },
@@ -1035,7 +1035,7 @@
       ],
       "tools": [
         {
-          "id": "790eda6c-26d3-40fa-a3ba-000b9ded3404/call_probe_1",
+          "id": "db93fb6c-4518-46ad-a933-227157276702/call_probe_1",
           "name": "probe_noop",
           "status": "completed"
         }
@@ -1050,19 +1050,19 @@
       "mcpEvents": [
         {
           "event": "spawned",
-          "ts": 1795094421531
+          "ts": 1795179637368
         },
         {
           "event": "initialized",
-          "ts": 1795094421551
+          "ts": 1795179637383
         },
         {
           "event": "tools/list",
-          "ts": 1795094421551
+          "ts": 1795179637384
         },
         {
           "event": "tools/call",
-          "ts": 1795094421604,
+          "ts": 1795179637433,
           "name": "probe_noop"
         }
       ]
@@ -1108,7 +1108,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 44915,
+      "port": 46027,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
