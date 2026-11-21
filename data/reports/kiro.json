@@ -29,7 +29,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-20T13:02:27.058Z",
+  "probedAt": "2026-11-21T12:46:06.713Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -51,13 +51,13 @@
     "profile": "mock",
     "client": "simulated",
     "platform": "linux-x64",
-    "node": "v24.22.2",
+    "node": "v24.22.3",
     "command": "${REPO_ROOT}/.cache/agents/kiro/agent acp --agent-engine=v3",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "59db89921c3580e033e34f745c153b34c6da87cc23946fb45b432861ee0486e5",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44740361281",
-    "revision": "7747fc6bb9303739225b817acc8e8d37ec788c57",
+    "recipeSha256": "85e884ed35d600fc4a27813f98dcc6c6cfe7b4bc5c14a9fe9314682176d089f6",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44905284590",
+    "revision": "dc4996d558198deec7ab7574390a4ea9ec235f7c",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -740,14 +740,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-20T13:02:27.015Z",
+      "at": "2026-11-21T12:46:06.669Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-20T13:02:27.051Z",
+      "at": "2026-11-21T12:46:06.706Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 1
@@ -755,10 +755,10 @@
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-20T13:02:27.055Z",
+      "at": "2026-11-21T12:46:06.709Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 2
+      "latencyMs": 3
     }
   ],
   "scenarios": [],
@@ -790,7 +790,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 35495,
+      "port": 38787,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
