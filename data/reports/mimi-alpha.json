@@ -8,7 +8,7 @@
     "capabilities": {},
     "authMethods": []
   },
-  "probedAt": "2026-11-21T12:46:41.944Z",
+  "probedAt": "2026-11-22T12:41:54.019Z",
   "state": "blocked",
   "summary": {
     "pass": 0,
@@ -34,9 +34,9 @@
     "command": "npx -y @sorbetai/acp@alpha",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "55033ac3e1d70519b7deef75f624dabb20b063a8d228f8565d6a46399625b7d8",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44905284590",
-    "revision": "dc4996d558198deec7ab7574390a4ea9ec235f7c",
+    "recipeSha256": "d1b95ce1e279a0521d0eac05ec4c4f0f95fb818fad76fbe0ae118c57077121a3",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45023329395",
+    "revision": "72057d3c029c69a94ccdc20e530f0d63ab723c19",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -58,8 +58,8 @@
           "method": "initialize",
           "status": "na",
           "reason": "transport",
-          "note": "agent exited (code 1): npm error could not determine executable to run\nnpm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-11-21T12_46_41_610Z-debug-0.log",
-          "latencyMs": 389
+          "note": "agent exited (code 1): node:internal/modules/cjs/loader:1568\n  throw err;\n  ^\n\nError: Cannot find module '/home/runner/.npm/_npx/f25f10297e78e863/node_modules/dist/stdio-cli.js'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)\n    at Module._load (node:internal/modules/cjs/loader:1341:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v24.22.3",
+          "latencyMs": 505
         }
       ]
     },
@@ -471,7 +471,7 @@
     }
   ],
   "notes": {
-    "initialize": "initialize: agent exited (code 1): npm error could not determine executable to run\nnpm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-11-21T12_46_41_610Z-debug-0.log",
+    "initialize": "initialize: agent exited (code 1): node:internal/modules/cjs/loader:1568\n  throw err;\n  ^\n\nError: Cannot find module '/home/runner/.npm/_npx/f25f10297e78e863/node_modules/dist/stdio-cli.js'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)\n    at Module._load (node:internal/modules/cjs/loader:1341:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v24.22.3",
     "authenticate": "authenticate: Not exercised; prerequisite initialize unavailable",
     "session/new": "session/new: Not exercised; prerequisite initialize unavailable",
     "session/load": "session/load: Not exercised; prerequisite initialize unavailable",
@@ -501,8 +501,8 @@
     "initialize": {
       "status": "na",
       "reason": "transport",
-      "note": "agent exited (code 1): npm error could not determine executable to run\nnpm error A complete log of this run can be found in: /home/runner/.npm/_logs/2026-11-21T12_46_41_610Z-debug-0.log",
-      "latencyMs": 389
+      "note": "agent exited (code 1): node:internal/modules/cjs/loader:1568\n  throw err;\n  ^\n\nError: Cannot find module '/home/runner/.npm/_npx/f25f10297e78e863/node_modules/dist/stdio-cli.js'\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1564:15)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1118:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1142:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1169:12)\n    at Module._load (node:internal/modules/cjs/loader:1341:5)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\n    at node:internal/main/run_main_module:33:47 {\n  code: 'MODULE_NOT_FOUND',\n  requireStack: []\n}\n\nNode.js v24.22.3",
+      "latencyMs": 505
     },
     "authenticate": {
       "status": "blocked",
@@ -715,16 +715,16 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-21T12:46:41.221Z",
+      "at": "2026-11-22T12:41:53.036Z",
       "outcome": "error",
-      "latencyMs": 329
+      "latencyMs": 473
     },
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-21T12:46:41.554Z",
+      "at": "2026-11-22T12:41:53.513Z",
       "outcome": "error",
-      "latencyMs": 389
+      "latencyMs": 505
     }
   ],
   "scenarios": [],
@@ -734,7 +734,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 43847,
+      "port": 33757,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 2,

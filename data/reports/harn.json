@@ -255,7 +255,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-21T12:45:30.338Z",
+  "probedAt": "2026-11-22T12:41:02.817Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -281,9 +281,9 @@
     "command": "${REPO_ROOT}/.cache/agents/harn/agent serve acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "6a1d89bb55d9132ff1bde1b9207ccd81a3bbbc497093158e5cb7313267f6055e",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44905284590",
-    "revision": "dc4996d558198deec7ab7574390a4ea9ec235f7c",
+    "recipeSha256": "60bfc293999f0bcf8e2eacba954556d431b5273616cfad72ad4c36bf86a1d3c7",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45023329395",
+    "revision": "72057d3c029c69a94ccdc20e530f0d63ab723c19",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -305,7 +305,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · harn",
-          "latencyMs": 39
+          "latencyMs": 14
         }
       ]
     },
@@ -334,7 +334,7 @@
           "reason": "request-rejected",
           "errorCode": -32602,
           "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-          "latencyMs": 0
+          "latencyMs": 1
         }
       ]
     },
@@ -747,14 +747,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · harn",
-      "latencyMs": 39
+      "latencyMs": 14
     },
     "session/new": {
       "status": "observed",
       "reason": "request-rejected",
       "errorCode": -32602,
       "note": "[environment_policy.missing] runnable session admission requires `environmentPolicy`: state `kind` as one of inherited, isolated, granted. Omission is refused rather than defaulted, so that what a session's children can read never depends o",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     "set_mode": {
       "status": "blocked",
@@ -965,29 +965,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-21T12:45:30.237Z",
+      "at": "2026-11-22T12:41:02.748Z",
       "outcome": "success",
-      "latencyMs": 39
+      "latencyMs": 14
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-21T12:45:30.318Z",
+      "at": "2026-11-22T12:41:02.797Z",
       "outcome": "error",
       "errorCode": -32602,
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-21T12:45:30.328Z",
+      "at": "2026-11-22T12:41:02.807Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-21T12:45:30.337Z",
+      "at": "2026-11-22T12:41:02.816Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -1024,7 +1024,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 41581,
+      "port": 34679,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

@@ -30,7 +30,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-21T12:44:18.016Z",
+  "probedAt": "2026-11-22T12:39:47.178Z",
   "state": "blocked",
   "summary": {
     "pass": 11,
@@ -56,9 +56,9 @@
     "command": "npx -y cline@3.0.62 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "fa28bfbb4e04b2a463b7403c3352872d11857f4c209d1e4d5ee3e6bf209f532d",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44905284590",
-    "revision": "dc4996d558198deec7ab7574390a4ea9ec235f7c",
+    "recipeSha256": "e4156d05baf12de3afd7a17ac6318b9485f5e58f8def158bdb0c2717453446fa",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45023329395",
+    "revision": "72057d3c029c69a94ccdc20e530f0d63ab723c19",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -94,7 +94,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · cline",
-          "latencyMs": 964
+          "latencyMs": 1491
         }
       ]
     },
@@ -121,7 +121,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 5
+          "latencyMs": 4
         }
       ]
     },
@@ -134,7 +134,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 4
+          "latencyMs": 7
         }
       ]
     },
@@ -241,7 +241,7 @@
           "status": "pass",
           "note": "Accepted mode selection act → plan",
           "advertised": true,
-          "latencyMs": 41
+          "latencyMs": 70
         }
       ]
     },
@@ -266,7 +266,7 @@
         {
           "method": "cancel",
           "status": "pass",
-          "note": "In-flight prompt returned cancelled after 46ms"
+          "note": "In-flight prompt returned cancelled after 63ms"
         }
       ]
     },
@@ -492,7 +492,7 @@
     "load:replay": "load:replay: Prior conversation text replayed for the same session",
     "set_mode": "set_mode: Accepted mode selection act → plan",
     "set_config": "set_config: Original value not offered; cannot safely restore",
-    "cancel": "cancel: In-flight prompt returned cancelled after 46ms",
+    "cancel": "cancel: In-flight prompt returned cancelled after 63ms",
     "logout": "logout: Not advertised; optional method not invoked",
     "message*": "update:message: 10 notification(s) observed",
     "tool_call*": "update:tool_call: 18 notification(s) observed",
@@ -511,18 +511,18 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · cline",
-      "latencyMs": 964
+      "latencyMs": 1491
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 5
+      "latencyMs": 4
     },
     "set_mode": {
       "status": "pass",
       "note": "Accepted mode selection act → plan",
       "advertised": true,
-      "latencyMs": 41
+      "latencyMs": 70
     },
     "set_config": {
       "status": "na",
@@ -535,12 +535,12 @@
     },
     "cancel": {
       "status": "pass",
-      "note": "In-flight prompt returned cancelled after 46ms"
+      "note": "In-flight prompt returned cancelled after 63ms"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 4
+      "latencyMs": 7
     },
     "load:replay": {
       "status": "pass",
@@ -704,105 +704,105 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-21T12:44:15.129Z",
+      "at": "2026-11-22T12:39:43.968Z",
       "outcome": "success",
-      "latencyMs": 964
+      "latencyMs": 1491
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-21T12:44:16.128Z",
+      "at": "2026-11-22T12:39:45.513Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 4
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-11-21T12:44:16.153Z",
+      "at": "2026-11-22T12:39:45.552Z",
       "outcome": "success",
-      "latencyMs": 41
+      "latencyMs": 70
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-11-21T12:44:16.199Z",
+      "at": "2026-11-22T12:39:45.631Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-11-21T12:44:16.212Z",
+      "at": "2026-11-22T12:39:45.651Z",
       "outcome": "success",
-      "latencyMs": 912
+      "latencyMs": 539
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-11-21T12:44:17.134Z",
+      "at": "2026-11-22T12:39:46.201Z",
       "outcome": "success",
-      "latencyMs": 65
+      "latencyMs": 83
     },
     {
       "method": "session/prompt",
       "scenario": "default:write",
-      "at": "2026-11-21T12:44:17.199Z",
+      "at": "2026-11-22T12:39:46.284Z",
       "outcome": "success",
-      "latencyMs": 46
+      "latencyMs": 89
     },
     {
       "method": "session/prompt",
       "scenario": "default:plan",
-      "at": "2026-11-21T12:44:17.245Z",
+      "at": "2026-11-22T12:39:46.373Z",
       "outcome": "success",
-      "latencyMs": 28
+      "latencyMs": 47
     },
     {
       "method": "session/prompt",
       "scenario": "cancel",
-      "at": "2026-11-21T12:44:17.274Z",
+      "at": "2026-11-22T12:39:46.421Z",
       "outcome": "success",
-      "latencyMs": 46
+      "latencyMs": 63
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-11-21T12:44:17.328Z",
+      "at": "2026-11-22T12:39:46.502Z",
       "outcome": "success",
-      "latencyMs": 4
+      "latencyMs": 7
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-21T12:44:17.342Z",
+      "at": "2026-11-22T12:39:46.524Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 3
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-11-21T12:44:17.343Z",
+      "at": "2026-11-22T12:39:46.527Z",
       "outcome": "success",
-      "latencyMs": 117
+      "latencyMs": 69
     },
     {
       "method": "session/new",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-21T12:44:17.461Z",
+      "at": "2026-11-22T12:39:46.599Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 3
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-21T12:44:17.463Z",
+      "at": "2026-11-22T12:39:46.602Z",
       "outcome": "success",
-      "latencyMs": 48
+      "latencyMs": 71
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-21T12:44:18.013Z",
+      "at": "2026-11-22T12:39:47.175Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -810,25 +810,25 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-21T12:44:18.014Z",
+      "at": "2026-11-22T12:39:47.176Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-21T12:44:18.015Z",
+      "at": "2026-11-22T12:39:47.176Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "1795265056129_XAKvP_cli",
+      "sessionId": "1795351185515_rWS5u_cli",
       "configuration": {
         "provider": "openai-compatible",
         "model": "gpt-4o",
@@ -869,7 +869,7 @@
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "1795265056129_XAKvP_cli",
+      "sessionId": "1795351185515_rWS5u_cli",
       "configuration": {
         "provider": "openai-compatible",
         "model": "gpt-4o",
@@ -896,7 +896,7 @@
       "tools": [
         {
           "id": "call_probe_2",
-          "name": "read_files: {\"files\":[{\"path\":\"/tmp/acp-probe-U0gXx7/PROBE_CANARY.txt...",
+          "name": "read_files: {\"files\":[{\"path\":\"/tmp/acp-probe-5Jt73c/PROBE_CANARY.txt...",
           "status": "completed"
         }
       ],
@@ -910,7 +910,7 @@
     {
       "id": "default:write",
       "profile": "default",
-      "sessionId": "1795265056129_XAKvP_cli",
+      "sessionId": "1795351185515_rWS5u_cli",
       "configuration": {
         "provider": "openai-compatible",
         "model": "gpt-4o",
@@ -937,7 +937,7 @@
       "tools": [
         {
           "id": "call_probe_3",
-          "name": "apply_patch: {\"input\":\"*** Begin Patch\\n*** Add File: /tmp/acp-probe-U...",
+          "name": "apply_patch: {\"input\":\"*** Begin Patch\\n*** Add File: /tmp/acp-probe-5...",
           "status": "completed"
         }
       ],
@@ -951,7 +951,7 @@
     {
       "id": "default:plan",
       "profile": "default",
-      "sessionId": "1795265056129_XAKvP_cli",
+      "sessionId": "1795351185515_rWS5u_cli",
       "configuration": {
         "provider": "openai-compatible",
         "model": "gpt-4o",
@@ -984,7 +984,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "1795265057342_NKNC0_cli",
+      "sessionId": "1795351186527_mxfAS_cli",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1010,7 +1010,7 @@
     {
       "id": "mcp:stdio:default",
       "profile": "default",
-      "sessionId": "1795265057462_6P2cQ_cli",
+      "sessionId": "1795351186601_8WmWm_cli",
       "configuration": {
         "provider": "openai-compatible",
         "model": "gpt-4o",
@@ -1040,7 +1040,9 @@
           "mcp: no matching tool offered"
         ]
       },
-      "diagnostics": [],
+      "diagnostics": [
+        "DeprecationWarning: AI SDK Warning (openai-compatible.chat / gpt-4o): Deprecated: \"providerOptions key 'openai-compatible'\". Use 'openaiCompatible' instead.\n      at iX (/$bunfs/root/chunk-bkyx34xg.js:26:46952)\n      at J0 (/$bunfs/root/chunk-bkyx34xg.js:26:47251)\n      at transform (/$bunfs/root/chunk-bkyx34xg.js:44:43027)\n\nDeprecationWarning: AI SDK Warning (openai-compatible.chat / gpt-4o): Deprecated: \"providerOptions key 'openai-compatible'\". Use 'openaiCompatible' instead.\n      at iX (/$bunfs/root/chunk-bkyx34xg.js:26:46952)\n      at J0 (/$bunfs/root/chunk-bkyx34xg.js:26:47251)\n      at transform (/$bunfs/root/chunk-bkyx34xg.js:44:43027)"
+      ],
       "mcpEvents": []
     }
   ],
@@ -1086,10 +1088,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 44783,
+      "port": 42561,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 18,
+      "relayed": 19,
       "drops": 0
     }
   }

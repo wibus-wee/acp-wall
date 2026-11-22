@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "qoder",
   "agentName": "qoder-cli",
-  "agentVersion": "1.1.94",
+  "agentVersion": "1.1.95",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -39,7 +39,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-21T12:47:01.453Z",
+  "probedAt": "2026-11-22T12:42:19.070Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -62,12 +62,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.3",
-    "command": "npx -y @qoder-ai/qodercli@1.1.94 --acp",
+    "command": "npx -y @qoder-ai/qodercli@1.1.95 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "488025e4b48717a5f36d065d2c18db86fe950f0e8edca92b2c4bbce1eddbafc9",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44905284590",
-    "revision": "dc4996d558198deec7ab7574390a4ea9ec235f7c",
+    "recipeSha256": "67a17129c63f233e0d2380cf7d7511b1e3a38a616ab6dde9051fb2ba31a64458",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45023329395",
+    "revision": "72057d3c029c69a94ccdc20e530f0d63ab723c19",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -89,7 +89,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · qoder-cli",
-          "latencyMs": 5431
+          "latencyMs": 4151
         }
       ]
     },
@@ -118,7 +118,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Authentication is required.",
-          "latencyMs": 272
+          "latencyMs": 416
         }
       ]
     },
@@ -183,7 +183,7 @@
           "errorCode": -32000,
           "note": "Authentication required: Authentication is required.",
           "advertised": true,
-          "latencyMs": 263
+          "latencyMs": 268
         },
         {
           "method": "session/resume",
@@ -534,14 +534,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · qoder-cli",
-      "latencyMs": 5431
+      "latencyMs": 4151
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Authentication is required.",
-      "latencyMs": 272
+      "latencyMs": 416
     },
     "set_mode": {
       "status": "blocked",
@@ -621,7 +621,7 @@
       "errorCode": -32000,
       "note": "Authentication required: Authentication is required.",
       "advertised": true,
-      "latencyMs": 263
+      "latencyMs": 268
     },
     "session/resume": {
       "status": "blocked",
@@ -755,30 +755,30 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-21T12:46:55.419Z",
+      "at": "2026-11-22T12:42:14.188Z",
       "outcome": "success",
-      "latencyMs": 5431
+      "latencyMs": 4151
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-21T12:47:00.904Z",
+      "at": "2026-11-22T12:42:18.375Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 272
+      "latencyMs": 416
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-21T12:47:01.186Z",
+      "at": "2026-11-22T12:42:18.799Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 263
+      "latencyMs": 268
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-21T12:47:01.451Z",
+      "at": "2026-11-22T12:42:19.068Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -815,10 +815,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 37233,
+      "port": 42711,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 17,
+      "relayed": 20,
       "drops": 6
     }
   }

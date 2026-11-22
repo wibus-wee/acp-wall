@@ -29,7 +29,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-21T12:46:06.713Z",
+  "probedAt": "2026-11-22T12:41:29.982Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -55,9 +55,9 @@
     "command": "${REPO_ROOT}/.cache/agents/kiro/agent acp --agent-engine=v3",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "85e884ed35d600fc4a27813f98dcc6c6cfe7b4bc5c14a9fe9314682176d089f6",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/44905284590",
-    "revision": "dc4996d558198deec7ab7574390a4ea9ec235f7c",
+    "recipeSha256": "9130d4dfee22f823aae1cc3fddf252889aabc4eab1b70171ac7e26e466a8521e",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45023329395",
+    "revision": "72057d3c029c69a94ccdc20e530f0d63ab723c19",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -740,14 +740,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-21T12:46:06.669Z",
+      "at": "2026-11-22T12:41:29.917Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-21T12:46:06.706Z",
+      "at": "2026-11-22T12:41:29.973Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 1
@@ -755,10 +755,10 @@
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-21T12:46:06.709Z",
+      "at": "2026-11-22T12:41:29.978Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 3
+      "latencyMs": 2
     }
   ],
   "scenarios": [],
@@ -790,7 +790,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 38787,
+      "port": 33599,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
