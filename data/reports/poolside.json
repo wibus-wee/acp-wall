@@ -39,7 +39,7 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-11-22T12:42:11.934Z",
+  "probedAt": "2026-11-23T14:49:32.254Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -65,9 +65,9 @@
     "command": "${REPO_ROOT}/.cache/agents/poolside/agent acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "e37e387cd673d27d181b97ba4224f8258ee40671ca5fe22a6ffdb6ea85c87f1a",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45023329395",
-    "revision": "72057d3c029c69a94ccdc20e530f0d63ab723c19",
+    "recipeSha256": "2948a6d14475376f12a4e9482c439de03e751d0f4a4c14320dafa1193fe789fa",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45197665140",
+    "revision": "d7d57c87bc2b89d6848ce785dccac3adf6b0e103",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -747,14 +747,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-22T12:42:11.857Z",
+      "at": "2026-11-23T14:49:32.171Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-22T12:42:11.907Z",
+      "at": "2026-11-23T14:49:32.225Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 1
@@ -762,17 +762,17 @@
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-22T12:42:11.920Z",
+      "at": "2026-11-23T14:49:32.239Z",
       "outcome": "success",
       "latencyMs": 3
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-22T12:42:11.932Z",
+      "at": "2026-11-23T14:49:32.252Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 0
     }
   ],
   "scenarios": [],
@@ -813,7 +813,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 33333,
+      "port": 44723,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,
