@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "qoder",
   "agentName": "qoder-cli",
-  "agentVersion": "1.1.95",
+  "agentVersion": "1.1.96",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -39,7 +39,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-23T14:49:46.504Z",
+  "probedAt": "2026-11-24T15:00:07.197Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -62,12 +62,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.3",
-    "command": "npx -y @qoder-ai/qodercli@1.1.95 --acp",
+    "command": "npx -y @qoder-ai/qodercli@1.1.96 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "575afbf98710e9d10cb75d3e639160bed48ece0c80ac10b54246ae24d092f737",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45197665140",
-    "revision": "d7d57c87bc2b89d6848ce785dccac3adf6b0e103",
+    "recipeSha256": "f32339c2022911a4d42f21a9fdaa8801f9a905a0c4b45e79f777b741ad4410ef",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45419505141",
+    "revision": "f66606e1e9dec30101ed83b850757778edc62647",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -89,7 +89,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · qoder-cli",
-          "latencyMs": 5445
+          "latencyMs": 5210
         }
       ]
     },
@@ -118,7 +118,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: Authentication is required.",
-          "latencyMs": 234
+          "latencyMs": 262
         }
       ]
     },
@@ -183,7 +183,7 @@
           "errorCode": -32000,
           "note": "Authentication required: Authentication is required.",
           "advertised": true,
-          "latencyMs": 211
+          "latencyMs": 256
         },
         {
           "method": "session/resume",
@@ -534,14 +534,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · qoder-cli",
-      "latencyMs": 5445
+      "latencyMs": 5210
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: Authentication is required.",
-      "latencyMs": 234
+      "latencyMs": 262
     },
     "set_mode": {
       "status": "blocked",
@@ -621,7 +621,7 @@
       "errorCode": -32000,
       "note": "Authentication required: Authentication is required.",
       "advertised": true,
-      "latencyMs": 211
+      "latencyMs": 256
     },
     "session/resume": {
       "status": "blocked",
@@ -755,30 +755,30 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-23T14:49:40.546Z",
+      "at": "2026-11-24T15:00:01.407Z",
       "outcome": "success",
-      "latencyMs": 5445
+      "latencyMs": 5210
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-23T14:49:46.045Z",
+      "at": "2026-11-24T15:00:06.667Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 234
+      "latencyMs": 262
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-23T14:49:46.289Z",
+      "at": "2026-11-24T15:00:06.938Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 211
+      "latencyMs": 256
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-23T14:49:46.502Z",
+      "at": "2026-11-24T15:00:07.195Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -815,7 +815,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 46857,
+      "port": 33197,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 18,

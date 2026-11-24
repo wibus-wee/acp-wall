@@ -19,7 +19,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-23T14:49:08.060Z",
+  "probedAt": "2026-11-24T14:58:37.343Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -45,9 +45,9 @@
     "command": "uvx --with agent-client-protocol==0.8.1 minion-code@0.1.44 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "dc6f6211de2a52f74bfbeee918c70df22d2bea4ff31427a5f925a04a32122ffa",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45197665140",
-    "revision": "d7d57c87bc2b89d6848ce785dccac3adf6b0e103",
+    "recipeSha256": "8989f0ab1c15010e3c94f8fbc64d281c57e2a5bc1ffb6fba180c09b0307eb02c",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45419505141",
+    "revision": "f66606e1e9dec30101ed83b850757778edc62647",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -69,7 +69,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · minion-code",
-          "latencyMs": 818
+          "latencyMs": 802
         }
       ]
     },
@@ -512,7 +512,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · minion-code",
-      "latencyMs": 818
+      "latencyMs": 802
     },
     "session/new": {
       "status": "blocked",
@@ -730,14 +730,14 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-23T14:49:07.198Z",
+      "at": "2026-11-24T14:58:36.499Z",
       "outcome": "success",
-      "latencyMs": 818
+      "latencyMs": 802
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-23T14:49:08.053Z",
+      "at": "2026-11-24T14:58:37.338Z",
       "outcome": "error",
       "errorCode": -32000,
       "latencyMs": 1
@@ -745,9 +745,9 @@
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-23T14:49:08.056Z",
+      "at": "2026-11-24T14:58:37.341Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 1
     }
   ],
   "scenarios": [],
@@ -780,7 +780,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 38173,
+      "port": 45289,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 0,

@@ -53,7 +53,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-23T14:47:31.372Z",
+  "probedAt": "2026-11-24T14:57:03.531Z",
   "state": "blocked",
   "summary": {
     "pass": 5,
@@ -79,9 +79,9 @@
     "command": "npx -y deepagents-acp@0.1.7",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "ac87bc8fc9bc62aa0685228f925743df2997bba96e1060f0f8c9238f53204616",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45197665140",
-    "revision": "d7d57c87bc2b89d6848ce785dccac3adf6b0e103",
+    "recipeSha256": "986f7fdef28d372ce5fcc2085dcfde7e24787def2a1bf1fc173d04b70d780fff",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45419505141",
+    "revision": "f66606e1e9dec30101ed83b850757778edc62647",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -103,7 +103,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · deepagents-acp",
-          "latencyMs": 650
+          "latencyMs": 622
         }
       ]
     },
@@ -130,7 +130,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 58
+          "latencyMs": 61
         }
       ]
     },
@@ -143,7 +143,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 3
         }
       ]
     },
@@ -158,7 +158,7 @@
           "reason": "request-rejected",
           "errorCode": -32603,
           "note": "Internal error — Unable to import @langchain/anthropic. Please install with `npm install @langchain/anthropic` or `pnpm install @langchai…",
-          "latencyMs": 26
+          "latencyMs": 27
         }
       ]
     },
@@ -540,12 +540,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · deepagents-acp",
-      "latencyMs": 650
+      "latencyMs": 622
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 58
+      "latencyMs": 61
     },
     "set_mode": {
       "status": "pass",
@@ -563,7 +563,7 @@
       "reason": "request-rejected",
       "errorCode": -32603,
       "note": "Internal error — Unable to import @langchain/anthropic. Please install with `npm install @langchain/anthropic` or `pnpm install @langchai…",
-      "latencyMs": 26
+      "latencyMs": 27
     },
     "cancel": {
       "status": "blocked",
@@ -574,7 +574,7 @@
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 3
     },
     "load:replay": {
       "status": "observed",
@@ -753,57 +753,57 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-23T14:47:30.518Z",
+      "at": "2026-11-24T14:57:02.693Z",
       "outcome": "success",
-      "latencyMs": 650
+      "latencyMs": 622
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-23T14:47:31.210Z",
+      "at": "2026-11-24T14:57:03.358Z",
       "outcome": "success",
-      "latencyMs": 58
+      "latencyMs": 61
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-11-23T14:47:31.282Z",
+      "at": "2026-11-24T14:57:03.436Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-11-23T14:47:31.289Z",
-      "outcome": "success",
-      "latencyMs": 0
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:exec",
-      "at": "2026-11-23T14:47:31.304Z",
-      "outcome": "error",
-      "errorCode": -32603,
-      "latencyMs": 26
-    },
-    {
-      "method": "session/load",
-      "scenario": "load:replay:1",
-      "at": "2026-11-23T14:47:31.340Z",
+      "at": "2026-11-24T14:57:03.442Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
+      "method": "session/prompt",
+      "scenario": "default:exec",
+      "at": "2026-11-24T14:57:03.459Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 27
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-11-24T14:57:03.497Z",
+      "outcome": "success",
+      "latencyMs": 3
+    },
+    {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-23T14:47:31.353Z",
+      "at": "2026-11-24T14:57:03.510Z",
       "outcome": "success",
-      "latencyMs": 0
+      "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-11-23T14:47:31.353Z",
+      "at": "2026-11-24T14:57:03.511Z",
       "outcome": "error",
       "errorCode": -32603,
       "latencyMs": 9
@@ -811,14 +811,14 @@
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-23T14:47:31.362Z",
+      "at": "2026-11-24T14:57:03.520Z",
       "outcome": "success",
       "latencyMs": 1
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-11-23T14:47:31.363Z",
+      "at": "2026-11-24T14:57:03.521Z",
       "outcome": "error",
       "errorCode": -32603,
       "latencyMs": 7
@@ -826,7 +826,7 @@
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-23T14:47:31.371Z",
+      "at": "2026-11-24T14:57:03.530Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -834,7 +834,7 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-23T14:47:31.371Z",
+      "at": "2026-11-24T14:57:03.530Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -842,7 +842,7 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-23T14:47:31.371Z",
+      "at": "2026-11-24T14:57:03.530Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -852,7 +852,7 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "sess_b09981a7258a4bb9",
+      "sessionId": "sess_174da6be078e42d5",
       "configuration": {},
       "result": {
         "status": "observed",
@@ -877,7 +877,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "sess_f9cffe3558e04108",
+      "sessionId": "sess_54b0a7f997ac4f89",
       "configuration": {},
       "result": {
         "status": "observed",
@@ -902,7 +902,7 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "sess_0d4d1aad8b2e48da",
+      "sessionId": "sess_95391e3964a9414c",
       "configuration": {},
       "result": {
         "status": "observed",
@@ -965,7 +965,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 37447,
+      "port": 36367,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 1,

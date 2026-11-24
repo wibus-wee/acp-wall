@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "kimchi",
   "agentName": "kimchi",
-  "agentVersion": "1.37.6",
+  "agentVersion": "1.39.1",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -97,7 +97,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-23T14:48:24.272Z",
+  "probedAt": "2026-11-24T14:58:02.186Z",
   "state": "blocked",
   "summary": {
     "pass": 15,
@@ -123,9 +123,9 @@
     "command": "${REPO_ROOT}/.cache/agents/kimchi/agent --mode acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "dfcd0c7cf8ac11b0b869b9a800365fdeb835482687e78cbe21f8ee8bd738f99e",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45197665140",
-    "revision": "d7d57c87bc2b89d6848ce785dccac3adf6b0e103",
+    "recipeSha256": "00289da47e88d3f11e320994951584750d657d1e40d72cc6d3438b0f7ecaf631",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45419505141",
+    "revision": "f66606e1e9dec30101ed83b850757778edc62647",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -153,7 +153,6 @@
         "clear_todos",
         "confirm_todos",
         "Agent",
-        "set_phase",
         "dispatch_to_cloud_agent",
         "web_fetch",
         "web_search",
@@ -188,7 +187,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · kimchi",
-          "latencyMs": 632
+          "latencyMs": 743
         }
       ]
     },
@@ -215,7 +214,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 159
+          "latencyMs": 198
         }
       ]
     },
@@ -286,7 +285,7 @@
           "method": "session/close",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 97
+          "latencyMs": 36
         },
         {
           "method": "session/delete",
@@ -346,7 +345,7 @@
           "status": "pass",
           "note": "Changed permissions-mode to another offered value",
           "advertised": true,
-          "latencyMs": 5
+          "latencyMs": 17
         }
       ]
     },
@@ -358,7 +357,7 @@
         {
           "method": "cancel",
           "status": "pass",
-          "note": "In-flight prompt returned cancelled after 116ms"
+          "note": "In-flight prompt returned cancelled after 68ms"
         }
       ]
     },
@@ -582,7 +581,7 @@
     "load:replay": "load:replay: Prior conversation text replayed for the same session",
     "set_mode": "set_mode: No session modes offered",
     "set_config": "set_config: Changed permissions-mode to another offered value",
-    "cancel": "cancel: In-flight prompt returned cancelled after 116ms",
+    "cancel": "cancel: In-flight prompt returned cancelled after 68ms",
     "logout": "logout: No authentication established by this run; shared account state is not changed",
     "message*": "update:message: 10 notification(s) observed",
     "tool_call*": "update:tool_call: 24 notification(s) observed",
@@ -601,12 +600,12 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · kimchi",
-      "latencyMs": 632
+      "latencyMs": 743
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 159
+      "latencyMs": 198
     },
     "set_mode": {
       "status": "na",
@@ -617,7 +616,7 @@
       "status": "pass",
       "note": "Changed permissions-mode to another offered value",
       "advertised": true,
-      "latencyMs": 5
+      "latencyMs": 17
     },
     "session/prompt": {
       "status": "pass",
@@ -625,7 +624,7 @@
     },
     "cancel": {
       "status": "pass",
-      "note": "In-flight prompt returned cancelled after 116ms"
+      "note": "In-flight prompt returned cancelled after 68ms"
     },
     "session/load": {
       "status": "pass",
@@ -691,7 +690,7 @@
     "session/close": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 97
+      "latencyMs": 36
     },
     "session/delete": {
       "status": "na",
@@ -790,148 +789,148 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-23T14:48:21.048Z",
+      "at": "2026-11-24T14:57:58.742Z",
       "outcome": "success",
-      "latencyMs": 632
+      "latencyMs": 743
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-23T14:48:21.711Z",
+      "at": "2026-11-24T14:57:59.532Z",
       "outcome": "success",
-      "latencyMs": 159
+      "latencyMs": 198
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-11-23T14:48:21.889Z",
+      "at": "2026-11-24T14:57:59.758Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 17
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-11-23T14:48:21.905Z",
+      "at": "2026-11-24T14:57:59.790Z",
       "outcome": "success",
-      "latencyMs": 2
+      "latencyMs": 3
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-11-23T14:48:21.916Z",
+      "at": "2026-11-24T14:57:59.807Z",
       "outcome": "success",
-      "latencyMs": 219
+      "latencyMs": 325
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-11-23T14:48:22.148Z",
-      "outcome": "success",
-      "latencyMs": 110
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:write",
-      "at": "2026-11-23T14:48:22.258Z",
-      "outcome": "success",
-      "latencyMs": 128
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:plan",
-      "at": "2026-11-23T14:48:22.386Z",
+      "at": "2026-11-24T14:58:00.142Z",
       "outcome": "success",
       "latencyMs": 100
     },
     {
       "method": "session/prompt",
-      "scenario": "cancel",
-      "at": "2026-11-23T14:48:22.486Z",
+      "scenario": "default:write",
+      "at": "2026-11-24T14:58:00.243Z",
       "outcome": "success",
       "latencyMs": 116
     },
     {
+      "method": "session/prompt",
+      "scenario": "default:plan",
+      "at": "2026-11-24T14:58:00.360Z",
+      "outcome": "success",
+      "latencyMs": 84
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "cancel",
+      "at": "2026-11-24T14:58:00.444Z",
+      "outcome": "success",
+      "latencyMs": 68
+    },
+    {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-11-23T14:48:22.611Z",
+      "at": "2026-11-24T14:58:00.522Z",
       "outcome": "success",
       "latencyMs": 3
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-23T14:48:22.628Z",
+      "at": "2026-11-24T14:58:00.542Z",
       "outcome": "success",
       "latencyMs": 5
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-11-23T14:48:22.637Z",
+      "at": "2026-11-24T14:58:00.554Z",
       "outcome": "success",
-      "latencyMs": 60
+      "latencyMs": 62
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-11-23T14:48:22.708Z",
+      "at": "2026-11-24T14:58:00.627Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-11-23T14:48:22.719Z",
-      "outcome": "success",
-      "latencyMs": 45
-    },
-    {
-      "method": "session/close",
-      "scenario": "session-mgmt",
-      "at": "2026-11-23T14:48:22.771Z",
-      "outcome": "success",
-      "latencyMs": 97
-    },
-    {
-      "method": "session/new",
-      "scenario": "mcp:stdio:default",
-      "at": "2026-11-23T14:48:22.873Z",
+      "at": "2026-11-24T14:58:00.640Z",
       "outcome": "success",
       "latencyMs": 47
     },
     {
+      "method": "session/close",
+      "scenario": "session-mgmt",
+      "at": "2026-11-24T14:58:00.693Z",
+      "outcome": "success",
+      "latencyMs": 36
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-11-24T14:58:00.736Z",
+      "outcome": "success",
+      "latencyMs": 64
+    },
+    {
       "method": "session/prompt",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-23T14:48:22.921Z",
+      "at": "2026-11-24T14:58:00.800Z",
       "outcome": "success",
-      "latencyMs": 184
+      "latencyMs": 224
     },
     {
       "method": "session/new",
       "scenario": "mcp:http:default",
-      "at": "2026-11-23T14:48:23.607Z",
+      "at": "2026-11-24T14:58:01.526Z",
       "outcome": "success",
-      "latencyMs": 70
+      "latencyMs": 89
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:http:default",
-      "at": "2026-11-23T14:48:23.677Z",
+      "at": "2026-11-24T14:58:01.615Z",
       "outcome": "success",
-      "latencyMs": 91
+      "latencyMs": 65
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-23T14:48:24.270Z",
+      "at": "2026-11-24T14:58:02.183Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 1
+      "latencyMs": 2
     },
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-23T14:48:24.271Z",
+      "at": "2026-11-24T14:58:02.185Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -939,7 +938,7 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-23T14:48:24.271Z",
+      "at": "2026-11-24T14:58:02.185Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -949,7 +948,7 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "01a208e1-21f1-7016-bb86-ede5404841f5",
+      "sessionId": "01a20e10-4f17-75ac-af8c-ee34b4f8c802",
       "configuration": {
         "permissions-mode": "default",
         "model": "kimchi-dev/probe-model"
@@ -991,7 +990,7 @@
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "01a208e1-21f1-7016-bb86-ede5404841f5",
+      "sessionId": "01a20e10-4f17-75ac-af8c-ee34b4f8c802",
       "configuration": {
         "permissions-mode": "default",
         "model": "kimchi-dev/probe-model"
@@ -1030,7 +1029,7 @@
     {
       "id": "default:write",
       "profile": "default",
-      "sessionId": "01a208e1-21f1-7016-bb86-ede5404841f5",
+      "sessionId": "01a20e10-4f17-75ac-af8c-ee34b4f8c802",
       "configuration": {
         "permissions-mode": "default",
         "model": "kimchi-dev/probe-model"
@@ -1069,7 +1068,7 @@
     {
       "id": "default:plan",
       "profile": "default",
-      "sessionId": "01a208e1-21f1-7016-bb86-ede5404841f5",
+      "sessionId": "01a20e10-4f17-75ac-af8c-ee34b4f8c802",
       "configuration": {
         "permissions-mode": "default",
         "model": "kimchi-dev/probe-model"
@@ -1100,7 +1099,7 @@
     {
       "id": "mcp:stdio:default",
       "profile": "default",
-      "sessionId": "01a208e1-2665-7016-bb86-edea31a60980",
+      "sessionId": "01a20e10-53b3-75ac-af8c-ee3b586cc8f2",
       "configuration": {
         "permissions-mode": "default",
         "model": "kimchi-dev/probe-model"
@@ -1130,28 +1129,26 @@
           "mcp: no matching tool offered"
         ]
       },
-      "diagnostics": [
-        "[model-roles] Warning: orchestrator model \"kimchi-dev/kimi-k3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: planner model \"kimchi-dev/glm-5.3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: builder model \"kimchi-dev/glm-5.3-flash\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: reviewer model \"kimchi-dev/kimi-k3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: explorer model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: researcher model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: judge model \"kimchi-dev/glm-5.3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: compactor model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model."
-      ],
+      "diagnostics": [],
       "mcpEvents": [
         {
           "event": "spawned",
-          "ts": 1795445303041
+          "ts": 1795532280959
         },
         {
           "event": "initialized",
-          "ts": 1795445303067
+          "ts": 1795532280980
         },
         {
           "event": "tools/list",
-          "ts": 1795445303067
+          "ts": 1795532280980
         }
       ]
     },
     {
       "id": "mcp:http:default",
       "profile": "default",
-      "sessionId": "01a208e1-2940-7016-bb86-edec629c0fd1",
+      "sessionId": "01a20e10-56c2-75ac-af8c-ee3ddccd0bc7",
       "configuration": {
         "permissions-mode": "default",
         "model": "kimchi-dev/probe-model"
@@ -1180,21 +1177,19 @@
           "mcp: no matching tool offered"
         ]
       },
-      "diagnostics": [
-        "[model-roles] Warning: orchestrator model \"kimchi-dev/kimi-k3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: planner model \"kimchi-dev/glm-5.3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: builder model \"kimchi-dev/glm-5.3-flash\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: reviewer model \"kimchi-dev/kimi-k3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: explorer model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: researcher model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: judge model \"kimchi-dev/glm-5.3\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model.\n[model-roles] Warning: compactor model \"kimchi-dev/deepseek-v4-flash-0731\" is not available. Subagents for this role will fall back to the parent model. Update via /multi-model."
-      ],
+      "diagnostics": [],
       "mcpEvents": [
         {
           "event": "connected",
-          "ts": 1795445303684
+          "ts": 1795532281624
         },
         {
           "event": "initialized",
-          "ts": 1795445303692
+          "ts": 1795532281636
         },
         {
           "event": "tools/list",
-          "ts": 1795445303695
+          "ts": 1795532281639
         }
       ]
     }
@@ -1250,10 +1245,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 43117,
+      "port": 37031,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 6,
+      "relayed": 4,
       "drops": 0
     }
   }
