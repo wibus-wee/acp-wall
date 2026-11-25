@@ -3,22 +3,50 @@
   "methodologyVersion": "2.1.0",
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "fast-agent",
+  "agentName": "fast-agent-acp",
+  "agentVersion": "0.10.66",
   "specVersion": 1,
   "advertised": {
-    "capabilities": {},
-    "authMethods": []
+    "capabilities": {
+      "loadSession": true,
+      "promptCapabilities": {
+        "image": true,
+        "audio": false,
+        "embeddedContext": true
+      },
+      "mcpCapabilities": {
+        "http": true,
+        "sse": true
+      },
+      "sessionCapabilities": {
+        "list": {},
+        "resume": {}
+      },
+      "_meta": {
+        "co.huggingface": {
+          "structuredOutput": true
+        }
+      }
+    },
+    "authMethods": [
+      {
+        "id": "fast-agent-ai-secrets",
+        "name": "Configure fast-agent",
+        "description": "Set provider keys in fast-agent.secrets.yaml or env vars. See docs: [Configuration Reference](https://fast-agent.ai/ref/config_file/)"
+      }
+    ]
   },
-  "probedAt": "2026-11-24T14:57:16.207Z",
+  "probedAt": "2026-11-25T14:31:07.231Z",
   "state": "blocked",
   "summary": {
-    "pass": 0,
-    "observed": 0,
-    "blocked": 34,
+    "pass": 16,
+    "observed": 2,
+    "blocked": 1,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 1,
+    "na": 16,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -34,32 +62,49 @@
     "command": "uvx fast-agent-acp==0.10.66 -x",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "a16e4416705ca2ac50c2cf02f8603161f6bb81749ac8c263655a615b6380c858",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45419505141",
-    "revision": "f66606e1e9dec30101ed83b850757778edc62647",
+    "recipeSha256": "9a823efc0bde0b178e7e1c1bc3160eea8ef50965968879abfee1fcd4cdd3b689",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45634546051",
+    "revision": "7d80638faca2f951f0096f9698f1cfffc4c41306",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
-    "mockRequests": 0,
+    "mockRequests": 16,
     "modelEvidence": {
-      "seenTools": [],
-      "issuedTools": [],
-      "skippedCalls": []
+      "seenTools": [
+        "bash",
+        "process",
+        "read_text_file",
+        "write_text_file",
+        "edit_file",
+        "acp-probe-mcp__probe_noop",
+        "acp-probe-http__probe_noop",
+        "acp-probe-sse__probe_noop"
+      ],
+      "issuedTools": [
+        "bash",
+        "read_text_file",
+        "write_text_file",
+        "acp-probe-mcp__probe_noop",
+        "acp-probe-http__probe_noop",
+        "acp-probe-sse__probe_noop"
+      ],
+      "skippedCalls": [
+        "plan: no matching tool offered"
+      ]
     }
   },
   "cells": [
     {
       "key": "initialize",
       "scope": "core",
-      "status": "na",
+      "status": "pass",
       "items": [
         {
           "method": "initialize",
-          "status": "na",
-          "reason": "transport",
-          "note": "agent exited (code 1): Traceback (most recent call last):\nFile \"/home/runner/work/_temp/setup-uv-cache/archive-v0/WdmZZttcY2UJ22Ul/bin/fast-agent-acp\", line 6, in <module>\n    from fast_agent_acp.cli import main\nModuleNotFoundError: No module named 'fast_agent_acp'",
-          "latencyMs": 89
+          "status": "pass",
+          "note": "Protocol 1 · fast-agent-acp",
+          "latencyMs": 5186
         }
       ]
     },
@@ -71,642 +116,588 @@
         {
           "method": "authenticate",
           "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "advertised": true,
+          "reason": "interactive-auth",
+          "note": "Advertised: fast-agent-ai-secrets; login not attempted in unattended discovery"
         }
       ]
     },
     {
       "key": "session/new",
       "scope": "core",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "session/new",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "Created a session without additional MCP dependencies",
+          "latencyMs": 93
         }
       ]
     },
     {
       "key": "session/load",
       "scope": "optional",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "session/load",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 19
         }
       ]
     },
     {
       "key": "session/prompt",
       "scope": "core",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "session/prompt",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "4 prompt responses received; content and tool choice are observed separately"
         }
       ]
     },
     {
       "key": "prompt:content",
       "scope": "optional",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "prompt:image",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "advertised": true,
+          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
         },
         {
           "method": "prompt:embedded-context",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "advertised": true,
+          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
         }
       ]
     },
     {
       "key": "sessions/*",
       "scope": "optional",
-      "status": "blocked",
+      "status": "mixed",
       "items": [
         {
           "method": "session/list",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "advertised": true,
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32002,
+          "note": "Session not found: 2611251431-wTukEP — Session 2611251431-wTukEP could not be resolved from /tmp/acp-probe-MYjTkX",
+          "advertised": true,
+          "latencyMs": 1
         },
         {
           "method": "session/close",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "session/delete",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
     {
       "key": "fork",
       "scope": "optional",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "session/fork",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
     {
       "key": "load:replay",
       "scope": "optional",
-      "status": "blocked",
+      "status": "observed",
       "items": [
         {
           "method": "load:replay",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "observed",
+          "note": "Conversation replay observed; prior content not fully matched"
         }
       ]
     },
     {
       "key": "set_mode",
       "scope": "optional",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "set_mode",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "Accepted selection of the sole advertised mode; no transition claimed",
+          "advertised": true,
+          "latencyMs": 2
         }
       ]
     },
     {
       "key": "set_config",
       "scope": "optional",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "set_config",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "no-alternative",
+          "note": "No offered alternative select value; boolean capability is not negotiated"
         }
       ]
     },
     {
       "key": "cancel",
       "scope": "core",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "cancel",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "In-flight prompt returned cancelled after 39ms"
         }
       ]
     },
     {
       "key": "logout",
       "scope": "optional",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "logout",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         }
       ]
     },
     {
       "key": "message*",
       "scope": "observation",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "update:message",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "15 notification(s) observed"
         }
       ]
     },
     {
       "key": "tool_call*",
       "scope": "observation",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "update:tool_call",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "19 notification(s) observed"
         }
       ]
     },
     {
       "key": "usage",
       "scope": "observation",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "update:usage",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
     {
       "key": "permission",
       "scope": "observation",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "request_permission",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "3 client request(s) observed with simulated client replies; see scenarios for conditions"
         }
       ]
     },
     {
       "key": "plan",
       "scope": "observation",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "update:plan",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "not-triggered",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
     {
       "key": "slash_cmds",
       "scope": "observation",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "update:commands",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "9 notification(s) observed"
         }
       ]
     },
     {
       "key": "fs/*",
       "scope": "observation",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "fs/read_text_file",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
         },
         {
           "method": "fs/write_text_file",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
         }
       ]
     },
     {
       "key": "terminal/*",
       "scope": "observation",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "terminal/*",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "no-client-callback",
+          "note": "No client request observed; internal tools and policy choices are permitted"
         }
       ]
     },
     {
       "key": "elicitation",
       "scope": "observation",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "elicitation",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "not-run",
+          "note": "No controlled elicitation scenario configured"
         }
       ]
     },
     {
       "key": "providers",
       "scope": "experimental",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "providers/list",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "providers/set",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
         },
         {
           "method": "providers/disable",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "not-run",
+          "advertised": false,
+          "note": "Provider mutation not exercised in discovery"
         }
       ]
     },
     {
       "key": "nes",
       "scope": "experimental",
-      "status": "blocked",
+      "status": "na",
       "items": [
         {
           "method": "nes/start",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "advertised": false,
+          "reason": "not-advertised",
+          "note": "Not advertised; optional method not invoked"
         },
         {
           "method": "nes/suggest",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "na",
+          "reason": "not-run",
+          "note": "No controlled scenario exercised this check"
         }
       ]
     },
     {
       "key": "mcp",
       "scope": "observation",
-      "status": "blocked",
+      "status": "pass",
       "items": [
         {
           "method": "mcp:stdio",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario."
         },
         {
           "method": "mcp:http",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario.",
+          "advertised": true
         },
         {
           "method": "mcp:sse",
-          "status": "blocked",
-          "reason": "prerequisite",
-          "blockedBy": "initialize",
-          "note": "Not exercised; prerequisite initialize unavailable"
+          "status": "pass",
+          "note": "Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario.",
+          "advertised": true
         }
       ]
     }
   ],
   "notes": {
-    "initialize": "initialize: agent exited (code 1): Traceback (most recent call last):\nFile \"/home/runner/work/_temp/setup-uv-cache/archive-v0/WdmZZttcY2UJ22Ul/bin/fast-agent-acp\", line 6, in <module>\n    from fast_agent_acp.cli import main\nModuleNotFoundError: No module named 'fast_agent_acp'",
-    "authenticate": "authenticate: Not exercised; prerequisite initialize unavailable",
-    "session/new": "session/new: Not exercised; prerequisite initialize unavailable",
-    "session/load": "session/load: Not exercised; prerequisite initialize unavailable",
-    "session/prompt": "session/prompt: Not exercised; prerequisite initialize unavailable",
-    "prompt:content": "prompt:image: Not exercised; prerequisite initialize unavailable · prompt:embedded-context: Not exercised; prerequisite initialize unavailable",
-    "sessions/*": "session/list: Not exercised; prerequisite initialize unavailable · session/resume: Not exercised; prerequisite initialize unavailable · session/close: Not exercised; prerequisite initialize unavailable · session/delete: Not exercised; prerequisite initialize unavailable",
-    "fork": "session/fork: Not exercised; prerequisite initialize unavailable",
-    "load:replay": "load:replay: Not exercised; prerequisite initialize unavailable",
-    "set_mode": "set_mode: Not exercised; prerequisite initialize unavailable",
-    "set_config": "set_config: Not exercised; prerequisite initialize unavailable",
-    "cancel": "cancel: Not exercised; prerequisite initialize unavailable",
-    "logout": "logout: Not exercised; prerequisite initialize unavailable",
-    "message*": "update:message: Not exercised; prerequisite initialize unavailable",
-    "tool_call*": "update:tool_call: Not exercised; prerequisite initialize unavailable",
-    "usage": "update:usage: Not exercised; prerequisite initialize unavailable",
-    "permission": "request_permission: Not exercised; prerequisite initialize unavailable",
-    "plan": "update:plan: Not exercised; prerequisite initialize unavailable",
-    "slash_cmds": "update:commands: Not exercised; prerequisite initialize unavailable",
-    "fs/*": "fs/read_text_file: Not exercised; prerequisite initialize unavailable · fs/write_text_file: Not exercised; prerequisite initialize unavailable",
-    "terminal/*": "terminal/*: Not exercised; prerequisite initialize unavailable",
-    "elicitation": "elicitation: Not exercised; prerequisite initialize unavailable",
-    "providers": "providers/list: Not exercised; prerequisite initialize unavailable · providers/set: Not exercised; prerequisite initialize unavailable · providers/disable: Not exercised; prerequisite initialize unavailable",
-    "nes": "nes/start: Not exercised; prerequisite initialize unavailable · nes/suggest: Not exercised; prerequisite initialize unavailable",
-    "mcp": "mcp:stdio: Not exercised; prerequisite initialize unavailable · mcp:http: Not exercised; prerequisite initialize unavailable · mcp:sse: Not exercised; prerequisite initialize unavailable"
+    "initialize": "initialize: Protocol 1 · fast-agent-acp",
+    "authenticate": "authenticate: Advertised: fast-agent-ai-secrets; login not attempted in unattended discovery",
+    "session/new": "session/new: Created a session without additional MCP dependencies",
+    "session/load": "session/load: pass",
+    "session/prompt": "session/prompt: 4 prompt responses received; content and tool choice are observed separately",
+    "prompt:content": "prompt:image: Typed prompt accepted and answered; model understanding and content preservation are not established · prompt:embedded-context: Typed prompt accepted and answered; model understanding and content preservation are not established",
+    "sessions/*": "session/list: pass · session/resume: Session not found: 2611251431-wTukEP — Session 2611251431-wTukEP could not be resolved from /tmp/acp-probe-MYjTkX · session/close: Not advertised; optional method not invoked · session/delete: Not advertised; optional method not invoked",
+    "fork": "session/fork: Not advertised; optional method not invoked",
+    "load:replay": "load:replay: Conversation replay observed; prior content not fully matched",
+    "set_mode": "set_mode: Accepted selection of the sole advertised mode; no transition claimed",
+    "set_config": "set_config: No offered alternative select value; boolean capability is not negotiated",
+    "cancel": "cancel: In-flight prompt returned cancelled after 39ms",
+    "logout": "logout: Not advertised; optional method not invoked",
+    "message*": "update:message: 15 notification(s) observed",
+    "tool_call*": "update:tool_call: 19 notification(s) observed",
+    "usage": "update:usage: No matching notifications observed; see scenario stimuli",
+    "permission": "request_permission: 3 client request(s) observed with simulated client replies; see scenarios for conditions",
+    "plan": "update:plan: No matching notifications observed; see scenario stimuli",
+    "slash_cmds": "update:commands: 9 notification(s) observed",
+    "fs/*": "fs/read_text_file: No client request observed; internal tools and policy choices are permitted · fs/write_text_file: No client request observed; internal tools and policy choices are permitted",
+    "terminal/*": "terminal/*: No client request observed; internal tools and policy choices are permitted",
+    "elicitation": "elicitation: No controlled elicitation scenario configured",
+    "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
+    "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
+    "mcp": "mcp:stdio: Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario. · mcp:sse: Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario."
   },
   "methods": {
     "initialize": {
+      "status": "pass",
+      "note": "Protocol 1 · fast-agent-acp",
+      "latencyMs": 5186
+    },
+    "session/new": {
+      "status": "pass",
+      "note": "Created a session without additional MCP dependencies",
+      "latencyMs": 93
+    },
+    "set_mode": {
+      "status": "pass",
+      "note": "Accepted selection of the sole advertised mode; no transition claimed",
+      "advertised": true,
+      "latencyMs": 2
+    },
+    "set_config": {
       "status": "na",
-      "reason": "transport",
-      "note": "agent exited (code 1): Traceback (most recent call last):\nFile \"/home/runner/work/_temp/setup-uv-cache/archive-v0/WdmZZttcY2UJ22Ul/bin/fast-agent-acp\", line 6, in <module>\n    from fast_agent_acp.cli import main\nModuleNotFoundError: No module named 'fast_agent_acp'",
-      "latencyMs": 89
+      "reason": "no-alternative",
+      "note": "No offered alternative select value; boolean capability is not negotiated"
+    },
+    "session/prompt": {
+      "status": "pass",
+      "note": "4 prompt responses received; content and tool choice are observed separately"
+    },
+    "cancel": {
+      "status": "pass",
+      "note": "In-flight prompt returned cancelled after 39ms"
+    },
+    "session/load": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 19
+    },
+    "load:replay": {
+      "status": "observed",
+      "note": "Conversation replay observed; prior content not fully matched"
+    },
+    "session/fork": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "prompt:image": {
+      "status": "pass",
+      "advertised": true,
+      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+    },
+    "prompt:embedded-context": {
+      "status": "pass",
+      "advertised": true,
+      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+    },
+    "providers/list": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "providers/set": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "providers/disable": {
+      "status": "na",
+      "reason": "not-run",
+      "advertised": false,
+      "note": "Provider mutation not exercised in discovery"
+    },
+    "nes/start": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/list": {
+      "status": "pass",
+      "advertised": true,
+      "latencyMs": 1
+    },
+    "session/resume": {
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32002,
+      "note": "Session not found: 2611251431-wTukEP — Session 2611251431-wTukEP could not be resolved from /tmp/acp-probe-MYjTkX",
+      "advertised": true,
+      "latencyMs": 1
+    },
+    "session/close": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "session/delete": {
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
+    },
+    "mcp:stdio": {
+      "status": "pass",
+      "note": "Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario."
+    },
+    "mcp:http": {
+      "status": "pass",
+      "note": "Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario.",
+      "advertised": true
+    },
+    "mcp:sse": {
+      "status": "pass",
+      "note": "Fixture received probe_noop and returned its controlled result; 1/1 configured scenarios received a fixture call. See each scenario.",
+      "advertised": true
+    },
+    "fs/read_text_file": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "fs/write_text_file": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "terminal/*": {
+      "status": "na",
+      "reason": "no-client-callback",
+      "note": "No client request observed; internal tools and policy choices are permitted"
+    },
+    "request_permission": {
+      "status": "pass",
+      "note": "3 client request(s) observed with simulated client replies; see scenarios for conditions"
+    },
+    "elicitation": {
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled elicitation scenario configured"
+    },
+    "update:message": {
+      "status": "pass",
+      "note": "15 notification(s) observed"
+    },
+    "update:tool_call": {
+      "status": "pass",
+      "note": "19 notification(s) observed"
+    },
+    "update:plan": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "update:commands": {
+      "status": "pass",
+      "note": "9 notification(s) observed"
+    },
+    "update:usage": {
+      "status": "na",
+      "reason": "not-triggered",
+      "note": "No matching notifications observed; see scenario stimuli"
+    },
+    "lody": {
+      "status": "na",
+      "note": "no _meta.lody capabilities; _lody/* unanswered",
+      "definitive": true
     },
     "authenticate": {
       "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/new": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/load": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/prompt": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "prompt:image": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "prompt:embedded-context": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/list": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/resume": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/close": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/delete": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "session/fork": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "load:replay": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "set_mode": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "set_config": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "cancel": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "advertised": true,
+      "reason": "interactive-auth",
+      "note": "Advertised: fast-agent-ai-secrets; login not attempted in unattended discovery"
     },
     "logout": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "update:message": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "update:tool_call": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "update:usage": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "request_permission": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "update:plan": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "update:commands": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "fs/read_text_file": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "fs/write_text_file": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "terminal/*": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "elicitation": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "providers/list": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "providers/set": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "providers/disable": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "nes/start": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "status": "na",
+      "advertised": false,
+      "reason": "not-advertised",
+      "note": "Not advertised; optional method not invoked"
     },
     "nes/suggest": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "mcp:stdio": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "mcp:http": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
-    },
-    "mcp:sse": {
-      "status": "blocked",
-      "reason": "prerequisite",
-      "blockedBy": "initialize",
-      "note": "Not exercised; prerequisite initialize unavailable"
+      "status": "na",
+      "reason": "not-run",
+      "note": "No controlled scenario exercised this check"
     }
   },
   "claimMismatches": [],
@@ -715,26 +706,584 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-24T14:57:16.086Z",
-      "outcome": "error",
-      "latencyMs": 26
+      "at": "2026-11-25T14:30:58.971Z",
+      "outcome": "success",
+      "latencyMs": 5186
     },
     {
-      "method": "initialize",
-      "scenario": "initialize",
-      "at": "2026-11-24T14:57:16.116Z",
+      "method": "session/new",
+      "scenario": "session/new",
+      "at": "2026-11-25T14:31:04.212Z",
+      "outcome": "success",
+      "latencyMs": 93
+    },
+    {
+      "method": "session/set_mode",
+      "scenario": "set_mode",
+      "at": "2026-11-25T14:31:04.327Z",
+      "outcome": "success",
+      "latencyMs": 2
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:exec",
+      "at": "2026-11-25T14:31:04.365Z",
+      "outcome": "success",
+      "latencyMs": 228
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:read",
+      "at": "2026-11-25T14:31:04.603Z",
+      "outcome": "success",
+      "latencyMs": 47
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:write",
+      "at": "2026-11-25T14:31:04.650Z",
+      "outcome": "success",
+      "latencyMs": 46
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "default:plan",
+      "at": "2026-11-25T14:31:04.696Z",
+      "outcome": "success",
+      "latencyMs": 19
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "cancel",
+      "at": "2026-11-25T14:31:04.715Z",
+      "outcome": "success",
+      "latencyMs": 39
+    },
+    {
+      "method": "session/load",
+      "scenario": "load:replay:1",
+      "at": "2026-11-25T14:31:04.767Z",
+      "outcome": "success",
+      "latencyMs": 19
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-11-25T14:31:04.801Z",
+      "outcome": "success",
+      "latencyMs": 19
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:image",
+      "at": "2026-11-25T14:31:04.820Z",
+      "outcome": "success",
+      "latencyMs": 20
+    },
+    {
+      "method": "session/new",
+      "scenario": "prompt-content",
+      "at": "2026-11-25T14:31:04.840Z",
+      "outcome": "success",
+      "latencyMs": 19
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "prompt:embedded-context",
+      "at": "2026-11-25T14:31:04.859Z",
+      "outcome": "success",
+      "latencyMs": 21
+    },
+    {
+      "method": "session/list",
+      "scenario": "session-mgmt",
+      "at": "2026-11-25T14:31:04.887Z",
+      "outcome": "success",
+      "latencyMs": 1
+    },
+    {
+      "method": "session/new",
+      "scenario": "session-mgmt",
+      "at": "2026-11-25T14:31:04.897Z",
+      "outcome": "success",
+      "latencyMs": 18
+    },
+    {
+      "method": "session/resume",
+      "scenario": "session-mgmt",
+      "at": "2026-11-25T14:31:04.929Z",
       "outcome": "error",
-      "latencyMs": 89
+      "errorCode": -32002,
+      "latencyMs": 1
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-11-25T14:31:04.932Z",
+      "outcome": "success",
+      "latencyMs": 335
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:stdio:default",
+      "at": "2026-11-25T14:31:05.267Z",
+      "outcome": "success",
+      "latencyMs": 82
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:http:default",
+      "at": "2026-11-25T14:31:05.851Z",
+      "outcome": "success",
+      "latencyMs": 135
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:http:default",
+      "at": "2026-11-25T14:31:05.987Z",
+      "outcome": "success",
+      "latencyMs": 54
+    },
+    {
+      "method": "session/new",
+      "scenario": "mcp:sse:default",
+      "at": "2026-11-25T14:31:06.545Z",
+      "outcome": "success",
+      "latencyMs": 132
+    },
+    {
+      "method": "session/prompt",
+      "scenario": "mcp:sse:default",
+      "at": "2026-11-25T14:31:06.678Z",
+      "outcome": "success",
+      "latencyMs": 49
+    },
+    {
+      "method": "_lody/rate_limits/get",
+      "scenario": "lody",
+      "at": "2026-11-25T14:31:07.228Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 1
+    },
+    {
+      "method": "_lody/subagents/list",
+      "scenario": "lody",
+      "at": "2026-11-25T14:31:07.229Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
+    },
+    {
+      "method": "_lody/session/history/read",
+      "scenario": "lody",
+      "at": "2026-11-25T14:31:07.229Z",
+      "outcome": "error",
+      "errorCode": -32601,
+      "latencyMs": 0
     }
   ],
-  "scenarios": [],
+  "scenarios": [
+    {
+      "id": "default:exec",
+      "profile": "default",
+      "sessionId": "2611251431-FOasPA",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "tool_call",
+        "session_info_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "039bab8003f14345a4f8e01c74de3d97",
+          "name": "bash",
+          "status": "pending"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "bash"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:read",
+      "profile": "default",
+      "sessionId": "2611251431-FOasPA",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "tool_call",
+        "session_info_update",
+        "tool_call_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "950b6a4bb9544d138ee426dc4ca69a16",
+          "name": "environment/read_text_file",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "read_text_file"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:write",
+      "profile": "default",
+      "sessionId": "2611251431-FOasPA",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "tool_call",
+        "session_info_update",
+        "tool_call_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "f071efcf378f4449bbecc3280b5376d0",
+          "name": "environment/write_text_file",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "write_text_file"
+        ],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "default:plan",
+      "profile": "default",
+      "sessionId": "2611251431-FOasPA",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk",
+        "session_info_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": [
+          "plan: no matching tool offered"
+        ]
+      }
+    },
+    {
+      "id": "prompt:image",
+      "profile": "default",
+      "sessionId": "2611251431-f7mOmD",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk",
+        "session_info_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "prompt:embedded-context",
+      "profile": "default",
+      "sessionId": "2611251431-mj5TIw",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 0,
+        "elicitation": 0
+      },
+      "notifications": [
+        "agent_message_chunk",
+        "session_info_update"
+      ],
+      "tools": [],
+      "model": {
+        "issuedTools": [],
+        "skippedCalls": []
+      }
+    },
+    {
+      "id": "mcp:stdio:default",
+      "profile": "default",
+      "sessionId": "2611251431-m338lf",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Fixture received probe_noop and returned its controlled result"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 1,
+        "elicitation": 0
+      },
+      "notifications": [
+        "tool_call",
+        "session_info_update",
+        "tool_call_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "15944cc9a7964c6d821cb914881d7079",
+          "name": "acp-probe-mcp/probe_noop",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "acp-probe-mcp__probe_noop"
+        ],
+        "skippedCalls": []
+      },
+      "diagnostics": [],
+      "mcpEvents": [
+        {
+          "event": "spawned",
+          "ts": 1795617065155
+        },
+        {
+          "event": "initialized",
+          "ts": 1795617065179
+        },
+        {
+          "event": "tools/list",
+          "ts": 1795617065248
+        },
+        {
+          "event": "tools/call",
+          "ts": 1795617065330,
+          "name": "probe_noop"
+        }
+      ]
+    },
+    {
+      "id": "mcp:http:default",
+      "profile": "default",
+      "sessionId": "2611251431-6YueQX",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Fixture received probe_noop and returned its controlled result"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 1,
+        "elicitation": 0
+      },
+      "notifications": [
+        "tool_call",
+        "session_info_update",
+        "tool_call_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "a19ab838d33442218de0667110a3351b",
+          "name": "acp-probe-http/probe_noop",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "acp-probe-http__probe_noop"
+        ],
+        "skippedCalls": []
+      },
+      "diagnostics": [],
+      "mcpEvents": [
+        {
+          "event": "connected",
+          "ts": 1795617065894
+        },
+        {
+          "event": "initialized",
+          "ts": 1795617065901
+        },
+        {
+          "event": "tools/list",
+          "ts": 1795617065969
+        },
+        {
+          "event": "tools/call",
+          "ts": 1795617066023,
+          "name": "probe_noop"
+        }
+      ]
+    },
+    {
+      "id": "mcp:sse:default",
+      "profile": "default",
+      "sessionId": "2611251431-G1j3Q3",
+      "configuration": {},
+      "result": {
+        "status": "pass",
+        "note": "Fixture received probe_noop and returned its controlled result"
+      },
+      "callbacks": {
+        "fs/read_text_file": 0,
+        "fs/write_text_file": 0,
+        "terminal/*": 0,
+        "request_permission": 1,
+        "elicitation": 0
+      },
+      "notifications": [
+        "tool_call",
+        "session_info_update",
+        "tool_call_update",
+        "agent_message_chunk"
+      ],
+      "tools": [
+        {
+          "id": "f03d1b0f77a7433aba1aa70427c7ff28",
+          "name": "acp-probe-sse/probe_noop",
+          "status": "completed"
+        }
+      ],
+      "model": {
+        "issuedTools": [
+          "acp-probe-sse__probe_noop"
+        ],
+        "skippedCalls": []
+      },
+      "diagnostics": [],
+      "mcpEvents": [
+        {
+          "event": "connected",
+          "ts": 1795617066562
+        },
+        {
+          "event": "initialized",
+          "ts": 1795617066575
+        },
+        {
+          "event": "tools/list",
+          "ts": 1795617066659
+        },
+        {
+          "event": "tools/call",
+          "ts": 1795617066709,
+          "name": "probe_noop"
+        }
+      ]
+    }
+  ],
   "uncertaintyReasons": {
-    "transport": 1,
-    "prerequisite": 34
+    "interactive-auth": 1,
+    "not-advertised": 6,
+    "no-alternative": 1,
+    "not-triggered": 2,
+    "no-client-callback": 3,
+    "not-run": 4
+  },
+  "lody": {
+    "advertised": {},
+    "answered": [],
+    "missing": [
+      "_lody/rate_limits/get",
+      "_lody/subagents/list",
+      "_lody/session/history/read"
+    ],
+    "observed": [],
+    "endpoints": [
+      {
+        "method": "_lody/rate_limits/get",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      },
+      {
+        "method": "_lody/subagents/list",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      },
+      {
+        "method": "_lody/session/history/read",
+        "outcome": "method-not-found",
+        "errorCode": -32601
+      }
+    ]
+  },
+  "ext": {
+    "advertised": [
+      "co.huggingface"
+    ],
+    "observed": []
   },
   "transport": {
     "mitm": {
-      "port": 46877,
+      "port": 37127,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 1,

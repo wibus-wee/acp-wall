@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "kimi-code",
   "agentName": "Kimi Code CLI",
-  "agentVersion": "2.7.3",
+  "agentVersion": "2.8.0",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -44,7 +44,7 @@
           "terminal-auth": {
             "type": "terminal",
             "label": "Login with Kimi account",
-            "command": "/home/runner/.npm/_npx/623d197d9719ff76/node_modules/.bin/kimi",
+            "command": "/home/runner/.npm/_npx/4f30dca796891700/node_modules/.bin/kimi",
             "args": [
               "login"
             ],
@@ -54,7 +54,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-24T14:58:04.520Z",
+  "probedAt": "2026-11-25T14:31:42.863Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -77,12 +77,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.3",
-    "command": "npx -y @moonshot-ai/kimi-code@2.7.3 acp",
+    "command": "npx -y @moonshot-ai/kimi-code@2.8.0 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "10c524859d4fe51b43393530ccf68798cb2d8d98c4f5dc7e3747d9069e0c1b64",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45419505141",
-    "revision": "f66606e1e9dec30101ed83b850757778edc62647",
+    "recipeSha256": "38a9706ebf0722fca7d0b594e08be5d842085b60a2272251355e6f438d0e47c1",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45634546051",
+    "revision": "7d80638faca2f951f0096f9698f1cfffc4c41306",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -104,7 +104,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · Kimi Code CLI",
-          "latencyMs": 1229
+          "latencyMs": 1554
         }
       ]
     },
@@ -133,7 +133,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required",
-          "latencyMs": 8
+          "latencyMs": 11
         }
       ]
     },
@@ -195,7 +195,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 80
+          "latencyMs": 19
         },
         {
           "method": "session/resume",
@@ -546,14 +546,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · Kimi Code CLI",
-      "latencyMs": 1229
+      "latencyMs": 1554
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required",
-      "latencyMs": 8
+      "latencyMs": 11
     },
     "set_mode": {
       "status": "blocked",
@@ -630,7 +630,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 80
+      "latencyMs": 19
     },
     "session/resume": {
       "status": "blocked",
@@ -764,29 +764,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-24T14:58:03.138Z",
+      "at": "2026-11-25T14:31:41.198Z",
       "outcome": "success",
-      "latencyMs": 1229
+      "latencyMs": 1554
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-24T14:58:04.412Z",
+      "at": "2026-11-25T14:31:42.809Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 8
+      "latencyMs": 11
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-24T14:58:04.430Z",
+      "at": "2026-11-25T14:31:42.830Z",
       "outcome": "success",
-      "latencyMs": 80
+      "latencyMs": 19
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-24T14:58:04.518Z",
+      "at": "2026-11-25T14:31:42.861Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -823,7 +823,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 33697,
+      "port": 39833,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 1,

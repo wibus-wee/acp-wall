@@ -30,7 +30,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-24T14:56:36.495Z",
+  "probedAt": "2026-11-25T14:30:28.731Z",
   "state": "blocked",
   "summary": {
     "pass": 11,
@@ -56,9 +56,9 @@
     "command": "npx -y cline@3.0.62 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "abfd63f698faeb76276f6c80f37bc1d2c71c91dae086da44966eaa87b63428d6",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45419505141",
-    "revision": "f66606e1e9dec30101ed83b850757778edc62647",
+    "recipeSha256": "06ba0431e405fc6f1861c07338959bead9cea93b6928e54ae0455e1ec595501d",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45634546051",
+    "revision": "7d80638faca2f951f0096f9698f1cfffc4c41306",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -94,7 +94,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · cline",
-          "latencyMs": 1205
+          "latencyMs": 1488
         }
       ]
     },
@@ -134,7 +134,7 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 5
+          "latencyMs": 9
         }
       ]
     },
@@ -241,7 +241,7 @@
           "status": "pass",
           "note": "Accepted mode selection act → plan",
           "advertised": true,
-          "latencyMs": 51
+          "latencyMs": 66
         }
       ]
     },
@@ -266,7 +266,7 @@
         {
           "method": "cancel",
           "status": "pass",
-          "note": "In-flight prompt returned cancelled after 43ms"
+          "note": "In-flight prompt returned cancelled after 75ms"
         }
       ]
     },
@@ -492,7 +492,7 @@
     "load:replay": "load:replay: Prior conversation text replayed for the same session",
     "set_mode": "set_mode: Accepted mode selection act → plan",
     "set_config": "set_config: Original value not offered; cannot safely restore",
-    "cancel": "cancel: In-flight prompt returned cancelled after 43ms",
+    "cancel": "cancel: In-flight prompt returned cancelled after 75ms",
     "logout": "logout: Not advertised; optional method not invoked",
     "message*": "update:message: 10 notification(s) observed",
     "tool_call*": "update:tool_call: 18 notification(s) observed",
@@ -511,7 +511,7 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · cline",
-      "latencyMs": 1205
+      "latencyMs": 1488
     },
     "session/new": {
       "status": "pass",
@@ -522,7 +522,7 @@
       "status": "pass",
       "note": "Accepted mode selection act → plan",
       "advertised": true,
-      "latencyMs": 51
+      "latencyMs": 66
     },
     "set_config": {
       "status": "na",
@@ -535,12 +535,12 @@
     },
     "cancel": {
       "status": "pass",
-      "note": "In-flight prompt returned cancelled after 43ms"
+      "note": "In-flight prompt returned cancelled after 75ms"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 5
+      "latencyMs": 9
     },
     "load:replay": {
       "status": "pass",
@@ -704,105 +704,105 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-24T14:56:33.147Z",
+      "at": "2026-11-25T14:30:25.087Z",
       "outcome": "success",
-      "latencyMs": 1205
+      "latencyMs": 1488
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-24T14:56:34.392Z",
+      "at": "2026-11-25T14:30:26.631Z",
       "outcome": "success",
       "latencyMs": 3
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-11-24T14:56:34.422Z",
+      "at": "2026-11-25T14:30:26.668Z",
       "outcome": "success",
-      "latencyMs": 51
+      "latencyMs": 66
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-11-24T14:56:34.480Z",
+      "at": "2026-11-25T14:30:26.743Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 4
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-11-24T14:56:34.495Z",
+      "at": "2026-11-25T14:30:26.765Z",
       "outcome": "success",
-      "latencyMs": 612
+      "latencyMs": 851
     },
     {
       "method": "session/prompt",
       "scenario": "default:read",
-      "at": "2026-11-24T14:56:35.118Z",
+      "at": "2026-11-25T14:30:27.626Z",
       "outcome": "success",
-      "latencyMs": 435
+      "latencyMs": 92
     },
     {
       "method": "session/prompt",
       "scenario": "default:write",
-      "at": "2026-11-24T14:56:35.554Z",
+      "at": "2026-11-25T14:30:27.718Z",
       "outcome": "success",
-      "latencyMs": 83
+      "latencyMs": 98
     },
     {
       "method": "session/prompt",
       "scenario": "default:plan",
-      "at": "2026-11-24T14:56:35.637Z",
+      "at": "2026-11-25T14:30:27.816Z",
       "outcome": "success",
-      "latencyMs": 49
+      "latencyMs": 41
     },
     {
       "method": "session/prompt",
       "scenario": "cancel",
-      "at": "2026-11-24T14:56:35.688Z",
+      "at": "2026-11-25T14:30:27.857Z",
       "outcome": "success",
-      "latencyMs": 43
+      "latencyMs": 75
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-11-24T14:56:35.742Z",
+      "at": "2026-11-25T14:30:27.952Z",
       "outcome": "success",
-      "latencyMs": 5
+      "latencyMs": 9
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-24T14:56:35.760Z",
+      "at": "2026-11-25T14:30:27.985Z",
       "outcome": "success",
-      "latencyMs": 1
+      "latencyMs": 2
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-11-24T14:56:35.761Z",
+      "at": "2026-11-25T14:30:27.987Z",
       "outcome": "success",
-      "latencyMs": 176
+      "latencyMs": 90
     },
     {
       "method": "session/new",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-24T14:56:35.939Z",
+      "at": "2026-11-25T14:30:28.080Z",
       "outcome": "success",
-      "latencyMs": 3
+      "latencyMs": 20
     },
     {
       "method": "session/prompt",
       "scenario": "mcp:stdio:default",
-      "at": "2026-11-24T14:56:35.942Z",
+      "at": "2026-11-25T14:30:28.101Z",
       "outcome": "success",
-      "latencyMs": 48
+      "latencyMs": 124
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-24T14:56:36.493Z",
+      "at": "2026-11-25T14:30:28.728Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -810,7 +810,7 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-24T14:56:36.494Z",
+      "at": "2026-11-25T14:30:28.729Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 0
@@ -818,17 +818,17 @@
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-24T14:56:36.494Z",
+      "at": "2026-11-25T14:30:28.729Z",
       "outcome": "error",
       "errorCode": -32601,
-      "latencyMs": 0
+      "latencyMs": 1
     }
   ],
   "scenarios": [
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "1795532194394_gSGvK_cli",
+      "sessionId": "1795617026633_Cyc9x_cli",
       "configuration": {
         "provider": "openai-compatible",
         "model": "gpt-4o",
@@ -869,7 +869,7 @@
     {
       "id": "default:read",
       "profile": "default",
-      "sessionId": "1795532194394_gSGvK_cli",
+      "sessionId": "1795617026633_Cyc9x_cli",
       "configuration": {
         "provider": "openai-compatible",
         "model": "gpt-4o",
@@ -896,7 +896,7 @@
       "tools": [
         {
           "id": "call_probe_2",
-          "name": "read_files: {\"files\":[{\"path\":\"/tmp/acp-probe-aSDNvQ/PROBE_CANARY.txt...",
+          "name": "read_files: {\"files\":[{\"path\":\"/tmp/acp-probe-3QyzAR/PROBE_CANARY.txt...",
           "status": "completed"
         }
       ],
@@ -910,7 +910,7 @@
     {
       "id": "default:write",
       "profile": "default",
-      "sessionId": "1795532194394_gSGvK_cli",
+      "sessionId": "1795617026633_Cyc9x_cli",
       "configuration": {
         "provider": "openai-compatible",
         "model": "gpt-4o",
@@ -937,7 +937,7 @@
       "tools": [
         {
           "id": "call_probe_3",
-          "name": "apply_patch: {\"input\":\"*** Begin Patch\\n*** Add File: /tmp/acp-probe-a...",
+          "name": "apply_patch: {\"input\":\"*** Begin Patch\\n*** Add File: /tmp/acp-probe-3...",
           "status": "completed"
         }
       ],
@@ -951,7 +951,7 @@
     {
       "id": "default:plan",
       "profile": "default",
-      "sessionId": "1795532194394_gSGvK_cli",
+      "sessionId": "1795617026633_Cyc9x_cli",
       "configuration": {
         "provider": "openai-compatible",
         "model": "gpt-4o",
@@ -984,7 +984,7 @@
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "1795532195761_AdhGA_cli",
+      "sessionId": "1795617027986_Uf646_cli",
       "configuration": {},
       "result": {
         "status": "pass",
@@ -1010,7 +1010,7 @@
     {
       "id": "mcp:stdio:default",
       "profile": "default",
-      "sessionId": "1795532195942_zDaMT_cli",
+      "sessionId": "1795617028097_5lRjd_cli",
       "configuration": {
         "provider": "openai-compatible",
         "model": "gpt-4o",
@@ -1040,7 +1040,9 @@
           "mcp: no matching tool offered"
         ]
       },
-      "diagnostics": [],
+      "diagnostics": [
+        "DeprecationWarning: AI SDK Warning (openai-compatible.chat / gpt-4o): Deprecated: \"providerOptions key 'openai-compatible'\". Use 'openaiCompatible' instead.\n      at iX (/$bunfs/root/chunk-bkyx34xg.js:26:46952)\n      at J0 (/$bunfs/root/chunk-bkyx34xg.js:26:47251)\n      at transform (/$bunfs/root/chunk-bkyx34xg.js:44:43027)\n\nDeprecationWarning: AI SDK Warning (openai-compatible.chat / gpt-4o): Deprecated: \"providerOptions key 'openai-compatible'\". Use 'openaiCompatible' instead.\n      at iX (/$bunfs/root/chunk-bkyx34xg.js:26:46952)\n      at J0 (/$bunfs/root/chunk-bkyx34xg.js:26:47251)\n      at transform (/$bunfs/root/chunk-bkyx34xg.js:44:43027)"
+      ],
       "mcpEvents": []
     }
   ],
@@ -1086,7 +1088,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 40503,
+      "port": 34339,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 19,

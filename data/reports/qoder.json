@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "qoder",
   "agentName": "qoder-cli",
-  "agentVersion": "1.1.96",
+  "agentVersion": "1.1.98",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -39,7 +39,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-24T15:00:07.197Z",
+  "probedAt": "2026-11-25T14:32:56.213Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -62,12 +62,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.3",
-    "command": "npx -y @qoder-ai/qodercli@1.1.96 --acp",
+    "command": "npx -y @qoder-ai/qodercli@1.1.98 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "f32339c2022911a4d42f21a9fdaa8801f9a905a0c4b45e79f777b741ad4410ef",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45419505141",
-    "revision": "f66606e1e9dec30101ed83b850757778edc62647",
+    "recipeSha256": "e8cab6d1176ddf540ac7e23bbfa8b8481247bd64fb1c1d6b5ecb97b19218baad",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45634546051",
+    "revision": "7d80638faca2f951f0096f9698f1cfffc4c41306",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -89,7 +89,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · qoder-cli",
-          "latencyMs": 5210
+          "latencyMs": 5309
         }
       ]
     },
@@ -117,8 +117,8 @@
           "status": "blocked",
           "reason": "authentication",
           "errorCode": -32000,
-          "note": "Authentication required: Authentication is required.",
-          "latencyMs": 262
+          "note": "Authentication required: identity.job.exchange failed: HTTP 400",
+          "latencyMs": 216
         }
       ]
     },
@@ -181,9 +181,9 @@
           "status": "blocked",
           "reason": "authentication",
           "errorCode": -32000,
-          "note": "Authentication required: Authentication is required.",
+          "note": "Authentication required: identity.job.exchange failed: HTTP 400",
           "advertised": true,
-          "latencyMs": 256
+          "latencyMs": 204
         },
         {
           "method": "session/resume",
@@ -506,11 +506,11 @@
   "notes": {
     "initialize": "initialize: Protocol 1 · qoder-cli",
     "authenticate": "authenticate: Advertised: qodercli-login; login not attempted in unattended discovery",
-    "session/new": "session/new: Authentication required: Authentication is required.",
+    "session/new": "session/new: Authentication required: identity.job.exchange failed: HTTP 400",
     "session/load": "session/load: Not exercised; prerequisite session/new unavailable",
     "session/prompt": "session/prompt: No usable session; see session/new",
     "prompt:content": "prompt:image: No usable session; see session/new · prompt:embedded-context: No usable session; see session/new",
-    "sessions/*": "session/list: Authentication required: Authentication is required. · session/resume: No usable session; see session/new · session/close: No usable session; see session/new · session/delete: No usable session; see session/new",
+    "sessions/*": "session/list: Authentication required: identity.job.exchange failed: HTTP 400 · session/resume: No usable session; see session/new · session/close: No usable session; see session/new · session/delete: No usable session; see session/new",
     "fork": "session/fork: No usable session; see session/new",
     "load:replay": "load:replay: No usable session; see session/new",
     "set_mode": "set_mode: No usable session; see session/new",
@@ -534,14 +534,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · qoder-cli",
-      "latencyMs": 5210
+      "latencyMs": 5309
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
-      "note": "Authentication required: Authentication is required.",
-      "latencyMs": 262
+      "note": "Authentication required: identity.job.exchange failed: HTTP 400",
+      "latencyMs": 216
     },
     "set_mode": {
       "status": "blocked",
@@ -619,9 +619,9 @@
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
-      "note": "Authentication required: Authentication is required.",
+      "note": "Authentication required: identity.job.exchange failed: HTTP 400",
       "advertised": true,
-      "latencyMs": 256
+      "latencyMs": 204
     },
     "session/resume": {
       "status": "blocked",
@@ -755,30 +755,30 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-24T15:00:01.407Z",
+      "at": "2026-11-25T14:32:50.386Z",
       "outcome": "success",
-      "latencyMs": 5210
+      "latencyMs": 5309
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-24T15:00:06.667Z",
+      "at": "2026-11-25T14:32:55.774Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 262
+      "latencyMs": 216
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-24T15:00:06.938Z",
+      "at": "2026-11-25T14:32:56.005Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 256
+      "latencyMs": 204
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-24T15:00:07.195Z",
+      "at": "2026-11-25T14:32:56.211Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -815,11 +815,11 @@
   },
   "transport": {
     "mitm": {
-      "port": 33197,
+      "port": 35109,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 18,
-      "drops": 6
+      "drops": 12
     }
   }
 }
