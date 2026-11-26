@@ -39,7 +39,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-25T14:32:56.213Z",
+  "probedAt": "2026-11-26T14:00:56.221Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -65,9 +65,9 @@
     "command": "npx -y @qoder-ai/qodercli@1.1.98 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "e8cab6d1176ddf540ac7e23bbfa8b8481247bd64fb1c1d6b5ecb97b19218baad",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45634546051",
-    "revision": "7d80638faca2f951f0096f9698f1cfffc4c41306",
+    "recipeSha256": "10efcb13fcb31d0e4a999fab3b8a44ce3021c93aeb2a7c9e086da5ed6298495c",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45834124554",
+    "revision": "d3d935815dbd0b350ebb0c098b2e05b427b45b32",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -89,7 +89,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · qoder-cli",
-          "latencyMs": 5309
+          "latencyMs": 3927
         }
       ]
     },
@@ -118,7 +118,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: identity.job.exchange failed: HTTP 400",
-          "latencyMs": 216
+          "latencyMs": 669
         }
       ]
     },
@@ -183,7 +183,7 @@
           "errorCode": -32000,
           "note": "Authentication required: identity.job.exchange failed: HTTP 400",
           "advertised": true,
-          "latencyMs": 204
+          "latencyMs": 318
         },
         {
           "method": "session/resume",
@@ -534,14 +534,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · qoder-cli",
-      "latencyMs": 5309
+      "latencyMs": 3927
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: identity.job.exchange failed: HTTP 400",
-      "latencyMs": 216
+      "latencyMs": 669
     },
     "set_mode": {
       "status": "blocked",
@@ -621,7 +621,7 @@
       "errorCode": -32000,
       "note": "Authentication required: identity.job.exchange failed: HTTP 400",
       "advertised": true,
-      "latencyMs": 204
+      "latencyMs": 318
     },
     "session/resume": {
       "status": "blocked",
@@ -755,30 +755,30 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-25T14:32:50.386Z",
+      "at": "2026-11-26T14:00:51.260Z",
       "outcome": "success",
-      "latencyMs": 5309
+      "latencyMs": 3927
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-25T14:32:55.774Z",
+      "at": "2026-11-26T14:00:55.222Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 216
+      "latencyMs": 669
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-25T14:32:56.005Z",
+      "at": "2026-11-26T14:00:55.900Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 204
+      "latencyMs": 318
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-25T14:32:56.211Z",
+      "at": "2026-11-26T14:00:56.219Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -815,11 +815,11 @@
   },
   "transport": {
     "mitm": {
-      "port": 35109,
+      "port": 37019,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 18,
-      "drops": 12
+      "relayed": 20,
+      "drops": 6
     }
   }
 }

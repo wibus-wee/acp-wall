@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "mimi-alpha",
   "agentName": "sorbet-acp",
-  "agentVersion": "0.1.0-alpha.26",
+  "agentVersion": "0.1.0-alpha.28",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -120,17 +120,17 @@
     },
     "authMethods": []
   },
-  "probedAt": "2026-11-25T14:32:29.058Z",
-  "state": "measured",
+  "probedAt": "2026-11-26T14:00:27.721Z",
+  "state": "blocked",
   "summary": {
-    "pass": 22,
+    "pass": 12,
     "observed": 4,
-    "blocked": 0,
+    "blocked": 12,
     "unsupported": 0,
     "fail": 0,
     "partial": 0,
     "error": 0,
-    "na": 9,
+    "na": 7,
     "mixed": 0,
     "legacy": 0,
     "total": 35
@@ -146,53 +146,18 @@
     "command": "npx -y @sorbetai/acp@alpha",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "e174d14400f60e423e16c1dd4135fcb196115326153cb1eec3fcf9ad17053635",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45634546051",
-    "revision": "7d80638faca2f951f0096f9698f1cfffc4c41306",
+    "recipeSha256": "b9d3a9c5e50f54289100c01c640154ae82995b7b5cf03b3d709d195e5e119987",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45834124554",
+    "revision": "d3d935815dbd0b350ebb0c098b2e05b427b45b32",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
     "mcpSdkVersion": "1.32.0",
-    "mockRequests": 32,
+    "mockRequests": 1,
     "modelEvidence": {
-      "seenTools": [
-        "acp_fs_read_text_file",
-        "acp_fs_write_text_file",
-        "acp_terminal_create",
-        "acp_terminal_output",
-        "acp_terminal_wait",
-        "acp_terminal_kill",
-        "acp_terminal_release",
-        "agent",
-        "artifact",
-        "wait",
-        "web_search",
-        "goal",
-        "bash",
-        "codemode",
-        "edit",
-        "read",
-        "write",
-        "tool_search",
-        "mcp_acp_probe_mcp_probe_noop",
-        "mcp_acp_probe_http_probe_noop",
-        "mcp_acp_probe_sse_probe_noop"
-      ],
-      "issuedTools": [
-        "acp_terminal_create",
-        "acp_fs_read_text_file",
-        "acp_fs_write_text_file",
-        "tool_search",
-        "tool_search",
-        "tool_search"
-      ],
-      "skippedCalls": [
-        "exec: configured tool acp_terminal_create not offered",
-        "plan: no matching tool offered",
-        "mcp: no matching tool offered",
-        "mcp: no matching tool offered",
-        "mcp: no matching tool offered"
-      ]
+      "seenTools": [],
+      "issuedTools": [],
+      "skippedCalls": []
     }
   },
   "cells": [
@@ -205,7 +170,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · sorbet-acp",
-          "latencyMs": 1787
+          "latencyMs": 1852
         }
       ]
     },
@@ -231,7 +196,7 @@
           "method": "session/new",
           "status": "pass",
           "note": "Created a session without additional MCP dependencies",
-          "latencyMs": 354
+          "latencyMs": 262
         }
       ]
     },
@@ -244,38 +209,45 @@
           "method": "session/load",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 287
+          "latencyMs": 136
         }
       ]
     },
     {
       "key": "session/prompt",
       "scope": "core",
-      "status": "pass",
+      "status": "observed",
       "items": [
         {
           "method": "session/prompt",
-          "status": "pass",
-          "note": "4 prompt responses received; content and tool choice are observed separately"
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}",
+          "latencyMs": 111
         }
       ]
     },
     {
       "key": "prompt:content",
       "scope": "optional",
-      "status": "pass",
+      "status": "observed",
       "items": [
         {
           "method": "prompt:image",
-          "status": "pass",
-          "advertised": true,
-          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}",
+          "advertised": true
         },
         {
           "method": "prompt:embedded-context",
-          "status": "pass",
-          "advertised": true,
-          "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+          "status": "observed",
+          "reason": "request-rejected",
+          "errorCode": -32603,
+          "note": "Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}",
+          "advertised": true
         }
       ]
     },
@@ -288,25 +260,25 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 1
         },
         {
           "method": "session/resume",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 202
+          "latencyMs": 87
         },
         {
           "method": "session/close",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 35
+          "latencyMs": 52
         },
         {
           "method": "session/delete",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 91
+          "latencyMs": 486
         }
       ]
     },
@@ -319,19 +291,19 @@
           "method": "session/fork",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 86
+          "latencyMs": 355
         }
       ]
     },
     {
       "key": "load:replay",
       "scope": "optional",
-      "status": "pass",
+      "status": "observed",
       "items": [
         {
           "method": "load:replay",
-          "status": "pass",
-          "note": "Prior conversation text replayed for the same session"
+          "status": "observed",
+          "note": "Conversation replay observed; prior content not fully matched"
         }
       ]
     },
@@ -345,7 +317,7 @@
           "status": "pass",
           "note": "Accepted selection of the sole advertised mode; no transition claimed",
           "advertised": true,
-          "latencyMs": 2
+          "latencyMs": 26
         }
       ]
     },
@@ -359,19 +331,21 @@
           "status": "pass",
           "note": "Changed behavior:prompt_suggestion to another offered value",
           "advertised": true,
-          "latencyMs": 151
+          "latencyMs": 95
         }
       ]
     },
     {
       "key": "cancel",
       "scope": "core",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "cancel",
-          "status": "pass",
-          "note": "In-flight prompt returned cancelled after 313ms"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No successful prompt to establish cancellation conditions"
         }
       ]
     },
@@ -392,24 +366,28 @@
     {
       "key": "message*",
       "scope": "observation",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "update:message",
-          "status": "pass",
-          "note": "13 notification(s) observed"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
     {
       "key": "tool_call*",
       "scope": "observation",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "update:tool_call",
-          "status": "pass",
-          "note": "24 notification(s) observed"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
     },
@@ -421,31 +399,34 @@
         {
           "method": "update:usage",
           "status": "pass",
-          "note": "46 notification(s) observed"
+          "note": "1 notification(s) observed"
         }
       ]
     },
     {
       "key": "permission",
       "scope": "observation",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "request_permission",
-          "status": "pass",
-          "note": "3 client request(s) observed with simulated client replies; see scenarios for conditions"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
     {
       "key": "plan",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "update:plan",
-          "status": "na",
-          "reason": "not-triggered",
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
           "note": "No matching notifications observed; see scenario stimuli"
         }
       ]
@@ -458,49 +439,56 @@
         {
           "method": "update:commands",
           "status": "pass",
-          "note": "12 notification(s) observed"
+          "note": "9 notification(s) observed"
         }
       ]
     },
     {
       "key": "fs/*",
       "scope": "observation",
-      "status": "pass",
+      "status": "blocked",
       "items": [
         {
           "method": "fs/read_text_file",
-          "status": "pass",
-          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         },
         {
           "method": "fs/write_text_file",
-          "status": "pass",
-          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
     {
       "key": "terminal/*",
       "scope": "observation",
-      "status": "observed",
+      "status": "blocked",
       "items": [
         {
           "method": "terminal/*",
-          "status": "observed",
-          "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
     {
       "key": "elicitation",
       "scope": "observation",
-      "status": "na",
+      "status": "blocked",
       "items": [
         {
           "method": "elicitation",
-          "status": "na",
-          "reason": "not-run",
-          "note": "No controlled elicitation scenario configured"
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "Not observed; prerequisite session/prompt unavailable"
         }
       ]
     },
@@ -555,27 +543,28 @@
     {
       "key": "mcp",
       "scope": "observation",
-      "status": "observed",
+      "status": "blocked",
       "items": [
         {
           "method": "mcp:stdio",
-          "status": "observed",
-          "reason": "tool-not-called",
-          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
         },
         {
           "method": "mcp:http",
-          "status": "observed",
-          "reason": "tool-not-called",
-          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
-          "advertised": true
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
         },
         {
           "method": "mcp:sse",
-          "status": "observed",
-          "reason": "tool-not-called",
-          "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
-          "advertised": true
+          "status": "blocked",
+          "reason": "prerequisite",
+          "blockedBy": "session/prompt",
+          "note": "MCP scenario prerequisites unavailable"
         }
       ]
     }
@@ -585,82 +574,91 @@
     "authenticate": "authenticate: No protocol authentication method advertised",
     "session/new": "session/new: Created a session without additional MCP dependencies",
     "session/load": "session/load: pass",
-    "session/prompt": "session/prompt: 4 prompt responses received; content and tool choice are observed separately",
-    "prompt:content": "prompt:image: Typed prompt accepted and answered; model understanding and content preservation are not established · prompt:embedded-context: Typed prompt accepted and answered; model understanding and content preservation are not established",
+    "session/prompt": "session/prompt: Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}",
+    "prompt:content": "prompt:image: Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"} · prompt:embedded-context: Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}",
     "sessions/*": "session/list: pass · session/resume: pass · session/close: pass · session/delete: pass",
     "fork": "session/fork: pass",
-    "load:replay": "load:replay: Prior conversation text replayed for the same session",
+    "load:replay": "load:replay: Conversation replay observed; prior content not fully matched",
     "set_mode": "set_mode: Accepted selection of the sole advertised mode; no transition claimed",
     "set_config": "set_config: Changed behavior:prompt_suggestion to another offered value",
-    "cancel": "cancel: In-flight prompt returned cancelled after 313ms",
+    "cancel": "cancel: No successful prompt to establish cancellation conditions",
     "logout": "logout: No authentication established by this run; shared account state is not changed",
-    "message*": "update:message: 13 notification(s) observed",
-    "tool_call*": "update:tool_call: 24 notification(s) observed",
-    "usage": "update:usage: 46 notification(s) observed",
-    "permission": "request_permission: 3 client request(s) observed with simulated client replies; see scenarios for conditions",
+    "message*": "update:message: No matching notifications observed; see scenario stimuli",
+    "tool_call*": "update:tool_call: No matching notifications observed; see scenario stimuli",
+    "usage": "update:usage: 1 notification(s) observed",
+    "permission": "request_permission: Not observed; prerequisite session/prompt unavailable",
     "plan": "update:plan: No matching notifications observed; see scenario stimuli",
-    "slash_cmds": "update:commands: 12 notification(s) observed",
-    "fs/*": "fs/read_text_file: 1 client request(s) observed with simulated client replies; see scenarios for conditions · fs/write_text_file: 1 client request(s) observed with simulated client replies; see scenarios for conditions",
-    "terminal/*": "terminal/*: 1 client request(s) observed with simulated client replies; see scenarios for conditions",
-    "elicitation": "elicitation: No controlled elicitation scenario configured",
+    "slash_cmds": "update:commands: 9 notification(s) observed",
+    "fs/*": "fs/read_text_file: Not observed; prerequisite session/prompt unavailable · fs/write_text_file: Not observed; prerequisite session/prompt unavailable",
+    "terminal/*": "terminal/*: Not observed; prerequisite session/prompt unavailable",
+    "elicitation": "elicitation: Not observed; prerequisite session/prompt unavailable",
     "providers": "providers/list: Not advertised; optional method not invoked · providers/set: Provider mutation not exercised in discovery · providers/disable: Provider mutation not exercised in discovery",
     "nes": "nes/start: Not advertised; optional method not invoked · nes/suggest: No controlled scenario exercised this check",
-    "mcp": "mcp:stdio: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:http: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario. · mcp:sse: Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
+    "mcp": "mcp:stdio: MCP scenario prerequisites unavailable · mcp:http: MCP scenario prerequisites unavailable · mcp:sse: MCP scenario prerequisites unavailable"
   },
   "methods": {
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · sorbet-acp",
-      "latencyMs": 1787
+      "latencyMs": 1852
     },
     "session/new": {
       "status": "pass",
       "note": "Created a session without additional MCP dependencies",
-      "latencyMs": 354
+      "latencyMs": 262
     },
     "set_mode": {
       "status": "pass",
       "note": "Accepted selection of the sole advertised mode; no transition claimed",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 26
     },
     "set_config": {
       "status": "pass",
       "note": "Changed behavior:prompt_suggestion to another offered value",
       "advertised": true,
-      "latencyMs": 151
+      "latencyMs": 95
     },
     "session/prompt": {
-      "status": "pass",
-      "note": "4 prompt responses received; content and tool choice are observed separately"
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}",
+      "latencyMs": 111
     },
     "cancel": {
-      "status": "pass",
-      "note": "In-flight prompt returned cancelled after 313ms"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No successful prompt to establish cancellation conditions"
     },
     "session/load": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 287
+      "latencyMs": 136
     },
     "load:replay": {
-      "status": "pass",
-      "note": "Prior conversation text replayed for the same session"
+      "status": "observed",
+      "note": "Conversation replay observed; prior content not fully matched"
     },
     "session/fork": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 86
+      "latencyMs": 355
     },
     "prompt:image": {
-      "status": "pass",
-      "advertised": true,
-      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}",
+      "advertised": true
     },
     "prompt:embedded-context": {
-      "status": "pass",
-      "advertised": true,
-      "note": "Typed prompt accepted and answered; model understanding and content preservation are not established"
+      "status": "observed",
+      "reason": "request-rejected",
+      "errorCode": -32603,
+      "note": "Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}",
+      "advertised": true
     },
     "providers/list": {
       "status": "na",
@@ -689,85 +687,100 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 2
+      "latencyMs": 1
     },
     "session/resume": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 202
+      "latencyMs": 87
     },
     "session/close": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 35
+      "latencyMs": 52
     },
     "session/delete": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 91
+      "latencyMs": 486
     },
     "mcp:stdio": {
-      "status": "observed",
-      "reason": "tool-not-called",
-      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario."
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
     },
     "mcp:http": {
-      "status": "observed",
-      "reason": "tool-not-called",
-      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
-      "advertised": true
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
     },
     "mcp:sse": {
-      "status": "observed",
-      "reason": "tool-not-called",
-      "note": "Fixture tool discovery completed; no fixture call received; 0/1 configured scenarios received a fixture call. See each scenario.",
-      "advertised": true
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "MCP scenario prerequisites unavailable"
     },
     "fs/read_text_file": {
-      "status": "pass",
-      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "fs/write_text_file": {
-      "status": "pass",
-      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "terminal/*": {
-      "status": "observed",
-      "note": "1 client request(s) observed with simulated client replies; see scenarios for conditions"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "request_permission": {
-      "status": "pass",
-      "note": "3 client request(s) observed with simulated client replies; see scenarios for conditions"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "elicitation": {
-      "status": "na",
-      "reason": "not-run",
-      "note": "No controlled elicitation scenario configured"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "Not observed; prerequisite session/prompt unavailable"
     },
     "update:message": {
-      "status": "pass",
-      "note": "13 notification(s) observed"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:tool_call": {
-      "status": "pass",
-      "note": "24 notification(s) observed"
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
+      "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:plan": {
-      "status": "na",
-      "reason": "not-triggered",
+      "status": "blocked",
+      "reason": "prerequisite",
+      "blockedBy": "session/prompt",
       "note": "No matching notifications observed; see scenario stimuli"
     },
     "update:commands": {
       "status": "pass",
-      "note": "12 notification(s) observed"
+      "note": "9 notification(s) observed"
     },
     "update:usage": {
       "status": "pass",
-      "note": "46 notification(s) observed"
+      "note": "1 notification(s) observed"
     },
     "lody": {
       "status": "observed",
-      "note": "13 feature(s) advertised: usage v1, forkAtTurn v1, steering v1, goal v1, compaction v1, tasks v1, sessionActivity v1, subagents v1, subagentEvents v1, sessionHistory v1, sessionArchive v1, promptSuggestions v1, sessionTitle v1 · _lody/* answered: subagents/list, session/history/read · on wire: goal, modelConfigOptions, turnId, titleSource"
+      "note": "13 feature(s) advertised: usage v1, forkAtTurn v1, steering v1, goal v1, compaction v1, tasks v1, sessionActivity v1, subagents v1, subagentEvents v1, sessionHistory v1, sessionArchive v1, promptSuggestions v1, sessionTitle v1 · _lody/* answered: subagents/list, session/history/read · on wire: goal, modelConfigOptions, turnId"
     },
     "authenticate": {
       "status": "na",
@@ -792,210 +805,143 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-25T14:32:19.820Z",
+      "at": "2026-11-26T14:00:23.031Z",
       "outcome": "success",
-      "latencyMs": 1787
+      "latencyMs": 1852
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-25T14:32:21.648Z",
+      "at": "2026-11-26T14:00:24.928Z",
       "outcome": "success",
-      "latencyMs": 354
+      "latencyMs": 262
     },
     {
       "method": "session/set_mode",
       "scenario": "set_mode",
-      "at": "2026-11-25T14:32:22.034Z",
+      "at": "2026-11-26T14:00:25.212Z",
       "outcome": "success",
-      "latencyMs": 2
+      "latencyMs": 26
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-11-25T14:32:22.058Z",
+      "at": "2026-11-26T14:00:25.258Z",
       "outcome": "success",
-      "latencyMs": 151
+      "latencyMs": 95
     },
     {
       "method": "session/set_config_option",
       "scenario": "set_config",
-      "at": "2026-11-25T14:32:22.222Z",
+      "at": "2026-11-26T14:00:25.363Z",
       "outcome": "success",
-      "latencyMs": 70
+      "latencyMs": 96
     },
     {
       "method": "session/prompt",
       "scenario": "default:exec",
-      "at": "2026-11-25T14:32:22.306Z",
-      "outcome": "success",
-      "latencyMs": 937
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:read",
-      "at": "2026-11-25T14:32:23.251Z",
-      "outcome": "success",
-      "latencyMs": 108
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:write",
-      "at": "2026-11-25T14:32:23.359Z",
-      "outcome": "success",
-      "latencyMs": 198
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "default:plan",
-      "at": "2026-11-25T14:32:23.557Z",
-      "outcome": "success",
-      "latencyMs": 243
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "cancel",
-      "at": "2026-11-25T14:32:23.801Z",
-      "outcome": "success",
-      "latencyMs": 313
+      "at": "2026-11-26T14:00:25.473Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 111
     },
     {
       "method": "session/load",
       "scenario": "load:replay:1",
-      "at": "2026-11-25T14:32:24.124Z",
+      "at": "2026-11-26T14:00:25.597Z",
       "outcome": "success",
-      "latencyMs": 287
+      "latencyMs": 136
     },
     {
       "method": "session/fork",
       "scenario": "session/fork",
-      "at": "2026-11-25T14:32:24.429Z",
+      "at": "2026-11-26T14:00:25.752Z",
       "outcome": "success",
-      "latencyMs": 86
+      "latencyMs": 355
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-25T14:32:24.527Z",
+      "at": "2026-11-26T14:00:26.118Z",
       "outcome": "success",
-      "latencyMs": 146
+      "latencyMs": 148
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:image",
-      "at": "2026-11-25T14:32:24.673Z",
-      "outcome": "success",
-      "latencyMs": 48
+      "at": "2026-11-26T14:00:26.267Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 79
     },
     {
       "method": "session/new",
       "scenario": "prompt-content",
-      "at": "2026-11-25T14:32:24.721Z",
+      "at": "2026-11-26T14:00:26.347Z",
       "outcome": "success",
-      "latencyMs": 74
+      "latencyMs": 80
     },
     {
       "method": "session/prompt",
       "scenario": "prompt:embedded-context",
-      "at": "2026-11-25T14:32:24.795Z",
-      "outcome": "success",
-      "latencyMs": 674
+      "at": "2026-11-26T14:00:26.428Z",
+      "outcome": "error",
+      "errorCode": -32603,
+      "latencyMs": 47
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-25T14:32:25.474Z",
+      "at": "2026-11-26T14:00:26.481Z",
       "outcome": "success",
-      "latencyMs": 2
+      "latencyMs": 1
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-11-25T14:32:25.481Z",
+      "at": "2026-11-26T14:00:26.488Z",
       "outcome": "success",
-      "latencyMs": 41
+      "latencyMs": 68
     },
     {
       "method": "session/resume",
       "scenario": "session-mgmt",
-      "at": "2026-11-25T14:32:25.531Z",
+      "at": "2026-11-26T14:00:26.566Z",
       "outcome": "success",
-      "latencyMs": 202
+      "latencyMs": 87
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-11-25T14:32:25.745Z",
+      "at": "2026-11-26T14:00:26.664Z",
       "outcome": "success",
-      "latencyMs": 71
+      "latencyMs": 72
     },
     {
       "method": "session/close",
       "scenario": "session-mgmt",
-      "at": "2026-11-25T14:32:25.821Z",
+      "at": "2026-11-26T14:00:26.742Z",
       "outcome": "success",
-      "latencyMs": 35
+      "latencyMs": 52
     },
     {
       "method": "session/new",
       "scenario": "session-mgmt",
-      "at": "2026-11-25T14:32:25.860Z",
+      "at": "2026-11-26T14:00:26.800Z",
       "outcome": "success",
-      "latencyMs": 185
+      "latencyMs": 74
     },
     {
       "method": "session/delete",
       "scenario": "session-mgmt",
-      "at": "2026-11-25T14:32:26.050Z",
+      "at": "2026-11-26T14:00:26.880Z",
       "outcome": "success",
-      "latencyMs": 91
-    },
-    {
-      "method": "session/new",
-      "scenario": "mcp:stdio:default",
-      "at": "2026-11-25T14:32:26.147Z",
-      "outcome": "success",
-      "latencyMs": 443
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "mcp:stdio:default",
-      "at": "2026-11-25T14:32:26.590Z",
-      "outcome": "success",
-      "latencyMs": 190
-    },
-    {
-      "method": "session/new",
-      "scenario": "mcp:http:default",
-      "at": "2026-11-25T14:32:27.281Z",
-      "outcome": "success",
-      "latencyMs": 70
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "mcp:http:default",
-      "at": "2026-11-25T14:32:27.352Z",
-      "outcome": "success",
-      "latencyMs": 127
-    },
-    {
-      "method": "session/new",
-      "scenario": "mcp:sse:default",
-      "at": "2026-11-25T14:32:27.980Z",
-      "outcome": "success",
-      "latencyMs": 85
-    },
-    {
-      "method": "session/prompt",
-      "scenario": "mcp:sse:default",
-      "at": "2026-11-25T14:32:28.065Z",
-      "outcome": "success",
-      "latencyMs": 358
+      "latencyMs": 486
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-25T14:32:28.925Z",
+      "at": "2026-11-26T14:00:27.372Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -1003,14 +949,14 @@
     {
       "method": "_lody/subagents/list",
       "scenario": "lody",
-      "at": "2026-11-25T14:32:28.926Z",
+      "at": "2026-11-26T14:00:27.373Z",
       "outcome": "success",
-      "latencyMs": 88
+      "latencyMs": 304
     },
     {
       "method": "_lody/session/history/read",
       "scenario": "lody",
-      "at": "2026-11-25T14:32:29.014Z",
+      "at": "2026-11-26T14:00:27.677Z",
       "outcome": "success",
       "latencyMs": 42
     }
@@ -1019,140 +965,17 @@
     {
       "id": "default:exec",
       "profile": "default",
-      "sessionId": "6dbad1f2-e611-4553-9127-907990a8c0ff",
+      "sessionId": "e5919451-197e-4bb9-bfa1-0a6663debf34",
       "configuration": {
         "behavior:prompt_suggestion": "on",
         "model": "wall-probe/probe-model",
         "permission_mode": "ask"
       },
       "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 1,
-        "request_permission": 1,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "usage_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "call_probe_1",
-          "name": "cat PROBE_CANARY.txt",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "acp_terminal_create"
-        ],
-        "skippedCalls": [
-          "exec: configured tool acp_terminal_create not offered"
-        ]
-      }
-    },
-    {
-      "id": "default:read",
-      "profile": "default",
-      "sessionId": "6dbad1f2-e611-4553-9127-907990a8c0ff",
-      "configuration": {
-        "behavior:prompt_suggestion": "on",
-        "model": "wall-probe/probe-model",
-        "permission_mode": "ask"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 1,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 1,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "usage_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "call_probe_2",
-          "name": "Read client file",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "acp_fs_read_text_file"
-        ],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "default:write",
-      "profile": "default",
-      "sessionId": "6dbad1f2-e611-4553-9127-907990a8c0ff",
-      "configuration": {
-        "behavior:prompt_suggestion": "on",
-        "model": "wall-probe/probe-model",
-        "permission_mode": "ask"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 1,
-        "terminal/*": 0,
-        "request_permission": 1,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "usage_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "call_probe_3",
-          "name": "Write client file",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "acp_fs_write_text_file"
-        ],
-        "skippedCalls": []
-      }
-    },
-    {
-      "id": "default:plan",
-      "profile": "default",
-      "sessionId": "6dbad1f2-e611-4553-9127-907990a8c0ff",
-      "configuration": {
-        "behavior:prompt_suggestion": "on",
-        "model": "wall-probe/probe-model",
-        "permission_mode": "ask"
-      },
-      "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}"
       },
       "callbacks": {
         "fs/read_text_file": 0,
@@ -1162,26 +985,24 @@
         "elicitation": 0
       },
       "notifications": [
-        "session_info_update",
-        "usage_update",
-        "agent_message_chunk"
+        "session_info_update"
       ],
       "tools": [],
       "model": {
         "issuedTools": [],
-        "skippedCalls": [
-          "plan: no matching tool offered"
-        ]
+        "skippedCalls": []
       }
     },
     {
       "id": "prompt:image",
       "profile": "default",
-      "sessionId": "b6eef1b1-b191-4889-862b-2dded99e4f45",
+      "sessionId": "7499c177-b06c-477d-bf67-38e8e5071504",
       "configuration": {},
       "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}"
       },
       "callbacks": {
         "fs/read_text_file": 0,
@@ -1191,9 +1012,7 @@
         "elicitation": 0
       },
       "notifications": [
-        "session_info_update",
-        "usage_update",
-        "agent_message_chunk"
+        "session_info_update"
       ],
       "tools": [],
       "model": {
@@ -1204,11 +1023,13 @@
     {
       "id": "prompt:embedded-context",
       "profile": "default",
-      "sessionId": "f9fc3aac-a6fa-41a2-9676-02fbbaeaaeed",
+      "sessionId": "c7936cf4-2099-466e-8010-bb70fe8434dc",
       "configuration": {},
       "result": {
-        "status": "pass",
-        "note": "Prompt response received; tool outcomes and callbacks are recorded separately"
+        "status": "observed",
+        "reason": "request-rejected",
+        "errorCode": -32603,
+        "note": "Internal error: Sorbet Run failed with runtime_error — {\"code\":\"runtime_error\",\"message\":\"Repeated <tool> under <codemode_tools> requires an id\"}"
       },
       "callbacks": {
         "fs/read_text_file": 0,
@@ -1218,196 +1039,19 @@
         "elicitation": 0
       },
       "notifications": [
-        "session_info_update",
-        "usage_update",
-        "agent_message_chunk"
+        "session_info_update"
       ],
       "tools": [],
       "model": {
         "issuedTools": [],
         "skippedCalls": []
       }
-    },
-    {
-      "id": "mcp:stdio:default",
-      "profile": "default",
-      "sessionId": "2ef0cb32-3dd4-4e1d-8bda-e712795f5aa4",
-      "configuration": {
-        "behavior:prompt_suggestion": "on",
-        "model": "wall-probe/probe-model",
-        "permission_mode": "ask"
-      },
-      "result": {
-        "status": "observed",
-        "reason": "tool-not-called",
-        "note": "Fixture tool discovery completed; no fixture call received"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "usage_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "call_probe_4",
-          "name": "tool_search",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "tool_search"
-        ],
-        "skippedCalls": []
-      },
-      "diagnostics": [],
-      "mcpEvents": [
-        {
-          "event": "spawned",
-          "ts": 1795617146386
-        },
-        {
-          "event": "spawned",
-          "ts": 1795617146557
-        },
-        {
-          "event": "initialized",
-          "ts": 1795617146573
-        },
-        {
-          "event": "tools/list",
-          "ts": 1795617146573
-        }
-      ]
-    },
-    {
-      "id": "mcp:http:default",
-      "profile": "default",
-      "sessionId": "07682c7b-7293-46d9-8736-a7d821f1d8a3",
-      "configuration": {
-        "behavior:prompt_suggestion": "on",
-        "model": "wall-probe/probe-model",
-        "permission_mode": "ask"
-      },
-      "result": {
-        "status": "observed",
-        "reason": "tool-not-called",
-        "note": "Fixture tool discovery completed; no fixture call received"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "usage_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "call_probe_5",
-          "name": "tool_search",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "tool_search"
-        ],
-        "skippedCalls": []
-      },
-      "diagnostics": [],
-      "mcpEvents": [
-        {
-          "event": "connected",
-          "ts": 1795617147335
-        },
-        {
-          "event": "initialized",
-          "ts": 1795617147340
-        },
-        {
-          "event": "tools/list",
-          "ts": 1795617147344
-        }
-      ]
-    },
-    {
-      "id": "mcp:sse:default",
-      "profile": "default",
-      "sessionId": "8239c1f5-9853-49ce-9a53-99661d263d40",
-      "configuration": {
-        "behavior:prompt_suggestion": "on",
-        "model": "wall-probe/probe-model",
-        "permission_mode": "ask"
-      },
-      "result": {
-        "status": "observed",
-        "reason": "tool-not-called",
-        "note": "Fixture tool discovery completed; no fixture call received"
-      },
-      "callbacks": {
-        "fs/read_text_file": 0,
-        "fs/write_text_file": 0,
-        "terminal/*": 0,
-        "request_permission": 0,
-        "elicitation": 0
-      },
-      "notifications": [
-        "session_info_update",
-        "usage_update",
-        "tool_call",
-        "tool_call_update",
-        "agent_message_chunk"
-      ],
-      "tools": [
-        {
-          "id": "call_probe_6",
-          "name": "tool_search",
-          "status": "completed"
-        }
-      ],
-      "model": {
-        "issuedTools": [
-          "tool_search"
-        ],
-        "skippedCalls": []
-      },
-      "diagnostics": [],
-      "mcpEvents": [
-        {
-          "event": "connected",
-          "ts": 1795617148047
-        },
-        {
-          "event": "initialized",
-          "ts": 1795617148056
-        },
-        {
-          "event": "tools/list",
-          "ts": 1795617148057
-        }
-      ]
     }
   ],
   "uncertaintyReasons": {
     "not-advertised": 3,
-    "not-run": 5,
-    "not-triggered": 1
+    "prerequisite": 12,
+    "not-run": 4
   },
   "lody": {
     "advertised": {
@@ -1487,8 +1131,7 @@
     "observed": [
       "goal",
       "modelConfigOptions",
-      "turnId",
-      "titleSource"
+      "turnId"
     ],
     "endpoints": [
       {
@@ -1518,17 +1161,15 @@
       "lody.turnId",
       "sorbet.version",
       "sorbet.modelRequests",
-      "sorbet.context",
-      "sorbet.lastTurn",
-      "lody.titleSource"
+      "sorbet.context"
     ]
   },
   "transport": {
     "mitm": {
-      "port": 37301,
+      "port": 40805,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 3,
+      "relayed": 2,
       "drops": 0
     }
   }
