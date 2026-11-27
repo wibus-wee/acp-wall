@@ -4,7 +4,7 @@
   "schemaSha256": "7f77702b34e0a0558e77220e9007bf8ee161a976bb8ac5021aba1b7e7b2c5708",
   "harness": "qoder",
   "agentName": "qoder-cli",
-  "agentVersion": "1.1.98",
+  "agentVersion": "1.1.99",
   "specVersion": 1,
   "advertised": {
     "capabilities": {
@@ -39,7 +39,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-26T14:00:56.221Z",
+  "probedAt": "2026-11-27T13:59:36.540Z",
   "state": "blocked",
   "summary": {
     "pass": 1,
@@ -62,12 +62,12 @@
     "client": "simulated",
     "platform": "linux-x64",
     "node": "v24.22.3",
-    "command": "npx -y @qoder-ai/qodercli@1.1.98 --acp",
+    "command": "npx -y @qoder-ai/qodercli@1.1.99 --acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "10efcb13fcb31d0e4a999fab3b8a44ce3021c93aeb2a7c9e086da5ed6298495c",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/45834124554",
-    "revision": "d3d935815dbd0b350ebb0c098b2e05b427b45b32",
+    "recipeSha256": "275392e4cc056150401270bdea417d57ee07b57c11e23c0070fa93b44e9966f3",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/46011343375",
+    "revision": "7643d82872c22569111255df2556743ccb864cc4",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -89,7 +89,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · qoder-cli",
-          "latencyMs": 3927
+          "latencyMs": 5391
         }
       ]
     },
@@ -118,7 +118,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required: identity.job.exchange failed: HTTP 400",
-          "latencyMs": 669
+          "latencyMs": 212
         }
       ]
     },
@@ -183,7 +183,7 @@
           "errorCode": -32000,
           "note": "Authentication required: identity.job.exchange failed: HTTP 400",
           "advertised": true,
-          "latencyMs": 318
+          "latencyMs": 201
         },
         {
           "method": "session/resume",
@@ -534,14 +534,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · qoder-cli",
-      "latencyMs": 3927
+      "latencyMs": 5391
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required: identity.job.exchange failed: HTTP 400",
-      "latencyMs": 669
+      "latencyMs": 212
     },
     "set_mode": {
       "status": "blocked",
@@ -621,7 +621,7 @@
       "errorCode": -32000,
       "note": "Authentication required: identity.job.exchange failed: HTTP 400",
       "advertised": true,
-      "latencyMs": 318
+      "latencyMs": 201
     },
     "session/resume": {
       "status": "blocked",
@@ -755,30 +755,30 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-26T14:00:51.260Z",
+      "at": "2026-11-27T13:59:30.645Z",
       "outcome": "success",
-      "latencyMs": 3927
+      "latencyMs": 5391
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-26T14:00:55.222Z",
+      "at": "2026-11-27T13:59:36.112Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 669
+      "latencyMs": 212
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-26T14:00:55.900Z",
+      "at": "2026-11-27T13:59:36.335Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 318
+      "latencyMs": 201
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-26T14:00:56.219Z",
+      "at": "2026-11-27T13:59:36.538Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -815,10 +815,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 37019,
+      "port": 44741,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 20,
+      "relayed": 13,
       "drops": 6
     }
   }
