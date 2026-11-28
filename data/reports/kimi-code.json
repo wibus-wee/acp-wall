@@ -54,7 +54,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-27T13:58:22.537Z",
+  "probedAt": "2026-11-28T13:09:23.321Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -80,9 +80,9 @@
     "command": "npx -y @moonshot-ai/kimi-code@2.8.1 acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "c8720af8b01d886e6c06b18c416deb93f3294f5cddf8898dc2c89da97655d634",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/46011343375",
-    "revision": "7643d82872c22569111255df2556743ccb864cc4",
+    "recipeSha256": "905e377d4f0142984d218c2b87a57e9f8700c634bb3464590ef91afd062237e4",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/46147974730",
+    "revision": "e75c55aebfbc2fd55e38530c57bd9d4b4281d20e",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -104,7 +104,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · Kimi Code CLI",
-          "latencyMs": 1414
+          "latencyMs": 1115
         }
       ]
     },
@@ -133,7 +133,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required",
-          "latencyMs": 6
+          "latencyMs": 4
         }
       ]
     },
@@ -195,7 +195,7 @@
           "method": "session/list",
           "status": "pass",
           "advertised": true,
-          "latencyMs": 64
+          "latencyMs": 19
         },
         {
           "method": "session/resume",
@@ -546,14 +546,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · Kimi Code CLI",
-      "latencyMs": 1414
+      "latencyMs": 1115
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required",
-      "latencyMs": 6
+      "latencyMs": 4
     },
     "set_mode": {
       "status": "blocked",
@@ -630,7 +630,7 @@
     "session/list": {
       "status": "pass",
       "advertised": true,
-      "latencyMs": 64
+      "latencyMs": 19
     },
     "session/resume": {
       "status": "blocked",
@@ -764,29 +764,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-27T13:58:20.976Z",
+      "at": "2026-11-28T13:09:22.120Z",
       "outcome": "success",
-      "latencyMs": 1414
+      "latencyMs": 1115
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-27T13:58:22.442Z",
+      "at": "2026-11-28T13:09:23.280Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 6
+      "latencyMs": 4
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-27T13:58:22.460Z",
+      "at": "2026-11-28T13:09:23.293Z",
       "outcome": "success",
-      "latencyMs": 64
+      "latencyMs": 19
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-27T13:58:22.534Z",
+      "at": "2026-11-28T13:09:23.319Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -823,10 +823,10 @@
   },
   "transport": {
     "mitm": {
-      "port": 35559,
+      "port": 33949,
       "impersonated": [],
       "impersonations": 0,
-      "relayed": 1,
+      "relayed": 2,
       "drops": 0
     }
   }

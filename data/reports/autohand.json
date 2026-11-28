@@ -40,7 +40,7 @@
       }
     ]
   },
-  "probedAt": "2026-11-27T13:56:48.751Z",
+  "probedAt": "2026-11-28T13:07:44.064Z",
   "state": "blocked",
   "summary": {
     "pass": 2,
@@ -66,9 +66,9 @@
     "command": "npm exec --yes --package=autohand-cli@0.9.8 --package=@autohandai/autohand-acp@0.2.1 -- autohand-acp",
     "discovery": false,
     "authenticationAttempted": false,
-    "recipeSha256": "2d537e0af4949cd8bae115c157723282d668de25f4485bef42cdb0fb2eb00366",
-    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/46011343375",
-    "revision": "7643d82872c22569111255df2556743ccb864cc4",
+    "recipeSha256": "bd68c8e1389c98eb1187730a9009c0909733fe00a409e4f66d5a905979847450",
+    "ciUrl": "https://github.com/wibus-wee/acp-wall/actions/runs/46147974730",
+    "revision": "e75c55aebfbc2fd55e38530c57bd9d4b4281d20e",
     "sourceDirty": false,
     "sourceHash": "28509102823873b6081f7547442f302ba91b187a5cdb9d650b1d531199bc2859",
     "dependencySha256": "0524d03a23fb08edfbda6631f833bfd934354d831852e17a39d32072fdae02fd",
@@ -90,7 +90,7 @@
           "method": "initialize",
           "status": "pass",
           "note": "Protocol 1 · @autohandai/autohand-acp",
-          "latencyMs": 910
+          "latencyMs": 785
         }
       ]
     },
@@ -119,7 +119,7 @@
           "reason": "authentication",
           "errorCode": -32000,
           "note": "Authentication required — {\"message\":\"Please run `autohand login` in your terminal, then try again.\"}",
-          "latencyMs": 2
+          "latencyMs": 6
         }
       ]
     },
@@ -532,14 +532,14 @@
     "initialize": {
       "status": "pass",
       "note": "Protocol 1 · @autohandai/autohand-acp",
-      "latencyMs": 910
+      "latencyMs": 785
     },
     "session/new": {
       "status": "blocked",
       "reason": "authentication",
       "errorCode": -32000,
       "note": "Authentication required — {\"message\":\"Please run `autohand login` in your terminal, then try again.\"}",
-      "latencyMs": 2
+      "latencyMs": 6
     },
     "set_mode": {
       "status": "blocked",
@@ -750,29 +750,29 @@
     {
       "method": "initialize",
       "scenario": "initialize",
-      "at": "2026-11-27T13:56:47.782Z",
+      "at": "2026-11-28T13:07:43.220Z",
       "outcome": "success",
-      "latencyMs": 910
+      "latencyMs": 785
     },
     {
       "method": "session/new",
       "scenario": "session/new",
-      "at": "2026-11-27T13:56:48.730Z",
+      "at": "2026-11-28T13:07:44.041Z",
       "outcome": "error",
       "errorCode": -32000,
-      "latencyMs": 2
+      "latencyMs": 6
     },
     {
       "method": "session/list",
       "scenario": "session-mgmt",
-      "at": "2026-11-27T13:56:48.741Z",
+      "at": "2026-11-28T13:07:44.054Z",
       "outcome": "success",
       "latencyMs": 2
     },
     {
       "method": "_lody/rate_limits/get",
       "scenario": "lody",
-      "at": "2026-11-27T13:56:48.750Z",
+      "at": "2026-11-28T13:07:44.062Z",
       "outcome": "error",
       "errorCode": -32601,
       "latencyMs": 1
@@ -809,7 +809,7 @@
   },
   "transport": {
     "mitm": {
-      "port": 40677,
+      "port": 35867,
       "impersonated": [],
       "impersonations": 0,
       "relayed": 2,
